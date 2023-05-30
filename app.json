@@ -5,6 +5,17 @@
       "bundler": "metro"
     },
     "name": "ticketQube-mobile",
-    "slug": "ticketQube-mobile"
+    "slug": "ticketQube-mobile",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "backgroundColor": "#FF8142",
+      "resizeMode": "contain"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/logo.png",
+        "backgroundColor": "#FF8142"
+      }
+    }
   }
 }
