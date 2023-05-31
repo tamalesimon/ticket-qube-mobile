@@ -5,6 +5,8 @@ import LockIcon from "../assets/svgIcons/passwordLockIcon"
 import EyeOffIcon from "../assets/svgIcons/eyeoffIcon"
 import EyeIcon from "../assets/svgIcons/eyeIcon"
 import UserIcon from "../assets/svgIcons/userIcon.jsx"
+import CloseIcon from "../assets/svgIcons/closeIcon"
+
 
 export default {
     AppleIcon,
@@ -13,5 +15,6 @@ export default {
     LockIcon,
     EyeOffIcon,
     EyeIcon,
-    UserIcon
+    UserIcon,
+    CloseIcon
 }
