@@ -3,19 +3,16 @@ import { View, Text, Image, TouchableOpacity, TextInput, SafeAreaView, StyleShee
 import { COLORS, FONTS, FONTSIZE, images, icons } from '../../constants';
 import GenericButton from "../../components/buttons/genericButton";
 
-import globalStyles from '../../styles/globalStyles';
-
-
 const ResetSuccess = () => {
     return (
     <SafeAreaView style={{backgroundColor:COLORS.white, flex:1}}>
         <View>
-            <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', gap:8, marginTop:100 }}>
+            <View style={{ flexDirection: 'column', alignItems: 'center', gap:8, marginTop:100 }}>
                 <Image source={require('../../assets/images/IllustrationSuccessReset.png')} resizeMode='contain'/>
-                <View style={{ flexDirection: 'column', alignItems: 'center', width:292, marginTop:32 }}>
+                <View style={{ alignItems: 'center', width:292, marginTop:32 }}>
                     <Text style={{ fontFamily:FONTS.NotoSansJPRegular, fontWeight:700, fontSize:20, textAlign: 'center', width:292 }}>You have successfully changed your password</Text>
                 </View>
-                <View style={{marginTop:350}}>
+                <View style={{marginTop:335}}>
                     <GenericButton bgColor={"primaryBase"} label={"Login"} fontColor={"white"}/>
                 </View>
             </View>
