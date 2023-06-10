@@ -1,22 +1,18 @@
-import { View, SafeAreaView, Text, ScrollView } from "react-native";
-import { useRouter } from "expo-router";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { COLORS, icons } from "../constants";
+import { View, SafeAreaView, Text, ScrollView, TouchableOpacity, StyleSheet } from "react-native";
+import { useRouter, useNavigation } from "expo-router";
+import { createNativeStackNavigator, } from "@react-navigation/native-stack";
+import { COLORS, icons, FONTS } from "../constants";
 
-import GetStarted from "../screens/welcome/Getstarted";
-import Signin from "../screens/authentication/Signin";
-import Signup from "../screens/authentication/Signup";
-import Verify from "../screens/authentication/Verificationcode";
-import ForgotPassword from "../screens/authentication/Forgotpwd";
-import ResetPassword from "../screens/authentication/ResetPassword"
-import ResetSuccess from "../screens/authentication/ResetSuccess";
-import { TouchableOpacity } from "react-native-web";
+import { Signin, Signup, ForgotPassword, ResetPassword, ResetSuccess, Verify } from "../screens/authentication";
+import { Location, FollowOrganiser, PickInterest  } from "../screens/onboarding";
+import { GetStarted } from "../screens/welcome";
 
 const Stack = createNativeStackNavigator();
 
 export default function page() {
-  const { navigate } = useRouter();
+  const navigation = useNavigation();
   return (
+    
     <Stack.Navigator>
       <Stack.Group>
         <Stack.Screen
@@ -27,72 +23,27 @@ export default function page() {
         <Stack.Screen
           name="Signin"
           component={Signin}
-          options={{
-            headerStyle: {
-            backgroundColor: COLORS.white, // make the header transparent
-            elevation: 0, // remove the shadow on Android
-            borderBottomWidth: 0, // remove the border bottom on iOS
-          },
-          headerTitleStyle: {
-            display: "none", // hide the header title
-          },
-          }}
+          options={screenOptions}
         />
         <Stack.Screen
           name="Signup"
           component={Signup}
-          options={{
-            headerStyle: {
-            backgroundColor: COLORS.white, // make the header transparent
-            elevation: 0, // remove the shadow on Android
-            borderBottomWidth: 0, // remove the border bottom on iOS
-          },
-          headerTitleStyle: {
-            display: "none", // hide the header title
-          },
-          }}
+          options={screenOptions}
         />
         <Stack.Screen
           name="Verify"
           component={Verify}
-          options={{
-            headerStyle: {
-            backgroundColor: COLORS.white, // make the header transparent
-            elevation: 0, // remove the shadow on Android
-            borderBottomWidth: 0, // remove the border bottom on iOS
-          },
-          headerTitleStyle: {
-            display: "none", // hide the header title
-          },
-          }}
+          options={screenOptions}
         />
         <Stack.Screen
           name="ForgotPassword"
           component={ForgotPassword}
-          options={{
-            headerStyle: {
-            backgroundColor: COLORS.white, // make the header transparent
-            elevation: 0, // remove the shadow on Android
-            borderBottomWidth: 0, // remove the border bottom on iOS
-          },
-          headerTitleStyle: {
-            display: "none", // hide the header title
-          },
-          }}
+          options={screenOptions}
         />
         <Stack.Screen
           name="ResetPassword"
           component={ResetPassword}
-          options={{
-            headerStyle: {
-            backgroundColor: COLORS.white, // make the header transparent
-            elevation: 0, // remove the shadow on Android
-            borderBottomWidth: 0, // remove the border bottom on iOS
-          },
-          headerTitleStyle: {
-            display: "none", // hide the header title
-          },
-          }}
+          options={screenOptions}
         />
         <Stack.Screen
           name="ResetSuccess"
@@ -103,11 +54,13 @@ export default function page() {
             elevation: 0, // remove the shadow on Android
             borderBottomWidth: 0, // remove the border bottom on iOS
           },
+          headerTitle:' ',
+          headerShadowVisible:false,
           headerTitleStyle: {
             display: "none", // hide the header title
           },
           headerLeft:() =>(
-            <View style={{ marginLeft: 24}}>
+            <View>
                 <TouchableOpacity>
                     <icons.CloseIcon/>
                 </TouchableOpacity>
@@ -116,6 +69,66 @@ export default function page() {
           }}
         />
       </Stack.Group>
+      <Stack.Group>
+          <Stack.Screen
+            name="Location"
+            component={Location}
+            options={{
+              ...screenOptions,
+              headerRight: () => (
+                <TouchableOpacity onPress={() => navigation.navigate('FollowOrganiser')}>
+                    <Text style={styles.skipText}>Skip for now</Text>
+                </TouchableOpacity>
+              )
+              }}
+          />
+          <Stack.Screen
+            name="FollowOrganiser"
+            component={FollowOrganiser}
+            options={{
+              ...screenOptions,
+              headerRight: () => (
+                <TouchableOpacity onPress={() => navigation.navigate('PickInterest')}>
+                    <Text style={styles.skipText}>Skip for now</Text>
+                </TouchableOpacity>
+              )
+              }}
+          />
+          <Stack.Screen
+            name="PickInterest"
+            component={PickInterest}
+            options={{
+              ...screenOptions,
+              headerRight: () => (
+                <TouchableOpacity>
+                    <Text style={styles.skipText}>Skip for now</Text>
+                </TouchableOpacity>
+              )
+              }}
+          />
+      </Stack.Group>
     </Stack.Navigator>
   );
 }
+
+const screenOptions = {
+  headerStyle: {
+  backgroundColor: COLORS.white, // make the header transparent
+  elevation: 0, // remove the shadow on Android
+  borderBottomWidth: 0, // remove the border bottom on iOS
+},
+headerTitle:' ',
+headerShadowVisible:false,
+headerTitleStyle: {
+  display: "none", // hide the header title
+},
+}
+
+const styles = StyleSheet.create({
+  skipText: {
+    fontFamily: FONTS.NotoSansJPRegular,
+    fontWeight:500,
+    fontSize:14,
+    color:COLORS.primaryBase
+  }
+})
