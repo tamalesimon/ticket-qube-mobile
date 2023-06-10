@@ -27,7 +27,9 @@ export default function Location({navigator}) {
                                 <Text>Use my current location</Text>
                             </View>
                         </TouchableOpacity>
-                    <PopularLocations/>
+                        <View style={{ width:'100%'}}>
+                            <PopularLocations/>
+                        </View>
                 </View>
             </View>
     </SafeAreaView>

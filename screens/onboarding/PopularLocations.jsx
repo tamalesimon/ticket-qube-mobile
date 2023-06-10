@@ -4,7 +4,7 @@ import { FONTS, COLORS, } from '../../constants';
 
 export default function PopularLocations() {
   return (
-    <View style={{marginTop:24, flexDirection:'column', gap:16, width:327}}>
+    <View style={{marginTop:24, flexDirection:'column', gap:16,}}>
     <View>
         <Text style={styles.title}>Popular location</Text>
     </View>
