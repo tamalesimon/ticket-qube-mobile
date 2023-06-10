@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
     textInput:{
         marginLeft:12,
         height:40,
+        width:'70%',
         borderWidth: 0, // This will remove the border
         borderColor: 'transparent', // This will make the border color transparent
         borderRadius: 0, // This will make the border edges straight

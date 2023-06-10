@@ -10,11 +10,7 @@ import globalStyles from '../../styles/globalStyles';
 
 
 const Signup = ({ navigation }) => {
-    const [showPassword, setShowPassword] = useState(true);
 
-    const toggleShowPassword = () => {
-        setShowPassword(!showPassword);
-    }
     return (
     <SafeAreaView style={{backgroundColor:COLORS.white, flex:1, padding:23}}>
         <View>

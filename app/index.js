@@ -3,9 +3,12 @@ import { useRouter, useNavigation } from "expo-router";
 import { createNativeStackNavigator, } from "@react-navigation/native-stack";
 import { COLORS, icons, FONTS } from "../constants";
 
+import { HeaderLeft, HeaderRight } from "../components";
+
 import { Signin, Signup, ForgotPassword, ResetPassword, ResetSuccess, Verify } from "../screens/authentication";
 import { Location, FollowOrganiser, PickInterest  } from "../screens/onboarding";
 import { GetStarted } from "../screens/welcome";
+import { Home } from "../screens/home";
 
 const Stack = createNativeStackNavigator();
 
@@ -100,12 +103,28 @@ export default function page() {
             options={{
               ...screenOptions,
               headerRight: () => (
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('Home')}>
                     <Text style={styles.skipText}>Skip for now</Text>
                 </TouchableOpacity>
               )
               }}
           />
+      </Stack.Group>
+          
+      <Stack.Group>
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{
+            ...screenOptions,
+            headerRight: () => (
+              <HeaderRight/>
+            ),
+            headerLeft: ()  => (
+              <HeaderLeft/>
+            )
+          }}
+        />
       </Stack.Group>
     </Stack.Navigator>
   );

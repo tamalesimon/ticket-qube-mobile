@@ -10,6 +10,7 @@ import CurrentLocationIcon from "../assets/svgIcons/CurrentLocationIcon"
 import MapPin from "../assets/svgIcons/MapPinIcon"
 import SearchIcon from "../assets/svgIcons/SearchIcon"
 import CheckIcon from "../assets/svgIcons/CheckIcon"
+import NotificationBell from "../assets/svgIcons/NotificationBellIcon"
 
 
 export default {
@@ -24,5 +25,6 @@ export default {
     CurrentLocationIcon,
     MapPin,
     SearchIcon,
-    CheckIcon
+    CheckIcon,
+    NotificationBell
 }
