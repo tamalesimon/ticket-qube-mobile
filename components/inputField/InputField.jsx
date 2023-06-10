@@ -9,17 +9,20 @@ export default function InputField({
     ...props
 }) {
     const [secureTextEntry, setSecureTextEntry] = useState(inputType === 'password' === true);
+    const [isFocused, setIsFocused] = useState(false)
 
     function toggleSecureEntry() {
         setSecureTextEntry(!secureTextEntry);
     }
   return (
-    <View style={styles.container}>
+    <View style={{...styles.container, borderColor:isFocused ? COLORS.primaryBase : ' ', borderWidth: isFocused ? 1: 0}}>
       {IconComponent && <IconComponent style={{paddingTop:8}} />}
       <TextInput
         style={styles.textInput}
         placeholder={placeholder}
         secureTextEntry={secureTextEntry}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
         {...props}
       />
       {
@@ -39,7 +42,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor:COLORS.gray50,
         borderRadius:16,
-        height:56, width:327,
+        height:56, width:'100%',
         padding:16,
         marginBottom:16
     },
@@ -55,7 +58,5 @@ const styles = StyleSheet.create({
         borderColor: 'transparent', // This will make the border color transparent
         borderRadius: 0, // This will make the border edges straight
         backgroundColor: 'transparent', // This will make the background color transparent
-        outlineWidth: 0, // This will remove the outline (for Android)
-        outlineColor: 'transparent',
     }
 })

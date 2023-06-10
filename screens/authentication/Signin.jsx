@@ -16,11 +16,13 @@ const Signin = ({ navigation }) => {
         setShowPassword(!showPassword);
     }
     return (
-    <SafeAreaView style={{ backgroundColor:COLORS.white, flex:1}}>
+    <SafeAreaView style={{ backgroundColor:COLORS.white, flex:1, padding:24}}>
         <View>
-            <View style={{ flexDirection: 'column', alignItems: 'center', marginTop:32  }}>
-                <Text style={globalStyles.Heading4} >Hello Again!</Text>
-                <Text style={{ fontSize:FONTSIZE.medium, color:COLORS.gray400, fontFamily:FONTS.NotoSansJPRegular, textAlign:"center", fontWeight:400, width:261,}}>Welcome back, you've been missed</Text>
+            <View style={{ flexDirection: 'column', marginTop:32  }}>
+                <View style={{ alignItems:'center'}}>
+                    <Text style={globalStyles.Heading4} >Hello Again!</Text>
+                    <Text style={{ fontSize:FONTSIZE.medium, color:COLORS.gray400, fontFamily:FONTS.NotoSansJPRegular, textAlign:"center", fontWeight:400, width:261,}}>Welcome back, you've been missed</Text>
+                </View>
                 <View style={{ marginTop:24, marginBottom:16 }}>
                         <InputField
                             placeholder="Email"
@@ -45,7 +47,7 @@ const Signin = ({ navigation }) => {
                             <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="primary900" label={"Sign In with Google"}  icon={icons.GoogleIcon}/>
                             <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="primary900" label={"Sign In with Apple"}  icon={icons.AppleIcon}/>
                         </View>
-                        <View >
+                        <View style={{ alignItems: 'center' }}>
                             <AcceptTerms/>
                         </View>
                     </View>

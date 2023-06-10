@@ -1,20 +1,16 @@
-import { View, SafeAreaView, Text, ScrollView, TouchableOpacity } from "react-native";
-import { useRouter } from "expo-router";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { COLORS, icons } from "../constants";
+import { View, SafeAreaView, Text, ScrollView, TouchableOpacity, StyleSheet } from "react-native";
+import { useRouter, useNavigation } from "expo-router";
+import { createNativeStackNavigator, } from "@react-navigation/native-stack";
+import { COLORS, icons, FONTS } from "../constants";
 
-import GetStarted from "../screens/welcome/Getstarted";
-import Signin from "../screens/authentication/Signin";
-import Signup from "../screens/authentication/Signup";
-import Verify from "../screens/authentication/Verificationcode";
-import ForgotPassword from "../screens/authentication/Forgotpwd";
-import ResetPassword from "../screens/authentication/ResetPassword"
-import ResetSuccess from "../screens/authentication/ResetSuccess";
+import { Signin, Signup, ForgotPassword, ResetPassword, ResetSuccess, Verify } from "../screens/authentication";
+import { Location, FollowOrganiser, PickInterest  } from "../screens/onboarding";
+import { GetStarted } from "../screens/welcome";
 
 const Stack = createNativeStackNavigator();
 
 export default function page() {
-  const { navigate } = useRouter();
+  const navigation = useNavigation();
   return (
     
     <Stack.Navigator>
@@ -73,6 +69,44 @@ export default function page() {
           }}
         />
       </Stack.Group>
+      <Stack.Group>
+          <Stack.Screen
+            name="Location"
+            component={Location}
+            options={{
+              ...screenOptions,
+              headerRight: () => (
+                <TouchableOpacity onPress={() => navigation.navigate('FollowOrganiser')}>
+                    <Text style={styles.skipText}>Skip for now</Text>
+                </TouchableOpacity>
+              )
+              }}
+          />
+          <Stack.Screen
+            name="FollowOrganiser"
+            component={FollowOrganiser}
+            options={{
+              ...screenOptions,
+              headerRight: () => (
+                <TouchableOpacity onPress={() => navigation.navigate('PickInterest')}>
+                    <Text style={styles.skipText}>Skip for now</Text>
+                </TouchableOpacity>
+              )
+              }}
+          />
+          <Stack.Screen
+            name="PickInterest"
+            component={PickInterest}
+            options={{
+              ...screenOptions,
+              headerRight: () => (
+                <TouchableOpacity>
+                    <Text style={styles.skipText}>Skip for now</Text>
+                </TouchableOpacity>
+              )
+              }}
+          />
+      </Stack.Group>
     </Stack.Navigator>
   );
 }
@@ -89,3 +123,12 @@ headerTitleStyle: {
   display: "none", // hide the header title
 },
 }
+
+const styles = StyleSheet.create({
+  skipText: {
+    fontFamily: FONTS.NotoSansJPRegular,
+    fontWeight:500,
+    fontSize:14,
+    color:COLORS.primaryBase
+  }
+})

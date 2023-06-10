@@ -6,6 +6,10 @@ import EyeOffIcon from "../assets/svgIcons/EyeoffIcon"
 import EyeIcon from "../assets/svgIcons/EyeIcon"
 import UserIcon from "../assets/svgIcons/UserIcon.jsx"
 import CloseIcon from "../assets/svgIcons/CloseIcon"
+import CurrentLocationIcon from "../assets/svgIcons/CurrentLocationIcon"
+import MapPin from "../assets/svgIcons/MapPinIcon"
+import SearchIcon from "../assets/svgIcons/SearchIcon"
+import CheckIcon from "../assets/svgIcons/CheckIcon"
 
 
 export default {
@@ -16,5 +20,9 @@ export default {
     EyeOffIcon,
     EyeIcon,
     UserIcon,
-    CloseIcon
+    CloseIcon,
+    CurrentLocationIcon,
+    MapPin,
+    SearchIcon,
+    CheckIcon
 }

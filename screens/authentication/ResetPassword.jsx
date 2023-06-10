@@ -13,14 +13,15 @@ import globalStyles from '../../styles/globalStyles';
 const ResetPassword = ({ navigation }) => {
 
     return (
-    <SafeAreaView style={{backgroundColor:COLORS.white, flex:1, padding:23}}>
-            <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', gap:8, marginTop:32 }}>
-                <View style={{flexDirection: 'column', width:327,}}>
+    <SafeAreaView style={{backgroundColor:COLORS.white, flex:1, flexDirection: 'column', padding:23}}>
+            <View style={{ gap:8, marginTop:32, alignItems: 'center'}}>
+                <View style={{ width:'100%',}}>
                     <Text style={{...globalStyles.Heading4, textAlign:'left', }} >Reset your password</Text>
                     <Text style={styles.subComment}>Please enter new password for your account.</Text>
                 </View>
-                <View style={{ marginTop:24, marginBottom:16, flexDirection:'column', alignItems:'center' }}>
-                <InputField
+            </View>
+            <View style={{ marginTop:24, marginBottom:16, flexDirection:'column', alignItems:'center' }}>
+                    <InputField
                             placeholder="Password"
                             placeholderTextColor={COLORS.gray400}
                             icon={icons.LockIcon}
@@ -32,10 +33,9 @@ const ResetPassword = ({ navigation }) => {
                             icon={icons.LockIcon}
                             inputType={'password'}
                         />
-                    <View style={{ marginTop:390}}>
-                            <GenericButton bgColor="primaryBase" fontColor={"white"} label={"Create New Password"} onPress={() => navigation.navigate('ResetSuccess')}/>
-                    </View>
                 </View>
+            <View style={{ marginTop:390}}>
+                <GenericButton bgColor="primaryBase" fontColor={"white"} label={"Create New Password"} onPress={() => navigation.navigate('ResetSuccess')}/>
             </View>
     </SafeAreaView>
     )

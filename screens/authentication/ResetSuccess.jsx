@@ -3,17 +3,19 @@ import { View, Text, Image, TouchableOpacity, TextInput, SafeAreaView, StyleShee
 import { COLORS, FONTS, FONTSIZE, images, icons } from '../../constants';
 import GenericButton from "../../components/buttons/genericButton";
 
-const ResetSuccess = () => {
+const ResetSuccess = ({ navigation }) => {
     return (
-    <SafeAreaView style={{backgroundColor:COLORS.white, flex:1}}>
+    <SafeAreaView style={{backgroundColor:COLORS.white, flex:1, padding:24}}>
         <View>
-            <View style={{ flexDirection: 'column', alignItems: 'center', gap:8, marginTop:100 }}>
-                <Image source={require('../../assets/images/IllustrationSuccessReset.png')} resizeMode='contain'/>
-                <View style={{ alignItems: 'center', width:292, marginTop:32 }}>
-                    <Text style={{ fontFamily:FONTS.NotoSansJPRegular, fontWeight:700, fontSize:20, textAlign: 'center', width:292 }}>You have successfully changed your password</Text>
+            <View style={{ flexDirection: 'column', gap:8, marginTop:100 }}>
+                <View style={{alignItems: 'center'}}>
+                    <Image source={require('../../assets/images/IllustrationSuccessReset.png')} resizeMode='contain'/>
+                    <View style={{ alignItems: 'center', width:292, marginTop:32 }}>
+                        <Text style={{ fontFamily:FONTS.NotoSansJPRegular, fontWeight:700, fontSize:20, textAlign: 'center', width:292 }}>You have successfully changed your password</Text>
+                    </View>
                 </View>
-                <View style={{marginTop:335}}>
-                    <GenericButton bgColor={"primaryBase"} label={"Login"} fontColor={"white"}/>
+                <View style={{marginTop:320}}>
+                    <GenericButton bgColor={"primaryBase"} label={"Login"} fontColor={"white"} onPress={() => navigation.navigate('Location')}/>
                 </View>
             </View>
         </View>

@@ -19,7 +19,7 @@ const Signup = ({ navigation }) => {
     <SafeAreaView style={{backgroundColor:COLORS.white, flex:1, padding:23}}>
         <View>
             <View style={{ flexDirection: 'column', gap:8, marginTop:32 }}>
-                <View style={{flexDirection: 'column', gap:8, marginLeft:23}}>
+                <View style={{flexDirection: 'column', gap:8}}>
                     <Text style={{...globalStyles.Heading4, textAlign:'left'}}>Create an account</Text>
                     <View>
                         <Text style={styles.subComment}>Enter your Name, Email and Password to sign up.</Text>
@@ -28,7 +28,7 @@ const Signup = ({ navigation }) => {
                         </TouchableOpacity>
                     </View>
                 </View>
-                <View style={{ marginBottom:16, marginTop:24, flexDirection:'column', alignItems:'center' }}>
+                <View style={{ marginBottom:16, marginTop:24,  }}>
                 <InputField
                             placeholder="Your name"
                             placeholderTextColor={COLORS.gray400}
@@ -55,7 +55,9 @@ const Signup = ({ navigation }) => {
                             <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="primary900" label={"Sign Up with Google"}  icon={icons.GoogleIcon}/>
                             <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="primary900" label={"Sign Up with Apple"}  icon={icons.AppleIcon}/>
                         </View>
-                        <AcceptTerms/>
+                        <View style={{ alignItems: "center" }}>
+                            <AcceptTerms/>
+                        </View>
                     </View>
                 </View>
             </View>

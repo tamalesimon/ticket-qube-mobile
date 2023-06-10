@@ -10,13 +10,13 @@ const ForgotPassword = ({navigation}) => {
     return (
     <SafeAreaView style={{backgroundColor:COLORS.white, flex:1, padding:24}}>
         <View>
-            <View style={{ flexDirection: 'column', alignItems: 'center', gap:8, marginTop:32 }}>
-                <Image source={require('../../assets/images/forgot-password.png')} resizeMode='contain'/>
-                <View style={{ flexDirection: 'column', alignItems: 'center', marginTop:32 }}>
+            <View style={{ flexDirection: 'column', gap:8, marginTop:32 }}>
+                <View style={{ flexDirection: 'column', alignItems: 'center', gap:8, marginTop:32 }}>
+                    <Image source={require('../../assets/images/forgot-password.png')} resizeMode='contain'/>
                     <Text style={{ ...globalStyles.Heading4, marginBottom:8}}>Forgot Password</Text>
                     <Text style={styles.message} >Please enter the email address associated with your account.</Text>
                 </View>
-                <View style={{marginBottom:225, marginTop:32}}>
+                <View style={{marginBottom:217, marginTop:32, alignItems: 'center'}}>
                     <InputField
                         placeholder="Email"
                         placeholderTextColor={COLORS.gray400}
