@@ -9,27 +9,18 @@ const Tab = createBottomTabNavigator();
 export default function Tabs() {
   return (
     <Tab.Navigator
-        // screenOptions={{
-        //     headerShown: false,
-        //     tabBarActiveTintColor:COLORS.primaryBase,
-        //     tabBarStyle: {
-        //         position:'absolute',
-        //         bottom:0,
-        //         right:0,
-        //         left:0,
-        //         elevation:0,
-        //         borderBottomWidth: 0
-        //     }}}
-        initialRouteName='Home'>
+        tabBarOptions={{
+            labelStyle: { paddingBottom: 12 },
+        }}
+        initialRouteName='Home'
+        >
       <Tab.Screen
                 name="Home"
                 component={HomeTabs}
                 options={{
                     ...screenOptions,
                     tabBarIcon: ({focused}) => (
-                        <View style={{ alignItems: 'center', justifyContent: 'center'}}>
-                            {focused ? <icons.HomeIconActive/> : <icons.HomeIcon/>}
-                        </View>
+                            focused ? <icons.HomeIconActive/> : <icons.HomeIcon/>
                     )
                     ,
                     headerLeft: () => (
@@ -48,6 +39,7 @@ export default function Tabs() {
                 name="Explore"
                 component={Explore}
                 options={{
+                    ...screenOptions,
                     tabBarIcon: ({focused}) => (
                         <View style={{ alignItems: 'center', justifyContent: 'center'}}>
                             {focused ? <icons.SearchIconActive/> : <icons.SearchIcon/>}
@@ -59,6 +51,7 @@ export default function Tabs() {
                 name="Favorites"
                 component={Favorites}
                 options={{
+                    ...screenOptions,
                     tabBarIcon: ({focused}) => (
                         <View style={{ alignItems: 'center', justifyContent: 'center'}}>
                         {focused ? <icons.HeartIconActive/> : <icons.HeartIcon/>}
@@ -70,6 +63,7 @@ export default function Tabs() {
                 name="Ticket"
                 component={Ticket}
                 options={{
+                    ...screenOptions,
                     tabBarIcon: ({ focused }) => (
                         <View style={{ alignItems: 'center', justifyContent: 'center'}}>
                             {focused ? <icons.TicketIconActive/> : <icons.TicketIcon/>}
@@ -79,6 +73,7 @@ export default function Tabs() {
                 />
       <Tab.Screen name="Profile" component={Profile}
                 options={{
+                    ...screenOptions,
                     tabBarIcon: ({ focused }) => (
                         <View style={{ alignItems: 'center', justifyContent: 'center'}}>
                             {focused ? <icons.ProfileIconActive/> : <icons.ProfileIconCircle/>}
@@ -101,4 +96,8 @@ const screenOptions = {
         display: "none", // hide the header title
       },
       tabBarActiveTintColor:COLORS.primaryBase,
+      tabBarStyle: {
+        height: 70,
+        paddingTop:12
+      }
 }
