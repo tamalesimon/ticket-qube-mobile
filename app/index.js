@@ -9,6 +9,7 @@ import { Signin, Signup, ForgotPassword, ResetPassword, ResetSuccess, Verify } f
 import { Location, FollowOrganiser, PickInterest  } from "../screens/onboarding";
 import { GetStarted } from "../screens/welcome";
 import { Home } from "../screens/home";
+import Tabs from "../screens/tabs/Tabs";
 
 const Stack = createNativeStackNavigator();
 
@@ -72,6 +73,7 @@ export default function page() {
           }}
         />
       </Stack.Group>
+
       <Stack.Group>
           <Stack.Screen
             name="Location"
@@ -110,19 +112,13 @@ export default function page() {
               }}
           />
       </Stack.Group>
-          
+
       <Stack.Group>
         <Stack.Screen
           name="Home"
-          component={Home}
+          component={Tabs}
           options={{
-            ...screenOptions,
-            headerRight: () => (
-              <HeaderRight/>
-            ),
-            headerLeft: ()  => (
-              <HeaderLeft/>
-            )
+            headerShown:false 
           }}
         />
       </Stack.Group>

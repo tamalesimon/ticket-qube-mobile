@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-na
 import { icons, COLORS, FONTS } from '../../constants';
 import InputField from '../../components/inputField/InputField';
 
-export default function Home() {
+export default function HomeTabs() {
   return (
     <SafeAreaView style={{backgroundColor:COLORS.white, flex:1,  padding:24}}>
           <View style={{ marginBottom: 24}} >
@@ -14,6 +14,7 @@ export default function Home() {
                               inputType={'text'}
                           />
           </View>
+          <Text>HomeTabs</Text>
      </SafeAreaView>
   );
 }
