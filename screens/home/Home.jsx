@@ -14,7 +14,7 @@ export default function HomeTabs() {
                               inputType={'text'}
                           />
           </View>
-          <Text>HomeTabs</Text>
+          <Text>Home</Text>
      </SafeAreaView>
   );
 }

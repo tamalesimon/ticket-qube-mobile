@@ -105,7 +105,7 @@ export default function page() {
             options={{
               ...screenOptions,
               headerRight: () => (
-                <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                <TouchableOpacity onPress={() => navigation.navigate('NavigationTabs')}>
                     <Text style={styles.skipText}>Skip for now</Text>
                 </TouchableOpacity>
               )
@@ -115,7 +115,7 @@ export default function page() {
 
       <Stack.Group>
         <Stack.Screen
-          name="Home"
+          name="NavigationTabs"
           component={Tabs}
           options={{
             headerShown:false 
