@@ -20,6 +20,9 @@ import ProfileIconCircle from "../assets/svgIcons/ProfileUserCircle"
 import ProfileIconActive from "../assets/svgIcons/ProfileIconActive"
 import TicketIcon from "../assets/svgIcons/TicketIcon"
 import TicketIconActive from "../assets/svgIcons/TicketIconActive"
+import VerticalDotsIcon from "../assets/svgIcons/VerticalDotsIcon"
+import ArrowLeftIcon from "../assets/svgIcons/ArrowLeftIcon"
+import FilterIcon from "../assets/svgIcons/FilterIcon"
 
 
 export default {
@@ -44,5 +47,8 @@ export default {
     TicketIcon,
     TicketIconActive,
     ProfileIconCircle,
-    ProfileIconActive
+    ProfileIconActive,
+    VerticalDotsIcon,
+    ArrowLeftIcon,
+    FilterIcon
 }

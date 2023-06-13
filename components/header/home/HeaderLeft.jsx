@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
-import { icons, COLORS, FONTS } from '../../constants';
+import { icons, COLORS, FONTS } from '../../../constants';
 
 export default function HeaderLeft() {
   return (
