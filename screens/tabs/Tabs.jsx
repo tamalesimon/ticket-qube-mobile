@@ -1,8 +1,8 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View } from 'react-native'
-import { HomeTabs, Explore, Favorites, Ticket, Profile } from './index'
+import { HomeTabs, Explore, Favorites, Tickets, Profile } from './index'
 import { icons, COLORS, FONTS, FONTSIZE } from '../../constants';
-import { HeaderLeft, HeaderRight } from '../../components';
+import { HeaderLeft, HeaderRight, ExploreLeft, ExploreRight, VerticalDots } from '../../components';
 
 const Tab = createBottomTabNavigator();
 
@@ -19,6 +19,9 @@ export default function Tabs() {
                 component={HomeTabs}
                 options={{
                     ...screenOptions,
+                    headerTitleStyle: {
+                    display: "none", // hide the header title
+                    },
                     tabBarIcon: ({focused}) => (
                             focused ? <icons.HomeIconActive/> : <icons.HomeIcon/>
                     )
@@ -41,10 +44,21 @@ export default function Tabs() {
                 options={{
                     ...screenOptions,
                     tabBarIcon: ({focused}) => (
-                        <View style={{ alignItems: 'center', justifyContent: 'center'}}>
-                            {focused ? <icons.SearchIconActive/> : <icons.SearchIcon/>}
+                            focused ? <icons.SearchIconActive/> : <icons.SearchIcon/>
+                    ),
+                    headerLeft: () => (
+                        <View style={{ marginLeft:24, alignItems: 'center', justifyContent: 'center'}}>
+                            <ExploreLeft/>
                         </View>
-                    )
+                    ),
+                    headerRight: () => (
+                        <View style={{ marginRight:24}}>
+                            <ExploreRight/>
+                        </View>
+                    ),
+                    headerTitle: 'Explore', //
+                    headerTitleAlign: 'center',
+                    headerTitleStyle: { fontFamily: FONTS.NotoSansJPBold,  fontWeight:700}
                 }}
                  />
       <Tab.Screen
@@ -53,32 +67,65 @@ export default function Tabs() {
                 options={{
                     ...screenOptions,
                     tabBarIcon: ({focused}) => (
-                        <View style={{ alignItems: 'center', justifyContent: 'center'}}>
-                        {focused ? <icons.HeartIconActive/> : <icons.HeartIcon/>}
+                        focused ? <icons.HeartIconActive/> : <icons.HeartIcon/>
+                    ),
+                    headerLeft: () => (
+                        <View style={{ marginLeft:24, alignItems: 'center', justifyContent: 'center'}}>
+                            <ExploreLeft/>
                         </View>
-                    )
+                    ),
+                    headerTitle: 'Favorites', //
+                    headerTitleAlign: 'center',
+                    headerTitleStyle: { fontFamily: FONTS.NotoSansJPBold,  fontWeight:700}
                 }}
                 />
       <Tab.Screen
-                name="Ticket"
-                component={Ticket}
+                name="Tickets"
+                component={Tickets}
                 options={{
                     ...screenOptions,
                     tabBarIcon: ({ focused }) => (
                         <View style={{ alignItems: 'center', justifyContent: 'center'}}>
                             {focused ? <icons.TicketIconActive/> : <icons.TicketIcon/>}
                         </View>
-                    )
+                    ),
+                    headerLeft: () => (
+                        <View style={{ marginLeft:24, alignItems: 'center', justifyContent: 'center'}}>
+                            <ExploreLeft/>
+                        </View>
+                    ),
+                    headerRight: () => (
+                        <View style={{ marginRight:24}}>
+                            <VerticalDots/>
+                        </View>
+                    ),
+                    headerTitle: 'Tickets', //
+                    headerTitleAlign: 'center',
+                    headerTitleStyle: { fontFamily: FONTS.NotoSansJPBold,  fontWeight:700}
                 }}
                 />
       <Tab.Screen name="Profile" component={Profile}
                 options={{
                     ...screenOptions,
+                    
                     tabBarIcon: ({ focused }) => (
                         <View style={{ alignItems: 'center', justifyContent: 'center'}}>
                             {focused ? <icons.ProfileIconActive/> : <icons.ProfileIconCircle/>}
                         </View>
-                    )
+                    ),
+                    headerLeft: () => (
+                        <View style={{ marginLeft:24, alignItems: 'center', justifyContent: 'center'}}>
+                            <ExploreLeft/>
+                        </View>
+                    ),
+                    headerRight: () => (
+                        <View style={{ marginRight:24}}>
+                            <VerticalDots/>
+                        </View>
+                    ),
+                    headerTitle: 'Profile', //
+                    headerTitleAlign: 'center',
+                    headerTitleStyle: { fontFamily: FONTS.NotoSansJPBold,  fontWeight:700}
                 }}
       />
     </Tab.Navigator>
@@ -92,9 +139,6 @@ const screenOptions = {
         borderBottomWidth: 0, // remove the border bottom on iOS
       },
       headerShadowVisible:false,
-      headerTitleStyle: {
-        display: "none", // hide the header title
-      },
       tabBarActiveTintColor:COLORS.primaryBase,
       tabBarStyle: {
         height: 70,
