@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
-import { icons, COLORS } from '../../constants';
+import { icons, COLORS, FONTS } from '../../constants';
 
 export default function InputField({
     placeholder,
@@ -59,5 +59,9 @@ const styles = StyleSheet.create({
         borderColor: 'transparent', // This will make the border color transparent
         borderRadius: 0, // This will make the border edges straight
         backgroundColor: 'transparent', // This will make the background color transparent
+    },
+    textInfocus: {
+        color: COLORS.grayBase,
+        fontFamily: FONTS.NotoSansJPMedium
     }
 })
