@@ -118,7 +118,7 @@ export default function page() {
           name="NavigationTabs"
           component={Tabs}
           options={{
-            headerShown:false 
+            headerShown:false
           }}
         />
       </Stack.Group>

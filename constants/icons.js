@@ -23,6 +23,8 @@ import TicketIconActive from "../assets/svgIcons/TicketIconActive"
 import VerticalDotsIcon from "../assets/svgIcons/VerticalDotsIcon"
 import ArrowLeftIcon from "../assets/svgIcons/ArrowLeftIcon"
 import FilterIcon from "../assets/svgIcons/FilterIcon"
+import FlashIcon from "../assets/svgIcons/FlashIcon"
+import MapPinSmallIcon from "../assets/svgIcons/MapPinSmallIcon"
 
 
 export default {
@@ -50,5 +52,7 @@ export default {
     ProfileIconActive,
     VerticalDotsIcon,
     ArrowLeftIcon,
-    FilterIcon
+    FilterIcon,
+    FlashIcon,
+    MapPinSmallIcon
 }

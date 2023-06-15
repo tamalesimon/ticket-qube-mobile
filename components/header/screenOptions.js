@@ -1,7 +1,11 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { icons, FONTS, COLORS } from '../../constants'
-import { HeaderLeft, HeaderRight, ExploreLeft, ExploreRight, VerticalDots } from '../../components';
+import HeaderLeft from './home/HeaderLeft'
+import HeaderRight from './home/HeaderRight'
+import ExploreRight from './explore/ExploreRight'
+import BackLeft from './explore/BackLeft'
+import VerticalDots from './VerticalDotsIcon'
 
 export const screenOptions = {
     headerStyle: {
@@ -57,7 +61,7 @@ export const screenOptions = {
     ),
     headerLeft: () => (
       <View style={styles.headerButtonContainer}>
-        <ExploreLeft />
+        <BackLeft />
       </View>
     ),
     headerRight: () => (
@@ -82,7 +86,7 @@ export const screenOptions = {
     ),
     headerLeft: () => (
         <View style={styles.headerButtonContainer}>
-          <ExploreLeft />
+          <BackLeft />
         </View>
       ),
     headerTitle: 'Favorites',
@@ -102,7 +106,7 @@ export const screenOptions = {
     ),
     headerLeft: () => (
       <View style={styles.headerButtonContainer}>
-        <ExploreLeft />
+        <BackLeft />
       </View>
     ),
     headerRight: () => (
@@ -127,7 +131,7 @@ export const screenOptions = {
     ),
     headerLeft: () => (
       <View style={styles.headerButtonContainer}>
-        <ExploreLeft />
+        <BackLeft />
       </View>
     ),
     headerRight: () => (
