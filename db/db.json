@@ -1,0 +1,143 @@
+{"suggestion":[
+    {
+      "id": 1,
+      "name": "Web Summit 2023",
+      "description": "Join us for the biggest tech conference of the year, featuring the latest innovations in AI, cloud computing, and more!",
+      "startDate": "2023-09-12T09:00:00",
+      "endDate": "2023-09-14T18:00:00",
+      "location": "Moscone Center, San Francisco",
+      "picture": "https://cloudfront-us-east-2.images.arcpublishing.com/reuters/KBWIVQ65RJLM3GH2BNOSKYL65A.jpg",
+      "category": {
+        "id": 1,
+        "name": "Technology"
+      },
+      "tickets": [
+        {
+          "id": 1,
+          "name": "Early Bird Ticket",
+          "description": "Access to the conference for both days at a discounted price.",
+          "price": 499.99
+        },
+        {
+          "id": 2,
+          "name": "Standard Ticket",
+          "description": "Access to the conference for both days at the regular price.",
+          "price": 599.99
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "The Annual Marketing Conference 2023",
+      "description": "Join us for the biggest marketing conference of the year, featuring the latest trends and strategies.",
+      "startDate": "2023-11-01T09:00:00",
+      "endDate": "2023-11-03T18:00:00",
+      "location": "Jacob K. Javits Convention Center, New York City",
+      "picture": "https://africanmarketingconfederation.org/wp-content/uploads/2023/04/14-April-AMC-Member-News.jpg",
+      "category": {
+        "id": 2,
+        "name": "Marketing"
+      },
+      "tickets": [
+        {
+          "id": 3,
+          "name": "Early Bird Ticket",
+          "description": "Access to the conference for both days at a discounted price.",
+          "price": 399.99
+        },
+        {
+          "id": 4,
+          "name": "Standard Ticket",
+          "description": "Access to the conference for both days at the regular price.",
+          "price": 499.99
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Art Exhibition 2023",
+      "description": "Discover the latest and greatest art pieces from around the world at this annual art exhibition.",
+      "startDate": "2023-05-10T10:00:00",
+      "endDate": "2023-05-16T18:00:00",
+      "location": "Tate Modern, London",
+      "picture": "https://luxesource.com/wp-content/uploads/2023/01/LX_Chicago76_Scene_11.jpg",
+      "category": {
+        "id": 3,
+        "name": "Art"
+      },
+      "tickets": [
+        {
+          "id": 5,
+          "name": "General Admission",
+          "description": "Access to the exhibition for one day.",
+          "price": 29.99
+        },
+        {
+          "id": 6,
+          "name": "VIP Ticket",
+          "description": "Access to the exhibition for one day, with VIP treatment and a guided tour.",
+          "price": 99.99
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Frequency Summer Festival",
+      "description": "Join us for a fun-filled weekend of live music, food, and drinks!",
+      "startDate": "2023-07-08T12:00:00Z",
+      "endDate": "2023-07-10T23:00:00Z",
+      "location": "Central Park, New York City",
+      "picture": "https://www.thedjrevolution.com/wp-content/uploads/2023/01/Photo-of-the-dancefloor-at-Earth-Frequency-Festival.jpg",
+      "category": {
+        "id": 4,
+        "name": "Music Festivals",
+        "description": "Events that feature multiple musical performers."
+      },
+      "tickets": [
+        {
+          "id": 1,
+          "name": "General Admission",
+          "description": "Access to all performances throughout the weekend.",
+          "price": 100.0,
+          "quantity": 5000
+        },
+        {
+          "id": 2,
+          "name": "VIP Admission",
+          "description": "Access to exclusive VIP lounges and viewing areas.",
+          "price": 250.0,
+          "quantity": 500
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Charity Gala Dinner",
+      "description": "Join us for an elegant evening of fine dining, entertainment, and charity!",
+      "startDate": "2023-09-16T18:00:00Z",
+      "endDate": "2023-09-16T23:00:00Z",
+      "location": "Grand Ballroom, The Ritz-Carlton, San Francisco",
+      "picture": "https://uploads-ssl.webflow.com/60d27e95cceae4cfc65345b4/63a220c21e7378984bbebc35_Guests.jpg",
+      "category": {
+        "id": 5,
+        "name": "Galas",
+        "description": "Events that involve an evening of entertainment, often for charity or fundraising purposes."
+      },
+      "tickets": [
+        {
+          "id": 3,
+          "name": "Individual Ticket",
+          "description": "Access to the gala dinner for one person.",
+          "price": 500.0,
+          "quantity": 100
+        },
+        {
+          "id": 4,
+          "name": "Table of 10",
+          "description": "Reserved table for 10 people at the gala dinner.",
+          "price": 5000.0,
+          "quantity": 10
+        }
+      ]
+    }
+  ]}

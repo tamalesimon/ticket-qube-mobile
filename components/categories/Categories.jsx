@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
 import { FONTS, COLORS, icons } from '../../constants'
-import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 export default function Categories() {
     const [selected, setSelected] = useState(1)
@@ -46,6 +45,7 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.gray50,
         borderRadius:12,
         marginRight: 12,
+        marginBottom:24,
         flexDirection: 'row',
         alignItems: 'center'
     }

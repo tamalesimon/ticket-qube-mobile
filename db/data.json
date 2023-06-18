@@ -1,0 +1,353 @@
+{
+    "upcoming": [
+        {
+            "id": 1,
+            "name": "Web Summit 2023",
+            "description": "Join us for the biggest tech conference of the year, featuring the latest innovations in AI, cloud computing, and more!",
+            "startDate": "2023-07-15T16:00:00",
+            "endDate": "2023-07-17T23:59:00",
+            "location": "Central Park, New York",
+            "picture": "https://cloudfront-us-east-2.images.arcpublishing.com/reuters/KBWIVQ65RJLM3GH2BNOSKYL65A.jpg",
+            "category": {
+                "id": 1,
+                "name": "Music"
+            },
+            "tickets": [
+                {
+                    "id": 1,
+                    "name": "General Admission",
+                    "description": "Access to all stages and performances throughout the festival.",
+                    "price": 99.99
+                }, {
+                    "id": 2,
+                    "name": "VIP Pass",
+                    "description": "Exclusive access to VIP areas, premium viewing spots, and artist meet-and-greets.",
+                    "price": 249.99
+                }
+            ],
+            "organizer": {
+                "id": 1,
+                "name": "Web summit",
+                "phone": "+1-123-456-7890",
+                "email": "info@websummit.com",
+                "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Web_Summit_logo.svg/640px-Web_Summit_logo.svg.png",
+                "website": "https://websummit.com",
+                "additionalDetails": "Music Events International is a leading organizer of music festivals and concerts worldwide. Our mission is to provide unforgettable experiences, showcase diverse music genres, and bring music lovers together from around the globe."
+            },
+            "rating": 4.5
+        },
+        {
+            "id": 2,
+            "name": "Marketing Conference 2023",
+            "description": "Join us for the biggest marketing conference of the year, featuring the latest trends and strategies.",
+            "startDate": "2023-09-01T10:00:00",
+            "endDate": "2023-09-15T18:00:00",
+            "location": "jkj Convention Center, New York City",
+            "picture": "https://africanmarketingconfederation.org/wp-content/uploads/2023/04/14-April-AMC-Member-News.jpg",
+            "category": {
+                "id": 2,
+                "name": "Art"
+            },
+            "tickets": [
+                {
+                    "id": 3,
+                    "name": "General Admission",
+                    "description": "Access to all art galleries and exhibitions throughout the event.",
+                    "price": 19.99
+                }, {
+                    "id": 4,
+                    "name": "VIP Pass",
+                    "description": "Priority access, guided tours, and exclusive previews of new art collections.",
+                    "price": 49.99
+                }
+            ],
+            "organizer": {
+                "id": 2,
+                "name": "East African Community",
+                "phone": "+44-20-1234-5678",
+                "email": "info@eac.int",
+                "photo": "https://www.wcoomd.org/-/media/wco/public/images/media/press-releases/september-2021/eac-ar-news.jpg",
+                "website": "https://www.eac.int",
+                "additionalDetails": "Art Events Ltd. is dedicated to promoting art and supporting artists from around the world. Our exhibitions provide a platform for artistic expression, cultural exchange, and the celebration of creativity."
+            },
+            "rating": 4.2
+        },
+        {
+            "id": 3,
+            "name": "Food Festival 2023",
+            "description": "Indulge in a culinary adventure",
+            "startDate": "2023-10-20T12:00:00",
+            "endDate": "2023-10-22T22:00:00",
+            "location": "Berlin town",
+            "picture": "https://www.musicboard-berlin.de/wp-content/uploads/2019/06/African-Food-Festival_Logo_Webseite.jpg",
+            "category": {
+                "id": 3,
+                "name": "Food & Drinks"
+            },
+            "tickets": [
+                {
+                    "id": 5,
+                    "name": "General Admission",
+                    "description": "Access to food stalls, cooking demonstrations, and live entertainment.",
+                    "price": 29.99
+                }, {
+                    "id": 6,
+                    "name": "VIP Pass",
+                    "description": "Exclusive tastings, access to VIP lounges, and meet-and-greets with renowned chefs.",
+                    "price": 99.99
+                }
+            ],
+            "organizer": {
+                "id": 3,
+                "name": "African Food Festival.",
+                "phone": "+1-987-654-3210",
+                "email": "info@foodevents.com",
+                "photo": "https://www.musicboard-berlin.de/wp-content/uploads/2019/06/African-Food-Festival_Logo_Webseite.jpg",
+                "website": "https://foodevents.com",
+                "additionalDetails": "Food Events Inc. is dedicated to celebrating culinary diversity and bringing people together through the love of food. Our festivals showcase a wide array of cuisines, culinary talents, and immersive dining experiences."
+            },
+            "rating": 4.8
+        },
+        {
+            "id": 4,
+            "name": "Tech Conference 2023",
+            "description": "Explore the latest trends and innovations in the tech industry through insightful keynotes, panel discussions, and workshops.",
+            "startDate": "2023-11-10T09:00:00",
+            "endDate": "2023-11-12T18:00:00",
+            "location": "Convention Center, Cape Town",
+            "picture": "https://static.wixstatic.com/media/5ab612_b99d06d36bf7479e814f3c8f5816dddb~mv2.jpg/v1/fill/w_1080,h_1080,al_c,q_85/5ab612_b99d06d36bf7479e814f3c8f5816dddb~mv2.jpg",
+            "category": {
+                "id": 4,
+                "name": "Technology"
+            },
+            "tickets": [
+                {
+                    "id": 7,
+                    "name": "General Pass",
+                    "description": "Access to all conference sessions and networking events.",
+                    "price": 199.99
+                }, {
+                    "id": 8,
+                    "name": "VIP Pass",
+                    "description": "Priority seating, exclusive workshops, and access to VIP lounges.",
+                    "price": 499.99
+                }
+            ],
+            "organizer": {
+                "id": 4,
+                "name": "Tech Events Ltd.",
+                "phone": "+81-90-1234-5678",
+                "email": "info@techevents.com",
+                "photo": "https://example.com/images/techevents.jpg",
+                "website": "https://techevents.com",
+                "additionalDetails": "Tech Events Ltd. aims to connect tech enthusiasts, professionals, and industry leaders. Our conferences foster knowledge sharing, collaboration, and inspiration for the advancement of technology."
+            },
+            "rating": 4.6
+        }, {
+            "id": 5,
+            "name": "Fitness Expo 2024",
+            "description": "Get motivated and stay fit with a wide range of fitness activities, workshops, and demonstrations.",
+            "startDate": "2024-02-01T08:00:00",
+            "endDate": "2024-02-02T20",
+            "location": "Expo Center, LA",
+            "picture": "https://pbs.twimg.com/media/FxOQ85mXsAA6e-_.jpg",
+            "category": {
+                "id": 5,
+                "name": "Fitness"
+            },
+            "tickets": [
+                {
+                    "id": 9,
+                    "name": "Single Day Pass",
+                    "description": "Access to all fitness activities and workshops on a single day.",
+                    "price": 39.99
+                }, {
+                    "id": 10,
+                    "name": "Weekend Pass",
+                    "description": "Unlimited access to all fitness activities and workshops throughout the weekend.",
+                    "price": 79.99
+                }
+            ],
+            "organizer": {
+                "id": 5,
+                "name": "Fitness Events LLC",
+                "phone": "+1-987-654-3210",
+                "email": "info@fitnessevents.com",
+                "photo": "https://example.com/images/fitnessevents.jpg",
+                "website": "https://fitnessevents.com",
+                "additionalDetails": "Fitness Events LLC is passionate about promoting a healthy and active lifestyle. Our expos provide a platform to inspire and educate individuals about fitness, wellness, and overall well-being."
+            },
+            "rating": 4.3
+        }, {
+            "id": 6,
+            "name": "Auto Show",
+            "description": "Witness stunning fashion collections and runway presentations by renowned designers from around the world.",
+            "startDate": "2024-04-15T19:00:00",
+            "endDate": "2024-04-17T22:00:00",
+            "location": "Sheraton Hotel, Kampala",
+            "picture": "https://i0.wp.com/www.muzungubloguganda.com/wp-content/uploads/2017/08/Uganda-Classic-and-Vintage-Car-Show-2017.-Sheraton-Hotel.jpg",
+            "category": {
+                "id": 6,
+                "name": "Fashion"
+            },
+            "tickets": [
+                {
+                    "id": 11,
+                    "name": "General Admission",
+                    "description": "Access to the fashion show and exhibition area.",
+                    "price": 49.99
+                }, {
+                    "id": 12,
+                    "name": "VIP Pass",
+                    "description": "Front-row seating, backstage access, and exclusive after-party entry.",
+                    "price": 199.99
+                }
+            ],
+            "organizer": {
+                "id": 6,
+                "name": "Fashion Events International",
+                "phone": "+33-1-1234-5678",
+                "email": "info@fashionevents.com",
+                "photo": "https://example.com/images/fashionevents.jpg",
+                "website": "https://fashionevents.com",
+                "additionalDetails": "Fashion Events International showcases the creativity and artistry of the fashion industry. Our shows provide a platform for established and emerging designers to present their collections and set new trends."
+            },
+            "rating": 4.7
+        }, {
+            "id": 7,
+            "name": "Film Festival",
+            "description": "Celebrate the magic of cinema with a curated selection of feature films, documentaries, and short films from around the world.",
+            "startDate": "2024-06-10T12:00:00",
+            "endDate": "2024-06-20T23:59:00",
+            "location": "Uganda National Theatre, Kampala",
+            "picture": "https://uccinfoblog.files.wordpress.com/2019/05/uff-2.png",
+            "category": {
+                "id": 7,
+                "name": "Film"
+            },
+            "tickets": [
+                {
+                    "id": 13,
+                    "name": "Day Pass",
+                    "description": "Access to film screenings on a specific day.",
+                    "price": 24.99
+                }, {
+                    "id": 14,
+                    "name": "Festival Pass",
+                    "description": "Unlimited access to all film screenings and events throughout the festival.",
+                    "price": 99.99
+                }
+            ],
+            "organizer": {
+                "id": 7,
+                "name": "Uganda Film Festival.",
+                "phone": "+1-416-123-4567",
+                "email": "info@uff.co.ug",
+                "photo": "https://filmfreeway-production-storage-01-storage.filmfreeway.com/festivals/logos/000/044/375/large/logo.jpg",
+                "website": "https://www.ugandafilmfestival.co.ug",
+                "additionalDetails": "Film Events Ltd. is dedicated to promoting the art of filmmaking and providing a platform for filmmakers to showcase their work. Our festivals celebrate diverse stories, creativity, and the power of cinema."
+            },
+            "rating": 4.5
+        }, {
+            "id": 8,
+            "name": "Gaming Expo 2024",
+            "description": "Immerse yourself in the world of gaming with hands-on demos, esports competitions, and exciting gaming showcases.",
+            "startDate": "2024-08-15T10:00:00",
+            "endDate": "2024-08-18T21:00:00",
+            "location": "Exhibition Center, Berlin",
+            "picture": "https://www.shropshirestar.com/resizer/jaPf71WF5LlV8tZWoZdoyevt_sc=/1200x0/cloudfront-us-east-1.images.arcpublishing.com/mna/UWAHFCR555ERNGEWO3TUEALAKU.jpg",
+            "category": {
+                "id": 8,
+                "name": "Gaming"
+            },
+            "tickets": [
+                {
+                    "id": 15,
+                    "name": "Single Day Pass",
+                    "description": "Access to the gaming expo on a specific day.",
+                    "price": 29.99
+                }, {
+                    "id": 16,
+                    "name": "Weekend Pass",
+                    "description": "Unlimited access to the gaming expo throughout the weekend.",
+                    "price": 69.99
+                }
+            ],
+            "organizer": {
+                "id": 8,
+                "name": "Gaming Events GmbH",
+                "phone": "+49-30-1234-5678",
+                "email": "info@gamingevents.com",
+                "photo": "https://example.com/images/gamingevents.jpg",
+                "website": "https://gamingevents.com",
+                "additionalDetails": "Gaming Events GmbH is passionate about gaming and esports. Our expos provide a platform to connect gaming enthusiasts, showcase cutting-edge technology, and celebrate the vibrant gaming community."
+            },
+            "rating": 4.4
+        }, {
+            "id": 9,
+            "name": "Science Conference 2024",
+            "description": "Explore the frontiers of scientific research and innovation through enlightening presentations and scientific discussions.",
+            "startDate": "2024-10-01T09:00:00",
+            "endDate": "2024-10-03T18:00:00",
+            "location": "Convention Center, Sydney",
+            "picture": "https://royalsociety.org/-/media/summer-science-exhibition/2022/Talks-and-events/DES8000_07_SSE-2022_events-page_website-image.jpg",
+            "category": {
+                "id": 9,
+                "name": "Science"
+            },
+            "tickets": [
+                {
+                    "id": 17,
+                    "name": "General Pass",
+                    "description": "Access to all conference sessions and networking events",
+                    "price": "Free"
+                }
+            ],
+            "organizer": {
+                "id": 9,
+                "name": "Science Events Inc.",
+                "phone": "+61-2-1234-5678",
+                "email": "info@scienceevents.com",
+                "photo": "https://example.com/images/scienceevents.jpg",
+                "website": "https://scienceevents.com",
+                "additionalDetails": "Science Events Inc. is committed to fostering scientific discovery and collaboration. Our conferences provide a platform for researchers, academicians, and industry professionals to exchange knowledge, discuss breakthroughs, and shape the future of science."
+            },
+            "rating": 4.7
+        }, {
+            "id": 10,
+            "name": "Charity Gala 2024",
+            "description": "Join us for an elegant evening of philanthropy, live performances, and fundraising for a noble cause.",
+            "startDate": "2024-12-05T18:00:00",
+            "endDate": "2024-12-05T23:00:00",
+            "location": "Grand Ballroom, New York",
+            "picture": "https://www.thegmp.biz/storage/uploads/events/cover_images/FB_IMG_1574035657788_thegmp_1574036246.jpg",
+            "category": {
+                "id": 10,
+                "name": "Charity"
+            },
+            "tickets": [
+                {
+                    "id": 19,
+                    "name": "Individual Ticket",
+                    "description": "Admission for one person to the charity gala.",
+                    "price": 299.99
+                }, {
+                    "id": 20,
+                    "name": "Table Reservation",
+                    "description": "Reserved table for a group of 10 people, including dinner and exclusive seating.",
+                    "price": 2999.99
+                }
+            ],
+            "organizer": {
+                "id": 10,
+                "name": "Charity Events Foundation",
+                "phone": "+1-123-987-6543",
+                "email": "info@charityevents.com",
+                "photo": "https://example.com/images/charityevents.jpg",
+                "website": "https://charityevents.com",
+                "additionalDetails": "Charity Events Foundation is dedicated to making a positive impact in society. Our galas raise funds for various charitable causes, supporting communities in need and fostering hope for a better future."
+            },
+            "rating": 4.9
+        }
+    ]
+}

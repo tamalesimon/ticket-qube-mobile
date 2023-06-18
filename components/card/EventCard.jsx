@@ -1,24 +1,25 @@
 import React from 'react';
 import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
 import { icons, COLORS, FONTS, images }  from '../../constants'
+import { checkImageURL, returnDateDay, returnDateMonth } from '../../utils/utils';
 
-export default function EventCard() {
+export default function EventCard({ item }) {
 return (
     <View>
         <ImageBackground
-            source={{uri: 'https://img.freepik.com/premium-photo/abstract-futuristic-contemporary-modern-watercolor-art_93314-4483.jpg'}}
+            source={{uri: checkImageURL(item?.picture)? item.picture : 'https://img.freepik.com/premium-photo/abstract-futuristic-contemporary-modern-watercolor-art_93314-4483.jpg'}}
             style={styles.container}
         >
             <View style={styles.dateContainer}>
-                <Text style={styles.dateText}>29</Text>
-                <Text style={styles.dateMonth}>Sep</Text>
+                <Text style={styles.dateText}>{returnDateDay(item.endDate)}</Text>
+                <Text style={styles.dateMonth}>{returnDateMonth(item.startDate)}</Text>
             </View>
             <View style={styles.detailsContainer}>
-                <Text style={styles.detailsTitle}>Contemporary Art Festival: Ndere Center 29-30</Text>
+                <Text style={styles.detailsTitle}>{item.name}: {item.location}</Text>
                 <View style={styles.detailsSubtitle}>
-                    <Text style={styles.locationTime}>Kisaasi - 10:00 PM</Text>
+                    <Text style={styles.locationTime}>{item.location}</Text>
                     <TouchableOpacity style={styles.price}>
-                        <Text style={styles.priceText}>UGX 50k - 2M</Text>
+                        <Text style={styles.priceText}>Book</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -33,15 +34,16 @@ container: {
     width:250,
     borderRadius:16,
     overflow: 'hidden',
+    zIndex:99,
     padding:12,
     shadowColor: "#111827",
-shadowOffset: {
-    width: 0,
-    height: 18,
-},
-shadowOpacity:  0.25,
-shadowRadius: 20.00,
-elevation: 24
+    shadowOffset: {
+      width: 0,
+      height: 18,
+    },
+    shadowOpacity:  0.25,
+    shadowRadius: 20.00,
+    elevation: 5
 },
 dateContainer: {
     position:'absolute',
@@ -77,12 +79,13 @@ detailsContainer: {
     right:'4.8%',
     top:'59.31%',
     bottom:'4.14%',
+    width:"100%",
     flexDirection:'column',
     justifyContent:'space-between',
     padding:12,
     backgroundColor:COLORS.white,
     borderRadius:16,
-    gap:8,
+    
     shadowColor: "#111827",
     shadowOffset: {
     width: 0,
@@ -108,11 +111,12 @@ locationTime:{
     fontFamily:FONTS.NotoSansJPRegular,
     fontWeight:400,
     color: COLORS.gray400,
-    fontSize:12
+    fontSize:12,
+    width:"60%"
 },
 price: {
-    paddingHorizontal:13,
-    paddingVertical:7,
+    paddingHorizontal:14,
+    paddingVertical:4.5,
     backgroundColor:COLORS.primary100,
     borderRadius:8
 },

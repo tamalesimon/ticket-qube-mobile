@@ -1,17 +1,18 @@
 import React from 'react';
 import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
 import { icons, COLORS, FONTS, images }  from '../../constants'
+import { checkImageURL, returnDateDay, returnDateMonth } from '../../utils/utils';
 
-export default function SuggestionCard() {
+export default function SuggestionCard({item}) {
   return (
     <TouchableOpacity style={styles.container}>
         <ImageBackground
-            source={{ uri:'https://images.saymedia-content.com/.image/t_share/MTk3MjQ3NTQ5MzUyOTc3NzI3/romantic-poetry-definition-characteristics.png'}}
+            source={{ uri: checkImageURL(item?.picture) ? item.picture : 'https://img.freepik.com/premium-photo/abstract-futuristic-contemporary-modern-watercolor-art_93314-4483.jpg'}}
             style={styles.imageIcon}
         >
             <View style={styles.dateContainer}>
-                <Text style={styles.dateDay}>12</Text>
-                <Text style={styles.dateMonth}>Jul</Text>
+                <Text style={styles.dateDay}>{returnDateDay(item.startDate)}</Text>
+                <Text style={styles.dateMonth}>{returnDateMonth(item.startDate)}</Text>
             </View>
         </ImageBackground>
         <View style={styles.detailsContainer}>
@@ -32,21 +33,25 @@ export default function SuggestionCard() {
 
 const styles = StyleSheet.create({
 container: {
+    height:122,
     backgroundColor: COLORS.white,
     padding:12,
     borderRadius:16,
     flexDirection: 'row',
     alignItems: 'center',
-    shadowColor: "#111827",
+    marginBottom:18,
+    marginHorizontal:2,
+    zIndex:99,
     gap:12,
-    shadowColor: "#111827",
-    shadowOffset: {
-      width: 0,
-      height: 18,
-    },
-    shadowOpacity:  0.25,
-    shadowRadius: 20.00,
-    elevation: 24
+    overflow: 'hidden',
+    shadowColor: "#e3dede",
+shadowOffset: {
+  width: 0,
+  height: 18,
+},
+shadowOpacity:  0.25,
+shadowRadius: 20.00,
+elevation: 24
 },
 imageIcon: {
     width: 88,
@@ -111,7 +116,7 @@ location:{
 },
 price: {
     paddingHorizontal:17,
-    paddingVertical:7,
+    paddingVertical:3,
     backgroundColor:COLORS.primary100,
     borderRadius:8
 },

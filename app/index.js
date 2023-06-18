@@ -1,14 +1,11 @@
-import { View, SafeAreaView, Text, ScrollView, TouchableOpacity, StyleSheet } from "react-native";
-import { useRouter, useNavigation } from "expo-router";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { useNavigation } from "expo-router";
 import { createNativeStackNavigator, } from "@react-navigation/native-stack";
 import { COLORS, icons, FONTS } from "../constants";
-
-import { HeaderLeft, HeaderRight } from "../components";
 
 import { Signin, Signup, ForgotPassword, ResetPassword, ResetSuccess, Verify } from "../screens/authentication";
 import { Location, FollowOrganiser, PickInterest  } from "../screens/onboarding";
 import { GetStarted } from "../screens/welcome";
-import { Home } from "../screens/home";
 import Tabs from "../screens/tabs/Tabs";
 
 const Stack = createNativeStackNavigator();
