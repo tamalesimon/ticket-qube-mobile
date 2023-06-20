@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
-import { icons, COLORS, FONTS, images }  from '../../constants'
+import { icons, COLORS, FONTS }  from '../../constants'
 import { checkImageURL, returnDateDay, returnDateMonth } from '../../utils/utils';
 
 export default function SuggestionCard({item}) {
@@ -16,14 +16,14 @@ export default function SuggestionCard({item}) {
             </View>
         </ImageBackground>
         <View style={styles.detailsContainer}>
-            <Text style={styles.detailsTitle}>Impressionable Poetry: National Theatre</Text>
+            <Text style={styles.detailsTitle}>{item.name}</Text>
             <View style={styles.detailsSubtitle}>
                 <View style={styles.locationContainer}>
                     <icons.MapPinSmallIcon/>
-                    <Text style={styles.location}>National Theatre, KLA</Text>
+                    <Text style={styles.location}>{item.location}</Text>
                 </View>
                 <View style={styles.price}>
-                    <Text style={styles.priceText}>Free</Text>
+                    <Text style={styles.priceText}>$ {item.tickets[0].price}</Text>
                 </View>
             </View>
         </View>
@@ -112,6 +112,7 @@ location:{
     fontWeight:500,
     color: COLORS.gray400,
     fontSize:12,
+    width:140
 
 },
 price: {
