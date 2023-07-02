@@ -2,7 +2,8 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { useNavigation } from "expo-router";
 import { createNativeStackNavigator, } from "@react-navigation/native-stack";
 import { COLORS, icons, FONTS } from "../constants";
-
+import store from "../store";
+import { Provider } from "react-redux";
 import { Signin, Signup, ForgotPassword, ResetPassword, ResetSuccess, Verify } from "../screens/authentication";
 import { Location, FollowOrganiser, PickInterest  } from "../screens/onboarding";
 import { GetStarted } from "../screens/welcome";
@@ -10,10 +11,9 @@ import Tabs from "../screens/tabs/Tabs";
 
 const Stack = createNativeStackNavigator();
 
-export default function page() {
+export default function Page() {
   const navigation = useNavigation();
   return (
-    
     <Stack.Navigator>
       <Stack.Group>
         <Stack.Screen
@@ -122,6 +122,14 @@ export default function page() {
     </Stack.Navigator>
   );
 }
+
+// export default function Page(){
+//   return (
+//     <Provider store={store}>
+//       <App />
+//     </Provider>
+//   )
+// }
 
 const screenOptions = {
   headerStyle: {

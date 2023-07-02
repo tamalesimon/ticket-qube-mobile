@@ -21,3 +21,11 @@ export const checkImageURL = (url) => {
     const shortenedName = eventName.substring(0, 17)+"...";
     return shortenedName;
   }
+
+  export const maskEmail = (email) => {
+    const atIndex = email.indexOf('@');
+    const username = email.slice(0, atIndex);
+    const maskedUsername = username.replace(/.(?=.)/g, '*');
+    const domain = email.slice(atIndex);
+    return maskedUsername + domain;
+  };

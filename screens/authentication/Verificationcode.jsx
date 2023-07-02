@@ -1,43 +1,56 @@
-import React from "react"
+import React, { useState } from "react"
 import { View, Text, Image, TouchableOpacity, TextInput, SafeAreaView, StyleSheet } from 'react-native';
 import { COLORS, FONTS, FONTSIZE, images, icons } from '../../constants';
+import { maskEmail } from "../../utils/utils";
 import GenericButton from "../../components/buttons/genericButton";
-
 import globalStyles from '../../styles/globalStyles';
+import OtpInput from "../../components/inputField/OtpInput";
+import { useSelector, useDispatch } from "react-redux";
+import { verifyOtp } from "../../redux/authSlice";
 
 
-const Verify = () => {
+
+const Verify = ({route: {params: {email}}}) => {
+    const [otp, setOtp] = useState(['', '', '', ''])
+    const dispatch = useDispatch();
+
+    const isLoading = useSelector((state) => state.auth.isLoading)
+    const error = useSelector((state) => state.auth.error)
+    const userinfo = useSelector((state) => state.auth.userinfo)
+
+    const handleVerification = () => {
+        const otpToString = otp.join('');
+        dispatch(verifyOtp(JSON.stringify(otpToString)))
+        console.log(JSON.stringify(otpToString))
+    }
     return (
-    <SafeAreaView style={{backgroundColor:COLORS.white, flex:1}}>
+    <SafeAreaView style={{backgroundColor:COLORS.white, flex:1, paddingHorizontal:24}}>
         <View>
             <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', gap:8, marginTop:32 }}>
                 <Image source={require('../../assets/images/verify.png')} resizeMode='contain'/>
                 <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', marginTop:32 }}>
                     <Text style={{ ...globalStyles.Heading4, fontWeight:700, marginBottom:8}}>Verification Code</Text>
                     <Text style={styles.message}>We have sent the verification code to your email</Text>
-                    <Text style={styles.messageEmail}>ta****@gmail.com.</Text>
+                    <Text style={styles.messageEmail}>{maskEmail(email)}.</Text>
                 </View>
                 <View style={styles.inputContainer}>
-                    <View style={styles.inputBox}>
-                        <TextInput style={[globalStyles.Heading4, styles.inputText] }></TextInput>
-                    </View>
-                    <View style={styles.inputBox}>
-                        <TextInput style={[globalStyles.Heading4, styles.inputText] }></TextInput>
-                    </View>
-                    <View style={styles.inputBox}>
-                        <TextInput style={[globalStyles.Heading4, styles.inputText] }></TextInput>
-                    </View>
-                    <View style={styles.inputBox}>
-                        <TextInput style={[globalStyles.Heading4, styles.inputText] }></TextInput>
-                    </View>
-                    <View style={styles.inputBox}>
-                        <TextInput style={[globalStyles.Heading4, styles.inputText] }></TextInput>
-                    </View>
+                    {otp.map((digit, index) => (
+                        <OtpInput
+                            key={index}
+                            value={digit}
+                            onChangeText={(text) => {
+                                setOtp([...otp.map((d, i) => i === index ? text : d)])
+                            }}
+                            index={index}
+                        />
+                    ))}
                 </View>
                 <TouchableOpacity style={{ marginBottom: 180}}>
                         <Text style={styles.resendCode}>Resend code</Text>
                 </TouchableOpacity>
-                <GenericButton bgColor={"primaryBase"} label={"Verify"} fontColor={"white"}/>
+                <View style={{ width:"100%"}}>
+                    <GenericButton bgColor={"primaryBase"} label={"Verify"} fontColor={"white"} onPress={handleVerification}/>
+                </View>
             </View>
         </View>
     </SafeAreaView>
@@ -47,35 +60,12 @@ const Verify = () => {
 export default Verify
 
 const styles = StyleSheet.create({
-    inputText: {
-        fontFamily: FONTS.NotoSansJPMedium,
-        fontSize: FONTSIZE.medium,
-        color: COLORS.grayBase
-    },
     inputContainer: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-evenly',
         marginTop:32,
         marginBottom:24
-    },
-    inputBox:{
-        borderRadius: 16,
-        width:56,
-        height:56,
-        backgroundColor: COLORS.gray50,
-        marginRight:11.75
-    },
-    inputText:{
-        paddingHorizontal:21,
-        paddingVertical:10,
-        textAlign: 'center',
-        // borderColor:COLORS.primaryBase,
-        borderRadius:16,
-        // borderWidth: 1,
-    },
-    inputFocus:{
-        borderColor: COLORS.primaryBase,
     },
     resendCode:{
         fontFamily: FONTS.NotoSansJPMedium,

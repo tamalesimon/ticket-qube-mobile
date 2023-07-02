@@ -1,11 +1,13 @@
 import { Stack } from 'expo-router';
 import { useCallback } from 'react';
 import { useFonts } from 'expo-font';
+import { Provider } from 'react-redux';
+import store from '../store';
 import * as SplashScreen from 'expo-splash-screen';
 
 SplashScreen.preventAutoHideAsync();
 
-const Layout = () => {
+const App = () => {
     const [FontsLoaded] = useFonts({
       NotoSansJPBlack: require('../assets/fonts/NotoSansJP-Black.ttf'),
       NotoSansJPBold: require('../assets/fonts/NotoSansJP-Bold.ttf'),
@@ -26,7 +28,15 @@ const Layout = () => {
 
 
     if(!FontsLoaded) return null;
-    return <Stack onLayout={onLayoutRootView} screenOptions={{headerShown: false}}/>
+    return (
+      <Stack onLayout={onLayoutRootView} screenOptions={{headerShown: false}}/>
+    )
 }
 
-export default Layout;
+export default function Layout() {
+    return (
+        <Provider store={store}>
+            <App />
+        </Provider>
+    )
+}
