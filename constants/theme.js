@@ -2,9 +2,9 @@ const COLORS = {
     // primary
     primaryBase :"#FF8142",
     primary400  :"#FF9C6A",
-    primary300  :"FFB895",
-    primary200  :"FFD5C0",
-    primary100  :"FFF2EC",
+    primary300  :"#FFB895",
+    primary200  :"#FFD5C0",
+    primary100  :"#FFF2EC",
 
     // secondary
     secondaryBase   :"#00334E",

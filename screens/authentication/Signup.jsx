@@ -1,15 +1,65 @@
 import React, { useState } from "react"
+import { useDispatch, useSelector } from 'react-redux'
 import { View, Text, Image, TouchableOpacity, TextInput, SafeAreaView, StyleSheet } from 'react-native';
-import { useRouter } from "expo-router";
 import { COLORS, FONTS, FONTSIZE, images, icons } from '../../constants';
 import GenericButton from "../../components/buttons/genericButton";
 import InputField from "../../components/inputField/InputField";
 import AcceptTerms from "../../components/terms/AcceptTerms";
+import { createAccount } from "../../redux/authSlice";
 
 import globalStyles from '../../styles/globalStyles';
 
 
 const Signup = ({ navigation }) => {
+
+    const dispatch = useDispatch();
+    const isLoading =  useSelector((state) => state.auth.isLoading)
+    const error = useSelector((state) => state.auth.error);
+    const userinfo = useSelector((state) => state.auth.userinfo)
+
+    const [nameInput, setNameInput] = useState('')
+    const [errorMessage, setErrorMessage] = useState('')
+    const [ { firstName, lastName, email, password, phoneNumber, dateOfBirth, userRole }, setFormData] = useState({
+        firstName:'',
+        lastName:'',
+        email:'',
+        password:'',
+        phoneNumber: '',
+        dateOfBirth: '1987-01-10T00:00:00.00Z',
+        userRole: "CLIENT" })
+
+    const handleSignup = () => {
+        const data = {
+            firstName,
+            lastName,
+            email,
+            password,
+            phoneNumber,
+            dateOfBirth,
+            userRole
+        }
+        if (error){
+            setErrorMessage(error.message)
+            console.log("Error from Signup", error)
+        } else {
+            dispatch(createAccount(data));
+            navigation.navigate('Verify', {email})
+        }
+    }
+
+    const handleInputText = (text) => {
+        setNameInput(text);
+        const names = text.split(' ');
+        let firstName, lastName;
+        if (names.length >= 2 && names.length <= 4) {
+            firstName = names.slice(0, -1).join(' ');
+            lastName = names.slice(-1)[0];
+        } else {
+            firstName = text;
+            lastName = '';
+        }
+        setFormData(prevState => ({...prevState, firstName, lastName}));
+    }
 
     return (
     <SafeAreaView style={{backgroundColor:COLORS.white, flex:1, padding:23}}>
@@ -30,23 +80,38 @@ const Signup = ({ navigation }) => {
                             placeholderTextColor={COLORS.gray400}
                             icon={icons.UserIcon}
                             inputType={'names'}
+                            value={nameInput}
+                            onChangeText={handleInputText}
+                            setFormData={setFormData}
                         />
                 <InputField
                             placeholder="Email"
                             placeholderTextColor={COLORS.gray400}
                             icon={icons.MailIcon}
                             inputType={'email'}
+                            value={email}
+                            onChangeText={(text) => setFormData(prevState => ({...prevState, email:text}))}
+                            setFormData={setFormData}
                         />
                         <InputField
                             placeholder="Password"
                             placeholderTextColor={COLORS.gray400}
                             icon={icons.LockIcon}
                             inputType={'password'}
+                            value={password}
+                            onChangeText={(text) => setFormData(prevState => ({...prevState, password:text}))}
+                            setFormData={setFormData}
 
                         />
+                        {
+                            errorMessage ?
+                                        <View>
+                                            <Text style={{color:COLORS.red, fontSize:FONTSIZE.small, fontFamily:FONTS.NotoSansJPRegular}}>{errorMessage}</Text>
+                                        </View> : null
+                        }
                     <View style={{ marginTop:24}}>
                         <View style={{gap:12}}>
-                            <GenericButton bgColor="primaryBase" fontColor={"white"} label={"Sign Up"}/>
+                            <GenericButton bgColor="primaryBase" fontColor={"white"} label={"Sign Up"} onPress={handleSignup}/>
                             <Text style={{ fontFamily:FONTS.NotoSansJPRegular, color:COLORS.gray400, fontWeight:400, fontSize:FONTSIZE.medium, textAlign: "center", marginHorizontal:24 }}>Or</Text>
                             <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="primary900" label={"Sign Up with Google"}  icon={icons.GoogleIcon}/>
                             <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="primary900" label={"Sign Up with Apple"}  icon={icons.AppleIcon}/>

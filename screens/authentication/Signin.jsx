@@ -10,11 +10,10 @@ import InputField from "../../components/inputField/InputField";
 
 
 const Signin = ({ navigation }) => {
-    const [showPassword, setShowPassword] = useState(true);
-
-    const toggleShowPassword = () => {
-        setShowPassword(!showPassword);
-    }
+    const [{email, password}, setFormData] = useState({
+        email:'',
+        password:''
+    })
     return (
     <SafeAreaView style={{ backgroundColor:COLORS.white, flex:1, padding:24}}>
         <View>
@@ -29,13 +28,18 @@ const Signin = ({ navigation }) => {
                             placeholderTextColor={COLORS.gray400}
                             icon={icons.MailIcon}
                             inputType={'email'}
+                            onChangeText={(text) => setFormData(prevState => ({...prevState, email:text}))}
+                            setFormData={setFormData}
+                            value={email}
                         />
                         <InputField
                             placeholder="Password"
                             placeholderTextColor={COLORS.gray400}
                             icon={icons.LockIcon}
                             inputType={'password'}
-
+                            onChangeText={(text) => setFormData(prevState => ({...prevState, password:text}))}
+                            setFormData={setFormData}
+                            value={password}
                         />
                     <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')} style={{marginBottom:24}}>
                         <Text style={{ fontSize: FONTSIZE.medium, textAlign:'right', color: COLORS.grayBase, fontFamily: FONTS.NotoSansJPRegular, lineHeight:21, fontWeight:700 }}>Forgot Password?</Text>

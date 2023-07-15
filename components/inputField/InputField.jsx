@@ -6,6 +6,9 @@ export default function InputField({
     placeholder,
     icon: IconComponent,
     inputType,
+    value,
+    onChangeText,
+    setFormData,
     ...props
 }) {
     const [secureTextEntry, setSecureTextEntry] = useState(inputType === 'password' === true);
@@ -23,6 +26,11 @@ export default function InputField({
         secureTextEntry={secureTextEntry}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
+        value={value}
+        onChangeText={(text) => {
+            onChangeText(text);
+            setFormData((prevFormData) => ({...prevFormData, [inputType]: text}))
+            }}
         {...props}
       />
       {
