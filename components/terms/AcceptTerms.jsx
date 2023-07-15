@@ -8,7 +8,7 @@ export default function AcceptTerms() {
     <View style={styles.container}>
       <Text style={styles.textBody}>
         By signing in, I accept the <Text style={styles.textTitle}>Terms of Service</Text> and <Text style={styles.textTitle}>Community Guidelines</Text>
-        and have read <Text style={styles.textTitle}>Privacy Policy.</Text>
+        {' '}and have read <Text style={styles.textTitle}>Privacy Policy.</Text>
       </Text>
     </View>
   );
@@ -28,5 +28,6 @@ const styles = StyleSheet.create({
   },
   textTitle: {
       fontWeight:500,
+      color: "black",
   }
 })

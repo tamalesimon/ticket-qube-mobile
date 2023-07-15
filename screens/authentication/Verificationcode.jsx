@@ -7,6 +7,7 @@ import globalStyles from '../../styles/globalStyles';
 import OtpInput from "../../components/inputField/OtpInput";
 import { useSelector, useDispatch } from "react-redux";
 import { verifyOtp } from "../../redux/authSlice";
+import LoadingIndicator from "../../components/loaders/LoadingIndicator";
 
 
 
@@ -20,38 +21,43 @@ const Verify = ({route: {params: {email}}}) => {
 
     const handleVerification = () => {
         const otpToString = otp.join('');
-        dispatch(verifyOtp(JSON.stringify(otpToString)))
+        dispatch(verifyOtp(otpToString))
         console.log(JSON.stringify(otpToString))
     }
     return (
     <SafeAreaView style={{backgroundColor:COLORS.white, flex:1, paddingHorizontal:24}}>
-        <View>
-            <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', gap:8, marginTop:32 }}>
-                <Image source={require('../../assets/images/verify.png')} resizeMode='contain'/>
-                <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', marginTop:32 }}>
-                    <Text style={{ ...globalStyles.Heading4, fontWeight:700, marginBottom:8}}>Verification Code</Text>
-                    <Text style={styles.message}>We have sent the verification code to your email</Text>
-                    <Text style={styles.messageEmail}>{maskEmail(email)}.</Text>
+        <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', gap:8, marginTop:32 }}>
+        <Image source={require('../../assets/images/verify.png')} resizeMode='contain'/>
+        {
+        isLoading
+            ? <LoadingIndicator/>
+            :
+                <View style={{ flexDirection: 'column', alignItems: 'center', width:"100%"}} >
+                    <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', marginTop:32 }}>
+                        <Text style={{ ...globalStyles.Heading4, fontWeight:700, marginBottom:8}}>Verification Code</Text>
+                        <Text style={styles.message}>We have sent the verification code to your email</Text>
+                        <Text style={styles.messageEmail}>{maskEmail(email)}.</Text>
+                    </View>
+                    <View style={styles.inputContainer}>
+                        {otp.map((digit, index) => (
+                            <OtpInput
+                                key={index}
+                                value={digit}
+                                onChangeText={(text) => {
+                                    setOtp([...otp.map((d, i) => i === index ? text : d)])
+                                }}
+                                index={index}
+                            />
+                        ))}
+                    </View>
+                    <TouchableOpacity style={{ marginBottom: 180}}>
+                            <Text style={styles.resendCode}>Resend code</Text>
+                    </TouchableOpacity>
+                    <View style={{ width:"100%"}}>
+                        <GenericButton bgColor={"primaryBase"} label={"Verify"} fontColor={"white"} onPress={handleVerification}/>
+                    </View>
                 </View>
-                <View style={styles.inputContainer}>
-                    {otp.map((digit, index) => (
-                        <OtpInput
-                            key={index}
-                            value={digit}
-                            onChangeText={(text) => {
-                                setOtp([...otp.map((d, i) => i === index ? text : d)])
-                            }}
-                            index={index}
-                        />
-                    ))}
-                </View>
-                <TouchableOpacity style={{ marginBottom: 180}}>
-                        <Text style={styles.resendCode}>Resend code</Text>
-                </TouchableOpacity>
-                <View style={{ width:"100%"}}>
-                    <GenericButton bgColor={"primaryBase"} label={"Verify"} fontColor={"white"} onPress={handleVerification}/>
-                </View>
-            </View>
+        }
         </View>
     </SafeAreaView>
     )
@@ -82,5 +88,10 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.NotoSansJPMedium,
         fontSize:14,
         color:COLORS.secondaryBase
-    }
+    },
+    indicator: {
+        padding: 12,
+        backgroundColor: COLORS.gray200,
+        borderRadius: 12
+      },
 })

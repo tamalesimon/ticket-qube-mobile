@@ -18,6 +18,7 @@ const Signup = ({ navigation }) => {
     const userinfo = useSelector((state) => state.auth.userinfo)
 
     const [nameInput, setNameInput] = useState('')
+    const [errorMessage, setErrorMessage] = useState('')
     const [ { firstName, lastName, email, password, phoneNumber, dateOfBirth, userRole }, setFormData] = useState({
         firstName:'',
         lastName:'',
@@ -37,8 +38,27 @@ const Signup = ({ navigation }) => {
             dateOfBirth,
             userRole
         }
-        dispatch(createAccount(data));
-        navigation.navigate('Verify', {email})
+        if (error){
+            setErrorMessage(error.message)
+            console.log("Error from Signup", error)
+        } else {
+            dispatch(createAccount(data));
+            navigation.navigate('Verify', {email})
+        }
+    }
+
+    const handleInputText = (text) => {
+        setNameInput(text);
+        const names = text.split(' ');
+        let firstName, lastName;
+        if (names.length >= 2 && names.length <= 4) {
+            firstName = names.slice(0, -1).join(' ');
+            lastName = names.slice(-1)[0];
+        } else {
+            firstName = text;
+            lastName = '';
+        }
+        setFormData(prevState => ({...prevState, firstName, lastName}));
     }
 
     return (
@@ -61,20 +81,7 @@ const Signup = ({ navigation }) => {
                             icon={icons.UserIcon}
                             inputType={'names'}
                             value={nameInput}
-                            onChangeText={(text) => {
-                                setNameInput(text);
-                                const names = text.split(' ');
-                                if (names.length === 2) {
-                                    const [firstName, lastName] = names;
-                                    setFormData(prevState => ({...prevState, firstName, lastName}));
-                                    } else if (names.length === 4) {
-                                        const firstName = names.slice(0, 2).join(' ');
-                                        const lastName = names.slice(2).join(' ');
-                                        setFormData(prevState => ({...prevState, firstName, lastName}));
-                                    } else {
-                                        setFormData(prevState => ({...prevState, firstName: text, lastName: ''}));
-                                    }
-                                }}
+                            onChangeText={handleInputText}
                             setFormData={setFormData}
                         />
                 <InputField
@@ -96,6 +103,12 @@ const Signup = ({ navigation }) => {
                             setFormData={setFormData}
 
                         />
+                        {
+                            errorMessage ?
+                                        <View>
+                                            <Text style={{color:COLORS.red, fontSize:FONTSIZE.small, fontFamily:FONTS.NotoSansJPRegular}}>{errorMessage}</Text>
+                                        </View> : null
+                        }
                     <View style={{ marginTop:24}}>
                         <View style={{gap:12}}>
                             <GenericButton bgColor="primaryBase" fontColor={"white"} label={"Sign Up"} onPress={handleSignup}/>

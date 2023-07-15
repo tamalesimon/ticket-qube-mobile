@@ -8,10 +8,12 @@ const initialState = {
     userInfo: {},
     error: null,
     isAuthenticated: false,
-    token: null,
+    isFirstLaunch: true,
+    isVerified: false,
+    token: '',
     isLoading: false,
     status:null,
-    otp: {}
+    otp: ''
 }
 
 const options = {
@@ -24,13 +26,10 @@ const options = {
 
 export const createAccount = createAsyncThunk('users/signup', async(userDetails) => {
     try {
-        const response = await axios.post('http://localhost:8081/users/signup', userDetails, {
-            headers: {
-                'Content-Type': 'application/json; charset=utf-8',
-              },
-        })
-        return response.data
+        const response = await axios.post('http://localhost:8081/users/signup', userDetails);
+        return response.data.token
     }catch (error) {
+      console.log(error)
         throw error.response.data.message
     }
 });
@@ -64,9 +63,11 @@ export const forgotPassword = createAsyncThunk('users/forgotPassword', async(ema
 
 export const verifyOtp = createAsyncThunk('users/verify', async(otp) => {
     try {
-        const response = await axios.post(`${API}/users/verify`, otp, options)
+        const response = await axios.post(`${API}/users/verify`, otp)
+        console.log("response from verification: ", response)
         return response.data
     }catch (error) {
+      console.log(error)
         throw error.response.data.message
     }
 });
@@ -97,12 +98,10 @@ const authSlice = createSlice({
             state.error = null;
           })
           .addCase(verifyOtp.fulfilled, (state, action) => {
-            state.isLoading = false;
+            state.isLoading = true;
             state.isAuthenticated = true;
-            state.userInfo = action.payload.data;
+            state.userInfo = action.payload;
             state.otp = action.payload.otp;
-            state.token = action.payload.token;
-            axios.defaults.headers.common["Authorization"] = `Bearer ${action.payload.token}`;
           })
           .addCase(verifyOtp.rejected, (state, action) => {
             state.isLoading = false;
@@ -139,6 +138,8 @@ const authSlice = createSlice({
           .addCase(createAccount.fulfilled, (state, action) => {
             state.isLoading = false;
             state.userInfo = action.payload;
+            state.token = action.payload;
+            axios.defaults.headers.common['Authorization'] = `Bearer ${action.payload}`;
           })
           .addCase(createAccount.rejected, (state, action) => {
             state.isLoading = false;
