@@ -6,30 +6,30 @@ import useFetch from '../../utils/useFetch';
 import useDataFetch from '../../utils/useDataFetch';
 
 export default function Upcoming() {
-const { data, error, isLoading, refetch } = useDataFetch('3000/upcoming');
-const renderUpcoming = () => {
-    if (isLoading) {
-        return <ActivityIndicator size="large" colors="black" />
-    } else {
-     return  (<View>
-            <SectionHeaders sectionTitle="Upcoming events" />
-            <FlatList
-                data={data}
-                renderItem={({ item }) => <EventCard item={item} />}
-                keyExtractor={item => item?.id}
-                horizontal
-                showsHorizontalScrollIndicator={false}
-                contentContainerStyle={styles.eventSection}
-                snapToInterval={250+16}
-                decelerationRate="fast"
-            />
-        </View>)
+    const { data, error, isLoading, refetch } = useDataFetch('3000/upcoming');
+    const renderUpcoming = () => {
+        if (isLoading) {
+            return <ActivityIndicator size="large" colors="black" />
+        } else {
+            return (<View>
+                <SectionHeaders sectionTitle="Upcoming events" />
+                <FlatList
+                    data={data}
+                    renderItem={({ item }) => <EventCard item={item} />}
+                    keyExtractor={item => item?.id}
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    contentContainerStyle={styles.eventSection}
+                    snapToInterval={250 + 16}
+                    decelerationRate="fast"
+                />
+            </View>)
+        }
     }
-}
     return (
-    <View>
-        {renderUpcoming()}
-    </View>
+        <View>
+            {renderUpcoming()}
+        </View>
     );
 }
 
@@ -37,11 +37,11 @@ const styles = StyleSheet.create({
     eventSection: {
         flexDirection: 'row',
         alignItems: 'center',
-        gap:16,
-        paddingTop:16,
-        paddingLeft:4,
-        paddingBottom:24,
+        gap: 16,
+        paddingTop: 16,
+        paddingLeft: 4,
+        paddingBottom: 24,
         zIndex: 100,
-        position:'relative'
+        position: 'relative'
     }
 });

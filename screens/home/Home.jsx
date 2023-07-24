@@ -9,30 +9,29 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 export default function HomeTabs() {
   return (
-    
-    <SafeAreaView style={{backgroundColor:"#FDFDFD", flex:1,  padding:24}}>
-    
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <View style={{ marginBottom: 12}} >
-        <InputField
+
+    <SafeAreaView style={{ backgroundColor: "#FDFDFD", flex: 1, padding: 24 }}>
+
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={{ marginBottom: 12 }} >
+          <InputField
             placeholder="Search for events"
             placeholderTextColor={COLORS.gray400}
             icon={icons.SearchIcon}
             inputType={'text'}
-        />
-      </View>
-            <Categories />
-            <Upcoming/>
-            <Suggestions/>
-
-  </ScrollView>
+          />
+        </View>
+        <Categories />
+        <Upcoming />
+        <Suggestions />
+      </ScrollView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container:{
+  container: {
     // gap:16,
-    height:'100%'
-}
+    height: '100%'
+  }
 })

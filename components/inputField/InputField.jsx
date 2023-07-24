@@ -17,52 +17,53 @@ export default function InputField({
     function toggleSecureEntry() {
         setSecureTextEntry(!secureTextEntry);
     }
-  return (
-    <View style={{...styles.container, borderColor:isFocused ? COLORS.primaryBase : ' ', borderWidth: isFocused ? 1: 0}}>
-      {IconComponent && <IconComponent style={{paddingTop:8}} />}
-      <TextInput
-        style={styles.textInput}
-        placeholder={placeholder}
-        secureTextEntry={secureTextEntry}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
-        value={value}
-        onChangeText={(text) => {
-            onChangeText(text);
-            setFormData((prevFormData) => ({...prevFormData, [inputType]: text}))
-            }}
-        {...props}
-      />
-      {
-        inputType === "password" && (
-            <TouchableOpacity style={styles.showIcon} onPress={toggleSecureEntry}>
-                { secureTextEntry ? <icons.EyeOffIcon/> : <icons.EyeIcon/>}
-            </TouchableOpacity>
-        )
-      }
-     </View>
-  );
+    return (
+        <View style={{ ...styles.container, borderColor: isFocused ? COLORS.primaryBase : ' ', borderWidth: isFocused ? 1 : 0 }}>
+            {IconComponent && <IconComponent style={{ paddingTop: 8 }} />}
+            <TextInput
+                style={styles.textInput}
+                placeholder={placeholder}
+                cursorColor={COLORS.primaryBase}
+                secureTextEntry={secureTextEntry}
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
+                value={value}
+                onChangeText={(text) => {
+                    onChangeText(text);
+                    setFormData((prevFormData) => ({ ...prevFormData, [inputType]: text }))
+                }}
+                {...props}
+            />
+            {
+                inputType === "password" && (
+                    <TouchableOpacity style={styles.showIcon} onPress={toggleSecureEntry}>
+                        {secureTextEntry ? <icons.EyeOffIcon /> : <icons.EyeIcon />}
+                    </TouchableOpacity>
+                )
+            }
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor:COLORS.gray50,
-        borderRadius:16,
-        height:56, width:'100%',
-        padding:16,
-        marginBottom:16
+        backgroundColor: COLORS.gray50,
+        borderRadius: 16,
+        height: 56, width: '100%',
+        padding: 16,
+        marginBottom: 16
     },
     showIcon: {
-        position:'absolute',
-        top:16,
-        right:20
+        position: 'absolute',
+        top: 16,
+        right: 20
     },
-    textInput:{
-        marginLeft:12,
-        height:40,
-        width:'70%',
+    textInput: {
+        marginLeft: 12,
+        height: 40,
+        width: '70%',
         borderWidth: 0, // This will remove the border
         borderColor: 'transparent', // This will make the border color transparent
         borderRadius: 0, // This will make the border edges straight
