@@ -1,12 +1,9 @@
-# Expo Router Example
+# Running Qube
 
-Use [`expo-router`](https://expo.github.io/router) to build native navigation using files in the `app/` directory.
+git clone https://github.com/tamalesimon/ticket-qube-mobile.git
 
-## 🚀 How to use
-
-```sh
-npx create-expo-app -e with-router
-```
+- Installing dependencies [npm i]
+- Running the application [npm start]
 
 ## 📝 Notes
 
