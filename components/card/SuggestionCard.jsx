@@ -44,7 +44,7 @@ container: {
     zIndex:99,
     gap:12,
     overflow: 'hidden',
-    shadowColor: "#e3dede",
+    shadowColor: "white",
 shadowOffset: {
   width: 0,
   height: 18,

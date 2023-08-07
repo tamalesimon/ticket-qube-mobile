@@ -7,7 +7,7 @@ export default function SectionHeaders({ sectionTitle }) {
         <View style={styles.headers}>
             <Text style={styles.headerTitle}>{sectionTitle}</Text>
             <TouchableOpacity>
-            <Text style={styles.headerSubTitle}>See All</Text>
+                <Text style={styles.headerSubTitle}>See All</Text>
             </TouchableOpacity>
         </View>
     );
@@ -18,19 +18,19 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-    
+
     },
     headerTitle: {
         fontFamily: FONTS.NotoSansJPRegular,
         fontSize: 16,
         lineHeight: 24,
         color: COLORS.grayBase,
-        fontWeight:700
+        fontWeight: 700
     },
     headerSubTitle: {
         fontFamily: FONTS.NotoSansJPRegular,
-        fontSize:14,
-        fontWeight:500,
-        color:COLORS.gray400
+        fontSize: 14,
+        fontWeight: 500,
+        color: COLORS.gray400
     },
 })

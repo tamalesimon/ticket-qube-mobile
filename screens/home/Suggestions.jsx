@@ -5,7 +5,7 @@ import SectionHeaders from '../../components/titleHeaders/SectionHeaders'
 import useDataFetch from '../../utils/useDataFetch'
 
 export default function Suggestions() {
-    const { data, isLoading, error, refetch } = useDataFetch('3002/suggestion')
+    const { data, isLoading, error, refetch } = useDataFetch('3004/suggestion')
 
     const renderSuggestion = () => {
         if (isLoading) {

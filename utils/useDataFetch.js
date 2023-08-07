@@ -8,6 +8,7 @@ const useFetch = (endpoint, params) => {
 
     const options = {
         method: 'GET',
+        mode: "CORS",
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
