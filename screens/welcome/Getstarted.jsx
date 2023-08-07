@@ -17,7 +17,7 @@ export default function GetStarted({ navigation }) {
             <View style={{ flexDirection: 'column', alignItems: 'center', gap: 8, marginBottom: Display.setHeight(28) }}>
               {/* <Text style={globalStyles.Heading5} >Let's Get Started</Text>
               <Text style={{ fontSize: FONTSIZE.medium, color: COLORS.gray400, fontFamily: FONTS.NotoSansJPRegular, textAlign: "center", fontWeight: 400, width: 261, marginBottom: 20 }}>Sign up or log in to see what happening near you.</Text> */}
-              <Image source={require('../../assets/Shape.png')} resizeMode='contain' />
+              {/* <Image source={require('../../assets/Shape.png')} resizeMode='contain' /> */}
               <Image source={require('../../assets/LogoTitle.png')} resizeMode='contain' />
             </View>
             <View>

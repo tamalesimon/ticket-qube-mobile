@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { API_URL } from '@env'
+import { API_LOCAL, API_DEV } from '@env'
 
-const API = API_URL
+const API = API_DEV;
+const LocalAPI = API_LOCAL;
 
 const initialState = {
   userInfo: {},
@@ -19,15 +20,24 @@ const initialState = {
 const options = {
   headers: {
     'Content-Type': 'application/json; charset=utf-8',
-    'Authorization': 'Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0YW1hbGVzcEBnbWFpbC5jb20iLCJpYXQiOjE2ODgzMTgwNjksImV4cCI6MTY4ODM1NDA2OX0.a1VHVZYIVbxO8obu92FLs0PEmfaRG5balFWAp-atwypgYZ7F_R9JD1AKps7Wn8f7'
-  },
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS'
+  }
 };
+
+const axiosInstance = axios.create({
+  baseURL: LocalAPI,
+  headers: options.headers
+});
 
 
 export const createAccount = createAsyncThunk('users/signup', async (userDetails) => {
   try {
-    const response = await axios.post(`${API}/users/signup`, userDetails);
-    return response.data.token
+    const response = await axiosInstance.post(`${LocalAPI}/users/signup`, userDetails, {
+      options
+    });
+    return response.data
   } catch (error) {
     console.log(error)
     throw error.response.data.message
@@ -36,7 +46,7 @@ export const createAccount = createAsyncThunk('users/signup', async (userDetails
 
 export const verifyEmail = createAsyncThunk('users/verifyEmail', async (email) => {
   try {
-    const response = await axios.post(`${API}/users/verifyEmail`, email)
+    const response = await axiosInstance.post(`${LocalAPI}/users/verifyEmail`, email)
     return response.data
   } catch (error) {
     throw error.response.data.message
@@ -45,7 +55,9 @@ export const verifyEmail = createAsyncThunk('users/verifyEmail', async (email) =
 
 export const signin = createAsyncThunk('users/signin', async (useDetails) => {
   try {
-    const response = await axios.post(`${API}/users/signin`, useDetails)
+    const response = await axiosInstance.post(`${LocalAPI}/users/signin`, useDetails, {
+      options
+    })
     return response.data
   } catch (error) {
     throw error.response.data.message
@@ -54,16 +66,22 @@ export const signin = createAsyncThunk('users/signin', async (useDetails) => {
 
 export const forgotPassword = createAsyncThunk('users/forgotPassword', async (email) => {
   try {
-    const response = await axios.post(`${API}/users/forgotPassword`, email)
+    const response = await axiosInstance.post(`${LocalAPI}/users/forgotPassword`, email, {
+      options
+    })
     return response.data
   } catch (error) {
     throw error.response.data.message
   }
 });
 
-export const verifyOtp = createAsyncThunk('users/verify', async (otp) => {
+export const verifyOtp = createAsyncThunk('users/verify', async (data, { getState }) => {
   try {
-    const response = await axios.post(`${API}/users/verify`, otp)
+    const userid = getState().auth.userInfo.userId;
+    console.log("testing OTP: ", data)
+    const response = await axiosInstance.post(`${LocalAPI}/verification/verify/${userid}`, data, {
+      options
+    })
     console.log("response from verification: ", response)
     return response.data
   } catch (error) {
@@ -138,7 +156,7 @@ const authSlice = createSlice({
       .addCase(createAccount.fulfilled, (state, action) => {
         state.isLoading = false;
         state.userInfo = action.payload;
-        state.token = action.payload;
+        state.token = action.payload.token;
         axios.defaults.headers.common['Authorization'] = `Bearer ${action.payload}`;
       })
       .addCase(createAccount.rejected, (state, action) => {

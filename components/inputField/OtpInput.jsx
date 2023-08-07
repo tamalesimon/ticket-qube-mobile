@@ -7,38 +7,26 @@ import globalStyles from '../../styles/globalStyles';
 export default function OtpInput({ value, onChangeText, index }) {
 
     const inputRef = useRef(null);
-    const [isFocused, setIsFocused] = useState(false)
+    const [isFocused, setIsFocused] = useState(false);
 
     useEffect(() => {
         if (isFocused) {
             inputRef.current.focus();
         }
-    }, [isFocused])
+    }, []);
 
     const handleTextChange = (text) => {
         onChangeText(text);
-        if (text.length === 1 && index < 3) {
-            setIsFocused(true);
-        } else {
+        setIsFocused(text.length === 1 && index < 4);
+    };
+
+    const handleKeyPress = ({ nativeEvent }) => {
+        if (nativeEvent.key === 'Backspace' && index > 0) {
+            setIsFocused(false);
+        } else if (nativeEvent.key !== 'Backspace' && index < 4) {
             setIsFocused(false);
         }
-    }
-
-    const handleKeyPress = ({nativeEvent}) => {
-        if (nativeEvent.key === 'Backspace' && index > 0) {
-            inputRef.current.blur();
-
-            setTimeout(() =>{
-            inputRef.current.focus();
-            }, 0);
-        } else if (nativeEvent.key !== 'Backspace' && index < 3  ) {
-            inputRef.current.blur();
-
-            setTimeout(() =>{
-            inputRef.current.focus();
-            }, 0);
-        }
-    }
+    };
     return (
         <View style={{ ...styles.inputBox, borderColor: isFocused ? COLORS.primaryBase : ' ', borderWidth: isFocused ? 1 : 0 }}>
             <TextInput
