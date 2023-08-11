@@ -22,7 +22,7 @@ const options = {
     'Content-Type': 'application/json; charset=utf-8',
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
-    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS'
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
   }
 };
 
@@ -53,10 +53,14 @@ export const verifyEmail = createAsyncThunk('users/verifyEmail', async (email) =
   }
 });
 
-export const signin = createAsyncThunk('users/signin', async (useDetails) => {
+export const signin = createAsyncThunk('users/signin', async (useDetails, { getState }) => {
   try {
-    const response = await axiosInstance.post(`${LocalAPI}/users/signin`, useDetails, {
-      options
+    const bearerToken = getState().auth.token;
+    const response = await axiosInstance.post(`${LocalAPI}/users/login`, useDetails, {
+      headers: {
+        ...options.headers,
+        'Authorization': `Bearer ${bearerToken}`
+      }
     })
     return response.data
   } catch (error) {
@@ -64,10 +68,14 @@ export const signin = createAsyncThunk('users/signin', async (useDetails) => {
   }
 });
 
-export const forgotPassword = createAsyncThunk('users/forgotPassword', async (email) => {
+export const forgotPassword = createAsyncThunk('users/forgotPassword', async (email, { getState }) => {
   try {
+    const bearerToken = getState().auth.token;
     const response = await axiosInstance.post(`${LocalAPI}/users/forgotPassword`, email, {
-      options
+      headers: {
+        ...options.headers,
+        'Authorization': `Bearer ${bearerToken}`
+      }
     })
     return response.data
   } catch (error) {
@@ -78,9 +86,14 @@ export const forgotPassword = createAsyncThunk('users/forgotPassword', async (em
 export const verifyOtp = createAsyncThunk('users/verify', async (data, { getState }) => {
   try {
     const userid = getState().auth.userInfo.userId;
+    const bearerToken = getState().auth.token;
     console.log("testing OTP: ", data)
+    console.log("authorization: ", bearerToken)
     const response = await axiosInstance.post(`${LocalAPI}/verification/verify/${userid}`, data, {
-      options
+      headers: {
+        ...options.headers,
+        'Authorization': `Bearer ${bearerToken}`
+      }
     })
     console.log("response from verification: ", response)
     return response.data
@@ -120,6 +133,8 @@ const authSlice = createSlice({
         state.isAuthenticated = true;
         state.userInfo = action.payload;
         state.otp = action.payload.otp;
+        state.token = action.payload.token;
+        axios.defaults.headers.common["Authorization"] = `Bearer ${action.payload.token}`;
       })
       .addCase(verifyOtp.rejected, (state, action) => {
         state.isLoading = false;
