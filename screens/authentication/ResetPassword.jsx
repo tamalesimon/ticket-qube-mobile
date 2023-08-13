@@ -1,8 +1,10 @@
-import React, { useState } from "react"
-import { View, Text, Image, TouchableOpacity, TextInput, SafeAreaView, StyleSheet } from 'react-native';
-import { useRouter } from "expo-router";
-import { COLORS, FONTS, FONTSIZE, images, icons } from '../../constants';
-import { useTogglePasswordVisibility } from "../../utils/useTogglePasswordVisibility";
+import React from "react"
+import { useSelector, useDispatch } from "react-redux";
+import { View, Text, SafeAreaView, StyleSheet } from 'react-native';
+import { COLORS, FONTS,icons } from '../../constants';
+import { useFormValidation } from "../../hooks/useFormValidation";
+import { resetPassword }  from "../../redux/authSlice";
+
 import Display from "../../utils/Display"
 import GenericButton from "../../components/buttons/genericButton";
 import InputField from "../../components/inputField/InputField";
@@ -11,6 +13,17 @@ import globalStyles from '../../styles/globalStyles';
 
 
 const ResetPassword = ({ navigation }) => {
+    const dispatch = useDispatch();
+    const { isLoading, error } = useSelector(state => state.auth)
+    const { password, formErrors, setFormData, handleSubmit } = useFormValidation();
+
+    const handleResetPassword = () => {
+        const { isValid, data } = handleSubmit();
+        if (isValid && !error) {
+            dispatch(resetPassword(data))
+            navigation.navigate('ResetSuccess')
+        }
+    }
 
     return (
     <SafeAreaView style={{backgroundColor:COLORS.white, flex:1, flexDirection: 'column', padding:23}}>
@@ -26,16 +39,22 @@ const ResetPassword = ({ navigation }) => {
                             placeholderTextColor={COLORS.gray400}
                             icon={icons.LockIcon}
                             inputType={'password'}
+                            onChangeText={(text) => setFormData(prevState => ({ ...prevState, password: text }))}
+                            value={password}
+                            error={formErrors.passwordError}
                         />
                     <InputField
                             placeholder="Confirm password"
                             placeholderTextColor={COLORS.gray400}
                             icon={icons.LockIcon}
                             inputType={'password'}
+                            onChangeText={(text) => setFormData(prevState => ({ ...prevState, password: text }))}
+                            value={password}
+                            error={formErrors.passwordError}
                         />
                 </View>
             <View style={{ marginTop:390}}>
-                <GenericButton bgColor="primaryBase" fontColor={"white"} label={"Create New Password"} onPress={() => navigation.navigate('ResetSuccess')}/>
+                <GenericButton bgColor="primaryBase" fontColor={"white"} label={"Create New Password"} onPress={handleResetPassword}/>
             </View>
     </SafeAreaView>
     )

@@ -15,7 +15,7 @@ const ResetSuccess = ({ navigation }) => {
                     </View>
                 </View>
                 <View style={{marginTop:320}}>
-                    <GenericButton bgColor={"primaryBase"} label={"Login"} fontColor={"white"} onPress={() => navigation.navigate('Location')}/>
+                    <GenericButton bgColor={"primaryBase"} label={"Login"} fontColor={"white"} onPress={() => navigation.navigate('signin')}/>
                 </View>
             </View>
         </View>
