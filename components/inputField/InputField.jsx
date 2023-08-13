@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
 import { icons, COLORS, FONTS } from '../../constants';
+import { set } from 'react-native-reanimated';
 
 export default function InputField({
     placeholder,
@@ -9,28 +10,57 @@ export default function InputField({
     value,
     onChangeText,
     setFormData,
+    error,
     ...props
 }) {
     const [secureTextEntry, setSecureTextEntry] = useState(inputType === 'password' === true);
     const [isFocused, setIsFocused] = useState(false)
+    const [isEmpty, setIsEmpty] = useState(false)
+    const [originColor, setOriginColor] = useState('')
+
+    useEffect(() => {
+        if(!isFocused || !error || !isEmpty) {
+            setOriginColor('')
+        }
+    }, [isFocused, error, isEmpty])
 
     function toggleSecureEntry() {
         setSecureTextEntry(!secureTextEntry);
-    }
+    };
+    const handleBlur = () => {
+        setIsFocused(false)
+        if (!value) {
+            setIsEmpty(true)
+        }
+    };
+    const borderColor = error && isEmpty ? COLORS.errorLight : (isFocused || value && !error ? COLORS.primaryBase : '');
     return (
-        <View style={{ ...styles.container, borderColor: isFocused ? COLORS.primaryBase : ' ', borderWidth: isFocused ? 1 : 0 }}>
+        <View style={{ ...styles.container, borderColor: borderColor, borderWidth: isFocused || error && isEmpty || value && !error ? 1 : 0 }}>
             {IconComponent && <IconComponent style={{ paddingTop: 8 }} />}
             <TextInput
                 style={styles.textInput}
                 placeholder={placeholder}
                 cursorColor={COLORS.primaryBase}
                 secureTextEntry={secureTextEntry}
-                onFocus={() => setIsFocused(true)}
-                onBlur={() => setIsFocused(false)}
+                onFocus={() => {
+                    setIsFocused(true)
+                    if (!originColor) {
+                        setOriginColor(borderColor);
+    }
+                    }
+                
+                }
+                onBlur={handleBlur}
                 value={value}
                 onChangeText={(text) => {
                     onChangeText(text);
                     setFormData((prevFormData) => ({ ...prevFormData, [inputType]: text }))
+                    if (!isEmpty) {
+                        setIsEmpty(false)
+                    }
+                    if (originColor && !isFocused && !error && !isEmpty) {
+                        setOriginColor('');
+    }
                 }}
                 {...props}
             />

@@ -83,6 +83,21 @@ export const forgotPassword = createAsyncThunk('users/forgotPassword', async (em
   }
 });
 
+export const resetPassword = createAsyncThunk('reset/password', async (password, { getState }) => {
+  try{
+    const bearerToken = getState().auth.token;
+    const response = await axiosInstance.post(`${LocalAPI}/users/forgotPassword`, password, {
+      headers: {
+        ...options.headers,
+        'Authorization': `Bearer ${bearerToken}`
+      }
+    })
+    return response.data
+  } catch (error) {
+    throw error.message
+  }
+});
+
 export const verifyOtp = createAsyncThunk('users/verify', async (data, { getState }) => {
   try {
     const userid = getState().auth.userInfo.userId;

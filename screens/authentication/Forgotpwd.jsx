@@ -1,12 +1,27 @@
-import React from "react"
-import { View, Text, Image, TouchableOpacity, TextInput, SafeAreaView, StyleSheet } from 'react-native';
-import { COLORS, FONTS, FONTSIZE, images, icons } from '../../constants';
+import React, { useState } from "react"
+import { View, Text, Image, SafeAreaView, StyleSheet } from 'react-native';
+import { COLORS, FONTS, FONTSIZE, icons } from '../../constants';
+import { useSelector, useDispatch } from "react-redux";
+import { forgotPassword } from "../../redux/authSlice";
+
+import { useFormValidation } from "../../hooks/useFormValidation";
 import GenericButton from "../../components/buttons/genericButton";
 import InputField from "../../components/inputField/InputField";
 import globalStyles from '../../styles/globalStyles';
 
 
 const ForgotPassword = ({navigation}) => {
+    const dispatch = useDispatch();
+    const { isLoading, error } = useSelector(state => state.auth)
+    const { email, formErrors, setFormData, handleSubmit } = useFormValidation();
+
+    const handlePasswordReset = () => {
+        const { isValid, data } = handleSubmit();
+        if (isValid) {
+            dispatch(forgotPassword(data))
+            navigation.navigate('ResetPassword')
+        }
+    }
     return (
     <SafeAreaView style={{backgroundColor:COLORS.white, flex:1, padding:24}}>
         <View>
@@ -22,11 +37,13 @@ const ForgotPassword = ({navigation}) => {
                         placeholderTextColor={COLORS.gray400}
                         icon={icons.MailIcon}
                         inputType={'email'}
+                        onChangeText={(text) => setFormData(prevState => ({ ...prevState, email: text }))}
+                        setFormData={setFormData}
+                        value={email}
+                        error={formErrors.emailError}
                     />
                 </View>
-                <GenericButton bgColor={"primaryBase"} label={"Reset Password"} fontColor={"white"} onPress={() => {
-                    navigation.navigate('ResetPassword')
-                }}/>
+                <GenericButton bgColor={"primaryBase"} label={"Reset Password"} fontColor={"white"} onPress={handlePasswordReset}/>
             </View>
         </View>
     </SafeAreaView>
