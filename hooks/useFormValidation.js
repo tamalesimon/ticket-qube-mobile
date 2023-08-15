@@ -1,10 +1,28 @@
 import { useState } from 'react';
 
 export const useFormValidation = () => {
-    const [{ email, password }, setFormData] = useState({ email: '', password: '' })
-    const [formErrors, setFormErrors] = useState({ emailError: '', passwordError: '' })
+    const [formData, setFormData] = useState({
+    firstName:'',
+    lastName:'',
+    email:'',
+    password:'',
+    phoneNumber: '',
+    confirmPassword:'',
+    dateOfBirth: '1987-01-10T00:00:00.00Z',
+    userRole: "CLIENT" });
+    const [formErrors, setFormErrors] = useState({
+    emailError: '',
+    passwordError: '',
+    firstNameError:'',
+    lastNameError:'',
+    phoneNumberError:'',
+    dateOfBirthError:'',
+    userRoleError:'',
+    confirmPasswordError:''
+    });
 
     const validateForm = () => {
+        const {email, password, firstName, lastName, confirmPassword } = formData;
         let isValid = true;
         const errors = {};
 
@@ -12,20 +30,30 @@ export const useFormValidation = () => {
             isValid = false;
             errors.emailError = 'Email is required';
         }
-
         if (password.trim() === '') {
             isValid = false;
             errors.passwordError = 'Password is required';
+        }
+        if (firstName.trim() === '') {
+            isValid = false;
+            errors.passwordError = 'Password is required';
+        }
+        if (lastName.trim() === '') {
+            isValid = false;
+            errors.passwordError = 'Password is required';
+        }
+        if (password !== confirmPassword) {
+            isValid = false;
+            errors.passwordError = 'Password need to match';
         }
         setFormErrors(errors)
         return isValid;
     }
 
-    const handleSubmit = () => {
-        const data = { email, password }
+    const handleSubmit = (data) => {
         const isValid = validateForm();
-    return { isValid, data }
+        return { isValid, data }
     }
 
-    return { email, password, formErrors, handleSubmit, setFormData }
+    return { formData, formErrors, handleSubmit, setFormData }
 }

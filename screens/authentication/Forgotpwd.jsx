@@ -10,43 +10,49 @@ import InputField from "../../components/inputField/InputField";
 import globalStyles from '../../styles/globalStyles';
 
 
-const ForgotPassword = ({navigation}) => {
+const ForgotPassword = ({ navigation }) => {
     const dispatch = useDispatch();
     const { isLoading, error } = useSelector(state => state.auth)
-    const { email, formErrors, setFormData, handleSubmit } = useFormValidation();
+    const { formData, formErrors, setFormData, handleSubmit } = useFormValidation();
+    const { email } = formData;
 
     const handlePasswordReset = () => {
-        const { isValid, data } = handleSubmit();
-        if (isValid) {
+        const data = { email }
+        const submission = handleSubmit(data);
+        if (submission.isValid) {
             dispatch(forgotPassword(data))
-            navigation.navigate('ResetPassword')
+            if (!error) {
+                navigation.navigate('ResetPassword')
+            } else {
+                console.log(error)
+            }
         }
     }
     return (
-    <SafeAreaView style={{backgroundColor:COLORS.white, flex:1, padding:24}}>
-        <View>
-            <View style={{ flexDirection: 'column', gap:8, marginTop:32 }}>
-                <View style={{ flexDirection: 'column', alignItems: 'center', gap:8, marginTop:32 }}>
-                    <Image source={require('../../assets/images/forgot-password.png')} resizeMode='contain'/>
-                    <Text style={{ ...globalStyles.Heading4, marginBottom:8}}>Forgot Password</Text>
-                    <Text style={styles.message} >Please enter the email address associated with your account.</Text>
+        <SafeAreaView style={{ backgroundColor: COLORS.white, flex: 1, padding: 24 }}>
+            <View>
+                <View style={{ flexDirection: 'column', gap: 8, marginTop: 32 }}>
+                    <View style={{ flexDirection: 'column', alignItems: 'center', gap: 8, marginTop: 32 }}>
+                        <Image source={require('../../assets/images/forgot-password.png')} resizeMode='contain' />
+                        <Text style={{ ...globalStyles.Heading4, marginBottom: 8 }}>Forgot Password</Text>
+                        <Text style={styles.message} >Please enter the email address associated with your account.</Text>
+                    </View>
+                    <View style={{ marginBottom: 217, marginTop: 32, alignItems: 'center' }}>
+                        <InputField
+                            placeholder="Email"
+                            placeholderTextColor={COLORS.gray400}
+                            icon={icons.MailIcon}
+                            inputType={'email'}
+                            onChangeText={(text) => setFormData(prevState => ({ ...prevState, email: text }))}
+                            setFormData={setFormData}
+                            value={email}
+                            error={formErrors.emailError}
+                        />
+                    </View>
+                    <GenericButton bgColor={"primaryBase"} label={"Reset Password"} fontColor={"white"} onPress={handlePasswordReset} />
                 </View>
-                <View style={{marginBottom:217, marginTop:32, alignItems: 'center'}}>
-                    <InputField
-                        placeholder="Email"
-                        placeholderTextColor={COLORS.gray400}
-                        icon={icons.MailIcon}
-                        inputType={'email'}
-                        onChangeText={(text) => setFormData(prevState => ({ ...prevState, email: text }))}
-                        setFormData={setFormData}
-                        value={email}
-                        error={formErrors.emailError}
-                    />
-                </View>
-                <GenericButton bgColor={"primaryBase"} label={"Reset Password"} fontColor={"white"} onPress={handlePasswordReset}/>
             </View>
-        </View>
-    </SafeAreaView>
+        </SafeAreaView>
     )
 }
 
@@ -62,43 +68,43 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-evenly',
-        marginTop:32,
-        marginBottom:224
+        marginTop: 32,
+        marginBottom: 224
     },
-    inputBox:{
+    inputBox: {
         borderRadius: 16,
-        width:56,
-        height:56,
+        width: 56,
+        height: 56,
         backgroundColor: COLORS.gray50,
-        marginRight:11.75
+        marginRight: 11.75
     },
-    inputText:{
-        paddingHorizontal:21,
-        paddingVertical:10,
+    inputText: {
+        paddingHorizontal: 21,
+        paddingVertical: 10,
         textAlign: 'center',
         // borderColor:COLORS.primaryBase,
-        borderRadius:16,
+        borderRadius: 16,
         // borderWidth: 1,
     },
-    inputFocus:{
+    inputFocus: {
         borderColor: COLORS.primaryBase,
     },
-    resendCode:{
+    resendCode: {
         fontFamily: FONTS.NotoSansJPMedium,
-        fontSize:14,
+        fontSize: 14,
         color: COLORS.primaryBase,
     },
-    message:{
+    message: {
         fontFamily: FONTS.NotoSansJPRegular,
-        fontWeight:400,
-        fontSize:14,
-        color:COLORS.gray400,
-        width:290,
-        textAlign:"center",
+        fontWeight: 400,
+        fontSize: 14,
+        color: COLORS.gray400,
+        width: 290,
+        textAlign: "center",
     },
-    messageEmail:{
+    messageEmail: {
         fontFamily: FONTS.NotoSansJPMedium,
-        fontSize:14,
-        color:COLORS.secondaryBase
+        fontSize: 14,
+        color: COLORS.secondaryBase
     }
 })
