@@ -149,6 +149,7 @@ const authSlice = createSlice({
         state.userInfo = action.payload;
         state.otp = action.payload.otp;
         state.token = action.payload.token;
+        state.isVerified = action.payload.verified;
         axios.defaults.headers.common["Authorization"] = `Bearer ${action.payload.token}`;
       })
       .addCase(verifyOtp.rejected, (state, action) => {

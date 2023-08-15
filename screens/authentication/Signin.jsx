@@ -7,32 +7,34 @@ import { useSelector, useDispatch } from "react-redux";
 import { signin } from "../../redux/authSlice";
 import globalStyles from '../../styles/globalStyles';
 import InputField from "../../components/inputField/InputField";
-import { useFormValidation }  from '../../hooks/useFormValidation.js';
+import { useFormValidation } from '../../hooks/useFormValidation.js';
 import Display from '../../utils/Display'
 
 
 const Signin = ({ navigation }) => {
     const dispatch = useDispatch();
-    const { isLoading, error, status } = useSelector((state) => state.auth)
-    const { email, password, formErrors, setFormData, handleSubmit } = useFormValidation();
+    const { isLoading, error, verified } = useSelector((state) => state.auth)
+    const { formData, formErrors, setFormData, handleSubmit } = useFormValidation();
+    const { email, password } = formData;
 
 
     const handleSignin = () => {
-        const { isValid, data } = handleSubmit();
-        if (isValid) {
+        const data = { email, password }
+        const submission = handleSubmit(data);
+        if (submission.isValid) {
             dispatch(signin(data))
-            navigation.navigate('PickInterest')
+            navigation.navigate(verified === true ? 'Home' : 'PickInterest');
         }
     }
     return (
         <SafeAreaView style={{ backgroundColor: COLORS.white, flex: 1, padding: 24 }}>
             <View>
-            <View style={{ flexDirection: 'column', marginTop:32  }}>
-                <View style={{ }}>
-                        <Text style={globalStyles.Heading4} >Hello once Again!</Text>
+                <View style={{ flexDirection: 'column', marginTop: 32 }}>
+                    <View style={{}}>
+                        <Text style={globalStyles.Heading4}>Hello once Again!</Text>
                         <Text style={{ fontSize: FONTSIZE.medium, color: COLORS.gray400, fontFamily: FONTS.NotoSansJPRegular, fontWeight: 400, width: Display.setWidth(261), }}>Welcome back, you've been missed</Text>
                     </View>
-                <View style={{ marginTop:24, marginBottom:16 }}>
+                    <View style={{ marginTop: 24, marginBottom: 16 }}>
                         <InputField
                             placeholder="Email"
                             placeholderTextColor={COLORS.gray400}
@@ -53,15 +55,15 @@ const Signin = ({ navigation }) => {
                             value={password}
                             error={formErrors.passwordError}
                         />
-                    <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')} style={{marginBottom:24}}>
-                        <Text style={{ fontSize: FONTSIZE.medium, textAlign:'right', color: COLORS.grayBase, fontFamily: FONTS.NotoSansJPRegular, lineHeight:21, fontWeight:700 }}>Forgot Password?</Text>
+                        <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')} style={{ marginBottom: 24 }}>
+                            <Text style={{ fontSize: FONTSIZE.medium, textAlign: 'right', color: COLORS.grayBase, fontFamily: FONTS.NotoSansJPRegular, lineHeight: 21, fontWeight: 700 }}>Forgot Password?</Text>
                         </TouchableOpacity>
-                    <View style={{ marginTop:24}}>
-                        <View style={{gap:12}}>
-                            <GenericButton bgColor="primaryBase" fontColor={"white"} label={"Sign In"} onPress={handleSignin}/>
-                            <Text style={{ marginHorizontal:24, textAlign: "center", color:COLORS.gray400, fontSize:14, fontFamily:FONTS.NotoSansJPRegular}}>Or</Text>
-                            <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="primary900" label={"Sign In with Google"}  icon={icons.GoogleIcon}/>
-                            <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="primary900" label={"Sign In with Apple"}  icon={icons.AppleIcon}/>
+                        <View style={{ marginTop: 24 }}>
+                            <View style={{ gap: 12 }}>
+                                <GenericButton bgColor="primaryBase" fontColor={"white"} label={"Sign In"} onPress={handleSignin} />
+                                <Text style={{ marginHorizontal: 24, textAlign: "center", color: COLORS.gray400, fontSize: 14, fontFamily: FONTS.NotoSansJPRegular }}>Or</Text>
+                                <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="primary900" label={"Sign In with Google"} icon={icons.GoogleIcon} />
+                                <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="primary900" label={"Sign In with Apple"} icon={icons.AppleIcon} />
                             </View>
                             <View style={{ alignItems: 'center' }}>
                                 <AcceptTerms />
