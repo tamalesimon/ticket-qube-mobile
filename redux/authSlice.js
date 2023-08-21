@@ -3,7 +3,7 @@ import axios from "axios";
 import { API_LOCAL, API_DEV } from '@env'
 
 const API = API_DEV;
-const LocalAPI = API_LOCAL;
+const LocalAPI = "http://192.168.100.138:8080";
 
 const initialState = {
   userInfo: {},
@@ -84,7 +84,7 @@ export const forgotPassword = createAsyncThunk('users/forgotPassword', async (em
 });
 
 export const resetPassword = createAsyncThunk('reset/password', async (password, { getState }) => {
-  try{
+  try {
     const bearerToken = getState().auth.token;
     const response = await axiosInstance.post(`${LocalAPI}/users/forgotPassword`, password, {
       headers: {
@@ -129,10 +129,12 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(signin.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isLoading = true;
         state.isAuthenticated = true;
-        state.userInfo = action.payload.data;
+        state.isVerified = true;
+        state.userInfo = action.payload;
         state.token = action.payload.token;
+        state.status = action.payload.status ? true : false;
         axios.defaults.headers.common["Authorization"] = `Bearer ${action.payload.token}`;
       })
       .addCase(signin.rejected, (state, action) => {
