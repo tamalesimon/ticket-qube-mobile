@@ -1,11 +1,13 @@
 import React, { useState } from "react"
 import { useDispatch, useSelector } from 'react-redux'
-import { View, Text, Image, TouchableOpacity, TextInput, SafeAreaView, StyleSheet } from 'react-native';
-import { COLORS, FONTS, FONTSIZE, images, icons } from '../../constants';
+import { View, Text, TouchableOpacity, SafeAreaView, StyleSheet } from 'react-native';
+import { COLORS, FONTS, FONTSIZE, icons } from '../../constants';
+import { createAccount } from "../../redux/authSlice";
+import { useFormValidation } from "../../hooks/useFormValidation";
+
 import GenericButton from "../../components/buttons/genericButton";
 import InputField from "../../components/inputField/InputField";
 import AcceptTerms from "../../components/terms/AcceptTerms";
-import { createAccount } from "../../redux/authSlice";
 
 import globalStyles from '../../styles/globalStyles';
 
@@ -13,35 +15,15 @@ import globalStyles from '../../styles/globalStyles';
 const Signup = ({ navigation }) => {
 
     const dispatch = useDispatch();
-    const isLoading =  useSelector((state) => state.auth.isLoading)
-    const error = useSelector((state) => state.auth.error);
-    const userinfo = useSelector((state) => state.auth.userinfo)
-
-    const [nameInput, setNameInput] = useState('')
-    const [errorMessage, setErrorMessage] = useState('')
-    const [ { firstName, lastName, email, password, phoneNumber, dateOfBirth, userRole }, setFormData] = useState({
-        firstName:'',
-        lastName:'',
-        email:'',
-        password:'',
-        phoneNumber: '',
-        dateOfBirth: '1987-01-10T00:00:00.00Z',
-        userRole: "CLIENT" })
+    const { isLoading, error, userinfo } = useSelector(state => state.auth);
+    const [nameInput, setNameInput] = useState('');
+    const { formData, formErrors, handleSubmit, setFormData } = useFormValidation();
+    const { firstName, lastName, email, password, phoneNumber, dateOfBirth, userRole } = formData;
 
     const handleSignup = () => {
-        const data = {
-            firstName,
-            lastName,
-            email,
-            password,
-            phoneNumber,
-            dateOfBirth,
-            userRole
-        }
-        if (error){
-            setErrorMessage(error.message)
-            console.log("Error from Signup", error)
-        } else {
+        const data = { firstName, lastName, email, password, phoneNumber, dateOfBirth, userRole }
+        const submission = handleSubmit(data)
+        if (submission.isValid) {
             dispatch(createAccount(data));
             navigation.navigate('Verify', {email})
         }
@@ -83,6 +65,7 @@ const Signup = ({ navigation }) => {
                             value={nameInput}
                             onChangeText={handleInputText}
                             setFormData={setFormData}
+                            error={formErrors.firstNameError && formErrors.lastNameError}
                         />
                 <InputField
                             placeholder="Email"
@@ -92,6 +75,7 @@ const Signup = ({ navigation }) => {
                             value={email}
                             onChangeText={(text) => setFormData(prevState => ({...prevState, email:text}))}
                             setFormData={setFormData}
+                            error= {formErrors.emailError}
                         />
                         <InputField
                             placeholder="Password"
@@ -101,14 +85,8 @@ const Signup = ({ navigation }) => {
                             value={password}
                             onChangeText={(text) => setFormData(prevState => ({...prevState, password:text}))}
                             setFormData={setFormData}
-
+                            error={formErrors.passwordError}
                         />
-                        {
-                            errorMessage ?
-                                        <View>
-                                            <Text style={{color:COLORS.red, fontSize:FONTSIZE.small, fontFamily:FONTS.NotoSansJPRegular}}>{errorMessage}</Text>
-                                        </View> : null
-                        }
                     <View style={{ marginTop:24}}>
                         <View style={{gap:12}}>
                             <GenericButton bgColor="primaryBase" fontColor={"white"} label={"Sign Up"} onPress={handleSignup}/>

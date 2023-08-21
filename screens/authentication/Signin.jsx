@@ -18,6 +18,7 @@ const Signin = ({ navigation }) => {
     const { isLoading, error, status, isAuthenticated } = useSelector((state) => state.auth)
     const { email, password, formErrors, setFormData, handleSubmit } = useFormValidation();
 
+
     const handleNavigation = () => {
         if (status) {
             console.log("handleNavigation Executed ->", status)

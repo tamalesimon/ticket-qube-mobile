@@ -15,13 +15,19 @@ import globalStyles from '../../styles/globalStyles';
 const ResetPassword = ({ navigation }) => {
     const dispatch = useDispatch();
     const { isLoading, error } = useSelector(state => state.auth)
-    const { password, formErrors, setFormData, handleSubmit } = useFormValidation();
+    const { formData, formErrors, setFormData, handleSubmit } = useFormValidation();
+    const { password, confirmPassword } = formData;
 
     const handleResetPassword = () => {
-        const { isValid, data } = handleSubmit();
-        if (isValid && !error) {
+        const data = { password, confirmPassword };
+        const submission = handleSubmit(data);
+        if (submission.isValid) {
             dispatch(resetPassword(data))
-            navigation.navigate('ResetSuccess')
+            if(!error) {
+                navigation.navigate('ResetSuccess')
+            } else {
+                navigation.navigate('ResetFail')
+            }
         }
     }
 
