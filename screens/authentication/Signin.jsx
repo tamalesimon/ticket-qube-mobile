@@ -16,7 +16,8 @@ import LoadingIndicator from "../../components/loaders/LoadingIndicator";
 const Signin = ({ navigation }) => {
     const dispatch = useDispatch();
     const { isLoading, error, status, isAuthenticated } = useSelector((state) => state.auth)
-    const { email, password, formErrors, setFormData, handleSubmit } = useFormValidation();
+    const { formData, formErrors, setFormData, handleSubmit } = useFormValidation();
+    const { email, password } = formData;
 
 
     const handleNavigation = () => {
@@ -35,12 +36,16 @@ const Signin = ({ navigation }) => {
 
 
     const handleSignin = () => {
-        const { isValid, data } = handleSubmit();
-        if (isValid) {
+        const data = { email, password }
+        const submission = handleSubmit(data);
+        console.log("data", data)
+        if (submission.isValid) {
             dispatch(signin(data));
             setTimeout(() => {
                 handleNavigation();
             }, 3400)
+        } else {
+            console.log(formErrors)
         }
     }
 
