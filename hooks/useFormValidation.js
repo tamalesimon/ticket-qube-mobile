@@ -1,16 +1,7 @@
 import { useState } from 'react';
 
-export const useFormValidation = () => {
-    const [formData, setFormData] = useState({
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: '',
-        phoneNumber: '',
-        confirmPassword: '',
-        dateOfBirth: '1987-01-10T00:00:00.00Z',
-        userRole: "CLIENT"
-    });
+export const useFormValidation = (initialFormData) => {
+    const [formData, setFormData] = useState(initialFormData);
     const [formErrors, setFormErrors] = useState({
         emailError: '',
         passwordError: '',
@@ -19,19 +10,20 @@ export const useFormValidation = () => {
         phoneNumberError: '',
         dateOfBirthError: '',
         userRoleError: '',
-        confirmPasswordError: ''
+        confirmPasswordError: '',
+        otp: ['', '', '', '', '']
     });
 
     const validateForm = () => {
-        const { email, password, firstName, lastName, confirmPassword } = formData;
+        const { email, password, firstName, lastName, confirmPassword, otp } = formData;
         let isValid = true;
         const errors = {};
 
-        if (email.trim() === '') {
+        if (email?.trim() === '') {
             isValid = false;
             errors.emailError = 'Email is required';
         }
-        if (password.trim() === '') {
+        if (password?.trim() === '') {
             isValid = false;
             errors.passwordError = 'Password is required';
         }
@@ -39,9 +31,9 @@ export const useFormValidation = () => {
         return isValid;
     }
 
-    const handleSubmit = (data) => {
+    const handleSubmit = () => {
         const isValid = validateForm();
-        return { isValid, data }
+        return { isValid, data: formData }
     }
 
     return { formData, formErrors, handleSubmit, setFormData }

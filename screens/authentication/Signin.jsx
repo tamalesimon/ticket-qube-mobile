@@ -8,6 +8,7 @@ import { signin } from "../../redux/authSlice";
 import globalStyles from '../../styles/globalStyles';
 import InputField from "../../components/inputField/InputField";
 import { useFormValidation } from '../../hooks/useFormValidation.js';
+import { useNavigationHandler } from "../../hooks/useNavigationHandler.js";
 import Display from '../../utils/Display';
 import LoadingIndicator from "../../components/loaders/LoadingIndicator";
 
@@ -16,13 +17,11 @@ import LoadingIndicator from "../../components/loaders/LoadingIndicator";
 const Signin = ({ navigation }) => {
     const dispatch = useDispatch();
     const { isLoading, error, status, isAuthenticated } = useSelector((state) => state.auth)
-    const { formData, formErrors, setFormData, handleSubmit } = useFormValidation();
-    const { email, password } = formData;
-
+    const initialFormData = { email: '', password: '' }
+    const { formData, formErrors, setFormData, handleSubmit } = useFormValidation(initialFormData);
 
     const handleNavigation = () => {
         if (status) {
-            console.log("handleNavigation Executed ->", status)
             navigation.replace('NavigationTabs');
         }
     }
@@ -34,16 +33,13 @@ const Signin = ({ navigation }) => {
         });
     }, [status, isLoading])
 
+    // useNavigationHandler(isLoading, status, navigation, 'NavigationTab')
+
 
     const handleSignin = () => {
-        const data = { email, password }
-        const submission = handleSubmit(data);
-        console.log("data", data)
-        if (submission.isValid) {
+        const { isValid, data } = handleSubmit();
+        if (isValid) {
             dispatch(signin(data));
-            setTimeout(() => {
-                handleNavigation();
-            }, 3400)
         } else {
             console.log(formErrors)
         }
@@ -65,7 +61,7 @@ const Signin = ({ navigation }) => {
                             inputType={'email'}
                             onChangeText={(text) => setFormData(prevState => ({ ...prevState, email: text }))}
                             setFormData={setFormData}
-                            value={email}
+                            value={formData.email}
                             error={formErrors.emailError}
                         />
                         <InputField
@@ -75,7 +71,7 @@ const Signin = ({ navigation }) => {
                             inputType={'password'}
                             onChangeText={(text) => setFormData(prevState => ({ ...prevState, password: text }))}
                             setFormData={setFormData}
-                            value={password}
+                            value={formData.password}
                             error={formErrors.passwordError}
                         />
                         <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')} style={{ marginBottom: 24 }}>

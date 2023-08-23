@@ -1,9 +1,9 @@
-import React, { useState } from "react"
+import React, { useEffect } from "react"
 import { View, Text, Image, SafeAreaView, StyleSheet } from 'react-native';
 import { COLORS, FONTS, FONTSIZE, icons } from '../../constants';
 import { useSelector, useDispatch } from "react-redux";
 import { forgotPassword } from "../../redux/authSlice";
-
+import LoadingIndicator from "../../components/loaders/LoadingIndicator";
 import { useFormValidation } from "../../hooks/useFormValidation";
 import GenericButton from "../../components/buttons/genericButton";
 import InputField from "../../components/inputField/InputField";
@@ -12,20 +12,28 @@ import globalStyles from '../../styles/globalStyles';
 
 const ForgotPassword = ({ navigation }) => {
     const dispatch = useDispatch();
-    const { isLoading, error } = useSelector(state => state.auth)
-    const { formData, formErrors, setFormData, handleSubmit } = useFormValidation();
-    const { email } = formData;
+    const { isLoading, status, responseStatus } = useSelector(state => state.auth)
+    const initialFormData = { email: '' };
+    const { formData, formErrors, setFormData, handleSubmit } = useFormValidation(initialFormData);
+
+    const handleNavigation = () => {
+        if (responseStatus === 202) {
+            navigation.navigate('Verify', {destinationScreen: 'ResetPassword'});
+        }
+    }
+
+    useEffect(() => {
+        handleNavigation();
+        navigation.setOptions({
+            headerShown: !isLoading
+        });
+        console.log("response-status: ", responseStatus)
+    }, [isLoading, responseStatus])
 
     const handlePasswordReset = () => {
-        const data = { email }
-        const submission = handleSubmit(data);
-        if (submission.isValid) {
+        const { isValid, data } = handleSubmit();
+        if (isValid) {
             dispatch(forgotPassword(data))
-            if (!error) {
-                navigation.navigate('ResetPassword')
-            } else {
-                console.log(error)
-            }
         }
     }
     return (
@@ -45,13 +53,20 @@ const ForgotPassword = ({ navigation }) => {
                             inputType={'email'}
                             onChangeText={(text) => setFormData(prevState => ({ ...prevState, email: text }))}
                             setFormData={setFormData}
-                            value={email}
+                            value={formData.email}
                             error={formErrors.emailError}
                         />
                     </View>
                     <GenericButton bgColor={"primaryBase"} label={"Reset Password"} fontColor={"white"} onPress={handlePasswordReset} />
                 </View>
             </View>
+            {
+                isLoading && (
+                    <View style={styles.loader}>
+                        <LoadingIndicator />
+                    </View>
+                )
+            }
         </SafeAreaView>
     )
 }
@@ -106,5 +121,15 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.NotoSansJPMedium,
         fontSize: 14,
         color: COLORS.secondaryBase
+    },
+    loader: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)'
     }
 })

@@ -15,7 +15,7 @@ import globalStyles from '../../styles/globalStyles';
 const ResetPassword = ({ navigation }) => {
     const dispatch = useDispatch();
     const { isLoading, error } = useSelector(state => state.auth)
-    const { formData, formErrors, setFormData, handleSubmit } = useFormValidation();
+    const { formData, formErrors, setFormData, handleSubmit } = useFormValidation(initialFormData);
     const { password, confirmPassword } = formData;
 
     const handleResetPassword = () => {
