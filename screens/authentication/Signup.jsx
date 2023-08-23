@@ -25,7 +25,7 @@ const Signup = ({ navigation }) => {
         const submission = handleSubmit(data)
         if (submission.isValid) {
             dispatch(createAccount(data));
-            navigation.navigate('Verify', {email})
+            navigation.navigate('Verify', {destinationScreen: 'Signin'})
         }
     }
 

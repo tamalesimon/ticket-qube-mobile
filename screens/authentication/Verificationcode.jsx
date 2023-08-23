@@ -8,31 +8,46 @@ import OtpInput from "../../components/inputField/OtpInput";
 import { useSelector, useDispatch } from "react-redux";
 import { verifyOtp } from "../../redux/authSlice";
 import LoadingIndicator from "../../components/loaders/LoadingIndicator";
+import { useFormValidation } from "../../hooks/useFormValidation";
 
 
 
-const Verify = ({ route: { params: { email } }, navigation }) => {
-    const [otp, setOtp] = useState(['', '', '', '', ''])
+const Verify = ({ navigation, destinationScreen }) => {
+
     const [errorMessage, setErrorMessage] = useState('')
+    const { isLoading, error, userInfo, responseStatus } = useSelector(state => state.auth)
+    const { formData, formErrors, handleSubmit, setFormData } = useFormValidation({ otp: ['', '', '', '', ''] })
+    const { otp } = formData
     const dispatch = useDispatch();
 
-    const isLoading = useSelector((state) => state.auth.isLoading)
-    const error = useSelector((state) => state.auth.error)
-    const userinfo = useSelector((state) => state.auth.userInfo.userId)
 
+    // const handleNavigation = () => {
+    //     if (responseStatus === 202) {
+    //         navigation.navigate(destinationScreen);
+    //     }
+    // }
+
+    // useEffect(() => {
+    //     handleNavigation();
+    //     navigation.setOptions({
+    //         headerShown: !isLoading
+    //     });
+    //     console.log("response-status: ", responseStatus)
+    // }, [isLoading, responseStatus])
 
     const handleVerification = () => {
-
-        // const userId = userinfo.userId
-        const otpToString = otp.join('');
-        const data = {
-            otp: otpToString
-        }
-        if (error) {
-            setErrorMessage(error.message)
-        } else {
+        const { isValid } = handleSubmit();
+        if (isValid) {
+            const otpToString = otp.join('');
+            const data = { otp: otpToString }
+            console.log("otp: ", data)
             dispatch(verifyOtp(data))
-            navigation.navigate('Signin')
+        } else {
+            const otpError = formErrors.otp;
+            if (otpError) {
+                setErrorMessage(otpError)
+                console.log(errorMessage)
+            }
         }
 
     }
@@ -40,36 +55,31 @@ const Verify = ({ route: { params: { email } }, navigation }) => {
         <SafeAreaView style={{ backgroundColor: COLORS.white, flex: 1, paddingHorizontal: 24 }}>
             <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', gap: 8, marginTop: 32 }}>
                 <Image source={require('../../assets/images/verify.png')} resizeMode='contain' />
-                {
-                    isLoading
-                        ? <LoadingIndicator />
-                        :
-                        <View style={{ flexDirection: 'column', alignItems: 'center', width: "100%" }} >
-                            <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', marginTop: 32 }}>
-                                <Text style={{ ...globalStyles.Heading4, fontWeight: 700, marginBottom: 8 }}>Verification Code</Text>
-                                <Text style={styles.message}>We have sent the verification code to your email</Text>
-                                <Text style={styles.messageEmail}>{maskEmail(email)}.</Text>
-                            </View>
-                            <View style={styles.inputContainer}>
-                                {otp.map((digit, index) => (
-                                    <OtpInput
-                                        key={index}
-                                        value={digit}
-                                        onChangeText={(text) => {
-                                            setOtp([...otp.map((d, i) => i === index ? text : d)])
-                                        }}
-                                        index={index}
-                                    />
-                                ))}
-                            </View>
-                            <TouchableOpacity style={{ marginBottom: 180 }}>
-                                <Text style={styles.resendCode}>Resend code</Text>
-                            </TouchableOpacity>
-                            <View style={{ width: "100%" }}>
-                                <GenericButton bgColor={"primaryBase"} label={"Verify"} fontColor={"white"} onPress={handleVerification} />
-                            </View>
-                        </View>
-                }
+                <View style={{ flexDirection: 'column', alignItems: 'center', width: "100%" }} >
+                    <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', marginTop: 32 }}>
+                        <Text style={{ ...globalStyles.Heading4, fontWeight: 700, marginBottom: 8 }}>Verification Code</Text>
+                        <Text style={styles.message}>We have sent the verification code to your email</Text>
+                        {/* <Text style={styles.messageEmail}>{maskEmail(email)}.</Text> */}
+                    </View>
+                    <View style={styles.inputContainer}>
+                        {otp.map((digit, index) => (
+                            <OtpInput
+                                key={`otp-${index}`}
+                                value={digit}
+                                onChangeText={(text) => {
+                                    setFormData({ ...formData, otp: [...otp.map((d, i) => i === index ? text : d)] })
+                                }}
+                                index={index}
+                            />
+                        ))}
+                    </View>
+                    <TouchableOpacity style={{ marginBottom: 180 }}>
+                        <Text style={styles.resendCode}>Resend code</Text>
+                    </TouchableOpacity>
+                    <View style={{ width: "100%" }}>
+                        <GenericButton bgColor={"primaryBase"} label={"Verify"} fontColor={"white"} onPress={handleVerification} />
+                    </View>
+                </View>
             </View>
         </SafeAreaView>
     )

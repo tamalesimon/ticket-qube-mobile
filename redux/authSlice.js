@@ -11,10 +11,12 @@ const initialState = {
   isAuthenticated: false,
   isFirstLaunch: true,
   isVerified: false,
+  isExisting: false,
   token: '',
   isLoading: false,
   status: null,
-  otp: ''
+  otp: '',
+  responseStatus: null
 }
 
 const options = {
@@ -68,16 +70,19 @@ export const signin = createAsyncThunk('users/signin', async (useDetails, { getS
   }
 });
 
-export const forgotPassword = createAsyncThunk('users/forgotPassword', async (email, { getState }) => {
+export const forgotPassword = createAsyncThunk('/users/forgot-password', async (email, { getState }) => {
   try {
     const bearerToken = getState().auth.token;
-    const response = await axiosInstance.post(`${LocalAPI}/users/forgotPassword`, email, {
+    const response = await axiosInstance.post(`${LocalAPI}/users/forgot-password`, email, {
       headers: {
         ...options.headers,
         'Authorization': `Bearer ${bearerToken}`
       }
-    })
-    return response.data
+    });
+
+    
+
+    return {data: response.data, serverStatus: response.status }
   } catch (error) {
     throw error.response.data.message
   }
@@ -163,8 +168,9 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(forgotPassword.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.userInfo = action.payload.data;
+        state.isLoading = true;
+        state.responseStatus = action.payload.serverStatus;
+        state.isExisting = action.payload ? true : false;
       })
       .addCase(forgotPassword.rejected, (state, action) => {
         state.isLoading = false;
