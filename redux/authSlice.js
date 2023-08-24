@@ -13,6 +13,7 @@ const initialState = {
   isVerified: false,
   isExisting: false,
   token: '',
+  isCreated: false,
   isLoading: false,
   status: null,
   otp: '',
@@ -80,9 +81,9 @@ export const forgotPassword = createAsyncThunk('/users/forgot-password', async (
       }
     });
 
-    
 
-    return {data: response.data, serverStatus: response.status }
+
+    return response.data;
   } catch (error) {
     throw error.response.data.message
   }
@@ -151,12 +152,12 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(verifyOtp.fulfilled, (state, action) => {
-        state.isLoading = true;
-        state.isAuthenticated = true;
+        state.isLoading = false;
+        state.isAuthenticated = false;
         state.userInfo = action.payload;
         state.otp = action.payload.otp;
         state.token = action.payload.token;
-        state.isVerified = action.payload.verified;
+        state.isVerified = true
         axios.defaults.headers.common["Authorization"] = `Bearer ${action.payload.token}`;
       })
       .addCase(verifyOtp.rejected, (state, action) => {
@@ -165,12 +166,12 @@ const authSlice = createSlice({
       })
       .addCase(forgotPassword.pending, state => {
         state.isLoading = true;
+        state.isExisting = false;
         state.error = null;
       })
       .addCase(forgotPassword.fulfilled, (state, action) => {
-        state.isLoading = true;
-        state.responseStatus = action.payload.serverStatus;
-        state.isExisting = action.payload ? true : false;
+        state.isLoading = false;
+        state.isExisting = true;
       })
       .addCase(forgotPassword.rejected, (state, action) => {
         state.isLoading = false;
@@ -188,20 +189,39 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload ? action.payload : action.error.message;
       })
+
+      //signp new account
       .addCase(createAccount.pending, state => {
         state.isLoading = true;
+        state.isCreated = false
         state.error = null;
       })
       .addCase(createAccount.fulfilled, (state, action) => {
         state.isLoading = false;
         state.userInfo = action.payload;
+        state.isCreated = action.payload? true : false
         state.token = action.payload.token;
         axios.defaults.headers.common['Authorization'] = `Bearer ${action.payload}`;
       })
       .addCase(createAccount.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload ? action.payload : action.error.message;
-      });
+      })
+
+      //reset password
+      .addCase(resetPassword.pending, (state, action) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(resetPassword.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isReset = true
+        state.error = null
+      })
+      .addCase(resetPassword.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
   }
 })
 

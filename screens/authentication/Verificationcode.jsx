@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { View, Text, Image, TouchableOpacity, TextInput, SafeAreaView, StyleSheet } from 'react-native';
 import { COLORS, FONTS, FONTSIZE, images, icons } from '../../constants';
 import { maskEmail } from "../../utils/utils";
@@ -10,51 +10,50 @@ import { verifyOtp } from "../../redux/authSlice";
 import LoadingIndicator from "../../components/loaders/LoadingIndicator";
 import { useFormValidation } from "../../hooks/useFormValidation";
 
+import verifyImage from '../../assets/images/verify.png';
 
 
-const Verify = ({ navigation, destinationScreen }) => {
 
+const Verify = ({ navigation, route: { params: { screen } } }) => {
     const [errorMessage, setErrorMessage] = useState('')
-    const { isLoading, error, userInfo, responseStatus } = useSelector(state => state.auth)
-    const { formData, formErrors, handleSubmit, setFormData } = useFormValidation({ otp: ['', '', '', '', ''] })
+    const { isLoading, error, isVerified, isExisting, status } = useSelector(state => state.auth)
+    const { formData, formErrors, handleSubmit, setFormData } = useFormValidation(initialFormData = { otp: ['', '', '', '', ''] })
     const { otp } = formData
     const dispatch = useDispatch();
 
 
-    // const handleNavigation = () => {
-    //     if (responseStatus === 202) {
-    //         navigation.navigate(destinationScreen);
-    //     }
-    // }
+    const handleNavigation = () => {
+        if (status) {
+            navigation.navigate(screen);
+        }
+    }
 
-    // useEffect(() => {
-    //     handleNavigation();
-    //     navigation.setOptions({
-    //         headerShown: !isLoading
-    //     });
-    //     console.log("response-status: ", responseStatus)
-    // }, [isLoading, responseStatus])
+    useEffect(() => {
+        handleNavigation();
+        navigation.setOptions({
+            headerShown: !isLoading
+        });
+    }, [isLoading, isExisting, isVerified])
 
     const handleVerification = () => {
         const { isValid } = handleSubmit();
         if (isValid) {
             const otpToString = otp.join('');
             const data = { otp: otpToString }
-            console.log("otp: ", data)
             dispatch(verifyOtp(data))
         } else {
             const otpError = formErrors.otp;
             if (otpError) {
                 setErrorMessage(otpError)
                 console.log(errorMessage)
-            }
+            } else (error)
         }
 
     }
     return (
         <SafeAreaView style={{ backgroundColor: COLORS.white, flex: 1, paddingHorizontal: 24 }}>
             <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', gap: 8, marginTop: 32 }}>
-                <Image source={require('../../assets/images/verify.png')} resizeMode='contain' />
+                <Image source={verifyImage} resizeMode='contain' />
                 <View style={{ flexDirection: 'column', alignItems: 'center', width: "100%" }} >
                     <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', marginTop: 32 }}>
                         <Text style={{ ...globalStyles.Heading4, fontWeight: 700, marginBottom: 8 }}>Verification Code</Text>
@@ -81,6 +80,13 @@ const Verify = ({ navigation, destinationScreen }) => {
                     </View>
                 </View>
             </View>
+            {
+                isLoading && (
+                    <View style={styles.loader}>
+                        <LoadingIndicator />
+                    </View>
+                )
+            }
         </SafeAreaView>
     )
 }
@@ -116,4 +122,14 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.gray200,
         borderRadius: 12
     },
+    loader: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)'
+    }
 })
