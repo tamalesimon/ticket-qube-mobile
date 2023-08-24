@@ -8,17 +8,18 @@ import { useFormValidation } from "../../hooks/useFormValidation";
 import GenericButton from "../../components/buttons/genericButton";
 import InputField from "../../components/inputField/InputField";
 import globalStyles from '../../styles/globalStyles';
+import forgotPasswordImage from '../../assets/images/forgot-password.png';
 
 
 const ForgotPassword = ({ navigation }) => {
     const dispatch = useDispatch();
-    const { isLoading, status, responseStatus } = useSelector(state => state.auth)
+    const { isLoading, status, isExisting } = useSelector(state => state.auth)
     const initialFormData = { email: '' };
     const { formData, formErrors, setFormData, handleSubmit } = useFormValidation(initialFormData);
 
     const handleNavigation = () => {
-        if (responseStatus === 202) {
-            navigation.navigate('Verify', {destinationScreen: 'ResetPassword'});
+        if (isLoading) {
+            navigation.navigate('Verify', { screen: 'ResetPassword' });
         }
     }
 
@@ -27,13 +28,14 @@ const ForgotPassword = ({ navigation }) => {
         navigation.setOptions({
             headerShown: !isLoading
         });
-        console.log("response-status: ", responseStatus)
-    }, [isLoading, responseStatus])
+    }, [isLoading, isExisting])
 
     const handlePasswordReset = () => {
         const { isValid, data } = handleSubmit();
         if (isValid) {
             dispatch(forgotPassword(data))
+        } else {
+            console.log(formErrors)
         }
     }
     return (
@@ -41,7 +43,7 @@ const ForgotPassword = ({ navigation }) => {
             <View>
                 <View style={{ flexDirection: 'column', gap: 8, marginTop: 32 }}>
                     <View style={{ flexDirection: 'column', alignItems: 'center', gap: 8, marginTop: 32 }}>
-                        <Image source={require('../../assets/images/forgot-password.png')} resizeMode='contain' />
+                        <Image source={forgotPasswordImage} resizeMode='contain' />
                         <Text style={{ ...globalStyles.Heading4, marginBottom: 8 }}>Forgot Password</Text>
                         <Text style={styles.message} >Please enter the email address associated with your account.</Text>
                     </View>

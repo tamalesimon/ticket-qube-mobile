@@ -46,7 +46,7 @@ const ResetPassword = ({ navigation }) => {
                             icon={icons.LockIcon}
                             inputType={'password'}
                             onChangeText={(text) => setFormData(prevState => ({ ...prevState, password: text }))}
-                            value={password}
+                            value={formData.password}
                             error={formErrors.passwordError}
                         />
                     <InputField
@@ -55,7 +55,7 @@ const ResetPassword = ({ navigation }) => {
                             icon={icons.LockIcon}
                             inputType={'password'}
                             onChangeText={(text) => setFormData(prevState => ({ ...prevState, password: text }))}
-                            value={password}
+                            value={formData.password}
                             error={formErrors.passwordError}
                         />
                 </View>
