@@ -25,6 +25,11 @@ import ArrowLeftIcon from "../assets/svgIcons/ArrowLeftIcon"
 import FilterIcon from "../assets/svgIcons/FilterIcon"
 import FlashIcon from "../assets/svgIcons/FlashIcon"
 import MapPinSmallIcon from "../assets/svgIcons/MapPinSmallIcon"
+import VideoIcon from "../assets/svgIcons/VideoIcon"
+import CalendarAddIcon from "../assets/svgIcons/CalendarAddIcon"
+import UploadIcon from "../assets/svgIcons/UploadIcon";
+import LikeIcon from "../assets/svgIcons/LikeIcon";
+import BadgeVerified from "../assets/svgIcons/BadgeVerifiedIcon"
 
 
 export default {
@@ -54,5 +59,10 @@ export default {
     ArrowLeftIcon,
     FilterIcon,
     FlashIcon,
-    MapPinSmallIcon
+    MapPinSmallIcon,
+    VideoIcon,
+    CalendarAddIcon,
+    UploadIcon,
+    LikeIcon,
+    BadgeVerified
 }

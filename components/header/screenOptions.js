@@ -6,162 +6,188 @@ import HeaderRight from './home/HeaderRight'
 import ExploreRight from './explore/ExploreRight'
 import BackLeft from './explore/BackLeft'
 import VerticalDots from './VerticalDotsIcon'
+import LikesHeart from '../../screens/event/components/LikesHeart'
+import Upload from '../../screens/event/components/Upload'
 
 export const screenOptions = {
-    headerStyle: {
-      backgroundColor: COLORS.white,
-      elevation: 0,
-      borderBottomWidth: 0,
-    },
-    headerShadowVisible: false,
-    tabBarActiveTintColor: COLORS.primaryBase,
-    tabBarStyle: {
-        height: 70,
-        paddingTop: 12,
-      },
-    tabBarLabelStyle: {
-        paddingBottom: 12,
-      },
-  }
+  headerStyle: {
+    backgroundColor: COLORS.white,
+    elevation: 0,
+    borderBottomWidth: 0,
+  },
+  headerShadowVisible: false,
+  tabBarActiveTintColor: COLORS.primaryBase,
+  tabBarStyle: {
+    height: 70,
+    paddingTop: 12,
+  },
+  tabBarLabelStyle: {
+    paddingBottom: 12,
+  },
+}
 
-  export const homeScreenOptions = {
-    ...screenOptions,
-    headerTitleStyle: {
-        fontFamily: FONTS.NotoSansJPBold,
-        fontWeight: '700',
-      },
-    headerTitle: '',
-    tabBarIcon: ({ focused }) => (
-      <View style={styles.tabBarIconContainer}>
-        {focused ? <icons.HomeIconActive /> : <icons.HomeIcon />}
-      </View>
-    ),
-    headerLeft: () => (
-      <View style={styles.headerButtonContainer}>
-        <HeaderLeft />
-      </View>
-    ),
-    headerRight: () => (
-      <View style={styles.headerButtonContainer}>
-        <HeaderRight />
-      </View>
-    ),
-  }
+export const homeScreenOptions = {
+  ...screenOptions,
+  headerTitleStyle: {
+    fontFamily: FONTS.NotoSansJPBold,
+    fontWeight: '700',
+  },
+  headerTitle: '',
+  tabBarIcon: ({ focused }) => (
+    <View style={styles.tabBarIconContainer}>
+      {focused ? <icons.HomeIconActive /> : <icons.HomeIcon />}
+    </View>
+  ),
+  headerLeft: () => (
+    <View style={styles.headerButtonContainer}>
+      <HeaderLeft />
+    </View>
+  ),
+  headerRight: () => (
+    <View style={styles.headerButtonContainer}>
+      <HeaderRight />
+    </View>
+  ),
+}
 
-  export const exploreScreenOptions = {
-    ...screenOptions,
-    headerTitleStyle: {
-        fontFamily: FONTS.NotoSansJPBold,
-        fontWeight: '700',
-      },
-    tabBarIcon: ({ focused }) => (
-      <View style={styles.tabBarIconContainer}>
-        {focused ? <icons.SearchIconActive /> : <icons.SearchIcon />}
-      </View>
-    ),
-    headerLeft: () => (
-      <View style={styles.headerButtonContainer}>
-        <BackLeft />
-      </View>
-    ),
-    headerRight: () => (
-      <View style={styles.headerButtonContainer}>
-        <ExploreRight />
-      </View>
-    ),
-    headerTitle: "Explore",
-    headerTitleAlign: "center",
-  }
+export const exploreScreenOptions = {
+  ...screenOptions,
+  headerTitleStyle: {
+    fontFamily: FONTS.NotoSansJPBold,
+    fontWeight: '700',
+  },
+  tabBarIcon: ({ focused }) => (
+    <View style={styles.tabBarIconContainer}>
+      {focused ? <icons.SearchIconActive /> : <icons.SearchIcon />}
+    </View>
+  ),
+  headerLeft: () => (
+    <View style={styles.headerButtonContainer}>
+      <BackLeft />
+    </View>
+  ),
+  headerRight: () => (
+    <View style={styles.headerButtonContainer}>
+      <ExploreRight />
+    </View>
+  ),
+  headerTitle: "Explore",
+  headerTitleAlign: "center",
+}
 
-  export const favoritesScreenOptions = {
-    ...screenOptions,
-    headerTitleStyle: {
-        fontFamily: FONTS.NotoSansJPBold,
-        fontWeight: '700',
-      },
-    tabBarIcon: ({ focused }) => (
-      <View style={styles.tabBarIconContainer}>
-        {focused ? <icons.HeartIconActive /> : <icons.HeartIcon />}
-      </View>
-    ),
-    headerLeft: () => (
-        <View style={styles.headerButtonContainer}>
-          <BackLeft />
-        </View>
-      ),
-    headerTitle: 'Favorites',
-    headerTitleAlign: 'center',
-  }
+export const favoritesScreenOptions = {
+  ...screenOptions,
+  headerTitleStyle: {
+    fontFamily: FONTS.NotoSansJPBold,
+    fontWeight: '700',
+  },
+  tabBarIcon: ({ focused }) => (
+    <View style={styles.tabBarIconContainer}>
+      {focused ? <icons.HeartIconActive /> : <icons.HeartIcon />}
+    </View>
+  ),
+  headerLeft: () => (
+    <View style={styles.headerButtonContainer}>
+      <BackLeft />
+    </View>
+  ),
+  headerTitle: 'Favorites',
+  headerTitleAlign: 'center',
+}
 
-  export const ticketsScreenOptions = {
-    ...screenOptions,
-    headerTitleStyle: {
-        fontFamily: FONTS.NotoSansJPBold,
-        fontWeight: '700',
-      },
-    tabBarIcon: ({ focused }) => (
-      <View style={styles.tabBarIconContainer}>
-        {focused ? <icons.TicketIconActive /> : <icons.TicketIcon />}
-      </View>
-    ),
-    headerLeft: () => (
-      <View style={styles.headerButtonContainer}>
-        <BackLeft />
-      </View>
-    ),
-    headerRight: () => (
-      <View style={styles.headerButtonContainer}>
-        <VerticalDots />
-      </View>
-    ),
-    headerTitle: 'Tickets',
-    headerTitleAlign: 'center',
-  }
+export const ticketsScreenOptions = {
+  ...screenOptions,
+  headerTitleStyle: {
+    fontFamily: FONTS.NotoSansJPBold,
+    fontWeight: '700',
+  },
+  tabBarIcon: ({ focused }) => (
+    <View style={styles.tabBarIconContainer}>
+      {focused ? <icons.TicketIconActive /> : <icons.TicketIcon />}
+    </View>
+  ),
+  headerLeft: () => (
+    <View style={styles.headerButtonContainer}>
+      <BackLeft />
+    </View>
+  ),
+  headerRight: () => (
+    <View style={styles.headerButtonContainer}>
+      <VerticalDots />
+    </View>
+  ),
+  headerTitle: 'Tickets',
+  headerTitleAlign: 'center',
+}
 
-  export const profileScreenOptions = {
-    ...screenOptions,
-    headerTitleStyle: {
-        fontFamily: FONTS.NotoSansJPBold,
-        fontWeight: '700',
-      },
-    tabBarIcon: ({ focused }) => (
-      <View style={styles.tabBarIconContainer}>
-        {focused ? <icons.ProfileIconActive /> : <icons.ProfileIconCircle />}
-      </View>
-    ),
-    headerLeft: () => (
-      <View style={styles.headerButtonContainer}>
-        <BackLeft />
-      </View>
-    ),
-    headerRight: () => (
-      <View style={styles.headerButtonContainer}>
-        <VerticalDots />
-      </View>
-    ),
-    headerTitle: 'Profile',
-    headerTitleAlign: 'center',
-  }
+export const profileScreenOptions = {
+  ...screenOptions,
+  headerTitleStyle: {
+    fontFamily: FONTS.NotoSansJPBold,
+    fontWeight: '700',
+  },
+  tabBarIcon: ({ focused }) => (
+    <View style={styles.tabBarIconContainer}>
+      {focused ? <icons.ProfileIconActive /> : <icons.ProfileIconCircle />}
+    </View>
+  ),
+  headerLeft: () => (
+    <View style={styles.headerButtonContainer}>
+      <BackLeft />
+    </View>
+  ),
+  headerRight: () => (
+    <View style={styles.headerButtonContainer}>
+      <VerticalDots />
+    </View>
+  ),
+  headerTitle: 'Profile',
+  headerTitleAlign: 'center',
+}
 
-  const styles = StyleSheet.create({
-    tabBarStyle: {
-      height: 70,
-      paddingTop: 12,
-    },
-    tabBarLabelStyle: {
-      paddingBottom: 12,
-    },
-    tabBarIconContainer: {
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    headerButtonContainer: {
-      marginHorizontal: 24,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    headerTitleStyle: {
-      fontFamily: FONTS.NotoSansJPBold,
-      fontWeight: '700',
-    }
-  })
+export const eventDetailsScreenOptions = {
+  ...screenOptions,
+  headerLeft: () => (
+    <View style={styles.headerButtonContainer}>
+      <BackLeft />
+    </View>
+  ),
+  headerRight: () => (
+    <View style={styles.headerButtonContainer}>
+      <View style={styles.sharedContainer}>
+        <Upload />
+        <LikesHeart />
+      </View>
+    </View>
+  ),
+  headerTitle: '',
+  headerTitleAlign: 'center',
+}
+
+const styles = StyleSheet.create({
+  tabBarStyle: {
+    height: 70,
+    paddingTop: 12,
+  },
+  tabBarLabelStyle: {
+    paddingBottom: 12,
+  },
+  tabBarIconContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  headerButtonContainer: {
+    marginHorizontal: 10, //24px
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  headerTitleStyle: {
+    fontFamily: FONTS.NotoSansJPBold,
+    fontWeight: '700',
+  },
+  sharedContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent:'center'
+  }
+})
