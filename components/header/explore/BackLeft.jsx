@@ -15,7 +15,7 @@ export default function BackLeft() {
 const styles = StyleSheet.create({
     Arrow: {
         paddingVertical:12,
-        paddingHorizontal:13.5,
+        // paddingHorizontal:13.5,
         borderRadius: 12,
 }
 })

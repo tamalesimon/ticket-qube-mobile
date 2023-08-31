@@ -1,12 +1,14 @@
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { useNavigation } from "expo-router";
-import { createNativeStackNavigator, } from "@react-navigation/native-stack";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { COLORS, icons, FONTS } from "../constants";
 import store from "../store";
 import { Provider } from "react-redux";
 import { Signin, Signup, ForgotPassword, ResetPassword, ResetSuccess, Verify } from "../screens/authentication";
-import { Location, FollowOrganiser, PickInterest  } from "../screens/onboarding";
+import { Location, FollowOrganiser, PickInterest } from "../screens/onboarding";
 import { GetStarted } from "../screens/welcome";
+import { EventDetails } from "../screens/event";
+import { eventDetailsScreenOptions } from "../components/header/screenOptions";
 import Tabs from "../screens/tabs/Tabs";
 
 const Stack = createNativeStackNavigator();
@@ -14,112 +16,137 @@ const Stack = createNativeStackNavigator();
 export default function Page() {
   const navigation = useNavigation();
   return (
-    <Stack.Navigator>
-      <Stack.Group>
-        <Stack.Screen
-          name="Get Started"
-          component={GetStarted}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Signin"
-          component={Signin}
-          options={screenOptions}
-        />
-        <Stack.Screen
-          name="Signup"
-          component={Signup}
-          options={screenOptions}
-        />
-        <Stack.Screen
-          name="Verify"
-          component={Verify}
-          options={screenOptions}
-        />
-        <Stack.Screen
-          name="ForgotPassword"
-          component={ForgotPassword}
-          options={screenOptions}
-        />
-        <Stack.Screen
-          name="ResetPassword"
-          component={ResetPassword}
-          options={screenOptions}
-        />
-        <Stack.Screen
-          name="ResetSuccess"
-          component={ResetSuccess}
-          options={{
-            headerStyle: {
-            backgroundColor: COLORS.white, // make the header transparent
-            elevation: 0, // remove the shadow on Android
-            borderBottomWidth: 0, // remove the border bottom on iOS
-          },
-          headerTitle:' ',
-          headerShadowVisible:false,
-          headerTitleStyle: {
-            display: "none", // hide the header title
-          },
-          headerLeft:() =>(
-            <View>
-                <TouchableOpacity>
-                    <icons.CloseIcon/>
-                </TouchableOpacity>
-            </View>
-          )
-          }}
-        />
-      </Stack.Group>
+    // <Stack.Navigator>
+    // //Authentication screens
+    //   <Stack.Group>
+    //     <Stack.Screen
+    //       name="Get Started"
+    //       component={GetStarted}
+    //       options={{ headerShown: false }}
+    //     />
+    //     <Stack.Screen
+    //       name="Signin"
+    //       component={Signin}
+    //       options={screenOptions}
+    //     />
+    //     <Stack.Screen
+    //       name="Signup"
+    //       component={Signup}
+    //       options={screenOptions}
+    //     />
+    //     <Stack.Screen
+    //       name="Verify"
+    //       component={Verify}
+    //       options={screenOptions}
+    //     />
+    //     <Stack.Screen
+    //       name="ForgotPassword"
+    //       component={ForgotPassword}
+    //       options={screenOptions}
+    //     />
+    //     <Stack.Screen
+    //       name="ResetPassword"
+    //       component={ResetPassword}
+    //       options={screenOptions}
+    //     />
+    //     <Stack.Screen
+    //       name="ResetSuccess"
+    //       component={ResetSuccess}
+    //       options={{
+    //         headerStyle: {
+    //           backgroundColor: COLORS.white, // make the header transparent
+    //           elevation: 0, // remove the shadow on Android
+    //           borderBottomWidth: 0, // remove the border bottom on iOS
+    //         },
+    //         headerTitle: ' ',
+    //         headerShadowVisible: false,
+    //         headerTitleStyle: {
+    //           display: "none", // hide the header title
+    //         },
+    //         headerLeft: () => (
+    //           <View>
+    //             <TouchableOpacity>
+    //               <icons.CloseIcon />
+    //             </TouchableOpacity>
+    //           </View>
+    //         )
+    //       }}
+    //     />
+    //   </Stack.Group>
 
-      <Stack.Group>
-          <Stack.Screen
-            name="Location"
-            component={Location}
-            options={{
-              ...screenOptions,
-              headerRight: () => (
-                <TouchableOpacity onPress={() => navigation.navigate('FollowOrganiser')}>
-                    <Text style={styles.skipText}>Skip for now</Text>
-                </TouchableOpacity>
-              )
-              }}
-          />
-          <Stack.Screen
-            name="FollowOrganiser"
-            component={FollowOrganiser}
-            options={{
-              ...screenOptions,
-              headerRight: () => (
-                <TouchableOpacity onPress={() => navigation.navigate('PickInterest')}>
-                    <Text style={styles.skipText}>Skip for now</Text>
-                </TouchableOpacity>
-              )
-              }}
-          />
-          <Stack.Screen
-            name="PickInterest"
-            component={PickInterest}
-            options={{
-              ...screenOptions,
-              headerRight: () => (
-                <TouchableOpacity onPress={() => navigation.navigate('NavigationTabs')}>
-                    <Text style={styles.skipText}>Skip for now</Text>
-                </TouchableOpacity>
-              )
-              }}
-          />
-      </Stack.Group>
+    //       //onBoarding screens
+    //   <Stack.Group>
+    //     <Stack.Screen
+    //       name="Location"
+    //       component={Location}
+    //       options={{
+    //         ...screenOptions,
+    //         headerRight: () => (
+    //           <TouchableOpacity onPress={() => navigation.navigate('FollowOrganiser')}>
+    //             <Text style={styles.skipText}>Skip for now</Text>
+    //           </TouchableOpacity>
+    //         )
+    //       }}
+    //     />
+    //     <Stack.Screen
+    //       name="FollowOrganiser"
+    //       component={FollowOrganiser}
+    //       options={{
+    //         ...screenOptions,
+    //         headerRight: () => (
+    //           <TouchableOpacity onPress={() => navigation.navigate('PickInterest')}>
+    //             <Text style={styles.skipText}>Skip for now</Text>
+    //           </TouchableOpacity>
+    //         )
+    //       }}
+    //     />
+    //     <Stack.Screen
+    //       name="PickInterest"
+    //       component={PickInterest}
+    //       options={{
+    //         ...screenOptions,
+    //         headerRight: () => (
+    //           <TouchableOpacity onPress={() => navigation.navigate('NavigationTabs')}>
+    //             <Text style={styles.skipText}>Skip for now</Text>
+    //           </TouchableOpacity>
+    //         )
+    //       }}
+    //     />
+    //   </Stack.Group>
 
-      <Stack.Group>
-        <Stack.Screen
-          name="NavigationTabs"
-          component={Tabs}
-          options={{
-            headerShown:false
-          }}
-        />
-      </Stack.Group>
-    </Stack.Navigator>
+    //     //App index
+    //   <Stack.Group>
+    //     <Stack.Screen
+    //       name="NavigationTabs"
+    //       component={Tabs}
+    //       options={{
+    //         headerShown: false
+    //       }}
+    //     />
+    //   </Stack.Group>
+
+    //   //Event screens
+    //   <Stack.Group>
+    //     <Stack.Screen
+    //       name="EventDetails"
+    //       component={EventDetails}
+    //       options={eventDetailsScreenOptions}
+    //     />
+    //   </Stack.Group>
+    // </Stack.Navigator>
+
+    
+      <Stack.Navigator>
+        <Stack.Group>
+          <Stack.Screen
+            name="Event Details"
+            component={EventDetails}
+            options={eventDetailsScreenOptions}
+          />
+        </Stack.Group>
+      </Stack.Navigator>
+    
+
   );
 }
 
@@ -133,22 +160,22 @@ export default function Page() {
 
 const screenOptions = {
   headerStyle: {
-  backgroundColor: COLORS.white, // make the header transparent
-  elevation: 0, // remove the shadow on Android
-  borderBottomWidth: 0, // remove the border bottom on iOS
-},
-headerTitle:' ',
-headerShadowVisible:false,
-headerTitleStyle: {
-  display: "none", // hide the header title
-},
+    backgroundColor: COLORS.white, // make the header transparent
+    elevation: 0, // remove the shadow on Android
+    borderBottomWidth: 0, // remove the border bottom on iOS
+  },
+  headerTitle: ' ',
+  headerShadowVisible: false,
+  headerTitleStyle: {
+    display: "none", // hide the header title
+  },
 }
 
 const styles = StyleSheet.create({
   skipText: {
     fontFamily: FONTS.NotoSansJPRegular,
-    fontWeight:500,
-    fontSize:14,
-    color:COLORS.primaryBase
+    fontWeight: 500,
+    fontSize: 14,
+    color: COLORS.primaryBase
   }
 })
