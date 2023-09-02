@@ -141,7 +141,7 @@ export default function Page() {
           <Stack.Screen
             name="Event Details"
             component={EventDetails}
-            options={eventDetailsScreenOptions}
+            options={{headerShown: false}}
           />
         </Stack.Group>
       </Stack.Navigator>

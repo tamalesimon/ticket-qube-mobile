@@ -1,6 +1,8 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { icons, FONTS, COLORS } from '../../constants'
+import { useSelector, useDispatch } from 'react-redux'
+import { toggleSheet } from "../../redux/layoutSlice"
 import HeaderLeft from './home/HeaderLeft'
 import HeaderRight from './home/HeaderRight'
 import ExploreRight from './explore/ExploreRight'
@@ -10,6 +12,7 @@ import LikesHeart from '../../screens/event/components/LikesHeart'
 import Upload from '../../screens/event/components/Upload'
 
 export const screenOptions = {
+  headerShown: false,
   headerStyle: {
     backgroundColor: COLORS.white,
     elevation: 0,
@@ -145,23 +148,33 @@ export const profileScreenOptions = {
   headerTitleAlign: 'center',
 }
 
+
+
 export const eventDetailsScreenOptions = {
   ...screenOptions,
+  
   headerLeft: () => (
     <View style={styles.headerButtonContainer}>
       <BackLeft />
     </View>
   ),
-  headerRight: () => (
-    <View style={styles.headerButtonContainer}>
-      <View style={styles.sharedContainer}>
-        <Upload />
-        <LikesHeart />
+  headerRight: () => {
+    
+    const dispatch = useDispatch();
+    return (
+      <View style={styles.headerButtonContainer}>
+        <View style={styles.sharedContainer}>
+          <Upload handlePress={() => dispatch(toggleSheet())} />
+          <LikesHeart />
+        </View>
       </View>
-    </View>
-  ),
+    )
+  },
   headerTitle: '',
   headerTitleAlign: 'center',
+  headers: {
+    headerShown: false,
+  }
 }
 
 const styles = StyleSheet.create({
@@ -188,6 +201,6 @@ const styles = StyleSheet.create({
   sharedContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent:'center'
+    justifyContent: 'center'
   }
 })

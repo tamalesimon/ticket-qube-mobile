@@ -4,6 +4,7 @@ import EventOrganizer from "./EventOrganizer";
 import EventItenary from "./EventItenary";
 import EventLocation from "./EventLocation";
 import Footer from "./Footer";
+import ShareEvent from "./ShareEvent";
 
 export {
     EventImage,
@@ -11,5 +12,6 @@ export {
     EventOrganizer,
     EventItenary,
     EventLocation,
+    ShareEvent,
     Footer
 }
