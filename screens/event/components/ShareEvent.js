@@ -1,22 +1,75 @@
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { useCallback, forwardRef, useImperativeHandle } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, useWindowDimensions, TouchableWithoutFeedback } from 'react-native';
 import { icons, COLORS, FONTS } from '../../../constants';
-import Display from '../../../utils/Display';
+import Animated, { useSharedValue, useAnimatedStyle, withSpring, interpolate, Extrapolate } from 'react-native-reanimated';
 
-const ShareEvent = () => {
+const ShareEvent = forwardRef(({ activeHeight }, ref) => {
+    const height = useWindowDimensions().height;
+    const topAnimation = useSharedValue(height);
+    const animationStyle = useAnimatedStyle(() => {
+        const top = topAnimation.value;
+        return {
+            top,
+        }
+    });
+
+    const backDropAnimation = useAnimatedStyle(() => {
+        const opacity = interpolate(
+            topAnimation.value,
+            [height, activeHeight],
+            [0, 0.5],
+            Extrapolate.CLAMP
+        );
+        const display = opacity === 0 ? 'none' : 'flex'
+        return {
+            opacity, display
+        }
+    })
+
+    const expand = useCallback(() => {
+        'worklet';
+        topAnimation.value = withSpring(activeHeight, {
+            damping: 100,
+            stiffness: 400
+        });
+    }, []);
+
+    const close = useCallback(() => {
+        'worklet';
+        topAnimation.value = withSpring(height, {
+            damping: 100,
+            stiffness: 400
+        })
+    }, []);
+
+    useImperativeHandle(ref, () => ({
+        expand, close
+    }), [expand, close])
     return (
-        <View style={styles.container}>
-            <View style={styles.section}>
-                <View style={styles.divider}></View>
-                <View>
-                    <Text style={styles.sectionTitle}>Share this event</Text>
-                    <TouchableOpacity>
-                        <icons.CloseIcon />
-                    </TouchableOpacity>
+        // <Animated.View style={[styles.container, animationStyle]}>
+        //     <View style={styles.section}>
+        //         <View style={styles.divider}></View>
+        //         <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginTop: 16 }}>
+        //             <Text style={styles.sectionTitle}>Share this event</Text>
+        //             <TouchableOpacity>
+        //                 <icons.CloseIcon />
+        //             </TouchableOpacity>
+        //         </View>
+        //     </View>
+        // </Animated.View>
+        <>
+            <TouchableWithoutFeedback onPress={() => { close() }}>
+                <Animated.View style={[styles.backDrop, backDropAnimation]} />
+            </TouchableWithoutFeedback>
+            <Animated.View style={[styles.container, animationStyle]}>
+                <View style={styles.lineContainer}>
+                    <View style={styles.line} />
                 </View>
-            </View>
-        </View>
+
+            </Animated.View>
+        </>
     )
-}
+})
 
 export default ShareEvent;
 
@@ -27,25 +80,46 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         bottom: 0,
-
+        // alignItems: 'center',
+        // backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        backgroundColor: 'white',
+        borderTopLeftRadius: 40,
+        borderTopRightRadius: 40,
+        //flexDirection: 'column-reverse'
+    },
+    lineContainer: {
+        marginVertical: 10,
         alignItems: 'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)'
+    },
+    line: {
+        width: 50,
+        height: 4,
+        backgroundColor: COLORS.gray100,
+        borderRadius: 20,
     },
     section: {
         backgroundColor: COLORS.white,
         paddingHorizontal: 24,
-        paddingTop: 12,
+        marginTop: 16,
         paddingBottom: 16,
         borderRadius: 40,
-        width: Display.setWidth(375),
-        height: Display.setHeight(394),
-        flexDirection: 'column-reverse'
+        // width: 375,
+        height: "100%",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        borderBottomLeftRadius: 0,
+        borderBottomRightRadius: 0,
+        // flexDirection: 'column-reverse'
     },
     divider: {
-        width: Display.setHeight(32),
-        height: Display.setHeight(6),
+        width: 32,
+        height: 6,
         backgroundColor: COLORS.gray100,
-        borderRadius: 50
+        borderRadius: 50,
+        marginTop: 12,
+        alignSelf: "center"
     },
     sectionTitle: {
         fontFamily: FONTS.NotoSansJPRegular,
@@ -53,5 +127,13 @@ const styles = StyleSheet.create({
         fontWeight: 700,
         lineHeight: 24,
         color: COLORS.grayBase
+    },
+    backDrop: {
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
     }
 })
