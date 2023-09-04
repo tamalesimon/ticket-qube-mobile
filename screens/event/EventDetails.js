@@ -19,32 +19,26 @@ const EventDetails = () => {
         bottomSheetRef.current.close();
     }, [])
     return (
-        <>
-            <SafeAreaView style={{ backgroundColor: COLORS.white, flex: 1, padding: 24 }}>
-                <View style={styles.container}>
-                    <View style={styles.buttonsContainer}>
-                        <BackLeft />
-                        <View style={styles.buttonsRightHeader}>
-                            <Upload handlePress={openHandler} />
-                            <LikesHeart handlePress={closeHandler} />
-                        </View>
+        <SafeAreaView style={{ backgroundColor: COLORS.white, flex: 1, padding: 24 }}>
+            <View style={styles.container}>
+                <View style={styles.buttonsContainer}>
+                    <BackLeft />
+                    <View style={styles.buttonsRightHeader}>
+                        <Upload handlePress={openHandler} />
+                        <LikesHeart handlePress={closeHandler} />
                     </View>
                 </View>
-                <ScrollView showsVerticalScrollIndicator={false}>
-                    <EventImage />
-                    <Details />
-                    <EventOrganizer />
-                    <EventItenary />
-                    <EventLocation />
-                </ScrollView>
-                <Footer />
-            </SafeAreaView>
-            <ShareEvent activeHeight={height * 0.5} ref={bottomSheetRef} handlePress={closeHandler} />
-            {/* {
-                toggleBottomSheet && <ShareEvent activeHeight={height * 0.5} ref={bottomSheetRef} />
-            } */}
-        </>
-
+            </View>
+            <ScrollView showsVerticalScrollIndicator={false}>
+                <EventImage />
+                <Details />
+                <EventOrganizer />
+                <EventItenary />
+                <EventLocation />
+            </ScrollView>
+            <Footer />
+            <ShareEvent activeHeight={height * 0.9} ref={bottomSheetRef} handlePress={closeHandler} />
+        </SafeAreaView>
     );
 }
 

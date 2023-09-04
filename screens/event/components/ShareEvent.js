@@ -2,6 +2,8 @@ import { useCallback, forwardRef, useImperativeHandle } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, useWindowDimensions, TouchableWithoutFeedback } from 'react-native';
 import { icons, COLORS, FONTS } from '../../../constants';
 import Animated, { useSharedValue, useAnimatedStyle, withSpring, interpolate, Extrapolate } from 'react-native-reanimated';
+import EventShareStrip from './EventShareStrip';
+import Socials from './Socials';
 
 const ShareEvent = forwardRef(({ activeHeight }, ref) => {
     const height = useWindowDimensions().height;
@@ -46,17 +48,6 @@ const ShareEvent = forwardRef(({ activeHeight }, ref) => {
         expand, close
     }), [expand, close])
     return (
-        // <Animated.View style={[styles.container, animationStyle]}>
-        //     <View style={styles.section}>
-        //         <View style={styles.divider}></View>
-        //         <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginTop: 16 }}>
-        //             <Text style={styles.sectionTitle}>Share this event</Text>
-        //             <TouchableOpacity>
-        //                 <icons.CloseIcon />
-        //             </TouchableOpacity>
-        //         </View>
-        //     </View>
-        // </Animated.View>
         <>
             <TouchableWithoutFeedback onPress={() => { close() }}>
                 <Animated.View style={[styles.backDrop, backDropAnimation]} />
@@ -65,7 +56,19 @@ const ShareEvent = forwardRef(({ activeHeight }, ref) => {
                 <View style={styles.lineContainer}>
                     <View style={styles.line} />
                 </View>
-
+                <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginTop: 16 }}>
+                    <Text style={styles.sectionTitle}>Share this event</Text>
+                    <TouchableOpacity onPress={() => { close() }}>
+                        <icons.CloseIcon />
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.shareStrip}>
+                    <EventShareStrip />
+                </View>
+                <View style={styles.dividerContainer}>
+                    <View style={styles.dividerLine} />
+                </View>
+                <Socials/>
             </Animated.View>
         </>
     )
@@ -76,6 +79,7 @@ export default ShareEvent;
 const styles = StyleSheet.create({
     container: {
         position: 'absolute',
+        overflow: 'hidden',
         top: 0,
         left: 0,
         right: 0,
@@ -85,6 +89,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderTopLeftRadius: 40,
         borderTopRightRadius: 40,
+        paddingHorizontal: 24,
         //flexDirection: 'column-reverse'
     },
     lineContainer: {
@@ -129,11 +134,24 @@ const styles = StyleSheet.create({
         color: COLORS.grayBase
     },
     backDrop: {
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        backgroundColor: 'black',
         position: 'absolute',
         top: 0,
         left: 0,
         right: 0,
         bottom: 0,
-    }
+    },
+    shareStrip: {
+        marginTop: 24
+    },
+    dividerLine: {
+        borderWidth: 1,
+        backgroundColor: COLORS.gray100,
+        // marginVertical:33
+    },
+    dividerContainer: {
+        marginVertical: 33,
+        alignItems: 'center',
+        backgroundColor: COLORS.gray100,
+    },
 })
