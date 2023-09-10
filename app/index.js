@@ -7,8 +7,8 @@ import { Provider } from "react-redux";
 import { Signin, Signup, ForgotPassword, ResetPassword, ResetSuccess, Verify } from "../screens/authentication";
 import { Location, FollowOrganiser, PickInterest } from "../screens/onboarding";
 import { GetStarted } from "../screens/welcome";
-import { EventDetails } from "../screens/event";
-import { eventDetailsScreenOptions } from "../components/header/screenOptions";
+import { EventDetails, GetTicket } from "../screens/event";
+import { eventDetailsScreenOptions, ticketDetails } from "../components/header/screenOptions";
 import Tabs from "../screens/tabs/Tabs";
 
 const Stack = createNativeStackNavigator();
@@ -135,17 +135,27 @@ export default function Page() {
     //   </Stack.Group>
     // </Stack.Navigator>
 
-    
-      <Stack.Navigator>
-        <Stack.Group>
-          <Stack.Screen
-            name="Event Details"
-            component={EventDetails}
-            options={{headerShown: false}}
-          />
-        </Stack.Group>
-      </Stack.Navigator>
-    
+
+    // <Stack.Navigator>
+    //   <Stack.Group>
+    //     <Stack.Screen
+    //       name="Event Details"
+    //       component={EventDetails}
+    //       options={{headerShown: false}}
+    //     />
+    //   </Stack.Group>
+    // </Stack.Navigator>
+
+    <Stack.Navigator>
+      <Stack.Group>
+        <Stack.Screen
+          name="Get a Ticket"
+          component={GetTicket}
+          options={ticketDetails}
+        />
+      </Stack.Group>
+    </Stack.Navigator>
+
 
   );
 }

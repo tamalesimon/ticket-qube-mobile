@@ -2,15 +2,15 @@ import { Text, TouchableOpacity, StyleSheet, View } from "react-native";
 import { COLORS, FONTS } from "../../../constants";
 import GenericButton from "../../../components/buttons/genericButton";
 
-const Footer = () => {
+const Footer = ({ info, spotInfo, label }) => {
     return (
         <View style={styles.wrapper}>
             <View style={styles.container}>
                 <View>
-                    <Text style={styles.amount}>UGX 75k - 2mil</Text>
-                    <Text style={styles.spots}>100 Spots left</Text>
+                    <Text style={styles.amount}>{info}</Text>
+                    <Text style={styles.spots}>{spotInfo}</Text>
                 </View>
-                <GenericButton bgColor={"primaryBase"} fontColor={"white"} label={"Get a Ticket"} />
+                <GenericButton bgColor={"primaryBase"} fontColor={"white"} label={label} />
             </View>
         </View>
     )
