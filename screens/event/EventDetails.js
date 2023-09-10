@@ -37,7 +37,7 @@ const EventDetails = () => {
                 <EventLocation />
             </ScrollView>
             <Footer />
-            <ShareEvent activeHeight={height * 0.9} ref={bottomSheetRef} handlePress={closeHandler} />
+            <ShareEvent activeHeight={height * 0.45} ref={bottomSheetRef} handlePress={closeHandler} />
         </SafeAreaView>
     );
 }

@@ -30,7 +30,12 @@ import CalendarAddIcon from "../assets/svgIcons/CalendarAddIcon"
 import UploadIcon from "../assets/svgIcons/UploadIcon";
 import LikeIcon from "../assets/svgIcons/LikeIcon";
 import BadgeVerified from "../assets/svgIcons/BadgeVerifiedIcon";
-import LinkIcon from "../assets/svgIcons/linIcon"
+import LinkIcon from "../assets/svgIcons/linIcon";
+import CheckCircle from "../assets/svgIcons/CheckCircle";
+import CheckCircleSelected from "../assets/svgIcons/CheckCircleSelected";
+import PlusIcon from "../assets/svgIcons/PlusIcon";
+import MinusIcon from "../assets/svgIcons/MinusIcon";
+import CheveronRightIcon from "../assets/svgIcons/CheronRightIcon"
 
 
 export default {
@@ -66,5 +71,10 @@ export default {
     UploadIcon,
     LikeIcon,
     BadgeVerified,
-    LinkIcon
+    LinkIcon,
+    CheckCircle,
+    CheckCircleSelected,
+    PlusIcon,
+    MinusIcon,
+    CheveronRightIcon
 }

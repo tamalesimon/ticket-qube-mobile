@@ -12,7 +12,7 @@ import LikesHeart from '../../screens/event/components/LikesHeart'
 import Upload from '../../screens/event/components/Upload'
 
 export const screenOptions = {
-  headerShown: false,
+  // headerShown: false,
   headerStyle: {
     backgroundColor: COLORS.white,
     elevation: 0,
@@ -148,18 +148,14 @@ export const profileScreenOptions = {
   headerTitleAlign: 'center',
 }
 
-
-
 export const eventDetailsScreenOptions = {
   ...screenOptions,
-  
   headerLeft: () => (
     <View style={styles.headerButtonContainer}>
       <BackLeft />
     </View>
   ),
   headerRight: () => {
-    
     const dispatch = useDispatch();
     return (
       <View style={styles.headerButtonContainer}>
@@ -172,9 +168,28 @@ export const eventDetailsScreenOptions = {
   },
   headerTitle: '',
   headerTitleAlign: 'center',
-  headers: {
-    headerShown: false,
-  }
+}
+
+export const ticketDetails = {
+  headerStyle: {
+    backgroundColor: COLORS.gray50,
+    elevation: 0,
+    borderBottomWidth: 0,
+  },
+  headerShadowVisible: false,
+  headerTitleStyle: {
+    fontFamily: FONTS.NotoSansJPBold,
+    // fontWeight: '700',
+    lineHeight: 24,
+    // backgroundColor: COLORS.gray500,
+    color: COLORS.grayBase
+  },
+  headerLeft: () => (
+    <View style={styles.headerButtonContainer}>
+      <BackLeft />
+    </View>
+  ),
+  headerTitleAlign: 'center',
 }
 
 const styles = StyleSheet.create({
