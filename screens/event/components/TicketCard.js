@@ -1,14 +1,34 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity, Pressable } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import { COLORS, FONTS, icons } from '../../../constants';
 
 const TicketCard = () => {
+  const [isClicked, setIsClicked] = useState(false);
+  const [count, setCount] = useState(0);
+
+  const handleClick = () => {
+    setIsClicked(!isClicked);
+  }
+  const handleDecrement = () => {
+    if (isClicked && count > 0) {
+      setCount(count - 1)
+    }
+  }
+  const handleIncrement = () => {
+    if (isClicked && count < 10) {
+      setCount(count + 1)
+    }
+  }
+  const clicked = { backgroundColor: COLORS.grayBase, color: COLORS.white }
+  const borderClicked = { borderColor: COLORS.grayBase }
+  const notClicked = { backgroundColor: COLORS.gray50 }
+
   return (
-    <View style={styles.cardContainer}>
-      <TouchableOpacity>
-        <View style={styles.cardHeader}>
-          <Text style={styles.cardTitle}>Premium price</Text>
-          <icons.CheckCircle />
+    <View style={[styles.cardContainer, isClicked ? borderClicked : '']}>
+      <TouchableOpacity onPress={handleClick}>
+        <View style={[styles.cardHeader, isClicked ? clicked : notClicked]}>
+          <Text style={[styles.cardTitle, isClicked ? clicked : '']}>Premium price</Text>
+          {isClicked ? <icons.CheckCircleSelected /> : <icons.CheckCircle />}
         </View>
       </TouchableOpacity>
       <View style={styles.cardDetails}>
@@ -31,11 +51,11 @@ const TicketCard = () => {
             <Text style={styles.showBenefits}>Show benefits</Text>
           </Pressable>
           <View style={styles.counterContainer}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={handleDecrement}>
               <icons.MinusIcon />
             </TouchableOpacity>
-            <Text>1</Text>
-            <TouchableOpacity>
+            <Text>{count}</Text>
+            <TouchableOpacity onPress={handleIncrement}>
               <icons.PlusIcon />
             </TouchableOpacity>
           </View>
