@@ -7,8 +7,8 @@ import { Provider } from "react-redux";
 import { Signin, Signup, ForgotPassword, ResetPassword, ResetSuccess, Verify } from "../screens/authentication";
 import { Location, FollowOrganiser, PickInterest } from "../screens/onboarding";
 import { GetStarted } from "../screens/welcome";
-import { EventDetails, GetTicket } from "../screens/event";
-import { eventDetailsScreenOptions, ticketDetails } from "../components/header/screenOptions";
+import { EventDetails, GetTicket, SelectPayment, DetailsOrder, ContactInfo } from "../screens/event";
+import { eventDetailsScreenOptions, genericScreenOptions, WhiteBGScreenOptions, SelectPaymentsScreenOptions } from "../components/header/screenOptions";
 import Tabs from "../screens/tabs/Tabs";
 
 const Stack = createNativeStackNavigator();
@@ -146,12 +146,42 @@ export default function Page() {
     //   </Stack.Group>
     // </Stack.Navigator>
 
+    // <Stack.Navigator>
+    //   <Stack.Group>
+    //     <Stack.Screen
+    //       name="Get a Ticket"
+    //       component={GetTicket}
+    //       options={genericScreenOptions}
+    //     />
+    //   </Stack.Group>
+    // </Stack.Navigator>
+
+    // <Stack.Navigator>
+    //   <Stack.Group>
+    //     <Stack.Screen
+    //       name="Order Details"
+    //       component={DetailsOrder}
+    //       options={WhiteBGScreenOptions}
+    //     />
+    //   </Stack.Group>
+    // </Stack.Navigator>
+
+    // <Stack.Navigator>
+    //   <Stack.Group>
+    //     <Stack.Screen
+    //       name="Contact Details"
+    //       component={ContactInfo}
+    //       options={WhiteBGScreenOptions}
+    //     />
+    //   </Stack.Group>
+    // </Stack.Navigator>
+
     <Stack.Navigator>
       <Stack.Group>
         <Stack.Screen
-          name="Get a Ticket"
-          component={GetTicket}
-          options={ticketDetails}
+          name="Select Payment"
+          component={SelectPayment}
+          options={SelectPaymentsScreenOptions}
         />
       </Stack.Group>
     </Stack.Navigator>

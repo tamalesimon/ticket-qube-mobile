@@ -4,7 +4,7 @@ import { icons } from "../../../constants"
 export default function Upload({handlePress}) {
     return (
         <View>
-            <TouchableOpacity style={styles.dots} onPress={() => {handlePress();}}>
+            <TouchableOpacity style={styles.dots} onPress={() => {handlePress()}}>
                 <icons.UploadIcon />
             </TouchableOpacity>
         </View>

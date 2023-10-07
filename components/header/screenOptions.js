@@ -10,6 +10,7 @@ import BackLeft from './explore/BackLeft'
 import VerticalDots from './VerticalDotsIcon'
 import LikesHeart from '../../screens/event/components/LikesHeart'
 import Upload from '../../screens/event/components/Upload'
+import CircleQuestion from '../../screens/event/components/CircleQuestion'
 
 export const screenOptions = {
   // headerShown: false,
@@ -170,7 +171,7 @@ export const eventDetailsScreenOptions = {
   headerTitleAlign: 'center',
 }
 
-export const ticketDetails = {
+export const genericScreenOptions = {
   headerStyle: {
     backgroundColor: COLORS.gray50,
     elevation: 0,
@@ -187,6 +188,55 @@ export const ticketDetails = {
   headerLeft: () => (
     <View style={styles.headerButtonContainer}>
       <BackLeft />
+    </View>
+  ),
+  headerTitleAlign: 'center',
+}
+
+export const WhiteBGScreenOptions = {
+  headerStyle: {
+    backgroundColor: COLORS.white,
+    elevation: 0,
+    borderBottomWidth: 0,
+  },
+  headerShadowVisible: false,
+  headerTitleStyle: {
+    fontFamily: FONTS.NotoSansJPBold,
+    // fontWeight: '700',
+    lineHeight: 24,
+    // backgroundColor: COLORS.gray500,
+    color: COLORS.grayBase
+  },
+  headerLeft: () => (
+    <View style={styles.headerButtonContainer}>
+      <BackLeft />
+    </View>
+  ),
+  headerTitleAlign: 'center',
+}
+
+export const SelectPaymentsScreenOptions = {
+  headerStyle: {
+    backgroundColor: COLORS.white,
+    elevation: 0,
+    borderBottomWidth: 0,
+  },
+  headerShadowVisible: false,
+  headerTitleStyle: {
+    fontFamily: FONTS.NotoSansJPBold,
+    // fontWeight: '700',
+    lineHeight: 24,
+    // backgroundColor: COLORS.gray500,
+    color: COLORS.grayBase
+  },
+  headerLeft: () => (
+    <View style={styles.headerButtonContainer}>
+      <BackLeft />
+    </View>
+  ),
+  headerRight: () => (
+    <View style={styles.headerButtonContainer}>
+      <CircleQuestion />
     </View>
   ),
   headerTitleAlign: 'center',
