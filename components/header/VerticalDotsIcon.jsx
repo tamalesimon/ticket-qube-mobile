@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
-import { icons, COLORS, FONTS } from '../../constants';
+import { ICONS, COLORS, FONTS } from '../../constants';
 
 export default function VerticalDots() {
   return (
     <View>
       <TouchableOpacity style={styles.dots}>
-        <icons.VerticalDotsIcon />
+        <ICONS.VerticalDotsIcon />
       </TouchableOpacity>
     </View>
   );

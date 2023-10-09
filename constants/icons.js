@@ -35,7 +35,22 @@ import CheckCircle from "../assets/svgIcons/CheckCircle";
 import CheckCircleSelected from "../assets/svgIcons/CheckCircleSelected";
 import PlusIcon from "../assets/svgIcons/PlusIcon";
 import MinusIcon from "../assets/svgIcons/MinusIcon";
-import CheveronRightIcon from "../assets/svgIcons/CheronRightIcon"
+import CheveronRightIcon from "../assets/svgIcons/CheronRightIcon";
+import CheckedCircleOrange from "../assets/svgIcons/CheckedCircleOrange";
+import PhoneIcon from "../assets/svgIcons/PhoneIcon";
+import CircleQuestion from "../assets/svgIcons/CircleQuestion";
+import ArrowNarrowRight from "../assets/svgIcons/ArrowNarrowRight"
+import SelectCircle from "../assets/svgIcons/SelectCircle"
+import SelectCircleSelected from "../assets/svgIcons/SelectCircleSelected";
+import ApplePay from "../assets/svgIcons/ApplePay"
+import PayPal from "../assets/svgIcons/PayPal"
+import Payoneer from "../assets/svgIcons/Payooner";
+import MasterCardVisa from "../assets/svgIcons/MasterCardVisa";
+import MTN from "../assets/svgIcons/MtnIcon";
+import Airtel from "../assets/svgIcons/AirtelIcon";
+import CalendarDetails from "../assets/svgIcons/CalendarDetails";
+import ClockDetailsTime from "../assets/svgIcons/ClockDetailsTime";
+import CheronRightIcon from "../assets/svgIcons/CheronRightIcon"
 
 
 export default {
@@ -76,5 +91,20 @@ export default {
     CheckCircleSelected,
     PlusIcon,
     MinusIcon,
-    CheveronRightIcon
+    CheveronRightIcon,
+    CheckedCircleOrange,
+    PhoneIcon,
+    CircleQuestion,
+    ArrowNarrowRight,
+    SelectCircle,
+    SelectCircleSelected,
+    ApplePay,
+    PayPal,
+    Payoneer,
+    MasterCardVisa,
+    MTN,
+    Airtel,
+    CalendarDetails,
+    ClockDetailsTime,
+    CheronRightIcon
 }

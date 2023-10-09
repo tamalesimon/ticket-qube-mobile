@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { useDispatch, useSelector } from 'react-redux'
 import { View, Text, TouchableOpacity, SafeAreaView, StyleSheet } from 'react-native';
-import { COLORS, FONTS, FONTSIZE, icons } from '../../constants';
+import { COLORS, FONTS, FONTSIZE, ICONS } from '../../constants';
 import { createAccount } from "../../redux/authSlice";
 import { useFormValidation } from "../../hooks/useFormValidation";
 
@@ -75,7 +75,7 @@ const Signup = ({ navigation }) => {
                         <InputField
                             placeholder="Your name"
                             placeholderTextColor={COLORS.gray400}
-                            icon={icons.UserIcon}
+                            icon={ICONS.UserIcon}
                             inputType={'names'}
                             value={nameInput}
                             onChangeText={handleInputText}
@@ -85,7 +85,7 @@ const Signup = ({ navigation }) => {
                         <InputField
                             placeholder="Email"
                             placeholderTextColor={COLORS.gray400}
-                            icon={icons.MailIcon}
+                            icon={ICONS.MailIcon}
                             inputType={'email'}
                             value={email}
                             onChangeText={(text) => setFormData(prevState => ({ ...prevState, email: text }))}
@@ -95,7 +95,7 @@ const Signup = ({ navigation }) => {
                         <InputField
                             placeholder="Password"
                             placeholderTextColor={COLORS.gray400}
-                            icon={icons.LockIcon}
+                            icon={ICONS.LockIcon}
                             inputType={'password'}
                             value={password}
                             onChangeText={(text) => setFormData(prevState => ({ ...prevState, password: text }))}
@@ -106,8 +106,8 @@ const Signup = ({ navigation }) => {
                             <View style={{ gap: 12 }}>
                                 <GenericButton bgColor="primaryBase" fontColor={"white"} label={"Sign Up"} onPress={handleSignup} />
                                 <Text style={{ fontFamily: FONTS.NotoSansJPRegular, color: COLORS.gray400, fontWeight: 400, fontSize: FONTSIZE.medium, textAlign: "center", marginHorizontal: 24 }}>Or</Text>
-                                <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="primary900" label={"Sign Up with Google"} icon={icons.GoogleIcon} />
-                                <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="primary900" label={"Sign Up with Apple"} icon={icons.AppleIcon} />
+                                <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="primary900" label={"Sign Up with Google"} icon={ICONS.GoogleIcon} />
+                                <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="primary900" label={"Sign Up with Apple"} icon={ICONS.AppleIcon} />
                             </View>
                             <View style={{ alignItems: "center" }}>
                                 <AcceptTerms />

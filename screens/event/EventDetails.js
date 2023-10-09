@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef } from "react";
 import { SafeAreaView, Text, useWindowDimensions, View, StyleSheet } from "react-native";
-import { COLORS, icons } from "../../constants";
+import { COLORS, ICONS } from "../../constants";
 import { useSelector } from "react-redux";
 import { EventImage, Details, EventOrganizer, Footer, EventItenary, EventLocation, ShareEvent } from "./components";
 import { ScrollView } from "react-native-gesture-handler";

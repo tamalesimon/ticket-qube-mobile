@@ -1,6 +1,6 @@
 import { useCallback, forwardRef, useImperativeHandle } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, useWindowDimensions, TouchableWithoutFeedback } from 'react-native';
-import { icons, COLORS, FONTS } from '../../../constants';
+import { ICONS, COLORS, FONTS } from '../../../constants';
 import Animated, { useSharedValue, useAnimatedStyle, withSpring, interpolate, Extrapolate } from 'react-native-reanimated';
 import EventShareStrip from './EventShareStrip';
 import Socials from './Socials';
@@ -59,7 +59,7 @@ const ShareEvent = forwardRef(({ activeHeight }, ref) => {
                 <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginTop: 16 }}>
                     <Text style={styles.sectionTitle}>Share this event</Text>
                     <TouchableOpacity onPress={() => { close() }}>
-                        <icons.CloseIcon />
+                        <ICONS.CloseIcon />
                     </TouchableOpacity>
                 </View>
                 <View style={styles.shareStrip}>
@@ -68,7 +68,7 @@ const ShareEvent = forwardRef(({ activeHeight }, ref) => {
                 <View style={styles.dividerContainer}>
                     <View style={styles.dividerLine} />
                 </View>
-                <Socials/>
+                <Socials />
             </Animated.View>
         </>
     )

@@ -15,19 +15,19 @@ export default function AcceptTerms() {
 }
 
 const styles = StyleSheet.create({
-  container:{
+  container: {
     width: 305,
     marginTop: 50,
     alignItems: 'center',
   },
   textBody: {
-          textAlign: "center",
-          fontSize: FONTSIZE.xsmall,
-          color: COLORS.gray400,
-          fontFamily: FONTS.NotoSansJPRegular,
+    textAlign: "center",
+    fontSize: FONTSIZE.xsmall,
+    color: COLORS.gray400,
+    fontFamily: FONTS.NotoSansJPRegular,
   },
   textTitle: {
-      fontWeight:500,
-      color: "black",
+    fontWeight: 500,
+    color: "black",
   }
 })

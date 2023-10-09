@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import { COLORS, FONTS, icons } from '../../../constants';
+import { COLORS, FONTS, ICONS } from '../../../constants';
 import GenericButton from '../../../components/buttons/genericButton';
 
 export default function EventShareStrip() {
@@ -14,7 +14,7 @@ export default function EventShareStrip() {
                         <Text style={styles.eventLink}>https://qube.event...</Text>
                     </View>
                     <TouchableOpacity style={styles.copyLinkContainer}>
-                        <icons.LinkIcon />
+                        <ICONS.LinkIcon />
                         <Text style={styles.copyLink}>Copy link</Text>
                     </TouchableOpacity>
                 </View>
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
         color: COLORS.primaryBase,
         lineHeight: 18,
     },
-    
+
     line: {
         width: 50,
         height: 4,

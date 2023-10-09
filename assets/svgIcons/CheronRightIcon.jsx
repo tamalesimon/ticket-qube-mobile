@@ -1,10 +1,10 @@
 import * as React from "react"
 import Svg, { Path } from "react-native-svg"
-const CheveronRightIcon = (props) => (
+const CheronRightIcon = (props) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
-    width={14}
-    height={14}
+    width={6}
+    height={11}
     fill="none"
     {...props}
   >
@@ -13,8 +13,8 @@ const CheveronRightIcon = (props) => (
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={1.5}
-      d="M5.25 3.5 8.75 7l-3.5 3.5"
+      d="m1 1.5 4 4-4 4"
     />
   </Svg>
 )
-export default CheveronRightIcon
+export default CheronRightIcon

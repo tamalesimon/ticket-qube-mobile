@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, SafeAreaView, ImageBackground } from 'react-native';
 import { useRouter } from 'expo-router'
-import { COLORS, FONTS, FONTSIZE, images, icons } from '../../constants';
+import { COLORS, FONTS, FONTSIZE, images, ICONS } from '../../constants';
 const GenericButton = React.lazy(() => import('../../components/buttons/genericButton'))
 
 import globalStyles from '../../styles/globalStyles';
@@ -23,8 +23,8 @@ export default function GetStarted({ navigation }) {
             <View>
               <View style={{ gap: 12, }}>
                 <GenericButton bgColor="primaryBase" fontColor={"white"} label={"Continue with Email"} onPress={() => navigation.navigate('Signin')} />
-                <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="white" label={"Continue with Google"} icon={icons.GoogleIcon} />
-                <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="white" label={"Continue with Apple"} icon={icons.AppleIcon} />
+                <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="white" label={"Continue with Google"} icon={ICONS.GoogleIcon} />
+                <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="white" label={"Continue with Apple"} icon={ICONS.AppleIcon} />
               </View>
             </View>
             <View style={{ alignItems: 'center' }}>

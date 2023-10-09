@@ -5,6 +5,9 @@ import EventItenary from "./EventItenary";
 import EventLocation from "./EventLocation";
 import Footer from "./Footer";
 import ShareEvent from "./ShareEvent";
+import PaymentMethod from "./PaymentMethod";
+import OrderSummary from "./OrderSummary";
+import EventSummaryOrderDetail from "./EventSummaryOrderDetail";
 
 export {
     EventImage,
@@ -13,5 +16,8 @@ export {
     EventItenary,
     EventLocation,
     ShareEvent,
-    Footer
+    Footer,
+    PaymentMethod,
+    OrderSummary,
+    EventSummaryOrderDetail
 }

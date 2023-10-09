@@ -1,6 +1,6 @@
 import { View, Image, Text, StyleSheet, TouchableOpacity } from "react-native";
 import Xenson from "../../../assets/images/xenson_400x400.jpg"
-import { COLORS, FONTS, icons } from "../../../constants";
+import { COLORS, FONTS, ICONS } from "../../../constants";
 import GenericButton from "../../../components/buttons/genericButton";
 
 const EventOrganizer = () => {
@@ -14,12 +14,12 @@ const EventOrganizer = () => {
                     <View>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Text style={styles.organizerName}>Xenson Creatives</Text>
-                            <icons.BadgeVerified />
+                            <ICONS.BadgeVerified />
                         </View>
                         <Text style={styles.genre}>Art & Crafts</Text>
                     </View>
                 </View>
-                <GenericButton borderWidth={1} borderColor={'primaryBase'} fontColor={'primaryBase'} label={'Follow'}/>
+                <GenericButton borderWidth={1} borderColor={'primaryBase'} fontColor={'primaryBase'} label={'Follow'} />
             </View>
         </View>
     )

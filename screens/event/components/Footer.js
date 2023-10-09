@@ -2,15 +2,26 @@ import { Text, TouchableOpacity, StyleSheet, View } from "react-native";
 import { COLORS, FONTS } from "../../../constants";
 import GenericButton from "../../../components/buttons/genericButton";
 
-const Footer = ({ info, spotInfo, label }) => {
+const Footer = ({ info, spotInfo, label, handleClickButton }) => {
+    const shouldCenterButton = !info && !spotInfo;
     return (
         <View style={styles.wrapper}>
             <View style={styles.container}>
                 <View>
-                    <Text style={styles.amount}>{info}</Text>
-                    <Text style={styles.spots}>{spotInfo}</Text>
+                    {info && <Text style={styles.amount}>{info}</Text>}
+                    {spotInfo && <Text style={styles.spots}>{spotInfo}</Text>}
                 </View>
-                <GenericButton bgColor={"primaryBase"} fontColor={"white"} label={label} />
+                <View style={{
+                    alignItems: shouldCenterButton ? 'center' : 'flex-start',
+                    width: shouldCenterButton ? '100%' : undefined,
+                }}>
+                    <GenericButton
+                        bgColor={"primaryBase"}
+                        fontColor={"white"}
+                        label={label}
+                        shouldCenterButton={shouldCenterButton}
+                        onPress={handleClickButton} />
+                </View>
             </View>
         </View>
     )
@@ -23,7 +34,7 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         // alignItems: "center",
         // justifyContent: "center",
-        height: 72,
+        height: 92,
         position: "absolute",
         bottom: 0,
         left: 0,

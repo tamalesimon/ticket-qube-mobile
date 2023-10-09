@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import { icons, FONTS, COLORS } from '../../constants'
+import { ICONS, FONTS, COLORS } from '../../constants'
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleSheet } from "../../redux/layoutSlice"
 import HeaderLeft from './home/HeaderLeft'
@@ -10,6 +10,7 @@ import BackLeft from './explore/BackLeft'
 import VerticalDots from './VerticalDotsIcon'
 import LikesHeart from '../../screens/event/components/LikesHeart'
 import Upload from '../../screens/event/components/Upload'
+import CircleQuestion from '../../screens/event/components/CircleQuestion'
 
 export const screenOptions = {
   // headerShown: false,
@@ -38,7 +39,7 @@ export const homeScreenOptions = {
   headerTitle: '',
   tabBarIcon: ({ focused }) => (
     <View style={styles.tabBarIconContainer}>
-      {focused ? <icons.HomeIconActive /> : <icons.HomeIcon />}
+      {focused ? <ICONS.HomeIconActive /> : <ICONS.HomeIcon />}
     </View>
   ),
   headerLeft: () => (
@@ -61,7 +62,7 @@ export const exploreScreenOptions = {
   },
   tabBarIcon: ({ focused }) => (
     <View style={styles.tabBarIconContainer}>
-      {focused ? <icons.SearchIconActive /> : <icons.SearchIcon />}
+      {focused ? <ICONS.SearchIconActive /> : <ICONS.SearchIcon />}
     </View>
   ),
   headerLeft: () => (
@@ -86,7 +87,7 @@ export const favoritesScreenOptions = {
   },
   tabBarIcon: ({ focused }) => (
     <View style={styles.tabBarIconContainer}>
-      {focused ? <icons.HeartIconActive /> : <icons.HeartIcon />}
+      {focused ? <ICONS.HeartIconActive /> : <ICONS.HeartIcon />}
     </View>
   ),
   headerLeft: () => (
@@ -106,7 +107,7 @@ export const ticketsScreenOptions = {
   },
   tabBarIcon: ({ focused }) => (
     <View style={styles.tabBarIconContainer}>
-      {focused ? <icons.TicketIconActive /> : <icons.TicketIcon />}
+      {focused ? <ICONS.TicketIconActive /> : <ICONS.TicketIcon />}
     </View>
   ),
   headerLeft: () => (
@@ -131,7 +132,7 @@ export const profileScreenOptions = {
   },
   tabBarIcon: ({ focused }) => (
     <View style={styles.tabBarIconContainer}>
-      {focused ? <icons.ProfileIconActive /> : <icons.ProfileIconCircle />}
+      {focused ? <ICONS.ProfileIconActive /> : <ICONS.ProfileIconCircle />}
     </View>
   ),
   headerLeft: () => (
@@ -170,7 +171,7 @@ export const eventDetailsScreenOptions = {
   headerTitleAlign: 'center',
 }
 
-export const ticketDetails = {
+export const genericScreenOptions = {
   headerStyle: {
     backgroundColor: COLORS.gray50,
     elevation: 0,
@@ -187,6 +188,55 @@ export const ticketDetails = {
   headerLeft: () => (
     <View style={styles.headerButtonContainer}>
       <BackLeft />
+    </View>
+  ),
+  headerTitleAlign: 'center',
+}
+
+export const WhiteBGScreenOptions = {
+  headerStyle: {
+    backgroundColor: COLORS.white,
+    elevation: 0,
+    borderBottomWidth: 0,
+  },
+  headerShadowVisible: false,
+  headerTitleStyle: {
+    fontFamily: FONTS.NotoSansJPBold,
+    // fontWeight: '700',
+    lineHeight: 24,
+    // backgroundColor: COLORS.gray500,
+    color: COLORS.grayBase
+  },
+  headerLeft: () => (
+    <View style={styles.headerButtonContainer}>
+      <BackLeft />
+    </View>
+  ),
+  headerTitleAlign: 'center',
+}
+
+export const SelectPaymentsScreenOptions = {
+  headerStyle: {
+    backgroundColor: COLORS.white,
+    elevation: 0,
+    borderBottomWidth: 0,
+  },
+  headerShadowVisible: false,
+  headerTitleStyle: {
+    fontFamily: FONTS.NotoSansJPBold,
+    // fontWeight: '700',
+    lineHeight: 24,
+    // backgroundColor: COLORS.gray500,
+    color: COLORS.grayBase
+  },
+  headerLeft: () => (
+    <View style={styles.headerButtonContainer}>
+      <BackLeft />
+    </View>
+  ),
+  headerRight: () => (
+    <View style={styles.headerButtonContainer}>
+      <CircleQuestion />
     </View>
   ),
   headerTitleAlign: 'center',
