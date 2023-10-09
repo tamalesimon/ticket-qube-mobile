@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity, Pressable } from 'react-native';
 import React, { useState } from 'react';
-import { COLORS, FONTS, icons } from '../../../constants';
+import { COLORS, FONTS, ICONS } from '../../../constants';
 
 const TicketCard = () => {
   const [isClicked, setIsClicked] = useState(false);
@@ -28,7 +28,7 @@ const TicketCard = () => {
       <TouchableOpacity onPress={handleClick}>
         <View style={[styles.cardHeader, isClicked ? clicked : notClicked]}>
           <Text style={[styles.cardTitle, isClicked ? clicked : '']}>Premium price</Text>
-          {isClicked ? <icons.CheckCircleSelected /> : <icons.CheckCircle />}
+          {isClicked ? <ICONS.CheckCircleSelected /> : <ICONS.CheckCircle />}
         </View>
       </TouchableOpacity>
       <View style={styles.cardDetails}>
@@ -47,16 +47,16 @@ const TicketCard = () => {
         </View>
         <View style={styles.showBenefitsCounter}>
           <Pressable style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
-            <icons.CheveronRightIcon />
+            <ICONS.CheveronRightIcon />
             <Text style={styles.showBenefits}>Show benefits</Text>
           </Pressable>
           <View style={styles.counterContainer}>
             <TouchableOpacity onPress={handleDecrement}>
-              <icons.MinusIcon />
+              <ICONS.MinusIcon />
             </TouchableOpacity>
             <Text>{count}</Text>
             <TouchableOpacity onPress={handleIncrement}>
-              <icons.PlusIcon />
+              <ICONS.PlusIcon />
             </TouchableOpacity>
           </View>
         </View>

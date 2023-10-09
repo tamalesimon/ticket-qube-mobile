@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, SafeAreaView, ScrollView, StyleSheet } from 'react-native';
-import { icons, COLORS, } from '../../constants';
+import { ICONS, COLORS, } from '../../constants';
 import InputField from '../../components/inputField/InputField';
 import Upcoming from './Upcoming';
 import Suggestions from './Suggestions';
@@ -17,7 +17,7 @@ export default function HomeTabs() {
           <InputField
             placeholder="Search for events"
             placeholderTextColor={COLORS.gray400}
-            icon={icons.SearchIcon}
+            icon={ICONS.SearchIcon}
             inputType={'text'}
           />
         </View>

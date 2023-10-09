@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
-import { FONTS, COLORS, icons } from '../../constants'
+import { FONTS, COLORS, ICONS } from '../../constants'
 
 export default function Categories() {
   const [selected, setSelected] = useState(1)
@@ -20,7 +20,7 @@ export default function Categories() {
     const isFirstChild = item.id === 1;
     return (
       <TouchableOpacity style={[styles.container, { backgroundColor }]} onPress={() => setSelected(item.id)}>
-        {isFirstChild && isSelected && <icons.FlashIcon />}
+        {isFirstChild && isSelected && <ICONS.FlashIcon />}
         <Text style={{ color: textColor, fontWeight: textWeight, paddingLeft: 4 }}>{item.title}</Text>
       </TouchableOpacity>
     )

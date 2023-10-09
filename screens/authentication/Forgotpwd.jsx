@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import { View, Text, Image, SafeAreaView, StyleSheet } from 'react-native';
-import { COLORS, FONTS, FONTSIZE, icons } from '../../constants';
+import { COLORS, FONTS, FONTSIZE, ICONS } from '../../constants';
 import { useSelector, useDispatch } from "react-redux";
 import { forgotPassword } from "../../redux/authSlice";
 import LoadingIndicator from "../../components/loaders/LoadingIndicator";
@@ -51,7 +51,7 @@ const ForgotPassword = ({ navigation }) => {
                         <InputField
                             placeholder="Email"
                             placeholderTextColor={COLORS.gray400}
-                            icon={icons.MailIcon}
+                            icon={ICONS.MailIcon}
                             inputType={'email'}
                             onChangeText={(text) => setFormData(prevState => ({ ...prevState, email: text }))}
                             setFormData={setFormData}

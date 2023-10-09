@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import { icons, FONTS, COLORS } from '../../constants'
+import { ICONS, FONTS, COLORS } from '../../constants'
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleSheet } from "../../redux/layoutSlice"
 import HeaderLeft from './home/HeaderLeft'
@@ -39,7 +39,7 @@ export const homeScreenOptions = {
   headerTitle: '',
   tabBarIcon: ({ focused }) => (
     <View style={styles.tabBarIconContainer}>
-      {focused ? <icons.HomeIconActive /> : <icons.HomeIcon />}
+      {focused ? <ICONS.HomeIconActive /> : <ICONS.HomeIcon />}
     </View>
   ),
   headerLeft: () => (
@@ -62,7 +62,7 @@ export const exploreScreenOptions = {
   },
   tabBarIcon: ({ focused }) => (
     <View style={styles.tabBarIconContainer}>
-      {focused ? <icons.SearchIconActive /> : <icons.SearchIcon />}
+      {focused ? <ICONS.SearchIconActive /> : <ICONS.SearchIcon />}
     </View>
   ),
   headerLeft: () => (
@@ -87,7 +87,7 @@ export const favoritesScreenOptions = {
   },
   tabBarIcon: ({ focused }) => (
     <View style={styles.tabBarIconContainer}>
-      {focused ? <icons.HeartIconActive /> : <icons.HeartIcon />}
+      {focused ? <ICONS.HeartIconActive /> : <ICONS.HeartIcon />}
     </View>
   ),
   headerLeft: () => (
@@ -107,7 +107,7 @@ export const ticketsScreenOptions = {
   },
   tabBarIcon: ({ focused }) => (
     <View style={styles.tabBarIconContainer}>
-      {focused ? <icons.TicketIconActive /> : <icons.TicketIcon />}
+      {focused ? <ICONS.TicketIconActive /> : <ICONS.TicketIcon />}
     </View>
   ),
   headerLeft: () => (
@@ -132,7 +132,7 @@ export const profileScreenOptions = {
   },
   tabBarIcon: ({ focused }) => (
     <View style={styles.tabBarIconContainer}>
-      {focused ? <icons.ProfileIconActive /> : <icons.ProfileIconCircle />}
+      {focused ? <ICONS.ProfileIconActive /> : <ICONS.ProfileIconCircle />}
     </View>
   ),
   headerLeft: () => (

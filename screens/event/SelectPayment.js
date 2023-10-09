@@ -1,37 +1,48 @@
 import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 import React, { useState } from 'react'
 import { Footer } from './components'
-import { COLORS, FONTS, FONTSIZE, icons } from '../../constants'
+import { COLORS, FONTS, FONTSIZE, ICONS } from '../../constants'
+
 
 const SelectPayment = () => {
   const [selectedPayment, setSelectedPayment] = useState(false)
-
-  // const handleSelected = () => {
-  //   setIsSelected(!isSelected)
-  // }
+  const navigation = useNavigation();
+  const handleSelectedPaymentOption = () => {
+    const selectedPaymentOption = paymentOptions.find(Option => Option.id === selectedPayment)
+    navigation.navigate('DetailsOrder', {selectedPaymentOption});
+  }
   const paymentOptions = [{
     id: 1,
     name: "Card",
     icon: "MasterCardVisa"
   }, {
     id: 2,
+    name: "MoMo",
+    icon: "MTN"
+  }, {
+    id: 3,
+    name: "Airtel",
+    icon: "Airtel"
+  }, {
+    id: 4,
     name: "Apple pay",
     icon: "ApplePay"
   }, {
-    id: 3,
+    id: 5,
     name: "PayPal",
     icon: "PayPal"
   }, {
-    id: 4,
-    name: "Payooneer",
-    icon: "Payooneer"
+    id: 6,
+    name: "Payoneer",
+    icon: "Payoneer"
   }]
   return (
     <SafeAreaView style={{ backgroundColor: "white", flex: 1, overflow: 'hidden', paddingHorizontal: 24 }}>
       <View>
         <TouchableOpacity style={styles.one_click_payment}>
           <Text style={styles.one_click_payment_text}>One click payment</Text>
-          <icons.ArrowNarrowRight />
+          <ICONS.ArrowNarrowRight />
         </TouchableOpacity>
         <View style={styles.divider}>
           <View style={styles.dividerLine} />
@@ -42,22 +53,23 @@ const SelectPayment = () => {
           paymentOptions.map((item) => {
             const handleSelected = () => setSelectedPayment(item.id);
             const isSelected = selectedPayment == item.id;
-            const IconComponent = icons[item.icon];
+            const IconComponent = ICONS[item.icon];
+
             return (
               <TouchableOpacity key={item.id} onPress={handleSelected}>
                 <View style={styles.other_payments}>
                   <View style={styles.other_payments_icon_text}>
-                    {isSelected ? <icons.SelectCircleSelected /> : <icons.SelectCircle />}
+                    {isSelected ? <ICONS.SelectCircleSelected /> : <ICONS.SelectCircle />}
                     <Text style={styles.other_payments_text}>{item.name}</Text>
                   </View>
-                  {/* <IconComponent /> */}
+                  <View><IconComponent /></View>
                 </View>
               </TouchableOpacity>
             )
           })
         }
       </View>
-      <Footer label={"Confirm"} />
+      <Footer label={"Confirm"} handleClickButton={handleSelectedPaymentOption} />
     </SafeAreaView>
   )
 }

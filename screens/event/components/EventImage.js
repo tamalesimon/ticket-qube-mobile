@@ -1,5 +1,5 @@
 import { ImageBackground, View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { icons, COLORS } from "../../../constants";
+import { ICONS, COLORS } from "../../../constants";
 import futuristic from "../../../assets/images/futurist.avif"
 
 const EventImage = () => {
@@ -13,7 +13,7 @@ const EventImage = () => {
                 <View style={{ flexDirection: 'column-reverse', height: '100%' }}>
                     <TouchableOpacity >
                         <View style={styles.videoButton}>
-                            <icons.VideoIcon />
+                            <ICONS.VideoIcon />
                             <View style={{ paddingLeft: 4 }}>
                                 <Text style={styles.textButton}>Watch Video</Text>
                             </View>

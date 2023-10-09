@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, SafeAreaView, StyleSheet } from 'react-native';
-import { COLORS, FONTS, FONTSIZE, images, icons } from '../../constants';
+import { COLORS, FONTS, FONTSIZE, images, ICONS } from '../../constants';
 import GenericButton from "../../components/buttons/genericButton";
 import AcceptTerms from "../../components/terms/AcceptTerms";
 import { useSelector, useDispatch } from "react-redux";
@@ -57,7 +57,7 @@ const Signin = ({ navigation }) => {
                         <InputField
                             placeholder="Email"
                             placeholderTextColor={COLORS.gray400}
-                            icon={icons.MailIcon}
+                            icon={ICONS.MailIcon}
                             inputType={'email'}
                             onChangeText={(text) => setFormData(prevState => ({ ...prevState, email: text }))}
                             setFormData={setFormData}
@@ -67,7 +67,7 @@ const Signin = ({ navigation }) => {
                         <InputField
                             placeholder="Password"
                             placeholderTextColor={COLORS.gray400}
-                            icon={icons.LockIcon}
+                            icon={ICONS.LockIcon}
                             inputType={'password'}
                             onChangeText={(text) => setFormData(prevState => ({ ...prevState, password: text }))}
                             setFormData={setFormData}
@@ -81,8 +81,8 @@ const Signin = ({ navigation }) => {
                             <View style={{ gap: 12 }}>
                                 <GenericButton bgColor="primaryBase" fontColor={"white"} label={"Sign In"} onPress={handleSignin} />
                                 <Text style={{ marginHorizontal: 24, textAlign: "center", color: COLORS.gray400, fontSize: 14, fontFamily: FONTS.NotoSansJPRegular }}>Or</Text>
-                                <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="primary900" label={"Sign In with Google"} icon={icons.GoogleIcon} />
-                                <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="primary900" label={"Sign In with Apple"} icon={icons.AppleIcon} />
+                                <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="primary900" label={"Sign In with Google"} icon={ICONS.GoogleIcon} />
+                                <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="primary900" label={"Sign In with Apple"} icon={ICONS.AppleIcon} />
                             </View>
                             <View style={{ alignItems: 'center' }}>
                                 <AcceptTerms />

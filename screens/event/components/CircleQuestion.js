@@ -1,11 +1,11 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { icons } from "../../../constants"
+import { ICONS } from "../../../constants"
 
 export default function CircleQuestion({ handlePress }) {
     return (
         <View>
             <TouchableOpacity onPress={() => { handlePress() }}>
-                <icons.CircleQuestion />
+                <ICONS.CircleQuestion />
             </TouchableOpacity>
         </View>
     )

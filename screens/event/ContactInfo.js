@@ -2,7 +2,7 @@ import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity } from 'react-na
 import React, { useState } from 'react'
 import { Footer } from './components';
 import InputField from '../../components/inputField/InputField';
-import { COLORS, FONTS, FONTSIZE, icons } from '../../constants';
+import { COLORS, FONTS, FONTSIZE, ICONS } from '../../constants';
 import AcceptTerms from '../../components/terms/AcceptTerms';
 
 const ContactInfo = () => {
@@ -27,7 +27,7 @@ const ContactInfo = () => {
             Email Address
           </Text>
           <View style={styles.input_text_container}>
-            <icons.MailIcon style={{ marginTop: 6 }} />
+            <ICONS.MailIcon style={{ marginTop: 6 }} />
             <Text style={styles.input_text}>tamalesp@gmail.com</Text>
           </View>
         </View>
@@ -36,14 +36,14 @@ const ContactInfo = () => {
             Mobile Phone
           </Text>
           <View style={styles.input_text_container}>
-            <icons.PhoneIcon />
+            <ICONS.PhoneIcon />
             <Text style={styles.input_text}>+256 779 813 251</Text>
           </View>
         </View>
       </View>
       <View style={styles.keep_updated}>
         <TouchableOpacity onPress={handleClick}>
-          {isClicked ? <icons.CheckCircle /> : <icons.CheckedCircleOrange />}
+          {isClicked ? <ICONS.CheckCircle /> : <ICONS.CheckedCircleOrange />}
         </TouchableOpacity>
         <Text style={styles.keep_updated_text}>
           Keep me updated on the latest news, events, and the exclusive offers on this event organizer.

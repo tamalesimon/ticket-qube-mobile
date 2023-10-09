@@ -44,8 +44,13 @@ import SelectCircle from "../assets/svgIcons/SelectCircle"
 import SelectCircleSelected from "../assets/svgIcons/SelectCircleSelected";
 import ApplePay from "../assets/svgIcons/ApplePay"
 import PayPal from "../assets/svgIcons/PayPal"
-import Payooneer from "../assets/svgIcons/Payooner";
-import MasterCardVisa from "../assets/svgIcons/MasterCardVisa"
+import Payoneer from "../assets/svgIcons/Payooner";
+import MasterCardVisa from "../assets/svgIcons/MasterCardVisa";
+import MTN from "../assets/svgIcons/MtnIcon";
+import Airtel from "../assets/svgIcons/AirtelIcon";
+import CalendarDetails from "../assets/svgIcons/CalendarDetails";
+import ClockDetailsTime from "../assets/svgIcons/ClockDetailsTime";
+import CheronRightIcon from "../assets/svgIcons/CheronRightIcon"
 
 
 export default {
@@ -95,6 +100,11 @@ export default {
     SelectCircleSelected,
     ApplePay,
     PayPal,
-    Payooneer,
+    Payoneer,
     MasterCardVisa,
+    MTN,
+    Airtel,
+    CalendarDetails,
+    ClockDetailsTime,
+    CheronRightIcon
 }

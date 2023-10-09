@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
-import { icons, COLORS, FONTS } from '../../constants';
+import { ICONS, COLORS, FONTS } from '../../constants';
 
 import globalStyles from '../../styles/globalStyles';
 

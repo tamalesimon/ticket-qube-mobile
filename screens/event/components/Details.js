@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
 import globalStyles from "../../../styles/globalStyles";
-import { COLORS, FONTS, icons } from "../../../constants";
+import { COLORS, FONTS, ICONS } from "../../../constants";
 
 const Details = () => {
     return (
@@ -18,7 +18,7 @@ const Details = () => {
                     </View>
                 </View>
                 <TouchableOpacity style={styles.calender}>
-                    <icons.CalendarAddIcon />
+                    <ICONS.CalendarAddIcon />
                 </TouchableOpacity>
             </View>
             <View>

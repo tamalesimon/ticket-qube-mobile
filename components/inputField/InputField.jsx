@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
-import { icons, COLORS, FONTS } from '../../constants';
+import { ICONS, COLORS, FONTS } from '../../constants';
 import { set } from 'react-native-reanimated';
 
 export default function InputField({
@@ -19,7 +19,7 @@ export default function InputField({
     const [originColor, setOriginColor] = useState('')
 
     useEffect(() => {
-        if(!isFocused || !error || !isEmpty) {
+        if (!isFocused || !error || !isEmpty) {
             setOriginColor('')
         }
     }, [isFocused, error, isEmpty])
@@ -46,9 +46,9 @@ export default function InputField({
                     setIsFocused(true)
                     if (!originColor) {
                         setOriginColor(borderColor);
-    }
                     }
-                
+                }
+
                 }
                 onBlur={handleBlur}
                 value={value}
@@ -60,14 +60,14 @@ export default function InputField({
                     }
                     if (originColor && !isFocused && !error && !isEmpty) {
                         setOriginColor('');
-    }
+                    }
                 }}
                 {...props}
             />
             {
                 inputType === "password" && (
                     <TouchableOpacity style={styles.showIcon} onPress={toggleSecureEntry}>
-                        {secureTextEntry ? <icons.EyeOffIcon /> : <icons.EyeIcon />}
+                        {secureTextEntry ? <ICONS.EyeOffIcon /> : <ICONS.EyeIcon />}
                     </TouchableOpacity>
                 )
             }

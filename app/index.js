@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { useNavigation } from "expo-router";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { COLORS, icons, FONTS } from "../constants";
+import { COLORS, ICONS, FONTS } from "../constants";
 import store from "../store";
 import { Provider } from "react-redux";
 import { Signin, Signup, ForgotPassword, ResetPassword, ResetSuccess, Verify } from "../screens/authentication";
@@ -10,6 +10,7 @@ import { GetStarted } from "../screens/welcome";
 import { EventDetails, GetTicket, SelectPayment, DetailsOrder, ContactInfo } from "../screens/event";
 import { eventDetailsScreenOptions, genericScreenOptions, WhiteBGScreenOptions, SelectPaymentsScreenOptions } from "../components/header/screenOptions";
 import Tabs from "../screens/tabs/Tabs";
+
 
 const Stack = createNativeStackNavigator();
 
@@ -156,15 +157,15 @@ export default function Page() {
     //   </Stack.Group>
     // </Stack.Navigator>
 
-    // <Stack.Navigator>
-    //   <Stack.Group>
-    //     <Stack.Screen
-    //       name="Order Details"
-    //       component={DetailsOrder}
-    //       options={WhiteBGScreenOptions}
-    //     />
-    //   </Stack.Group>
-    // </Stack.Navigator>
+    <Stack.Navigator>
+      <Stack.Group>
+        <Stack.Screen
+          name="Order Details"
+          component={DetailsOrder}
+          options={WhiteBGScreenOptions}
+        />
+      </Stack.Group>
+    </Stack.Navigator>
 
     // <Stack.Navigator>
     //   <Stack.Group>
@@ -176,15 +177,15 @@ export default function Page() {
     //   </Stack.Group>
     // </Stack.Navigator>
 
-    <Stack.Navigator>
-      <Stack.Group>
-        <Stack.Screen
-          name="Select Payment"
-          component={SelectPayment}
-          options={SelectPaymentsScreenOptions}
-        />
-      </Stack.Group>
-    </Stack.Navigator>
+    // <Stack.Navigator>
+    //   <Stack.Group>
+    //     <Stack.Screen
+    //       name="Select Payment"
+    //       component={SelectPayment}
+    //       options={SelectPaymentsScreenOptions}
+    //     />
+    //   </Stack.Group>
+    // </Stack.Navigator>
 
 
   );

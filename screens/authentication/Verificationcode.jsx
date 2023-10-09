@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { View, Text, Image, TouchableOpacity, TextInput, SafeAreaView, StyleSheet } from 'react-native';
-import { COLORS, FONTS, FONTSIZE, images, icons } from '../../constants';
+import { COLORS, FONTS, FONTSIZE, images, ICONS } from '../../constants';
 import { maskEmail } from "../../utils/utils";
 import GenericButton from "../../components/buttons/genericButton";
 import globalStyles from '../../styles/globalStyles';

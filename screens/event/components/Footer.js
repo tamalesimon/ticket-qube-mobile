@@ -2,7 +2,7 @@ import { Text, TouchableOpacity, StyleSheet, View } from "react-native";
 import { COLORS, FONTS } from "../../../constants";
 import GenericButton from "../../../components/buttons/genericButton";
 
-const Footer = ({ info, spotInfo, label }) => {
+const Footer = ({ info, spotInfo, label, handleClickButton }) => {
     const shouldCenterButton = !info && !spotInfo;
     return (
         <View style={styles.wrapper}>
@@ -19,7 +19,8 @@ const Footer = ({ info, spotInfo, label }) => {
                         bgColor={"primaryBase"}
                         fontColor={"white"}
                         label={label}
-                        shouldCenterButton={shouldCenterButton} />
+                        shouldCenterButton={shouldCenterButton}
+                        onPress={handleClickButton} />
                 </View>
             </View>
         </View>
