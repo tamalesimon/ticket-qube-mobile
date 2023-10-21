@@ -1,10 +1,10 @@
 import { SafeAreaView } from 'react-native'
+import { useRoute } from '@react-navigation/native'
 import { Footer, OrderSummary, PaymentMethod, EventSummaryOrderDetail } from './components'
-import { COLORS, FONTS, ICONS } from '../../constants';
-import testImage from '../../assets/images/test_image.jpg'
 
 const DetailsOrder = () => {
-    const { CalendarDetails, ClockDetailsTime } = ICONS
+    const route = useRoute();
+    const selectedPaymentOption = route.params?.selectedPaymentOptions;
     return (
         <SafeAreaView style={{ backgroundColor: "white", flex: 1, overflow: 'hidden', paddingHorizontal: 24, gap: 24, paddingTop: 16 }}>
             <EventSummaryOrderDetail />

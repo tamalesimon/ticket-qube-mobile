@@ -35,7 +35,9 @@ const TicketCard = () => {
         <View style={styles.cardSpecifics} >
           <Image style={styles.imageRect} source={require('../../../assets/images/test_image.jpg')} resizeMode='cover' />
           <View>
-            <Text style={styles.eventTitle}>Xenson Senkaba Art Fest: 2023</Text>
+            <View style={{ paddingRight: 2 }}>
+              <Text style={styles.eventTitle}>Xenson Senkaba Art Fest: 2023</Text>
+            </View>
             <View style={styles.priceSpots}>
               <Text style={styles.spotsLeft}>10 spots left</Text>
               <Text style={styles.price}>ugx 150,000</Text>
@@ -88,7 +90,7 @@ const styles = StyleSheet.create({
     height: 72,
     width: 72,
     borderRadius: 12,
-    marginRight: 16,
+    // marginRight: 16,
   },
   cardTitle: {
     fontFamily: FONTS.NotoSansJPRegular,
@@ -100,7 +102,7 @@ const styles = StyleSheet.create({
   cardSpecifics: {
     flexDirection: 'row',
     alignItems: 'center',
-    // justifyContent: 'space-between'
+    gap: 16,
   },
   eventTitle: {
     fontFamily: FONTS.NotoSansJPRegular,
@@ -108,6 +110,7 @@ const styles = StyleSheet.create({
     fontWeight: 700,
     color: COLORS.grayBase,
     lineHeight: 21,
+    width:200
   },
   priceSpots: {
     flexDirection: 'row',

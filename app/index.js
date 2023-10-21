@@ -7,9 +7,11 @@ import { Provider } from "react-redux";
 import { Signin, Signup, ForgotPassword, ResetPassword, ResetSuccess, Verify } from "../screens/authentication";
 import { Location, FollowOrganiser, PickInterest } from "../screens/onboarding";
 import { GetStarted } from "../screens/welcome";
-import { EventDetails, GetTicket, SelectPayment, DetailsOrder, ContactInfo } from "../screens/event";
-import { eventDetailsScreenOptions, genericScreenOptions, WhiteBGScreenOptions, SelectPaymentsScreenOptions } from "../components/header/screenOptions";
+import { EventDetails, GetTicket, SelectPayment, DetailsOrder, ContactInfo, TicketOrderCompleted } from "../screens/event";
+import { eventDetailsScreenOptions, genericScreenOptions, WhiteBGScreenOptions, SelectPaymentsScreenOptions, HeadersWithClose, ticketsScreenOptions } from "../components/header/screenOptions";
 import Tabs from "../screens/tabs/Tabs";
+import EventMain from "../screens/EventMain";
+import Tickets from "../screens/ticket/Ticket";
 
 
 const Stack = createNativeStackNavigator();
@@ -142,7 +144,7 @@ export default function Page() {
     //     <Stack.Screen
     //       name="Event Details"
     //       component={EventDetails}
-    //       options={{headerShown: false}}
+    //       options={eventDetailsScreenOptions}
     //     />
     //   </Stack.Group>
     // </Stack.Navigator>
@@ -157,15 +159,15 @@ export default function Page() {
     //   </Stack.Group>
     // </Stack.Navigator>
 
-    <Stack.Navigator>
-      <Stack.Group>
-        <Stack.Screen
-          name="Order Details"
-          component={DetailsOrder}
-          options={WhiteBGScreenOptions}
-        />
-      </Stack.Group>
-    </Stack.Navigator>
+    // <Stack.Navigator>
+    //   <Stack.Group>
+    //     <Stack.Screen
+    //       name="Order Details"
+    //       component={DetailsOrder}
+    //       options={WhiteBGScreenOptions}
+    //     />
+    //   </Stack.Group>
+    // </Stack.Navigator>
 
     // <Stack.Navigator>
     //   <Stack.Group>
@@ -186,6 +188,27 @@ export default function Page() {
     //     />
     //   </Stack.Group>
     // </Stack.Navigator>
+
+    // <Stack.Navigator>
+    //   <Stack.Group>
+    //     <Stack.Screen
+    //       name="Order Completed"
+    //       component={TicketOrderCompleted}
+    //       options={HeadersWithClose}
+    //     />
+    //   </Stack.Group>
+    // </Stack.Navigator>
+
+    <Stack.Navigator>
+      <Stack.Group>
+        <Stack.Screen
+          name="Tickets"
+          component={Tickets}
+          options={ticketsScreenOptions}
+        />
+      </Stack.Group>
+
+    </Stack.Navigator>
 
 
   );

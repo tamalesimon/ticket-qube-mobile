@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
+import { useNavigation } from 'expo-router'
 import { ICONS, FONTS, COLORS } from '../../constants'
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleSheet } from "../../redux/layoutSlice"
@@ -11,6 +12,7 @@ import VerticalDots from './VerticalDotsIcon'
 import LikesHeart from '../../screens/event/components/LikesHeart'
 import Upload from '../../screens/event/components/Upload'
 import CircleQuestion from '../../screens/event/components/CircleQuestion'
+import CloseIcon from '../../screens/event/components/CloseIcon'
 
 export const screenOptions = {
   // headerShown: false,
@@ -157,12 +159,11 @@ export const eventDetailsScreenOptions = {
     </View>
   ),
   headerRight: () => {
-    const dispatch = useDispatch();
     return (
       <View style={styles.headerButtonContainer}>
         <View style={styles.sharedContainer}>
-          <Upload handlePress={() => dispatch(toggleSheet())} />
-          <LikesHeart />
+          <Upload handlePress={() => alert("Upload clicked")} />
+          <LikesHeart handlePress={() => alert("You have liked this event")} />
         </View>
       </View>
     )
@@ -185,11 +186,14 @@ export const genericScreenOptions = {
     // backgroundColor: COLORS.gray500,
     color: COLORS.grayBase
   },
-  headerLeft: () => (
-    <View style={styles.headerButtonContainer}>
-      <BackLeft />
-    </View>
-  ),
+  headerLeft: () => {
+    const navigation = useNavigation();
+    return (
+      <View style={styles.headerButtonContainer}>
+        <BackLeft onPress={() => navigation.goBack()} />
+      </View>
+    );
+  },
   headerTitleAlign: 'center',
 }
 
@@ -213,6 +217,29 @@ export const WhiteBGScreenOptions = {
     </View>
   ),
   headerTitleAlign: 'center',
+}
+
+export const HeadersWithClose = {
+  headerStyle: {
+    backgroundColor: COLORS.white,
+    elevation: 0,
+    borderBottomWidth: 0,
+  },
+  headerShadowVisible: false,
+  headerTitleStyle: {
+    fontFamily: FONTS.NotoSansJPBold,
+    // fontWeight: '700',
+    lineHeight: 24,
+    // backgroundColor: COLORS.gray500,
+    color: COLORS.grayBase
+  },
+  headerLeft: () => (
+    <View style={styles.headerButtonContainer}>
+      <CloseIcon />
+    </View>
+  ),
+  headerTitleAlign: 'center',
+  headerTitle: ''
 }
 
 export const SelectPaymentsScreenOptions = {
