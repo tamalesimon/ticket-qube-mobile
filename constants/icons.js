@@ -51,6 +51,8 @@ import Airtel from "../assets/svgIcons/AirtelIcon";
 import CalendarDetails from "../assets/svgIcons/CalendarDetails";
 import ClockDetailsTime from "../assets/svgIcons/ClockDetailsTime";
 import CheronRightIcon from "../assets/svgIcons/CheronRightIcon"
+import ChevronLeft from "../assets/svgIcons/ChevronLeft";
+import ChevronRight from "../assets/svgIcons/ChevronRight";
 
 
 export default {
@@ -106,5 +108,7 @@ export default {
     Airtel,
     CalendarDetails,
     ClockDetailsTime,
-    CheronRightIcon
+    CheronRightIcon,
+    ChevronLeft,
+    ChevronRight
 }

@@ -207,7 +207,6 @@ export default function Page() {
           options={ticketsScreenOptions}
         />
       </Stack.Group>
-
     </Stack.Navigator>
 
 

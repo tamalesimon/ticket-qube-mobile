@@ -1,10 +1,10 @@
 import * as React from "react"
 import Svg, { Path } from "react-native-svg"
-const CalendarDetails = (props) => (
+const CalendarDetails = ({dim=15, ...props}) => (
     <Svg
         xmlns="http://www.w3.org/2000/svg"
-        width={15}
-        height={15}
+        width={dim}
+        height={dim}
         fill="none"
         viewBox="0 0 14 15"
         {...props}
