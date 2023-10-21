@@ -1,4 +1,5 @@
 import { View, Text, StyleSheet, useWindowDimensions, SafeAreaView } from 'react-native'
+import { useNavigation } from 'expo-router';
 import React from 'react';
 import { COLORS, FONTS } from '../../constants';
 import TicketCard from './components/TicketCard';
@@ -6,6 +7,7 @@ import { Footer } from './components';
 import FiveDayStrip from './components/EventDateStrip'
 
 const GetTicket = () => {
+    const navigation = useNavigation();
     const { height } = useWindowDimensions();
     return (
         <SafeAreaView style={{ backgroundColor: COLORS.gray50, flex: 1, overflow: 'hidden' }}>
