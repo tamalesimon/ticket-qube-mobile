@@ -53,6 +53,9 @@ import ClockDetailsTime from "../assets/svgIcons/ClockDetailsTime";
 import CheronRightIcon from "../assets/svgIcons/CheronRightIcon"
 import ChevronLeft from "../assets/svgIcons/ChevronLeft";
 import ChevronRight from "../assets/svgIcons/ChevronRight";
+import VideosIcon from "../assets/svgIcons/VideosIcon"
+import MusicIcon from "../assets/svgIcons/MusicIcon"
+import PaintIcon from "../assets/svgIcons/PaintIcon"
 
 
 export default {
@@ -110,5 +113,8 @@ export default {
     ClockDetailsTime,
     CheronRightIcon,
     ChevronLeft,
-    ChevronRight
+    ChevronRight,
+    VideosIcon,
+    MusicIcon,
+    PaintIcon
 }
