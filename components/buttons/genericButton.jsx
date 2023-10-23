@@ -1,9 +1,9 @@
 import React from "react";
 import { TouchableOpacity, Text, StyleSheet, View } from "react-native";
-import { COLORS, FONTS } from "../../constants";
+import { COLORS, FONTS, ICONS } from "../../constants";
 
 export default function GenericButton({
-    icon: IconComponent,
+    iconName,
     borderWidth,
     borderColor,
     label,
@@ -14,9 +14,10 @@ export default function GenericButton({
 }) {
 
     const buttonStyle = shouldCenterButton ? { ...styles.button, width: '100%' } : styles.button;
+    const IconComponent = ICONS[iconName]
     return (
-        <TouchableOpacity onPress={onPress} style={{ ...buttonStyle, borderWidth: borderWidth, borderColor: COLORS[borderColor], backgroundColor: COLORS[bgColor] }}>
-            <View style={{ position: 'absolute', top: 16, left: 20 }}>
+        <TouchableOpacity onPress={onPress} style={{ ...buttonStyle, borderWidth: borderWidth, borderColor: COLORS[borderColor], backgroundColor: COLORS[bgColor], gap:8 }}>
+            <View>
                 {IconComponent && <IconComponent />}
             </View>
             <Text style={{ ...styles.label, color: COLORS[fontColor] }}>{label}</Text>

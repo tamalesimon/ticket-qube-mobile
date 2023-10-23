@@ -12,6 +12,8 @@ import { eventDetailsScreenOptions, genericScreenOptions, WhiteBGScreenOptions, 
 import Tabs from "../screens/tabs/Tabs";
 import EventMain from "../screens/EventMain";
 import Tickets from "../screens/ticket/Ticket";
+import TicketQrcode from "../screens/ticket/TicketQrcode";
+import TicketReciept from "../screens/ticket/TicketReciept";
 
 
 const Stack = createNativeStackNavigator();
@@ -201,9 +203,21 @@ export default function Page() {
 
     <Stack.Navigator>
       <Stack.Group>
-        <Stack.Screen
+        {/* <Stack.Screen
           name="Tickets"
           component={Tickets}
+          options={ticketsScreenOptions}
+        /> */}
+
+        {/* <Stack.Screen
+          name="QR Code"
+          component={TicketQrcode}
+          options={ticketsScreenOptions}
+        /> */}
+
+        <Stack.Screen
+          name="Tickets"
+          component={TicketReciept}
           options={ticketsScreenOptions}
         />
       </Stack.Group>

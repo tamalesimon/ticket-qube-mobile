@@ -56,6 +56,9 @@ import ChevronRight from "../assets/svgIcons/ChevronRight";
 import VideosIcon from "../assets/svgIcons/VideosIcon"
 import MusicIcon from "../assets/svgIcons/MusicIcon"
 import PaintIcon from "../assets/svgIcons/PaintIcon"
+import Barcode from "../assets/svgIcons/Barcode"
+import Download from "../assets/svgIcons/Download"
+import BxQr from "../assets/svgIcons/BxQr"
 
 
 export default {
@@ -116,5 +119,8 @@ export default {
     ChevronRight,
     VideosIcon,
     MusicIcon,
-    PaintIcon
+    PaintIcon,
+    Barcode,
+    Download,
+    BxQr
 }
