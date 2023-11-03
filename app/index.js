@@ -21,115 +21,112 @@ const Stack = createNativeStackNavigator();
 export default function Page() {
   const navigation = useNavigation();
   return (
-    // <Stack.Navigator>
-    // //Authentication screens
-    //   <Stack.Group>
-    //     <Stack.Screen
-    //       name="Get Started"
-    //       component={GetStarted}
-    //       options={{ headerShown: false }}
-    //     />
-    //     <Stack.Screen
-    //       name="Signin"
-    //       component={Signin}
-    //       options={screenOptions}
-    //     />
-    //     <Stack.Screen
-    //       name="Signup"
-    //       component={Signup}
-    //       options={screenOptions}
-    //     />
-    //     <Stack.Screen
-    //       name="Verify"
-    //       component={Verify}
-    //       options={screenOptions}
-    //     />
-    //     <Stack.Screen
-    //       name="ForgotPassword"
-    //       component={ForgotPassword}
-    //       options={screenOptions}
-    //     />
-    //     <Stack.Screen
-    //       name="ResetPassword"
-    //       component={ResetPassword}
-    //       options={screenOptions}
-    //     />
-    //     <Stack.Screen
-    //       name="ResetSuccess"
-    //       component={ResetSuccess}
-    //       options={{
-    //         headerStyle: {
-    //           backgroundColor: COLORS.white, // make the header transparent
-    //           elevation: 0, // remove the shadow on Android
-    //           borderBottomWidth: 0, // remove the border bottom on iOS
-    //         },
-    //         headerTitle: ' ',
-    //         headerShadowVisible: false,
-    //         headerTitleStyle: {
-    //           display: "none", // hide the header title
-    //         },
-    //         headerLeft: () => (
-    //           <View>
-    //             <TouchableOpacity>
-    //               <icons.CloseIcon />
-    //             </TouchableOpacity>
-    //           </View>
-    //         )
-    //       }}
-    //     />
-    //   </Stack.Group>
+    <Stack.Navigator>
+      {/* <Stack.Group>
+        <Stack.Screen
+          name="Get Started"
+          component={GetStarted}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Signin"
+          component={Signin}
+          options={screenOptions}
+        />
+        <Stack.Screen
+          name="Signup"
+          component={Signup}
+          options={screenOptions}
+        />
+        <Stack.Screen
+          name="Verify"
+          component={Verify}
+          options={screenOptions}
+        />
+        <Stack.Screen
+          name="ForgotPassword"
+          component={ForgotPassword}
+          options={screenOptions}
+        />
+        <Stack.Screen
+          name="ResetPassword"
+          component={ResetPassword}
+          options={screenOptions}
+        />
+        <Stack.Screen
+          name="ResetSuccess"
+          component={ResetSuccess}
+          options={{
+            headerStyle: {
+              backgroundColor: COLORS.white, // make the header transparent
+              elevation: 0, // remove the shadow on Android
+              borderBottomWidth: 0, // remove the border bottom on iOS
+            },
+            headerTitle: ' ',
+            headerShadowVisible: false,
+            headerTitleStyle: {
+              display: "none", // hide the header title
+            },
+            headerLeft: () => (
+              <View>
+                <TouchableOpacity>
+                  <icons.CloseIcon />
+                </TouchableOpacity>
+              </View>
+            )
+          }}
+        />
+      </Stack.Group> */}
 
-    //       //onBoarding screens
-    //   <Stack.Group>
-    //     <Stack.Screen
-    //       name="Location"
-    //       component={Location}
-    //       options={{
-    //         ...screenOptions,
-    //         headerRight: () => (
-    //           <TouchableOpacity onPress={() => navigation.navigate('FollowOrganiser')}>
-    //             <Text style={styles.skipText}>Skip for now</Text>
-    //           </TouchableOpacity>
-    //         )
-    //       }}
-    //     />
-    //     <Stack.Screen
-    //       name="FollowOrganiser"
-    //       component={FollowOrganiser}
-    //       options={{
-    //         ...screenOptions,
-    //         headerRight: () => (
-    //           <TouchableOpacity onPress={() => navigation.navigate('PickInterest')}>
-    //             <Text style={styles.skipText}>Skip for now</Text>
-    //           </TouchableOpacity>
-    //         )
-    //       }}
-    //     />
-    //     <Stack.Screen
-    //       name="PickInterest"
-    //       component={PickInterest}
-    //       options={{
-    //         ...screenOptions,
-    //         headerRight: () => (
-    //           <TouchableOpacity onPress={() => navigation.navigate('NavigationTabs')}>
-    //             <Text style={styles.skipText}>Skip for now</Text>
-    //           </TouchableOpacity>
-    //         )
-    //       }}
-    //     />
-    //   </Stack.Group>
-
-    //     //App index
-    //   <Stack.Group>
-    //     <Stack.Screen
-    //       name="NavigationTabs"
-    //       component={Tabs}
-    //       options={{
-    //         headerShown: false
-    //       }}
-    //     />
-    //   </Stack.Group>
-
+      <Stack.Group>
+        <Stack.Screen
+          name="Location"
+          component={Location}
+          options={{
+            ...screenOptions,
+            headerRight: () => (
+              <TouchableOpacity onPress={() => navigation.navigate('FollowOrganiser')}>
+                <Text style={styles.skipText}>Skip for now</Text>
+              </TouchableOpacity>
+            )
+          }}
+        />
+        <Stack.Screen
+          name="FollowOrganiser"
+          component={FollowOrganiser}
+          options={{
+            ...screenOptions,
+            headerRight: () => (
+              <TouchableOpacity onPress={() => navigation.navigate('PickInterest')}>
+                <Text style={styles.skipText}>Skip for now</Text>
+              </TouchableOpacity>
+            )
+          }}
+        />
+        <Stack.Screen
+          name="PickInterest"
+          component={PickInterest}
+          options={{
+            ...screenOptions,
+            headerRight: () => (
+              <TouchableOpacity onPress={() => navigation.navigate('NavigationTabs')}>
+                <Text style={styles.skipText}>Skip for now</Text>
+              </TouchableOpacity>
+            )
+          }}
+        />
+      </Stack.Group>
+    
+      <Stack.Group>
+        <Stack.Screen
+          name="NavigationTabs"
+          component={Tabs}
+          options={{
+            headerShown: false
+          }}
+        />
+      </Stack.Group>
+    </Stack.Navigator>
     //   //Event screens
     //   <Stack.Group>
     //     <Stack.Screen
@@ -201,27 +198,38 @@ export default function Page() {
     //   </Stack.Group>
     // </Stack.Navigator>
 
-    <Stack.Navigator>
-      <Stack.Group>
-        {/* <Stack.Screen
-          name="Tickets"
-          component={Tickets}
-          options={ticketsScreenOptions}
-        /> */}
+    // <Stack.Navigator>
+    //   <Stack.Group>
+    //     <Stack.Screen
+    //       name="Tickets"
+    //       component={Tickets}
+    //       options={ticketsScreenOptions}
+    //     />
 
-        {/* <Stack.Screen
-          name="QR Code"
-          component={TicketQrcode}
-          options={ticketsScreenOptions}
-        /> */}
+    //     <Stack.Screen
+    //       name="Ticket Receipt"
+    //       component={TicketReciept}
+    //       options={ticketsScreenOptions}
+    //     />
 
-        <Stack.Screen
-          name="Tickets"
-          component={TicketReciept}
-          options={ticketsScreenOptions}
-        />
-      </Stack.Group>
-    </Stack.Navigator>
+    //     <Stack.Screen
+    //       name="QR Code"
+    //       component={TicketQrcode}
+    //       options={ticketsScreenOptions}
+    //     />
+
+    //   </Stack.Group>
+    // </Stack.Navigator>
+
+    // <Stack.Navigator>
+    //   <Stack.Group>
+    //     <Stack.Screen
+    //       name="QR Code"
+    //       component={TicketQrcode}
+    //       options={ticketsScreenOptions}
+    //     />
+    //   </Stack.Group>
+    // </Stack.Navigator>
 
 
   );

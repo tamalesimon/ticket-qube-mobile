@@ -10,6 +10,7 @@ import GenericButton from "../../components/buttons/genericButton";
 import InputField from "../../components/inputField/InputField";
 
 import globalStyles from '../../styles/globalStyles';
+import { Footer } from "../event/components";
 
 
 const ResetPassword = ({ navigation }) => {
@@ -59,9 +60,10 @@ const ResetPassword = ({ navigation }) => {
                     error={formErrors.passwordError}
                 />
             </View>
-            <View style={{ marginTop: 390 }}>
+            {/* <View style={{ marginTop: 390 }}>
                 <GenericButton bgColor="primaryBase" fontColor={"white"} label={"Create New Password"} onPress={handleResetPassword} />
-            </View>
+            </View> */}
+            <Footer label={"Create New Password"} handleClickButton={handleResetPassword} />
         </SafeAreaView>
     )
 }

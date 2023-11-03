@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { View, Text, Image, SafeAreaView, StyleSheet } from 'react-native';
+import { View, Text, Image, SafeAreaView, StyleSheet, KeyboardAvoidingView } from 'react-native';
 import { COLORS, FONTS, FONTSIZE, ICONS } from '../../constants';
 import { useSelector, useDispatch } from "react-redux";
 import { forgotPassword } from "../../redux/authSlice";
@@ -9,6 +9,7 @@ import GenericButton from "../../components/buttons/genericButton";
 import InputField from "../../components/inputField/InputField";
 import globalStyles from '../../styles/globalStyles';
 import forgotPasswordImage from '../../assets/images/forgot-password.png';
+import { Footer } from "../event/components";
 
 
 const ForgotPassword = ({ navigation }) => {
@@ -47,6 +48,7 @@ const ForgotPassword = ({ navigation }) => {
                         <Text style={{ ...globalStyles.Heading4, marginBottom: 8 }}>Forgot Password</Text>
                         <Text style={styles.message} >Please enter the email address associated with your account.</Text>
                     </View>
+
                     <View style={{ marginBottom: 217, marginTop: 32, alignItems: 'center' }}>
                         <InputField
                             placeholder="Email"
@@ -59,9 +61,11 @@ const ForgotPassword = ({ navigation }) => {
                             error={formErrors.emailError}
                         />
                     </View>
-                    <GenericButton bgColor={"primaryBase"} label={"Reset Password"} fontColor={"white"} onPress={handlePasswordReset} />
+                    {/* <GenericButton bgColor={"primaryBase"} label={"Reset Password"} fontColor={"white"} onPress={handlePasswordReset} /> */}
                 </View>
             </View>
+            
+            <Footer label={"Reset Password"} handleClickButton={handlePasswordReset} />
             {
                 isLoading && (
                     <View style={styles.loader}>

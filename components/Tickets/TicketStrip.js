@@ -6,7 +6,7 @@ const TicketStrip = () => {
     return (
         <View style={styles.container}>
             <View style={styles.title_icon}>
-                <Text style={styles.ticketTitle}>Xenson Art Exibit: 2023 {<br />}Xgallery 29-30</Text>
+                <Text style={styles.ticketTitle}>Xenson Art Exibit: 2023 Xgallery 29-30</Text>
                 <ICONS.PaintIcon />
             </View>
             <View style={styles.ticketDivider}>

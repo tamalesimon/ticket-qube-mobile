@@ -10,7 +10,8 @@ export default function GenericButton({
     onPress,
     bgColor,
     fontColor,
-    shouldCenterButton
+    shouldCenterButton,
+    fontSize
 }) {
 
     const buttonStyle = shouldCenterButton ? { ...styles.button, width: '100%' } : styles.button;
@@ -20,7 +21,7 @@ export default function GenericButton({
             <View>
                 {IconComponent && <IconComponent />}
             </View>
-            <Text style={{ ...styles.label, color: COLORS[fontColor] }}>{label}</Text>
+            <Text style={{ ...styles.label, color: COLORS[fontColor], fontSize }}>{label}</Text>
         </TouchableOpacity>
     );
 }

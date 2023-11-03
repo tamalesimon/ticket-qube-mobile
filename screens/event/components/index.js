@@ -8,6 +8,7 @@ import ShareEvent from "./ShareEvent";
 import PaymentMethod from "./PaymentMethod";
 import OrderSummary from "./OrderSummary";
 import EventSummaryOrderDetail from "./EventSummaryOrderDetail";
+import FooterMultipleButtons from "./FooterMultipleButtons";
 
 export {
     EventImage,
@@ -19,5 +20,6 @@ export {
     Footer,
     PaymentMethod,
     OrderSummary,
-    EventSummaryOrderDetail
+    EventSummaryOrderDetail,
+    FooterMultipleButtons
 }

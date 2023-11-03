@@ -49,7 +49,7 @@ const TicketReciept = () => {
                     </View>
                 </View>
             </View>
-            <View style={{ marginTop: 20, gap: 12 }}>
+            <View style={{ marginTop: "15%", gap: 12 }}>
                 <GenericButton label={"Download Image"} fontColor={"white"} bgColor={"primaryBase"} iconName={"Download"} />
                 <GenericButton label={"Show QR Code"} fontColor={"secondaryBase"} bgColor={"white"} iconName={"BxQr"} />
             </View>
@@ -64,7 +64,15 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.primaryBase,
         borderRadius: 32,
         padding: 20,
-        gap: 24
+        gap: 24,
+        shadowColor: COLORS.primaryBase,
+        shadowOffset: {
+            width: 0,
+            height: 12,
+        },
+        shadowOpacity: 0.23,
+        shadowRadius: 12.81,
+        elevation: 16
     },
     imageContainer: {
         overflow: 'hidden',

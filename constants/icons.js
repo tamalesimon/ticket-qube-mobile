@@ -58,7 +58,9 @@ import MusicIcon from "../assets/svgIcons/MusicIcon"
 import PaintIcon from "../assets/svgIcons/PaintIcon"
 import Barcode from "../assets/svgIcons/Barcode"
 import Download from "../assets/svgIcons/Download"
-import BxQr from "../assets/svgIcons/BxQr"
+import BxQr from "../assets/svgIcons/BxQr";
+import Share from "../assets/svgIcons/ShareIcon"
+import LampOn from "../assets/svgIcons/LampOn"
 
 
 export default {
@@ -122,5 +124,7 @@ export default {
     PaintIcon,
     Barcode,
     Download,
-    BxQr
+    BxQr,
+    Share,
+    LampOn
 }

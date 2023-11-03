@@ -7,6 +7,7 @@ import globalStyles from '../../styles/globalStyles';
 import FollowCard from '../../components/card/FollowCard';
 import { dummyOrganizers } from '../../utils/DummyOrganizers';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Footer } from '../event/components';
 
 export default function FollowOrganiser() {
     const [isFollowing, setIsFollowing] = useState([])
@@ -54,12 +55,14 @@ export default function FollowOrganiser() {
                             />
                             {/* <FollowCard isFollowing={isFollowing} onPress={toggleFollow}/> */}
                         </View>
-                        <View style={{ marginTop: 24 }}>
+                        {/* <View style={{ marginTop: 24 }}>
                             <GenericButton bgColor="primaryBase" fontColor={"white"} label={"Finish"} onPress={() => navigation.navigate('ResetSuccess')} />
-                        </View>
+                        </View> */}
                     </View>
                 </View>
+                
             </View>
+            <Footer label={"Next"} handleClickButton={() => navigation.navigate('ResetSuccess')} />
         </LinearGradient>
     );
 }

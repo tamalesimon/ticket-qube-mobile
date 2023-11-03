@@ -5,6 +5,7 @@ import InputField from '../../components/inputField/InputField';
 import GenericButton from '../../components/buttons/genericButton';
 import globalStyles from '../../styles/globalStyles';
 import { DummyData } from '../../utils/DummyData';
+import { Footer } from '../event/components';
 
 export default function PickInterest() {
     const [selectedItems, setSelectedItems] = useState([])
@@ -46,10 +47,12 @@ export default function PickInterest() {
                         )
                     })}
                 </View>
-                <View style={{ marginTop: 95 }}>
+                {/* <View style={{ marginTop: 95 }}>
                     <GenericButton bgColor="primaryBase" fontColor={"white"} label={"Finish"} onPress={() => navigation.navigate('Home')} />
-                </View>
+                </View> */}
+                
             </View>
+            <Footer label={"Finish"} handleClickButton={() => navigation.navigate('Home')}/>
         </SafeAreaView>
     );
 }
