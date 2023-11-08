@@ -82,7 +82,7 @@ const Signup = ({ navigation }) => {
                             value={nameInput}
                             onChangeText={handleInputText}
                             setFormData={setFormData}
-                            error={formErrors.firstNameError && formErrors.lastNameError}
+                            error={!!(formErrors.firstNameError && formErrors.lastNameError)}
                         />
                         <InputField
                             placeholder="Email"

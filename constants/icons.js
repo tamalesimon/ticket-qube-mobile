@@ -61,6 +61,9 @@ import Download from "../assets/svgIcons/Download"
 import BxQr from "../assets/svgIcons/BxQr";
 import Share from "../assets/svgIcons/ShareIcon"
 import LampOn from "../assets/svgIcons/LampOn"
+import ChevronDown from "../assets/svgIcons/ChevronDown"
+import ChevronUp from "../assets/svgIcons/ChevronUp"
+import CalendarIcon from "../assets/svgIcons/CalendarIcon"
 
 
 export default {
@@ -126,5 +129,8 @@ export default {
     Download,
     BxQr,
     Share,
-    LampOn
+    LampOn,
+    ChevronDown,
+    ChevronUp,
+    CalendarIcon
 }

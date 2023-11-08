@@ -197,6 +197,32 @@ export const genericScreenOptions = {
   headerTitleAlign: 'center',
 }
 
+export const genericNoTitleScreenOptions = {
+  headerStyle: {
+    backgroundColor: COLORS.white,
+    elevation: 0,
+    borderBottomWidth: 0,
+  },
+  headerShadowVisible: false,
+  headerTitleStyle: {
+    fontFamily: FONTS.NotoSansJPBold,
+    // fontWeight: '700',
+    lineHeight: 24,
+    // backgroundColor: COLORS.gray500,
+    color: COLORS.grayBase
+  },
+  headerLeft: () => {
+    const navigation = useNavigation();
+    return (
+      <View style={styles.headerButtonContainer}>
+        <BackLeft onPress={() => navigation.goBack()} />
+      </View>
+    );
+  },
+  headerTitle:'',
+  headerTitleAlign: 'center',
+}
+
 export const WhiteBGScreenOptions = {
   headerStyle: {
     backgroundColor: COLORS.white,
@@ -282,7 +308,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   headerButtonContainer: {
-    marginHorizontal: 10, //24px
+    marginHorizontal: 2, //24px
     alignItems: 'center',
     justifyContent: 'center',
   },

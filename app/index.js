@@ -8,12 +8,13 @@ import { Signin, Signup, ForgotPassword, ResetPassword, ResetSuccess, Verify } f
 import { Location, FollowOrganiser, PickInterest } from "../screens/onboarding";
 import { GetStarted } from "../screens/welcome";
 import { EventDetails, GetTicket, SelectPayment, DetailsOrder, ContactInfo, TicketOrderCompleted } from "../screens/event";
-import { eventDetailsScreenOptions, genericScreenOptions, WhiteBGScreenOptions, SelectPaymentsScreenOptions, HeadersWithClose, ticketsScreenOptions } from "../components/header/screenOptions";
+import { eventDetailsScreenOptions, genericScreenOptions, genericNoTitleScreenOptions, WhiteBGScreenOptions, SelectPaymentsScreenOptions, HeadersWithClose, ticketsScreenOptions } from "../components/header/screenOptions";
 import Tabs from "../screens/tabs/Tabs";
 import EventMain from "../screens/EventMain";
 import Tickets from "../screens/ticket/Ticket";
 import TicketQrcode from "../screens/ticket/TicketQrcode";
 import TicketReciept from "../screens/ticket/TicketReciept";
+import DateofBirth from "../screens/onboarding/DateofBirth";
 
 
 const Stack = createNativeStackNavigator();
@@ -79,17 +80,19 @@ export default function Page() {
       </Stack.Group> */}
 
       <Stack.Group>
+      <Stack.Screen
+          name="DOB"
+          component={DateofBirth}
+          options={
+            genericNoTitleScreenOptions
+          }
+        />
         <Stack.Screen
           name="Location"
           component={Location}
-          options={{
-            ...screenOptions,
-            headerRight: () => (
-              <TouchableOpacity onPress={() => navigation.navigate('FollowOrganiser')}>
-                <Text style={styles.skipText}>Skip for now</Text>
-              </TouchableOpacity>
-            )
-          }}
+          options={
+            genericNoTitleScreenOptions
+          }
         />
         <Stack.Screen
           name="FollowOrganiser"
@@ -116,7 +119,7 @@ export default function Page() {
           }}
         />
       </Stack.Group>
-    
+
       <Stack.Group>
         <Stack.Screen
           name="NavigationTabs"
@@ -251,9 +254,6 @@ const screenOptions = {
   },
   headerTitle: ' ',
   headerShadowVisible: false,
-  headerTitleStyle: {
-    display: "none", // hide the header title
-  },
 }
 
 const styles = StyleSheet.create({

@@ -15,7 +15,7 @@ export const useFormValidation = (initialFormData) => {
     });
 
     const validateForm = () => {
-        const { email, password, firstName, lastName, confirmPassword, phoneNumber, dateOfBirth, otp } = formData;
+        const { email, password, firstName, lastName, confirmPassword, phoneNumber, dateOfBirth, otp, country, timeZone, userRole } = formData;
         let isValid = true;
         const errors = {};
 
