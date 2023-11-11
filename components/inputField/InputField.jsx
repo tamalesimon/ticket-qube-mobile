@@ -71,6 +71,13 @@ export default function InputField({
                     </TouchableOpacity>
                 )
             }
+            {
+                inputType === "DOB" && (
+                    <TouchableOpacity style={styles.showIcon} onPress={toggleSecureEntry}>
+                        <ICONS.CalendarIcon />
+                    </TouchableOpacity>
+                )
+            }
         </View>
     );
 }

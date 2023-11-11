@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useDispatch, useSelector } from 'react-redux'
 import { View, Text, TouchableOpacity, SafeAreaView, StyleSheet } from 'react-native';
 import { COLORS, FONTS, FONTSIZE, ICONS } from '../../constants';
@@ -48,6 +48,8 @@ const Signup = ({ navigation }) => {
     const handleInputText = (text) => {
         setNameInput(text);
         const names = text.split(' ');
+        let firstName;
+        let lastName;
         if (names.length >= 2 && names.length <= 4) {
             firstName = names.slice(0, -1).join(' ');
             lastName = names.slice(-1)[0];
@@ -80,7 +82,7 @@ const Signup = ({ navigation }) => {
                             value={nameInput}
                             onChangeText={handleInputText}
                             setFormData={setFormData}
-                            error={formErrors.firstNameError && formErrors.lastNameError}
+                            error={!!(formErrors.firstNameError && formErrors.lastNameError)}
                         />
                         <InputField
                             placeholder="Email"

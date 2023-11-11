@@ -2,37 +2,49 @@ import { Text, TouchableOpacity, StyleSheet, View } from "react-native";
 import { COLORS, FONTS } from "../../../constants";
 import GenericButton from "../../../components/buttons/genericButton";
 
-const Footer = ({ info, spotInfo, label, handleClickButton }) => {
+const FooterMultipleButtons = ({ info, spotInfo, iconName, iconName2, fontSize, label, label2, handleClickButton, handleClickButton2 }) => {
     const shouldCenterButton = !info && !spotInfo;
     return (
         <View style={styles.wrapper}>
             <View style={styles.container}>
-                <View>
+                {/* <View>
                     {info && <Text style={styles.amount}>{info}</Text>}
                     {spotInfo && <Text style={styles.spots}>{spotInfo}</Text>}
-                </View>
+                </View> */}
                 <View style={{
-                    alignItems: shouldCenterButton ? 'center' : 'flex-start',
-                    width: shouldCenterButton ? '100%' : undefined,
+                    gap: 12,
+                    flexDirection: 'row',
+                    alignItems:'center',
+                    // alignItems: shouldCenterButton ? 'center' : 'flex-start',
+                    width: shouldCenterButton ? '50%' : undefined,
                 }}>
                     <GenericButton
                         bgColor={"primaryBase"}
                         fontColor={"white"}
+                        fontSize={fontSize}
                         label={label}
+                        iconName={iconName}
                         shouldCenterButton={shouldCenterButton}
                         onPress={handleClickButton} />
+                    <GenericButton
+                        bgColor={"white"}
+                        fontColor={"grayBase"}
+                        fontSize={fontSize}
+                        label={label2}
+                        iconName={iconName2}
+                        shouldCenterButton={shouldCenterButton}
+                        onPress={handleClickButton2} />
                 </View>
             </View>
         </View>
     )
 }
 
-export default Footer;
+export default FooterMultipleButtons;
 
 const styles = StyleSheet.create({
     wrapper: {
-        
-        // backgroundColor: "white",
+        backgroundColor: COLORS.gray50,
         // alignItems: "center",
         // justifyContent: "center",
         height: 92,

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef, createRef } from "react"
 import { View, Text, Image, TouchableOpacity, TextInput, SafeAreaView, StyleSheet } from 'react-native';
 import { COLORS, FONTS, FONTSIZE, images, ICONS } from '../../constants';
 import { maskEmail } from "../../utils/utils";
@@ -11,6 +11,7 @@ import LoadingIndicator from "../../components/loaders/LoadingIndicator";
 import { useFormValidation } from "../../hooks/useFormValidation";
 
 import verifyImage from '../../assets/images/verify.png';
+import { Footer } from "../event/components";
 
 
 
@@ -50,13 +51,14 @@ const Verify = ({ navigation, route: { params: { screen } } }) => {
         }
 
     }
+
     return (
         <SafeAreaView style={{ backgroundColor: COLORS.white, flex: 1, paddingHorizontal: 24 }}>
             <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', gap: 8, marginTop: 32 }}>
                 <Image source={verifyImage} resizeMode='contain' />
-                <View style={{ flexDirection: 'column', alignItems: 'center', width: "100%" }} >
-                    <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', marginTop: 32 }}>
-                        <Text style={{ ...globalStyles.Heading4, fontWeight: 700, marginBottom: 8 }}>Verification Code</Text>
+                <View style={{ flexDirection: 'column', alignItems: 'center', width: "100%", justifyContent: 'center' }}>
+                    <View style={{ flexDirection: 'column', alignItems: 'center', marginTop: 32, }}>
+                        <Text style={{ ...globalStyles.Heading4, fontWeight: 700, }}>Verification Code</Text>
                         <Text style={styles.message}>We have sent the verification code to your email</Text>
                         {/* <Text style={styles.messageEmail}>{maskEmail(email)}.</Text> */}
                     </View>
@@ -75,11 +77,13 @@ const Verify = ({ navigation, route: { params: { screen } } }) => {
                     <TouchableOpacity style={{ marginBottom: 180 }}>
                         <Text style={styles.resendCode}>Resend code</Text>
                     </TouchableOpacity>
-                    <View style={{ width: "100%" }}>
+                    {/* <View style={{ width: "100%" }}>
                         <GenericButton bgColor={"primaryBase"} label={"Verify"} fontColor={"white"} onPress={handleVerification} />
-                    </View>
+                    </View> */}
                 </View>
+
             </View>
+            <Footer label={"Verify"} handleClickButton={handleVerification} />
             {
                 isLoading && (
                     <View style={styles.loader}>
@@ -87,6 +91,7 @@ const Verify = ({ navigation, route: { params: { screen } } }) => {
                     </View>
                 )
             }
+
         </SafeAreaView>
     )
 }

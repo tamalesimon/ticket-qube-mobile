@@ -53,6 +53,17 @@ import ClockDetailsTime from "../assets/svgIcons/ClockDetailsTime";
 import CheronRightIcon from "../assets/svgIcons/CheronRightIcon"
 import ChevronLeft from "../assets/svgIcons/ChevronLeft";
 import ChevronRight from "../assets/svgIcons/ChevronRight";
+import VideosIcon from "../assets/svgIcons/VideosIcon"
+import MusicIcon from "../assets/svgIcons/MusicIcon"
+import PaintIcon from "../assets/svgIcons/PaintIcon"
+import Barcode from "../assets/svgIcons/Barcode"
+import Download from "../assets/svgIcons/Download"
+import BxQr from "../assets/svgIcons/BxQr";
+import Share from "../assets/svgIcons/ShareIcon"
+import LampOn from "../assets/svgIcons/LampOn"
+import ChevronDown from "../assets/svgIcons/ChevronDown"
+import ChevronUp from "../assets/svgIcons/ChevronUp"
+import CalendarIcon from "../assets/svgIcons/CalendarIcon"
 
 
 export default {
@@ -110,5 +121,16 @@ export default {
     ClockDetailsTime,
     CheronRightIcon,
     ChevronLeft,
-    ChevronRight
+    ChevronRight,
+    VideosIcon,
+    MusicIcon,
+    PaintIcon,
+    Barcode,
+    Download,
+    BxQr,
+    Share,
+    LampOn,
+    ChevronDown,
+    ChevronUp,
+    CalendarIcon
 }

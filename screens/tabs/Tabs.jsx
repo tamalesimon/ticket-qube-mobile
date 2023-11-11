@@ -5,11 +5,12 @@ import Favorites from "../favorites/Favorites"
 import Tickets from "../ticket/Ticket"
 import Profile from "../profile/Profile"
 import {
-    homeScreenOptions,
-    exploreScreenOptions,
-    favoritesScreenOptions,
-    ticketsScreenOptions,
-    profileScreenOptions } from "../../components/header/screenOptions";
+  homeScreenOptions,
+  exploreScreenOptions,
+  favoritesScreenOptions,
+  ticketsScreenOptions,
+  profileScreenOptions
+} from "../../components/header/screenOptions";
 
 const Tab = createBottomTabNavigator();
 

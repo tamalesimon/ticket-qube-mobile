@@ -29,3 +29,7 @@ export const checkImageURL = (url) => {
     const domain = email.slice(atIndex);
     return maskedUsername + domain;
   };
+
+  const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+  const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/;
+  const usernameRegex = /^\w+$/;

@@ -21,7 +21,7 @@ const EventDateStrip = ({ date }) => {
     return (
         <View style={styles.container}>
             {dateList.map((date, index) => (
-                <View key={index} style={[styles.dateContainer, index === 2 && { backgroundColor: COLORS.grayBase }]}>
+                <View key={index} style={[styles.dateContainer, index === 2 && { backgroundColor: COLORS.secondaryBase }]}>
                     <Text style={[styles.day, index === 2 && { color: COLORS.white }]}>{date.month}</Text>
                     <Text style={[styles.month, index === 2 && { color: COLORS.white }]}>{date.day}</Text>
                 </View>
@@ -35,11 +35,11 @@ export default EventDateStrip;
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        gap:16,
+        gap: 16,
         justifyContent: 'center',
         // borderRadius: 12,
         //marginRight:12
-        //  
+        //
 
     },
     dateContainer: {
