@@ -23,7 +23,7 @@ export default function Page() {
   const navigation = useNavigation();
   return (
     <Stack.Navigator>
-      {/* <Stack.Group>
+      <Stack.Group>
         <Stack.Screen
           name="Get Started"
           component={GetStarted}
@@ -77,7 +77,7 @@ export default function Page() {
             )
           }}
         />
-      </Stack.Group> */}
+      </Stack.Group>
 
       <Stack.Group>
       <Stack.Screen
