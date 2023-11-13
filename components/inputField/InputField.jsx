@@ -54,7 +54,9 @@ export default function InputField({
                 value={value}
                 onChangeText={(text) => {
                     onChangeText(text);
-                    setFormData((prevFormData) => ({ ...prevFormData, [inputType]: text }))
+                    if (inputType !== 'names') {
+                        setFormData((prevFormData) => ({ ...prevFormData, [inputType]: text }))
+                    }
                     if (!isEmpty) {
                         setIsEmpty(false)
                     }
