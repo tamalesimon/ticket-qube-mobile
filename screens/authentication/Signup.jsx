@@ -17,7 +17,7 @@ const Signup = ({ navigation }) => {
     const dispatch = useDispatch();
     const { isLoading, error, userinfo, isCreated } = useSelector(state => state.auth);
     const [nameInput, setNameInput] = useState('');
-    const initialFormData = { firstName: '', lastName: '', email: '', password: '', phoneNumber: '', dateOfBirth: '', userRole: '' }
+    const initialFormData = { firstName: '', lastName: '', email: '', password: '', phoneNumber: '256779813251', dateOfBirth: '1993-04-17T00:00:00', userRole: 'CLIENT', country: 'Uganda', timeZone: 'AFRICA_KAMPALA' }
     const { formData, formErrors, handleSubmit, setFormData } = useFormValidation(initialFormData);
     const { firstName, lastName, email, password, phoneNumber, dateOfBirth, userRole } = formData;
 
@@ -43,22 +43,26 @@ const Signup = ({ navigation }) => {
         if (isValid) {
             dispatch(createAccount(data));
         }
+        console.log('form Data', data)
     }
 
     const handleInputText = (text) => {
-        setNameInput(text);
+        setNameInput(text)
         const names = text.split(' ');
         let firstName;
         let lastName;
         if (names.length >= 2 && names.length <= 4) {
             firstName = names.slice(0, -1).join(' ');
             lastName = names.slice(-1)[0];
+        } else if (names.length > 4) {
+            firstName = names.slice(0, 2).join(' ');
+            lastName = names.slice(-1)[0];
         } else {
             firstName = text;
             lastName = '';
         }
         setFormData(prevState => ({ ...prevState, firstName, lastName }));
-    }
+    };
 
     return (
         <SafeAreaView style={{ backgroundColor: COLORS.white, flex: 1, padding: 23 }}>

@@ -1,9 +1,10 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { API_LOCAL, API_DEV } from '@env'
 
 const API = API_DEV;
-const LocalAPI = "http://192.168.100.138:8080";
+const LocalAPI = "http://192.168.100.160:8080";
 
 const initialState = {
   userInfo: {},
@@ -17,7 +18,10 @@ const initialState = {
   isLoading: false,
   status: null,
   otp: '',
-  responseStatus: null
+  isSignedUp: {},
+  isVerified: {},
+  isLoggedIn: {},
+  isError: {}
 }
 
 const options = {
@@ -40,6 +44,7 @@ export const createAccount = createAsyncThunk('users/signup', async (userDetails
     const response = await axiosInstance.post(`${LocalAPI}/users/signup`, userDetails, {
       options
     });
+    AsyncStorage.setItem('userDetails', JSON.stringify(response.data))
     return response.data
   } catch (error) {
     console.log(error)
@@ -199,9 +204,8 @@ const authSlice = createSlice({
       .addCase(createAccount.fulfilled, (state, action) => {
         state.isLoading = false;
         state.userInfo = action.payload;
-        state.isCreated = action.payload? true : false
+        state.isSignedUp = action.payload
         state.token = action.payload.token;
-        axios.defaults.headers.common['Authorization'] = `Bearer ${action.payload}`;
       })
       .addCase(createAccount.rejected, (state, action) => {
         state.isLoading = false;
