@@ -8,6 +8,7 @@ import { useFormValidation } from "../../hooks/useFormValidation";
 import GenericButton from "../../components/buttons/genericButton";
 import InputField from "../../components/inputField/InputField";
 import AcceptTerms from "../../components/terms/AcceptTerms";
+import LoadingIndicator from "../../components/loaders/LoadingIndicator";
 
 import globalStyles from '../../styles/globalStyles';
 
@@ -15,18 +16,18 @@ import globalStyles from '../../styles/globalStyles';
 const Signup = ({ navigation }) => {
 
     const dispatch = useDispatch();
-    const { isLoading, error, userinfo, isCreated } = useSelector(state => state.auth);
+    const { isLoading, error, isSignedUp, isCreated } = useSelector(state => state.auth);
     const [nameInput, setNameInput] = useState('');
-    const initialFormData = { firstName: '', lastName: '', email: '', password: '', phoneNumber: '256779813251', dateOfBirth: '1993-04-17T00:00:00', userRole: 'CLIENT', country: 'Uganda', timeZone: 'AFRICA_KAMPALA' }
+    const initialFormData = { firstName: '', lastName: '', email: '', password: '', phoneNumber: '256779813251', dateOfBirth: '1993-04-17T00:00:00', userRole: 'CLIENT', country: 'UGANDA', timezone: 'AFRICA_KAMPALA' }
     const { formData, formErrors, handleSubmit, setFormData } = useFormValidation(initialFormData);
     const { firstName, lastName, email, password, phoneNumber, dateOfBirth, userRole } = formData;
 
 
     const handleNavigation = () => {
         if (isCreated) {
-            navigation.navigate('Verify', {
-                screen: 'Signin',
-                params: { email: userinfo.email }
+            navigation.navigate({
+                name: 'Verify',
+                params: { email: isSignedUp.email, password: password }
             })
         }
     }
@@ -34,7 +35,10 @@ const Signup = ({ navigation }) => {
     useEffect(() => {
         handleNavigation();
         navigation.setOptions({
-            headerShown: !isLoading
+            // headerShown: !isLoading
+            headerStyle: {
+                backgroundColor: isLoading ? '#7F7F7F' : 'white'
+            }
         });
     }, [isCreated, isLoading])
 
@@ -122,6 +126,13 @@ const Signup = ({ navigation }) => {
                     </View>
                 </View>
             </View>
+            {
+                isLoading && (
+                    <View style={styles.loader}>
+                        <LoadingIndicator />
+                    </View>
+                )
+            }
         </SafeAreaView>
     )
 }
@@ -142,5 +153,15 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: COLORS.primaryBase,
         lineHeight: 24
+    },
+    loader: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)'
     }
 })

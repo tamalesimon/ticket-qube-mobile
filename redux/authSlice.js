@@ -4,7 +4,7 @@ import axios from "axios";
 import { API_LOCAL, API_DEV } from '@env'
 
 const API = API_DEV;
-const LocalAPI = "http://192.168.100.160:8080";
+const LocalAPI = "http://localhost:8080";
 
 const initialState = {
   userInfo: {},
@@ -19,12 +19,12 @@ const initialState = {
   status: null,
   otp: '',
   isSignedUp: {},
-  isVerified: {},
+  isVerified: '',
   isLoggedIn: {},
   isError: {}
 }
 
-const options = {
+const headers = {
   headers: {
     'Content-Type': 'application/json; charset=utf-8',
     'Access-Control-Allow-Origin': '*',
@@ -35,16 +35,17 @@ const options = {
 
 const axiosInstance = axios.create({
   baseURL: LocalAPI,
-  headers: options.headers
+  headers: headers.headers
 });
 
 
 export const createAccount = createAsyncThunk('users/signup', async (userDetails) => {
   try {
     const response = await axiosInstance.post(`${LocalAPI}/users/signup`, userDetails, {
-      options
+      options: headers
     });
-    AsyncStorage.setItem('userDetails', JSON.stringify(response.data))
+    console.log("headers: ", axiosInstance)
+    AsyncStorage.setItem('signupInfo', JSON.stringify(response.data))
     return response.data
   } catch (error) {
     console.log(error)
@@ -52,24 +53,30 @@ export const createAccount = createAsyncThunk('users/signup', async (userDetails
   }
 });
 
-export const verifyEmail = createAsyncThunk('users/verifyEmail', async (email) => {
+export const verifyOtp = createAsyncThunk('users/verify-otp-on-signup', async (data) => {
   try {
-    const response = await axiosInstance.post(`${LocalAPI}/users/verifyEmail`, email)
+    const response = await axiosInstance.post(`${LocalAPI}/users/verify-otp-on-signup`, data)
+    AsyncStorage.removeItem('signupInfo');
+    AsyncStorage.setItem('verificationInfo', JSON.stringify(response.data))
+    console.log("data", data)
     return response.data
   } catch (error) {
     throw error.response.data.message
   }
 });
 
-export const signin = createAsyncThunk('users/signin', async (useDetails, { getState }) => {
+export const signin = createAsyncThunk('users/signin', async (useDetails) => {
   try {
-    const bearerToken = getState().auth.token;
+    const verificationInfo = await AsyncStorage.getItem('verificationInfo');
+    const tokenDetails = JSON.parse(verificationInfo);
     const response = await axiosInstance.post(`${LocalAPI}/users/login`, useDetails, {
       headers: {
-        ...options.headers,
-        'Authorization': `Bearer ${bearerToken}`
+        ...headers.headers,
+        'Authorization': `Bearer ${tokenDetails.token}`
       }
     })
+    AsyncStorage.removeItem('verificationInfo');
+    AsyncStorage.setItem('qubeUserLoginDetails', JSON.stringify(response.data))
     return response.data
   } catch (error) {
     throw error.response.data.message
@@ -81,13 +88,10 @@ export const forgotPassword = createAsyncThunk('/users/forgot-password', async (
     const bearerToken = getState().auth.token;
     const response = await axiosInstance.post(`${LocalAPI}/users/forgot-password`, email, {
       headers: {
-        ...options.headers,
+        ...headers.headers,
         'Authorization': `Bearer ${bearerToken}`
       }
     });
-
-
-
     return response.data;
   } catch (error) {
     throw error.response.data.message
@@ -99,7 +103,7 @@ export const resetPassword = createAsyncThunk('reset/password', async (password,
     const bearerToken = getState().auth.token;
     const response = await axiosInstance.post(`${LocalAPI}/users/forgotPassword`, password, {
       headers: {
-        ...options.headers,
+        ...headers.headers,
         'Authorization': `Bearer ${bearerToken}`
       }
     })
@@ -109,15 +113,11 @@ export const resetPassword = createAsyncThunk('reset/password', async (password,
   }
 });
 
-export const verifyOtp = createAsyncThunk('users/verify', async (data, { getState }) => {
+export const verifyUser = createAsyncThunk('users/verify', async (data) => {
   try {
-    const userid = getState().auth.userInfo.userId;
-    const bearerToken = getState().auth.token;
-    console.log("testing OTP: ", data)
-    console.log("authorization: ", bearerToken)
     const response = await axiosInstance.post(`${LocalAPI}/verification/verify/${userid}`, data, {
       headers: {
-        ...options.headers,
+        ...headers.headers,
         'Authorization': `Bearer ${bearerToken}`
       }
     })
@@ -154,16 +154,13 @@ const authSlice = createSlice({
       })
       .addCase(verifyOtp.pending, state => {
         state.isLoading = true;
+        state.isVerified = null;
         state.error = null;
       })
       .addCase(verifyOtp.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isAuthenticated = false;
-        state.userInfo = action.payload;
-        state.otp = action.payload.otp;
-        state.token = action.payload.token;
-        state.isVerified = true
-        axios.defaults.headers.common["Authorization"] = `Bearer ${action.payload.token}`;
+        state.isCreated = true
+        state.isVerified = action.payload; //fix this its not supposed to be here its supposed to be in pending
       })
       .addCase(verifyOtp.rejected, (state, action) => {
         state.isLoading = false;
@@ -182,15 +179,15 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload ? action.payload : action.error.message;
       })
-      .addCase(verifyEmail.pending, state => {
+      .addCase(verifyUser.pending, state => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(verifyEmail.fulfilled, (state, action) => {
+      .addCase(verifyUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.userInfo = action.payload.data;
       })
-      .addCase(verifyEmail.rejected, (state, action) => {
+      .addCase(verifyUser.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload ? action.payload : action.error.message;
       })
@@ -203,8 +200,9 @@ const authSlice = createSlice({
       })
       .addCase(createAccount.fulfilled, (state, action) => {
         state.isLoading = false;
+        state.isCreated = true;
         state.userInfo = action.payload;
-        state.isSignedUp = action.payload
+        state.isSignedUp = action.payload;
         state.token = action.payload.token;
       })
       .addCase(createAccount.rejected, (state, action) => {
