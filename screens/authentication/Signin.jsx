@@ -29,7 +29,9 @@ const Signin = ({ navigation }) => {
     useEffect(() => {
         handleNavigation();
         navigation.setOptions({
-            headerShown: !isLoading
+            headerStyle: {
+                backgroundColor: isLoading ? '#7F7F7F' : 'white'
+            }
         });
     }, [status, isLoading])
 
@@ -39,6 +41,7 @@ const Signin = ({ navigation }) => {
     const handleSignin = () => {
         const { isValid, data } = handleSubmit();
         if (isValid) {
+            console.log(data)
             dispatch(signin(data));
         } else {
             console.log(formErrors)

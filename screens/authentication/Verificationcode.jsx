@@ -15,41 +15,45 @@ import { Footer } from "../event/components";
 
 
 
-const Verify = ({ navigation, route: { params: { screen } } }) => {
+const Verify = ({ navigation, route: { params: { password } } }) => {
     const [errorMessage, setErrorMessage] = useState('')
-    const { isLoading, error, isVerified, isExisting, status } = useSelector(state => state.auth)
+    const { isLoading, error, isVerified, isSignedUp, isCreated } = useSelector(state => state.auth)
     const { formData, formErrors, handleSubmit, setFormData } = useFormValidation(initialFormData = { otp: ['', '', '', '', ''] })
     const { otp } = formData
     const dispatch = useDispatch();
 
 
     const handleNavigation = () => {
-        if (status) {
-            navigation.navigate(screen);
+        if (isVerified) {
+            navigation.navigate('Signin');
         }
     }
 
     useEffect(() => {
         handleNavigation();
         navigation.setOptions({
-            headerShown: !isLoading
+            // headerShown: !isLoading,
+            headerStyle: {
+                backgroundColor: isLoading ? '#7F7F7F' : 'white'
+            }
         });
-    }, [isLoading, isExisting, isVerified])
+    }, [isLoading, isVerified])
 
     const handleVerification = () => {
         const { isValid } = handleSubmit();
+        const otpToString = otp.join('');
+        const data = {
+            userId: isSignedUp.userId,
+            email: isSignedUp.email,
+            password: password,
+            otp: otpToString
+        }
         if (isValid) {
-            const otpToString = otp.join('');
-            const data = { otp: otpToString }
             dispatch(verifyOtp(data))
         } else {
-            const otpError = formErrors.otp;
-            if (otpError) {
-                setErrorMessage(otpError)
-                console.log(errorMessage)
-            } else (error)
+            setErrorMessage(formErrors) //handle errors well
+            console.log("error: ", errorMessage)
         }
-
     }
 
     return (
@@ -59,8 +63,8 @@ const Verify = ({ navigation, route: { params: { screen } } }) => {
                 <View style={{ flexDirection: 'column', alignItems: 'center', width: "100%", justifyContent: 'center' }}>
                     <View style={{ flexDirection: 'column', alignItems: 'center', marginTop: 32, }}>
                         <Text style={{ ...globalStyles.Heading4, fontWeight: 700, }}>Verification Code</Text>
-                        <Text style={styles.message}>We have sent the verification code to your email</Text>
-                        {/* <Text style={styles.messageEmail}>{maskEmail(email)}.</Text> */}
+                        <Text style={styles.message}>We have sent the verification code to</Text>
+                        <Text style={styles.messageEmail}>{maskEmail(isSignedUp.email)}.</Text>
                     </View>
                     <View style={styles.inputContainer}>
                         {otp.map((digit, index) => (

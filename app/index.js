@@ -1,9 +1,10 @@
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { useNavigation } from "expo-router";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { COLORS, ICONS, FONTS } from "../constants";
-import store from "../store";
-import { Provider } from "react-redux";
 import { Signin, Signup, ForgotPassword, ResetPassword, ResetSuccess, Verify } from "../screens/authentication";
 import { Location, FollowOrganiser, PickInterest } from "../screens/onboarding";
 import { GetStarted } from "../screens/welcome";
@@ -21,6 +22,33 @@ const Stack = createNativeStackNavigator();
 
 export default function Page() {
   const navigation = useNavigation();
+  const { isSignedUp, isVerified, isLoggedIn } = useSelector(state => state.auth)
+  const [isToken, setIsToken] = useState(null)
+
+  useEffect(() => {
+    AsyncStorage.getItem("QubeFirstLaunch").then(async (value) => {
+      if (value === null) {
+        AsyncStorage.setItem("QubeFirstLaunch", "true");
+        navigation.navigate("Get Started");
+      } else {
+        const authDetails = await AsyncStorage.getItem("qubeUserLoginDetails")
+        const tokenDetails = JSON.parse(authDetails);
+        if (tokenDetails) {
+          setIsToken(tokenDetails.token)
+          navigation.navigate("Signin");
+        } else {
+          navigation.navigate("Get Started");
+        }
+      }
+    })
+  }, [])
+
+  const qubeAuthStatus = {
+    loggedIn_active: isToken && isLoggedIn.status === "ACTIVE",
+    signedUp_inactive: isSignedUp.status === "PENDING",
+    signedUp_active: isSignedUp.status === "ACTIVE",
+  }
+
   return (
     <Stack.Navigator>
       <Stack.Group>
@@ -30,13 +58,13 @@ export default function Page() {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="Signin"
-          component={Signin}
+          name="Signup"
+          component={Signup}
           options={screenOptions}
         />
         <Stack.Screen
-          name="Signup"
-          component={Signup}
+          name="Signin"
+          component={Signin}
           options={screenOptions}
         />
         <Stack.Screen
@@ -44,11 +72,13 @@ export default function Page() {
           component={Verify}
           options={screenOptions}
         />
+
         <Stack.Screen
           name="ForgotPassword"
           component={ForgotPassword}
           options={screenOptions}
         />
+
         <Stack.Screen
           name="ResetPassword"
           component={ResetPassword}
@@ -80,7 +110,7 @@ export default function Page() {
       </Stack.Group>
 
       <Stack.Group>
-      <Stack.Screen
+        <Stack.Screen
           name="DOB"
           component={DateofBirth}
           options={
