@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
 import { ICONS, COLORS, FONTS, images } from '../../constants'
 import { checkImageURL, returnDateDay, returnDateMonth } from '../../utils/utils';
+import { Skeleton } from 'moti/skeleton';
 
 export default function EventCard({ item }) {
     return (
@@ -15,7 +16,7 @@ export default function EventCard({ item }) {
                     <Text style={styles.dateMonth}>{returnDateMonth(item.startDate)}</Text>
                 </View>
                 <View style={styles.detailsContainer}>
-                    <Text style={styles.detailsTitle}>{item.name}: {item.location}</Text>
+                    <Text style={styles.detailsTitle} numberOfLines={2}>{item.name}: {item.location}</Text>
                     <View style={styles.detailsSubtitle}>
                         <Text style={styles.locationTime}>{item.location}</Text>
                         <TouchableOpacity style={styles.price}>
@@ -24,6 +25,7 @@ export default function EventCard({ item }) {
                     </View>
                 </View>
             </ImageBackground>
+
         </View>
     );
 }
@@ -34,23 +36,26 @@ const styles = StyleSheet.create({
         width: 250,
         borderRadius: 16,
         overflow: 'hidden',
-        zIndex: 99,
+        // zIndex: 99,
         padding: 12,
-        shadowColor: "#111827",
-        shadowOffset: {
-            width: 0,
-            height: 18,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 20.00,
-        elevation: 5
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        alignItems: 'flex-end'
+        // shadowColor: "#111827",
+        // shadowOffset: {
+        //     width: 0,
+        //     height: 18,
+        // },
+        // shadowOpacity: 0.25,
+        // shadowRadius: 20.00,
+        // elevation: 5
     },
     dateContainer: {
-        position: 'absolute',
-        left: '85%',
-        top: '4.8%',
-        right: '4.8%',
-        bottom: '84.14%',
+        // position: 'absolute',
+        // left: '85%',
+        // top: '4.8%',
+        // right: '4.8%',
+        // bottom: '84.14%',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
@@ -74,18 +79,19 @@ const styles = StyleSheet.create({
         lineHeight: 15
     },
     detailsContainer: {
-        position: 'absolute',
-        left: '4.8%',
-        right: '4.8%',
-        top: '59.31%',
-        bottom: '4.14%',
+        // position: 'absolute',
+        // left: '4.8%',
+        // right: '4.8%',
+        // top: '59.31%',
+        // bottom: '4.14%',
+        minHeight: 106,
         width: "100%",
         flexDirection: 'column',
         justifyContent: 'space-between',
         padding: 12,
         backgroundColor: COLORS.white,
         borderRadius: 16,
-
+        gap: 8,
         shadowColor: "#111827",
         shadowOffset: {
             width: 0,
@@ -99,7 +105,8 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.NotoSansJPRegular,
         fontWeight: 700,
         fontSize: 14,
-        color: COLORS.grayBase
+        color: COLORS.grayBase,
+        overflow: 'hidden'
     },
     detailsSubtitle: {
         flexDirection: 'row',

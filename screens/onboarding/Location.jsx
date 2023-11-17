@@ -62,7 +62,7 @@ export default function Location({ navigation }) {
                     </TouchableOpacity>
                 </View>
             </View>
-            <Footer label={"Next"} handleClickButton={() => navigation.navigate('ResetSuccess')} />
+            <Footer label={"Next"} handleClickButton={() => navigation.navigate('FollowOrganiser')} />
             {
                 isClicked &&
                 <View style={styles.modalBack}>

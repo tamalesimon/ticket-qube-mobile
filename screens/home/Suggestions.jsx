@@ -1,35 +1,42 @@
 import React from 'react';
-import { View, StyleSheet, ActivityIndicator, Text, FlatList} from 'react-native';
+import { View, StyleSheet, ActivityIndicator, Text, FlatList } from 'react-native';
 import SuggestionCard from '../../components/card/SuggestionCard';
 import SectionHeaders from '../../components/titleHeaders/SectionHeaders'
 import useDataFetch from '../../utils/useDataFetch'
+import SkeletonLoaderList from '../../components/loaders/SkeletonLoaderList';
 
 export default function Suggestions() {
-    const { data, isLoading, error, refetch } = useDataFetch('3004/suggestion')
+    const { data, isLoading, error, refetch } = useDataFetch('3000/suggestion')
 
     const renderSuggestion = () => {
-        if (isLoading) {
-            return <ActivityIndicator size="large" colors="black" />
-        } else {
-            return (
-                <View>
-                    <SectionHeaders sectionTitle="Suggestions for you"/>
-                    <View style={{marginTop:16}}>
-                    {
-                        data.map((item) => {
-                            return (
-                                <SuggestionCard style={styles.suggestionSection} key={item.id} item={item}/>
-                            )
-                        })
-                    }
-                    </View>
-                </View>
-            )
-        }
+        return (
+            <View>
+                <SectionHeaders sectionTitle="Suggestions for you" isLoading={isLoading} />
+                {
+                    isLoading ?
+                        (<View style={{ marginTop: 16 }}>
+                            <SkeletonLoaderList />
+                        </View>) :
+                        (
+                            <View style={{ marginTop: 16 }}>
+                                {
+                                    data.map((item) => {
+                                        return (
+                                            <SuggestionCard style={styles.suggestionSection} key={item.id} item={item} />
+                                        )
+                                    })
+                                }
+                            </View>
+                        )
+                }
+
+
+            </View>
+        )
     }
     return (
         <View>
-        {renderSuggestion()}
+            {renderSuggestion()}
         </View>
     );
 }
@@ -37,7 +44,7 @@ export default function Suggestions() {
 const styles = StyleSheet.create({
     suggestionSection: {
         flexDirection: 'column',
-        gap:16,
+        gap: 16,
         // marginHorizontal:10
     }
 })

@@ -33,6 +33,7 @@ export default function Page() {
       } else {
         const authDetails = await AsyncStorage.getItem("qubeUserLoginDetails")
         const tokenDetails = JSON.parse(authDetails);
+        console.log(tokenDetails)
         if (tokenDetails) {
           setIsToken(tokenDetails.token)
           navigation.navigate("Signin");

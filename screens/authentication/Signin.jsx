@@ -1,4 +1,5 @@
 import React, { useCallback, useState, useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { View, Text, TouchableOpacity, SafeAreaView, StyleSheet } from 'react-native';
 import { COLORS, FONTS, FONTSIZE, images, ICONS } from '../../constants';
 import GenericButton from "../../components/buttons/genericButton";
@@ -8,7 +9,6 @@ import { signin } from "../../redux/authSlice";
 import globalStyles from '../../styles/globalStyles';
 import InputField from "../../components/inputField/InputField";
 import { useFormValidation } from '../../hooks/useFormValidation.js';
-import { useNavigationHandler } from "../../hooks/useNavigationHandler.js";
 import Display from '../../utils/Display';
 import LoadingIndicator from "../../components/loaders/LoadingIndicator";
 
@@ -21,10 +21,30 @@ const Signin = ({ navigation }) => {
     const { formData, formErrors, setFormData, handleSubmit } = useFormValidation(initialFormData);
 
     const handleNavigation = () => {
-        if (status) {
-            navigation.replace('NavigationTabs');
-        }
+        // if (status) {
+        //     navigation.replace('NavigationTabs');
+        // }
+
+        AsyncStorage.getItem("qubeId").then(async (value) => {
+            if (value == null) {
+                await AsyncStorage.setItem("qubeId", "true");
+                navigation.navigate("DOB");
+            } else {
+                if (status && value) {
+                    navigation.replace('NavigationTabs');
+                }
+            }
+        })
     }
+
+    // useEffect(() => {
+    //     AsyncStorage.getItem("qubeId").then(async (value) => {
+    //         if (value == null) {
+    //             await AsyncStorage.setItem("qubeId", "true");
+    //             navigation.navigate("DOB");
+    //         }
+    //     })
+    // }, [])
 
     useEffect(() => {
         handleNavigation();
@@ -34,8 +54,6 @@ const Signin = ({ navigation }) => {
             }
         });
     }, [status, isLoading])
-
-    // useNavigationHandler(isLoading, status, navigation, 'NavigationTab')
 
 
     const handleSignin = () => {
