@@ -9,7 +9,7 @@ import PopularLocations from './PopularLocations';
 import { Footer } from '../event/components';
 import { TextInput } from 'react-native-gesture-handler';
 
-export default function DateofBirth({ navigator }) {
+export default function DateofBirth({ navigation }) {
     return (
         <SafeAreaView style={{ backgroundColor: COLORS.white, flex: 1, padding: 23 }}>
             <View style={{ flexDirection: 'column', gap: 8, marginTop: 32 }}>
@@ -39,7 +39,7 @@ export default function DateofBirth({ navigator }) {
                     </View> */}
                 </View>
             </View>
-            <Footer label={"Next"} handleClickButton={() => navigation.navigate('ResetSuccess')} />
+            <Footer label={"Next"} handleClickButton={() => navigation.navigate('Location')} />
         </SafeAreaView>
     );
 }

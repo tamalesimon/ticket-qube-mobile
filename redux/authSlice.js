@@ -18,6 +18,7 @@ const initialState = {
   isLoading: false,
   status: null,
   otp: '',
+  qubeUserId: '',
   isSignedUp: {},
   isVerified: '',
   isLoggedIn: {},
@@ -67,12 +68,12 @@ export const verifyOtp = createAsyncThunk('users/verify-otp-on-signup', async (d
 
 export const signin = createAsyncThunk('users/signin', async (useDetails) => {
   try {
-    const verificationInfo = await AsyncStorage.getItem('verificationInfo');
-    const tokenDetails = JSON.parse(verificationInfo);
+    const authDetails = await AsyncStorage.getItem('qubeUserLoginDetails');
+    const tokenDetails = JSON.parse(authDetails);
     const response = await axiosInstance.post(`${LocalAPI}/users/login`, useDetails, {
       headers: {
         ...headers.headers,
-        'Authorization': `Bearer ${tokenDetails.token}`
+        // 'Authorization': `Bearer ${tokenDetails.token}`
       }
     })
     AsyncStorage.removeItem('verificationInfo');

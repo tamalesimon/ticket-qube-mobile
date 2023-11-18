@@ -4,7 +4,7 @@ import { ICONS, COLORS, FONTS } from '../../../constants';
 
 export default function HeaderRight() {
   return (
-    <View>
+    <View style={{ paddingRight: 12 }}>
       <TouchableOpacity style={styles.bellNotificationTitle}>
         <ICONS.NotificationBell />
       </TouchableOpacity>

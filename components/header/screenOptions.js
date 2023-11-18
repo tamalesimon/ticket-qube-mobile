@@ -17,7 +17,7 @@ import CloseIcon from '../../screens/event/components/CloseIcon'
 export const screenOptions = {
   // headerShown: false,
   headerStyle: {
-    backgroundColor: COLORS.gray50, //turn it back to white
+    backgroundColor: COLORS.white, //turn it back to white
     elevation: 0,
     borderBottomWidth: 0,
   },

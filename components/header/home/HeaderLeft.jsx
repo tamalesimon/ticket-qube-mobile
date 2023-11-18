@@ -4,7 +4,7 @@ import { ICONS, COLORS, FONTS } from '../../../constants';
 
 export default function HeaderLeft() {
   return (
-    <View>
+    <View style={{ paddingLeft: 24 }}>
       <Text style={styles.subTitle}>Find events near</Text>
       <Text style={styles.locationTitle}>Ntinda, Kampala</Text>
     </View>
