@@ -24,6 +24,7 @@ export default function Page() {
   const navigation = useNavigation();
   const { isSignedUp, isVerified, isLoggedIn } = useSelector(state => state.auth)
   const [isToken, setIsToken] = useState(null)
+  const [isExpiring, setIsExpiring] = useState(null)
 
   useEffect(() => {
     AsyncStorage.getItem("QubeFirstLaunch").then(async (value) => {
@@ -35,6 +36,7 @@ export default function Page() {
         const tokenDetails = JSON.parse(authDetails);
         console.log(tokenDetails)
         if (tokenDetails) {
+          setIsExpiring(tokenDetails.expiresAt)
           setIsToken(tokenDetails.token)
           navigation.navigate("Signin");
         } else {

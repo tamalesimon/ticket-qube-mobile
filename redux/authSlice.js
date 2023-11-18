@@ -73,7 +73,7 @@ export const signin = createAsyncThunk('users/signin', async (useDetails) => {
     const response = await axiosInstance.post(`${LocalAPI}/users/login`, useDetails, {
       headers: {
         ...headers.headers,
-        'Authorization': `Bearer ${tokenDetails.token}`
+        // 'Authorization': `Bearer ${tokenDetails.token}`
       }
     })
     AsyncStorage.removeItem('verificationInfo');

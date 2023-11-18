@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const useFetch = (endpoint, params) => {
+const useFetch = (endpoint, params = '') => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -18,7 +18,7 @@ const useFetch = (endpoint, params) => {
   const fetchData = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch(`http://localhost:${endpoint}`, options);
+      const response = await fetch(`http://localhost:${endpoint}/${params}`, options);
       const data = await response.json();
       setData(data);
       setIsLoading(false)

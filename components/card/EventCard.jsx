@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react
 import { ICONS, COLORS, FONTS, images } from '../../constants'
 import { checkImageURL, returnDateDay, returnDateMonth } from '../../utils/utils';
 import { Skeleton } from 'moti/skeleton';
+import Animated, { FadeIn, Layout } from 'react-native-reanimated';
 
 export default function EventCard({ item }) {
     return (
