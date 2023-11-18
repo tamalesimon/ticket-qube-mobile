@@ -3,9 +3,9 @@ import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react
 import { ICONS, COLORS, FONTS } from '../../constants'
 import { checkImageURL, returnDateDay, returnDateMonth } from '../../utils/utils';
 
-export default function SuggestionCard({ item }) {
+export default function SuggestionCard({ item, selectedEvent, handleEventClicked }) {
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={handleEventClicked}>
             <ImageBackground
                 source={{ uri: checkImageURL(item?.picture) ? item.picture : 'https://img.freepik.com/premium-photo/abstract-futuristic-contemporary-modern-watercolor-art_93314-4483.jpg' }}
                 style={styles.imageIcon}
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
         borderRadius: 16,
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 18,
+        // marginBottom: 18,
         marginHorizontal: 2,
         zIndex: 99,
         gap: 12,

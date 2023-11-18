@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ActivityIndicator, Text, FlatList } from 'react-native';
+import { useRouter } from 'expo-router';
 import SuggestionCard from '../../components/card/SuggestionCard';
 import SectionHeaders from '../../components/titleHeaders/SectionHeaders'
 import useDataFetch from '../../utils/useDataFetch'
 import SkeletonLoaderList from '../../components/loaders/SkeletonLoaderList';
 
 export default function Suggestions() {
+    const router = useRouter();
     const { data, isLoading, error, refetch } = useDataFetch('3000/suggestion')
+    const [selectedEvent, setSelectedEvent] = useState();
+
+    const handleEventClicked = (item) => {
+        router.push(`event-details/${item.id}`)
+        setSelectedEvent(item.id);
+    }
 
     const renderSuggestion = () => {
         return (
@@ -22,7 +30,7 @@ export default function Suggestions() {
                                 {
                                     data.map((item) => {
                                         return (
-                                            <SuggestionCard style={styles.suggestionSection} key={item.id} item={item} />
+                                            <SuggestionCard style={styles.suggestionSection} handleEventClicked={() => handleEventClicked(item)} selectedEvent={selectedEvent} key={item?.id} item={item} />
                                         )
                                     })
                                 }

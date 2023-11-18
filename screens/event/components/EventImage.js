@@ -1,12 +1,13 @@
 import { ImageBackground, View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { ICONS, COLORS } from "../../../constants";
+import { ICONS, COLORS } from "~/constants";
+import { checkImageURL } from "~/utils";
 import futuristic from "../../../assets/images/futurist.avif"
 
-const EventImage = () => {
+const EventImage = ({ data }) => {
     return (
         <View style={{ marginBottom: 16 }}>
             <ImageBackground
-                source={require('../../../assets/images/test_image.jpg')}
+                source={{ uri: checkImageURL(data?.picture) ? data.picture : '../../../assets/images/test_image.jpg' }}
                 style={styles.image}
                 resizeMode='cover'
             >

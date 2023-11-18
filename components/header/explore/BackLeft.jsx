@@ -2,10 +2,10 @@ import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
 import { ICONS, COLORS, FONTS } from '../../../constants';
 
-export default function BackLeft({goBack}) {
+export default function BackLeft({ handlePress }) {
   return (
     <View>
-      <TouchableOpacity style={styles.Arrow} onPress={goBack}>
+      <TouchableOpacity style={styles.Arrow} onPress={handlePress}>
         <ICONS.ArrowLeftIcon />
       </TouchableOpacity>
     </View>

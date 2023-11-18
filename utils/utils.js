@@ -16,6 +16,18 @@ export const checkImageURL = (url) => {
     return `${day}`;
   }
 
+  export const returnDateDayString = (eventDate) => {
+    const date = new Date(eventDate);
+    const day = date.toLocaleString('default', { weekday: 'long' });
+    return `${day}`
+  }
+
+  export const returnDateTime = (eventDate) => {
+    const date = new Date(eventDate);
+    const time = date.toLocaleString('default', { hour: 'numeric', minute: 'numeric', hour12: true });
+    return `${time}`;
+  }
+
   export const shortenEventName = (eventName) => {
     if(!eventName) return null
     const shortenedName = eventName.substring(0, 17)+"...";
