@@ -6,6 +6,10 @@ module.exports = function (api) {
       "@babel/plugin-proposal-export-namespace-from",
       "module:react-native-dotenv",
       "react-native-reanimated/plugin",
+      ["babel-plugin-root-import", {
+        "rootPathSuffix": "./",
+        "rootPathPrefix": "~/"
+      }],
       require.resolve("expo-router/babel"),
     ],
   };

@@ -2,13 +2,14 @@ import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { COLORS, FONTS, ICONS } from '../../../constants';
 import GenericButton from '../../../components/buttons/genericButton';
+import { checkImageURL } from '../../../utils/utils';
 
-export default function EventShareStrip() {
+export default function EventShareStrip({ data }) {
     return (
         <View style={styles.container}>
-            <Image style={styles.imageRect} resizeMode='cover' source={require('../../../assets/images/test_image.jpg')} />
+            <Image style={styles.imageRect} resizeMode='cover' source={{ uri: checkImageURL(data?.picture) ? data.picture : require('../../../assets/images/test_image.jpg') }} />
             <View style={{ gap: 8 }}>
-                <Text style={styles.eventTitle}>Xenson Senkaba Art Fest: 2023</Text>
+                <Text style={styles.eventTitle}>{data.name}</Text>
                 <View style={{ flexDirection: 'row', gap: 8, alignItems: 'center', justifyContent: 'space-between' }}>
                     <View style={styles.eventLinkContainer}>
                         <Text style={styles.eventLink}>https://qube.event...</Text>

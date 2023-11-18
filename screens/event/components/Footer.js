@@ -8,7 +8,7 @@ const Footer = ({ info, spotInfo, label, handleClickButton }) => {
         <View style={styles.wrapper}>
             <View style={styles.container}>
                 <View>
-                    {info && <Text style={styles.amount}>{info}</Text>}
+                    {info && <Text style={styles.amount}>USD</Text>}
                     {spotInfo && <Text style={styles.spots}>{spotInfo}</Text>}
                 </View>
                 <View style={{
@@ -31,11 +31,11 @@ export default Footer;
 
 const styles = StyleSheet.create({
     wrapper: {
-        
-        // backgroundColor: "white",
+
+        backgroundColor: "white",
         // alignItems: "center",
         // justifyContent: "center",
-        height: 92,
+        // height: 92,
         position: "absolute",
         bottom: 0,
         left: 0,

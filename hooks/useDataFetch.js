@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const useFetch = (endpoint, params = '') => {
+const useFetch = (endpoint) => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -18,7 +18,8 @@ const useFetch = (endpoint, params = '') => {
   const fetchData = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch(`http://localhost:${endpoint}/${params}`, options);
+      const response = await fetch(`http://localhost:${endpoint}`, options);
+      console.log(endpoint, params)
       const data = await response.json();
       setData(data);
       setIsLoading(false)
@@ -31,8 +32,13 @@ const useFetch = (endpoint, params = '') => {
   };
 
   useEffect(() => {
-    fetchData();
-  }, [params]);
+    const timer = setTimeout(() => {
+      fetchData();
+      console.log("it is being called");
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const refetch = () => {
     setIsLoading(true);

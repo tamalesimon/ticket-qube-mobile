@@ -5,7 +5,7 @@ import Animated, { useSharedValue, useAnimatedStyle, withSpring, interpolate, Ex
 import EventShareStrip from './EventShareStrip';
 import Socials from './Socials';
 
-const ShareEvent = forwardRef(({ activeHeight }, ref) => {
+const ShareEvent = forwardRef(({ activeHeight, data }, ref) => {
     const height = useWindowDimensions().height;
     const topAnimation = useSharedValue(height);
     const animationStyle = useAnimatedStyle(() => {
@@ -63,7 +63,7 @@ const ShareEvent = forwardRef(({ activeHeight }, ref) => {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.shareStrip}>
-                    <EventShareStrip />
+                    <EventShareStrip  data={data}/>
                 </View>
                 <View style={styles.dividerContainer}>
                     <View style={styles.dividerLine} />

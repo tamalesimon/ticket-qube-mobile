@@ -1,20 +1,21 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
 import globalStyles from "../../../styles/globalStyles";
 import { COLORS, FONTS, ICONS } from "../../../constants";
+import { returnDateDay, returnDateMonth, returnDateTime, returnDateDayString } from "../../../utils/utils";
 
-const Details = () => {
+const Details = ({ data }) => {
     return (
         <View style={{ marginBottom: 24 }}>
-            <Text style={styles.eventTitle}>Xenson Senkaba Art Fest: 2023</Text>
+            <Text style={styles.eventTitle}>{data?.name}</Text>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <View style={styles.dateContainer}>
-                        <Text style={styles.dateText}>29</Text>
-                        <Text style={styles.dateMonth}>Mar</Text>
+                        <Text style={styles.dateText}>{returnDateDay(data?.startDate)}</Text>
+                        <Text style={styles.dateMonth}>{returnDateMonth(data?.startDate)}</Text>
                     </View>
                     <View>
-                        <Text style={styles.day}>Tuesday</Text>
-                        <Text style={styles.time}>10:00 PM - End</Text>
+                        <Text style={styles.day}>{returnDateDayString(data?.startDate)}</Text>
+                        <Text style={styles.time}>{returnDateTime(data?.startDate)} - {returnDateTime(data?.endDate)}</Text>
                     </View>
                 </View>
                 <TouchableOpacity style={styles.calender}>
@@ -23,7 +24,7 @@ const Details = () => {
             </View>
             <View>
                 <Text style={styles.aboutTitle}>About this event</Text>
-                <Text style={styles.aboutDetails}>We're celebrating our 30th edition of the California Art Festival in CA this Spring so join us at the Building Park in California State University from March 29 - 30, 2022 with our Private View opening on Saturday, March 26!</Text>
+                <Text style={styles.aboutDetails}>{data?.description}</Text>
                 <TouchableOpacity>
                     <Text style={styles.showMore}>Show more</Text>
                 </TouchableOpacity>
