@@ -31,7 +31,11 @@ const useFetch = (endpoint, params = '') => {
   };
 
   useEffect(() => {
-    fetchData();
+    const timer = setTimeout(() => {
+      fetchData();
+    }, 3000);
+
+    return () => clearTimeout(timer);
   }, [params]);
 
   const refetch = () => {

@@ -1,143 +1,382 @@
-{"suggestion":[
+{
+  "suggestion": [
     {
-      "id": 1,
-      "name": "Web Summit 2023",
-      "description": "Join us for the biggest tech conference of the year, featuring the latest innovations in AI, cloud computing, and more!",
-      "startDate": "2023-09-12T09:00:00",
-      "endDate": "2023-09-14T18:00:00",
-      "location": "Moscone Center, San Francisco",
-      "picture": "https://cloudfront-us-east-2.images.arcpublishing.com/reuters/KBWIVQ65RJLM3GH2BNOSKYL65A.jpg",
+      "id": "1",
+      "name": "Nyege Nyege Music Festival",
+      "description": "Nyege Nyege, Africa’s essential music and arts festival, returns for its 8th edition in an exciting new location for four days from Thursday Nov 9th to Sunday Nov 12th across 7 stages. Upon the invitation of the Mayor of Jinja and the Jinja City Council, Nyege Nyege will take place on three conjoined sites along the Nile River: The Jinja Golf Course, Source of the Nile and the Jinja Showground. With over 300 hotels, the city has enough accommodation for all budgets for all guests just minutes away from the venue. With over 500 shows internationally, the festival and its associated labels and collective have defined the vanguard of new sounds emerging from the Continent and the festival is widely considered to be the greatest showcase of traditional and contemporary African music in the world, attracting music fans and industry movers and shakers to come and discover new music genres, breakthrough artists and blossoming talents at every edition.",
+      "startDate": "2023-12-15T18:00:00",
+      "endDate": "2023-12-17T20:00:00",
+      "location": "Jinja, Uganda",
+      "picture": "https://nyegenyege.com/wp-content/uploads/2023/09/NN23-BillBoard-WIP-732x1024.png",
+      "coordinates": {
+        "latitude": 40.7128,
+        "longitude": -74.006
+      },
       "category": {
-        "id": 1,
+        "id": 101,
+        "name": "Music"
+      },
+      "tickets": [
+        {
+          "id": "001",
+          "name": "General Admission",
+          "description": "Access to all performances",
+          "price": 50
+        },
+        {
+          "id": "002",
+          "name": "VIP Pass",
+          "description": "Exclusive front-row seating and backstage access",
+          "price": 150
+        }
+      ],
+      "organizer": {
+        "id": 201,
+        "name": "Nyege Nyege",
+        "description": "Passionate about bringing music to life",
+        "picture": "https://nyegenyege.com/wp-content/uploads/2023/09/NN23-BillBoard-WIP-732x1024.png",
+        "website": "https://musicfest.com",
+        "email": "info@musicfest.com",
+        "phone": "+1 (123) 456-7890",
+        "socialMedia": {
+          "facebook": "https://www.facebook.com/musicfest",
+          "twitter": "https://twitter.com/musicfest",
+          "instagram": "https://www.instagram.com/musicfest"
+        }
+      },
+      "eventActivities": [
+        {
+          "id": "act001",
+          "name": "Live Performance",
+          "description": "A Pass",
+          "startDate": "2023-12-15T18:00:00",
+          "endDate": "2023-12-15T20:00:00",
+          "picture": "https://nyegenyege.com/wp-content/uploads/2023/09/A-Pass-1-514x559.jpg"
+        },
+        {
+          "id": "act002",
+          "name": "Live Performance",
+          "description": "Afrorack",
+          "startDate": "2023-12-16T14:00:00",
+          "endDate": "2023-12-16T18:00:00",
+          "picture": "https://nyegenyege.com/wp-content/uploads/2023/09/Afrorack-L-559x373.jpg"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Food Truck Festival",
+      "description": "A gathering of diverse food trucks offering delicious cuisines Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quam ob rem tandem, inquit, non satisfacit? Gracchum patrem non beatiorem fuisse quam fillum, cum alter stabilire rem publicam studuerit, alter evertere. Duo Reges: constructio interrete. An nisi populari fama? Conferam tecum, quam cuique verso rem subicias; Quae cum dixisset paulumque institisset, Quid est? Quae diligentissime contra Aristonem dicuntur a Chryippo. Minime vero istorum quidem, inquit.",
+      "startDate": "2023-11-25T14:00:00",
+      "endDate": "2023-11-27T18:00:00",
+      "location": "Fairgrounds",
+      "picture": "https://static.vecteezy.com/system/resources/previews/028/062/464/large_2x/car-food-transportation-night-barbecue-grill-mode-of-transport-truck-traditional-festival-land-vehicle-generated-by-ai-free-photo.jpg",
+      "coordinates": {
+        "latitude": 34.0522,
+        "longitude": -118.2437
+      },
+      "category": {
+        "id": 102,
+        "name": "Food & Drink"
+      },
+      "tickets": [
+        {
+          "id": "003",
+          "name": "Tasting Pass",
+          "description": "Access to sample dishes from all food trucks",
+          "price": 20
+        },
+        {
+          "id": "004",
+          "name": "VIP Foodie Experience",
+          "description": "Exclusive tastings and chef meet-and-greets",
+          "price": 60
+        }
+      ],
+      "organizer": {
+        "id": 202,
+        "name": "Foodie Events Co.",
+        "description": "Curating culinary experiences for food enthusiasts",
+        "picture": "https://columbusfoodtruckfest.com/wp-content/uploads/2023/01/columbusFoodTruckFestival_logoLockup_2023_for-light-backg-use.png",
+        "website": "https://foodieevents.com",
+        "email": "info@foodieevents.com",
+        "phone": "+1 (987) 654-3210",
+        "socialMedia": {
+          "facebook": "https://www.facebook.com/foodieevents",
+          "twitter": "https://twitter.com/foodieevents",
+          "instagram": "https://www.instagram.com/foodieevents"
+        }
+      },
+      "eventActivities": [
+        {
+          "id": "act003",
+          "name": "Food Truck Line Up",
+          "description": "Tortilla Street Food",
+          "startDate": "2023-11-26T12:00:00",
+          "endDate": "2023-11-26T15:00:00",
+          "picture": "https://columbusfoodtruckfest.com/wp-content/uploads/2021/01/Food-Vendor-Signup.jpg"
+        },
+        {
+          "id": "act004",
+          "name": "Live Band Perfomance",
+          "description": "Vivid Garden",
+          "startDate": "2023-11-27T14:00:00",
+          "endDate": "2023-11-27T18:00:00",
+          "picture": "https://columbusfoodtruckfest.com/wp-content/uploads/2021/01/Band-Inquiries.jpg"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Art Exhibition: Modern Perspectives",
+      "description": "Showcasing contemporary artworks from emerging artists Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consequens enim est et post oritur, ut dixi. Omnia peccata paria dicitis.",
+      "startDate": "2023-12-05T16:00:00",
+      "endDate": "2023-12-10T18:00:00",
+      "location": "Art Gallery Center, Kampala",
+      "picture": "https://luxesource.com/wp-content/uploads/2023/01/LX_Chicago76_Scene_11.jpg",
+      "coordinates": {
+        "latitude": 51.5074,
+        "longitude": -0.1278
+      },
+      "category": {
+        "id": 103,
+        "name": "Art & Culture"
+      },
+      "tickets": [
+        {
+          "id": "005",
+          "name": "General Entry",
+          "description": "Access to the entire exhibition",
+          "price": 10
+        },
+        {
+          "id": "006",
+          "name": "VIP Preview",
+          "description": "Exclusive preview night with artists",
+          "price": 30
+        }
+      ],
+      "organizer": {
+        "id": 203,
+        "name": "Artistic Visions Group",
+        "description": "Promoting diverse art forms and creativity",
+        "picture": "https://artistkarin.com/wp-content/uploads/2013/01/artistic-vision.jpg",
+        "website": "https://artisticvisions.com",
+        "email": "info@artisticvisions.com",
+        "phone": "+1 (777) 888-9999",
+        "socialMedia": {
+          "facebook": "https://www.facebook.com/artisticvisions",
+          "twitter": "https://twitter.com/artisticvisions",
+          "instagram": "https://www.instagram.com/artisticvisions"
+        }
+      },
+      "eventActivities": [
+        {
+          "id": "act005",
+          "name": "Artist Talks",
+          "description": "Creative process",
+          "startDate": "2023-12-07T16:00:00",
+          "endDate": "2023-12-07T18:00:00",
+          "picture": "https://camstl.org/wp-content/uploads/2019/12/2020.01-Spring-Patron-Press-Preview_Virginia-Harold50-1000x0-c-default.jpg"
+        },
+        {
+          "id": "act006",
+          "name": "Live Art Creation",
+          "description": "Art in real-time",
+          "startDate": "2023-12-09T11:00:00",
+          "endDate": "2023-12-09T15:00:00",
+          "picture": "https://co-events.com/en/wp-content/uploads/sites/3/2019/09/Arnaud-Puig-2.jpg"
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "name": "Tech Conference: Innovation Unleashed",
+      "description": "Explore the latest in technology and innovation Lorem ipsum dolor sit amet, consectetur adipiscing elit. Is ita vivebat, ut nulla tam exquisita posset inveniri voluptas, qua non abundaret. Recte dicis; Huius, Lyco, oratione locuples, rebus ipsis ielunior. Facillimum id quidem est, inquam. Varietates autem iniurasque fortunae facile veteres philosophorum praeceptis instituta vita superabat. Duo Reges: constructio interrete. Quid igitur dubitamus in tota eius natura quaerere quid sit effectum? Multoque hoc melius nos veriusque quam Stoici. Quid est, quod ab ea absolvi et perfici debeat? Quod mihi quidem visus est, cum sciret, velle tamen confitentem audire Torquatum. Quos quidem tibi studiose et diligenter tractandos magnopere censeo.",
+      "startDate": "2023-11-28T09:00:00",
+      "endDate": "2023-11-30T12:00:00",
+      "location": "Tech Hub Convention Center",
+      "picture": "https://cloudfront-us-east-2.images.arcpublishing.com/reuters/KBWIVQ65RJLM3GH2BNOSKYL65A.jpg",
+      "coordinates": {
+        "latitude": 37.7749,
+        "longitude": -122.4194
+      },
+      "category": {
+        "id": 104,
         "name": "Technology"
       },
       "tickets": [
         {
-          "id": 1,
-          "name": "Early Bird Ticket",
-          "description": "Access to the conference for both days at a discounted price.",
-          "price": 499.99
+          "id": "007",
+          "name": "Standard Pass",
+          "description": "Access to keynote sessions and expo",
+          "price": 100
         },
         {
-          "id": 2,
-          "name": "Standard Ticket",
-          "description": "Access to the conference for both days at the regular price.",
-          "price": 599.99
+          "id": "008",
+          "name": "VIP Experience",
+          "description": "Exclusive workshops and networking",
+          "price": 250
+        }
+      ],
+      "organizer": {
+        "id": 204,
+        "name": "InnovateTech Inc.",
+        "description": "Driving technological advancements",
+        "picture": "https://innovatetech.com/wp-content/uploads/2016/03/ITLogoMed.jpg",
+        "website": "https://innovatetech.com",
+        "email": "info@innovatetech.com",
+        "phone": "+1 (555) 123-4567",
+        "socialMedia": {
+          "facebook": "https://www.facebook.com/innovatetech",
+          "twitter": "https://twitter.com/innovatetech",
+          "instagram": "https://www.instagram.com/innovatetech"
+        }
+      },
+      "eventActivities": [
+        {
+          "id": "act007",
+          "name": "Keynote Addresses",
+          "description": "Industry leaders",
+          "startDate": "2023-11-28T09:00:00",
+          "endDate": "2023-11-28T12:00:00",
+          "picture": "https://assets-global.website-files.com/61f29c609f84a86e418fbcfb/645a17db9870f27e28420c4e_Keynote-speakers.jpeg"
+        },
+        {
+          "id": "act008",
+          "name": "Tech Expo",
+          "description": "Showcasing cutting-edge technologies",
+          "startDate": "2023-11-29T10:00:00",
+          "endDate": "2023-11-29T17:00:00",
+          "picture": "https://www.iottechexpo.com/wp-content/uploads/2022/11/IoT-Tech-Expo-is-coming-back-to-London-1.png"
         }
       ]
     },
     {
-      "id": 2,
-      "name": "The Annual Marketing Conference 2023",
-      "description": "Join us for the biggest marketing conference of the year, featuring the latest trends and strategies.",
-      "startDate": "2023-11-01T09:00:00",
-      "endDate": "2023-11-03T18:00:00",
-      "location": "Jacob K. Javits Convention Center, New York City",
-      "picture": "https://africanmarketingconfederation.org/wp-content/uploads/2023/04/14-April-AMC-Member-News.jpg",
+      "id": "5",
+      "name": "Fitness Expo: Wellness Revolution",
+      "description": "Embrace fitness and holistic well-being Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ex ea difficultate illae fallaciloquae, ut ait Accius, malitiae natae sunt. Profectus in exilium Tubulus statim nec respondere ausus; Quamquam te quidem video minime esse deterritum. Duo Reges: constructio interrete. Quo modo?",
+      "startDate": "2023-12-10T11:00:00",
+      "endDate": "2023-12-12T15:00:00",
+      "location": "Fitness Center Arena",
+      "picture": "https://3.bp.blogspot.com/-tUzXivOdTH0/W9gI3YHihqI/AAAAAAAAP88/raeAl58mjWgOFyLBVe8mIul-SgZrLSFJQCEwYBhgL/s1600/45099824_10218546430800504_483526490470744064_o.jpg",
+      "coordinates": {
+        "latitude": 40.7128,
+        "longitude": -74.006
+      },
       "category": {
-        "id": 2,
-        "name": "Marketing"
+        "id": 105,
+        "name": "Health & Wellness"
       },
       "tickets": [
         {
-          "id": 3,
-          "name": "Early Bird Ticket",
-          "description": "Access to the conference for both days at a discounted price.",
-          "price": 399.99
+          "id": "009",
+          "name": "Daily Access",
+          "description": "Access to all exhibits and workshops",
+          "price": 30
         },
         {
-          "id": 4,
-          "name": "Standard Ticket",
-          "description": "Access to the conference for both days at the regular price.",
-          "price": 499.99
+          "id": "010",
+          "name": "VIP Pass",
+          "description": "Exclusive classes and personalized training",
+          "price": 80
+        }
+      ],
+      "organizer": {
+        "id": 205,
+        "name": "Wellness Unlimited",
+        "description": "Promoting a healthier lifestyle",
+        "picture": "https://www.foundationrecruitment.com/wp-content/uploads/2017/08/shutterstock_healthy-lifestyle.jpg",
+        "website": "https://wellnessunlimited.com",
+        "email": "info@wellnessunlimited.com",
+        "phone": "+1 (999) 333-7777",
+        "socialMedia": {
+          "facebook": "https://www.facebook.com/wellnessunlimited",
+          "twitter": "https://twitter.com/wellnessunlimited",
+          "instagram": "https://www.instagram.com/wellnessunlimited"
+        }
+      },
+      "eventActivities": [
+        {
+          "id": "act009",
+          "name": "Fitness Workshops",
+          "description": "Fitness routines",
+          "startDate": "2023-12-10T11:00:00",
+          "endDate": "2023-12-10T15:00:00",
+          "picture": "https://c.ndtvimg.com/2018-09/lvefaajo_weight-training_625x300_24_September_18.jpg"
+        },
+        {
+          "id": "act010",
+          "name": "Wellness Seminars",
+          "description": "Stress management",
+          "startDate": "2023-12-11T13:00:00",
+          "endDate": "2023-12-11T16:00:00",
+          "picture": "https://lifelineconnections.org/wp-content/uploads/2021/01/Stress-Management-1.png"
         }
       ]
     },
     {
-      "id": 3,
-      "name": "Art Exhibition 2023",
-      "description": "Discover the latest and greatest art pieces from around the world at this annual art exhibition.",
-      "startDate": "2023-05-10T10:00:00",
-      "endDate": "2023-05-16T18:00:00",
-      "location": "Tate Modern, London",
-      "picture": "https://luxesource.com/wp-content/uploads/2023/01/LX_Chicago76_Scene_11.jpg",
+      "id": "6",
+      "name": "Film Festival: Cinematic Odyssey",
+      "description": "Celebrating diverse stories through film Lorem ipsum dolor sit amet, consectetur adipiscing elit. Qui autem esse poteris, nisi te amor ipse ceperit? Ex ea difficultate illae fallaciloquae, ut ait Accius, malitiae natae sunt. Beatus autem esse in maximarum rerum timore nemo potest. Duo Reges: constructio interrete. Quid enim est a Chrysippo praetermissum in Stoicis? Quid est, quod ab ea absolvi et perfici debeat?",
+      "startDate": "2023-11-22T10:00:00",
+      "endDate": "2023-11-27T17:00:00",
+      "location": "Cinephile Theater",
+      "picture": "https://raindance.org/wp-content/uploads/2023/09/2023-RD-BLOG-POST-1080x608-2.jpg",
+      "coordinates": {
+        "latitude": 34.0522,
+        "longitude": -118.2437
+      },
       "category": {
-        "id": 3,
-        "name": "Art"
+        "id": 106,
+        "name": "Film & Entertainment"
       },
       "tickets": [
         {
-          "id": 5,
-          "name": "General Admission",
-          "description": "Access to the exhibition for one day.",
-          "price": 29.99
+          "id": "011",
+          "name": "Day Pass",
+          "description": "Access to screenings for a day",
+          "price": 15
         },
         {
-          "id": 6,
-          "name": "VIP Ticket",
-          "description": "Access to the exhibition for one day, with VIP treatment and a guided tour.",
-          "price": 99.99
+          "id": "012",
+          "name": "Festival Pass",
+          "description": "Access to all screenings and events",
+          "price": 50
         }
-      ]
-    },
-    {
-      "id": 4,
-      "name": "Frequency Summer Festival",
-      "description": "Join us for a fun-filled weekend of live music, food, and drinks!",
-      "startDate": "2023-07-08T12:00:00Z",
-      "endDate": "2023-07-10T23:00:00Z",
-      "location": "Central Park, New York City",
-      "picture": "https://www.thedjrevolution.com/wp-content/uploads/2023/01/Photo-of-the-dancefloor-at-Earth-Frequency-Festival.jpg",
-      "category": {
-        "id": 4,
-        "name": "Music Festivals",
-        "description": "Events that feature multiple musical performers."
-      },
-      "tickets": [
-        {
-          "id": 1,
-          "name": "General Admission",
-          "description": "Access to all performances throughout the weekend.",
-          "price": 100.0,
-          "quantity": 5000
-        },
-        {
-          "id": 2,
-          "name": "VIP Admission",
-          "description": "Access to exclusive VIP lounges and viewing areas.",
-          "price": 250.0,
-          "quantity": 500
+      ],
+      "organizer": {
+        "id": 206,
+        "name": "Cinematic Ventures",
+        "description": "Promoting storytelling through cinema",
+        "picture": "https://creativityinnovationsuccess.files.wordpress.com/2023/09/optimized_panasonic_lumix-g9-ii_header_01_2048px.jpg",
+        "website": "https://cinematicventures.com",
+        "email": "info@cinematicventures.com",
+        "phone": "+1 (888) 555-4321",
+        "socialMedia": {
+          "facebook": "https://www.facebook.com/cinematicventures",
+          "twitter": "https://twitter.com/cinematicventures",
+          "instagram": "https://www.instagram.com/cinematicventures"
         }
-      ]
-    },
-    {
-      "id": 5,
-      "name": "Charity Gala Dinner",
-      "description": "Join us for an elegant evening of fine dining, entertainment, and charity!",
-      "startDate": "2023-09-16T18:00:00Z",
-      "endDate": "2023-09-16T23:00:00Z",
-      "location": "Grand Ballroom, The Ritz-Carlton, San Francisco",
-      "picture": "https://uploads-ssl.webflow.com/60d27e95cceae4cfc65345b4/63a220c21e7378984bbebc35_Guests.jpg",
-      "category": {
-        "id": 5,
-        "name": "Galas",
-        "description": "Events that involve an evening of entertainment, often for charity or fundraising purposes."
       },
-      "tickets": [
+      "eventActivities": [
         {
-          "id": 3,
-          "name": "Individual Ticket",
-          "description": "Access to the gala dinner for one person.",
-          "price": 500.0,
-          "quantity": 100
+          "id": "act011",
+          "name": "Screening Sessions",
+          "description": "Diverse films",
+          "startDate": "2023-11-23T10:00:00",
+          "endDate": "2023-11-23T21:00:00",
+          "picture": "https://www.hollywoodreporter.com/wp-content/uploads/2022/03/Emily-Blunt-Yahya-Abdul-Mateen-II-Rachel-Zegler-Gemma-Chan-Split.jpg"
         },
         {
-          "id": 4,
-          "name": "Table of 10",
-          "description": "Reserved table for 10 people at the gala dinner.",
-          "price": 5000.0,
-          "quantity": 10
+          "id": "act012",
+          "name": "Director Q&A",
+          "description": "Filmmakers",
+          "startDate": "2023-11-26T15:00:00",
+          "endDate": "2023-11-26T17:00:00",
+          "picture": "https://www.pcma.org/wp-content/uploads/2018/07/1-Storytelling-818x460.jpg"
         }
       ]
     }
-  ]}
+  ]
+}

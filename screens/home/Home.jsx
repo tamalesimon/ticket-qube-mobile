@@ -6,12 +6,14 @@ import Upcoming from './Upcoming';
 import Suggestions from './Suggestions';
 import Categories from '../../components/categories/Categories';
 import { LinearGradient } from 'expo-linear-gradient';
+import { StatusBar } from 'expo-status-bar';
+
 
 export default function HomeTabs() {
   return (
 
     <SafeAreaView style={{ backgroundColor: "#FDFDFD", flex: 1, padding: 24 }}>
-
+      <StatusBar style="auto" />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{ marginBottom: 12 }} >
           <InputField

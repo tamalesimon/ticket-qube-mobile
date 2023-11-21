@@ -38,7 +38,7 @@ const useFetch = (endpoint) => {
     }, 3000);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [data]);
 
   const refetch = () => {
     setIsLoading(true);
