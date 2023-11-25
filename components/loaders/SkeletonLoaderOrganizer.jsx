@@ -5,7 +5,7 @@ import { Skeleton } from 'moti/skeleton'
 const SkeletonLoaderOrganizer = () => {
     return (
         <Skeleton.Group show>
-            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop:50 }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 30 }}>
                 <View style={{ flexDirection: 'row', gap: 16, flex: 1, alignItems: 'center' }}>
                     <View>
                         <Skeleton colorMode='light' width={48} radius={100}><View style={{ width: 48, height: 48, }} /></Skeleton>
