@@ -17,9 +17,6 @@ const EventDetails = () => {
 
     const { data, isLoading, error, refetch } = useDataFetch('3000/suggestion', params.id)
 
-    console.log("params", params.id)
-    console.log(error)
-
     const navigation = useNavigation();
     const bottomSheetRef = useRef(null);
     const { height } = useWindowDimensions();
@@ -49,11 +46,11 @@ const EventDetails = () => {
                 </View>
             </View>
             <ScrollView showsVerticalScrollIndicator={false}>
-                <EventImage data={data} />
-                <Details data={data} />
-                <EventOrganizer />
-                <EventItenary />
-                <EventLocation />
+                <EventImage data={data} isLoading={isLoading} />
+                <Details data={data} isLoading={isLoading} />
+                <EventOrganizer data={data} isLoading={isLoading} />
+                <EventItenary data={data} isLoading={isLoading} />
+                <EventLocation data={data} isLoading={isLoading} />
             </ScrollView>
             <Footer
                 info={data}

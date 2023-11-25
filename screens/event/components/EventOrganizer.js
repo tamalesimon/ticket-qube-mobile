@@ -2,25 +2,33 @@ import { View, Image, Text, StyleSheet, TouchableOpacity } from "react-native";
 import Xenson from "../../../assets/images/xenson_400x400.jpg"
 import { COLORS, FONTS, ICONS } from "../../../constants";
 import GenericButton from "../../../components/buttons/genericButton";
+import { checkImageURL } from "../../../utils/utils";
+import SkeletonLoaderOrganizer from "../../../components/loaders/SkeletonLoaderOrganizer";
 
-const EventOrganizer = () => {
+const EventOrganizer = ({ data, isLoading }) => {
     return (
         <View style={{ marginBottom: 24 }}>
-            <View style={styles.container}>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <View style={{ marginRight: 16 }}>
-                        <Image source={Xenson} style={{ resizeMode: 'contain', borderRadius: 100, width: 48, height: 48 }} />
-                    </View>
-                    <View>
+            {
+                isLoading ? (
+                    <SkeletonLoaderOrganizer />
+                ) : (
+                    <View style={styles.container}>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={styles.organizerName}>Xenson Creatives</Text>
-                            <ICONS.BadgeVerified />
+                            <View style={{ marginRight: 16 }}>
+                                <Image source={{ uri: checkImageURL(data?.organizer?.picture) ? data.organizer?.picture : '../../../assets/images/test_image.jpg' }} style={{ resizeMode: 'cover', borderRadius: 117, width: 48, height: 48 }} />
+                            </View>
+                            <View>
+                                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                    <Text style={styles.organizerName}>{data?.organizer?.name}</Text>
+                                    <ICONS.BadgeVerified />
+                                </View>
+                                <Text style={styles.genre}>{data?.category?.name}</Text>
+                            </View>
                         </View>
-                        <Text style={styles.genre}>Art & Crafts</Text>
+                        <GenericButton borderWidth={1} borderColor={'primaryBase'} fontColor={'primaryBase'} label={'Follow'} />
                     </View>
-                </View>
-                <GenericButton borderWidth={1} borderColor={'primaryBase'} fontColor={'primaryBase'} label={'Follow'} />
-            </View>
+                )
+            }
         </View>
     )
 }

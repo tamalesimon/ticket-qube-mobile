@@ -1,34 +1,52 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
+import { useState } from "react"
 import globalStyles from "../../../styles/globalStyles";
+import Animated from "react-native-reanimated";
 import { COLORS, FONTS, ICONS } from "../../../constants";
 import { returnDateDay, returnDateMonth, returnDateTime, returnDateDayString } from "../../../utils/utils";
+import SkeletonLoaderDetails from "../../../components/loaders/SkeletonLoaderDetails";
 
-const Details = ({ data }) => {
+
+const Details = ({ data, isLoading }) => {
+    const [showMore, setShowMore] = useState(false);
+
+    const handleShowMore = () => {
+        setShowMore(!showMore)
+    }
     return (
         <View style={{ marginBottom: 24 }}>
-            <Text style={styles.eventTitle}>{data?.name}</Text>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <View style={styles.dateContainer}>
-                        <Text style={styles.dateText}>{returnDateDay(data?.startDate)}</Text>
-                        <Text style={styles.dateMonth}>{returnDateMonth(data?.startDate)}</Text>
-                    </View>
-                    <View>
-                        <Text style={styles.day}>{returnDateDayString(data?.startDate)}</Text>
-                        <Text style={styles.time}>{returnDateTime(data?.startDate)} - {returnDateTime(data?.endDate)}</Text>
-                    </View>
-                </View>
-                <TouchableOpacity style={styles.calender}>
-                    <ICONS.CalendarAddIcon />
-                </TouchableOpacity>
-            </View>
-            <View>
-                <Text style={styles.aboutTitle}>About this event</Text>
-                <Text style={styles.aboutDetails}>{data?.description}</Text>
-                <TouchableOpacity>
-                    <Text style={styles.showMore}>Show more</Text>
-                </TouchableOpacity>
-            </View>
+            {isLoading
+                ? <SkeletonLoaderDetails />
+                : (
+                    <>
+                        <Text style={styles.eventTitle}>{data?.name}</Text>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
+                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                <View style={styles.dateContainer}>
+                                    <Text style={styles.dateText}>{returnDateDay(data?.startDate)}</Text>
+                                    <Text style={styles.dateMonth}>{returnDateMonth(data?.startDate)}</Text>
+                                </View>
+                                <View>
+                                    <Text style={styles.day}>{returnDateDayString(data?.startDate)}</Text>
+                                    <Text style={styles.time}>{returnDateTime(data?.startDate)} - {returnDateTime(data?.endDate)}</Text>
+                                </View>
+                            </View>
+                            <TouchableOpacity style={styles.calender}>
+                                <ICONS.CalendarAddIcon />
+                            </TouchableOpacity>
+                        </View>
+                        <View>
+                            <Text style={styles.aboutTitle}>About this event</Text>
+                            {showMore ? (<Animated.Text style={styles.aboutDetails} >{data?.description}</Animated.Text>) : (
+                                <Animated.Text style={styles.aboutDetails} numberOfLines={3} ellipsizeMode="tail">{data?.description}</Animated.Text>
+                            )}
+                            <TouchableOpacity onPress={handleShowMore}>
+                                <Text style={styles.showMore}>{showMore ? 'Show less' : 'Show more'}</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </>
+                )
+            }
         </View>
     )
 }

@@ -1,27 +1,29 @@
 import { ImageBackground, View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { ICONS, COLORS } from "~/constants";
 import { checkImageURL } from "~/utils";
-import futuristic from "../../../assets/images/futurist.avif"
+import { Skeleton } from "moti/skeleton";
 
-const EventImage = ({ data }) => {
+const EventImage = ({ data, isLoading }) => {
     return (
         <View style={{ marginBottom: 16 }}>
-            <ImageBackground
-                source={{ uri: checkImageURL(data?.picture) ? data.picture : '../../../assets/images/test_image.jpg' }}
-                style={styles.image}
-                resizeMode='cover'
-            >
-                <View style={{ flexDirection: 'column-reverse', height: '100%' }}>
-                    <TouchableOpacity >
-                        <View style={styles.videoButton}>
-                            <ICONS.VideoIcon />
-                            <View style={{ paddingLeft: 4 }}>
-                                <Text style={styles.textButton}>Watch Video</Text>
+            <Skeleton colorMode="light" height={240} show={isLoading}>
+                <ImageBackground
+                    source={{ uri: checkImageURL(data?.picture) ? data.picture : '../../../assets/images/test_image.jpg' }}
+                    style={styles.image}
+                    resizeMode='cover'
+                >
+                    <View style={{ flexDirection: 'column-reverse', height: '100%' }}>
+                        <TouchableOpacity >
+                            <View style={styles.videoButton}>
+                                <ICONS.VideoIcon />
+                                <View style={{ paddingLeft: 4 }}>
+                                    <Text style={styles.textButton}>Watch Video</Text>
+                                </View>
                             </View>
-                        </View>
-                    </TouchableOpacity>
-                </View>
-            </ImageBackground>
+                        </TouchableOpacity>
+                    </View>
+                </ImageBackground>
+            </Skeleton>
         </View>
     )
 }
