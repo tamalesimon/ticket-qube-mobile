@@ -20,13 +20,13 @@
         {
           "id": "001",
           "name": "General Admission",
-          "description": "Access to all performances",
+          "description": "Access to all performances, with first come first serve basis",
           "price": 50
         },
         {
           "id": "002",
           "name": "VIP Pass",
-          "description": "Exclusive front-row seating and backstage access",
+          "description": "Exclusive front-row seating,  Backstage pass, Free merchandise, After party pass",
           "price": 150
         }
       ],

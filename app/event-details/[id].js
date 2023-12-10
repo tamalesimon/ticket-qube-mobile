@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useRouter, useSearchParams } from 'expo-router';
+import { useRouter, useSearchParams, useNavigation } from 'expo-router';
 import { SafeAreaView, Text, useWindowDimensions, View, StyleSheet } from "react-native";
-import { useNavigation } from "expo-router";
 import { COLORS, ICONS } from "~/constants";
 import { useSelector } from "react-redux";
 import { EventImage, Details, EventOrganizer, Footer, EventItenary, EventLocation, ShareEvent } from "~/screens/event/components";
@@ -29,7 +28,7 @@ const EventDetails = () => {
     }, [])
 
     const navigateToNext = () => {
-        navigation.navigate("Get a Ticket")
+        router.push("event-details/get-ticket/GetTicket")
     }
     return (
         <SafeAreaView style={{ backgroundColor: COLORS.white, flex: 1, paddingHorizontal: 24, paddingBottom: 24, paddingTop: 12 }}>
