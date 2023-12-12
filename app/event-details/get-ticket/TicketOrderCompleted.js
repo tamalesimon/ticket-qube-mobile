@@ -1,8 +1,8 @@
 import { View, Text, SafeAreaView, Image, StyleSheet } from 'react-native'
 import React from 'react'
-import { COLORS, FONTS } from '../../constants'
-import GenericButton from '../../components/buttons/genericButton'
-import OrderCompleted from '../../assets/images/ticket-order-completed.png'
+import { COLORS, FONTS } from '~/constants'
+import GenericButton from '~/components/buttons/genericButton'
+import OrderCompleted from '~/assets/images/ticket-order-completed.png'
 
 const TicketOrderCompleted = () => {
     return (

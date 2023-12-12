@@ -1,18 +1,55 @@
 import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
-import { Footer } from './components';
-import InputField from '../../components/inputField/InputField';
-import { COLORS, FONTS, FONTSIZE, ICONS } from '../../constants';
-import AcceptTerms from '../../components/terms/AcceptTerms';
+import { useNavigation, Stack, useRouter } from 'expo-router';
+import { Footer } from '~/screens/event/components';
+import InputField from '~/components/inputField/InputField';
+import { COLORS, FONTS, FONTSIZE, ICONS } from '~/constants';
+import AcceptTerms from '~/components/terms/AcceptTerms';
+
 
 const ContactInfo = () => {
+  const router = useRouter();
   const [isClicked, setIsClicked] = useState(false)
+
+  const WhiteBGScreenOptions = {
+    headerStyle: {
+      backgroundColor: COLORS.white,
+      elevation: 0,
+      borderBottomWidth: 0,
+    },
+    headerShadowVisible: false,
+    headerTitleStyle: {
+      fontFamily: FONTS.NotoSansJPBold,
+      // fontWeight: '700',
+      lineHeight: 24,
+      // backgroundColor: COLORS.gray500,
+      color: COLORS.grayBase
+    },
+    headerLeft: () => (
+      <View style={styles.headerButtonContainer}>
+        <TouchableOpacity onPress={() => router.back()}>
+          <ICONS.ArrowLeftIcon />
+        </TouchableOpacity>
+      </View>
+    ),
+    headerTitleAlign: 'center',
+  }
 
   const handleClick = () => {
     setIsClicked(!isClicked)
   }
+  const handleClickButton = () => {
+    router.push("event-details/get-ticket/DetailsOrder")
+  }
+
+
   return (
     <SafeAreaView style={{ backgroundColor: "white", flex: 1, overflow: 'hidden', }}>
+      <Stack.Screen
+        // name="Contact Details"
+        // component={ContactInfo}
+        options={{ ...WhiteBGScreenOptions, headerTitle: 'Contact Information' }}
+      />
       <View style={styles.form_details}>
         <View style={{ marginBottom: 16 }}>
           <Text style={styles.input_label}>
@@ -54,7 +91,7 @@ const ContactInfo = () => {
           By clicking "Confirm", I accept the <Text style={styles.data_sharing_policy_link}>Terms of Service</Text> and have read <Text style={styles.data_sharing_policy_link}>Privacy Policy</Text>. I agree that TicketQube may <Text style={styles.data_sharing_policy_link}>share my information</Text> with the event organizer.
         </Text>
       </View>
-      <Footer info={"UGX 150,000"} spotInfo={"You're going! +1"} label={"Confirm"} />
+      <Footer info={"UGX 150,000"} spotInfo={"You're going! +1"} label={"Confirm"} handleClickButton={handleClickButton} />
     </SafeAreaView>
   )
 }
@@ -136,6 +173,15 @@ const styles = StyleSheet.create({
     fontWeight: 500,
     lineHeight: 18,
     color: COLORS.grayBase
+  },
+  Arrow: {
+    paddingVertical: 12,
+    // paddingHorizontal:13.5,
+    borderRadius: 12,
+  },
+  headerButtonContainer: {
+    marginHorizontal: 24, //24px
+    alignItems: 'center',
+    justifyContent: 'center',
   }
-
 })

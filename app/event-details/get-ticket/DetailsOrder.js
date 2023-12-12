@@ -1,12 +1,39 @@
-import { SafeAreaView } from 'react-native'
-import { useRoute } from '@react-navigation/native'
-import { Footer, OrderSummary, PaymentMethod, EventSummaryOrderDetail } from './components'
+import { SafeAreaView, View, StyleSheet, TouchableOpacity } from 'react-native'
+import { useRouter, Stack } from 'expo-router'
+import { COLORS, FONTS, FONTSIZE, ICONS } from '~/constants';
+import { Footer, OrderSummary, PaymentMethod, EventSummaryOrderDetail } from '~/screens/event/components'
 
 const DetailsOrder = () => {
-    const route = useRoute();
-    const selectedPaymentOption = route.params?.selectedPaymentOptions;
+    const router = useRouter();
+    const WhiteBGScreenOptions = {
+        headerStyle: {
+            backgroundColor: COLORS.white,
+            elevation: 0,
+            borderBottomWidth: 0,
+        },
+        headerShadowVisible: false,
+        headerTitleStyle: {
+            fontFamily: FONTS.NotoSansJPBold,
+            // fontWeight: '700',
+            lineHeight: 24,
+            // backgroundColor: COLORS.gray500,
+            color: COLORS.grayBase
+        },
+        headerLeft: () => (
+            <View style={styles.headerButtonContainer}>
+                <TouchableOpacity onPress={() => router.back()}>
+                    <ICONS.ArrowLeftIcon />
+                </TouchableOpacity>
+            </View>
+        ),
+        headerTitleAlign: 'center',
+    }
+    
     return (
         <SafeAreaView style={{ backgroundColor: "white", flex: 1, overflow: 'hidden', paddingHorizontal: 24, gap: 24, paddingTop: 16 }}>
+            <Stack.Screen
+                options={{ ...WhiteBGScreenOptions, headerTitle: 'Order Details' }}
+            />
             <EventSummaryOrderDetail />
             <OrderSummary />
             <PaymentMethod />
@@ -20,3 +47,16 @@ const DetailsOrder = () => {
 }
 
 export default DetailsOrder;
+
+const styles = StyleSheet.create({
+    Arrow: {
+        paddingVertical: 12,
+        // paddingHorizontal:13.5,
+        borderRadius: 12,
+    },
+    headerButtonContainer: {
+        marginHorizontal: 24, //24px
+        alignItems: 'center',
+        justifyContent: 'center',
+    }
+})

@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, useWindowDimensions, SafeAreaView, TouchableOpacity } from 'react-native'
-import { useNavigation, Stack } from 'expo-router';
+import { useNavigation, Stack, useRouter } from 'expo-router';
 import React from 'react';
 import { COLORS, FONTS, ICONS } from '~/constants';
 import TicketCard from '~/screens/event/components/TicketCard';
@@ -7,7 +7,8 @@ import { Footer } from '~/screens/event/components';
 import FiveDayStrip from '~/screens/event/components/EventDateStrip'
 
 const GetTicket = () => {
-    const navigation = useNavigation()
+    const navigation = useNavigation();
+    const router = useRouter();
     const genericScreenOptions = {
         headerStyle: {
             backgroundColor: COLORS.gray50,
@@ -26,7 +27,7 @@ const GetTicket = () => {
             return (
                 <View style={styles.headerButtonContainer}>
                     <View>
-                        <TouchableOpacity style={styles.Arrow} onPress={() => navigation.goBack()}>
+                        <TouchableOpacity style={styles.Arrow} onPress={() => router.back()}>
                             <ICONS.ArrowLeftIcon />
                         </TouchableOpacity>
                     </View>
@@ -35,11 +36,12 @@ const GetTicket = () => {
         },
         headerTitleAlign: 'center',
     }
+    const handleClickButton = () => {
+        router.push("event-details/get-ticket/ContactInfo")
+    }
     return (
         <SafeAreaView style={{ backgroundColor: COLORS.gray50, flex: 1, overflow: 'hidden' }}>
             <Stack.Screen
-                //   name="Get a Ticket"
-                //       component={GetTicket}
                 options={{ ...genericScreenOptions, headerTitle: 'Get Ticket' }}
             />
             <View style={styles.calendarContainer}>
@@ -50,7 +52,7 @@ const GetTicket = () => {
                 <TicketCard />
                 <TicketCard />
             </View>
-            <Footer info={"UGX 150,000"} spotInfo="You're going! +1" label={"Continue"} />
+            <Footer info={"UGX 150,000"} spotInfo="You're going! +1" label={"Continue"} handleClickButton={handleClickButton} />
         </SafeAreaView>
     )
 }

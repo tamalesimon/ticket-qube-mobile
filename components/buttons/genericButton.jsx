@@ -17,7 +17,7 @@ export default function GenericButton({
     const buttonStyle = shouldCenterButton ? { ...styles.button, width: '100%' } : styles.button;
     const IconComponent = ICONS[iconName]
     return (
-        <TouchableOpacity onPress={onPress} style={{ ...buttonStyle, borderWidth: borderWidth, borderColor: COLORS[borderColor], backgroundColor: COLORS[bgColor], gap:8 }}>
+        <TouchableOpacity onPress={onPress} style={{ ...buttonStyle, borderWidth: borderWidth, borderColor: COLORS[borderColor], backgroundColor: COLORS[bgColor], ...(IconComponent && { gap: 8 }) }}>
             <View>
                 {IconComponent && <IconComponent />}
             </View>
