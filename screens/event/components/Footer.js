@@ -1,4 +1,5 @@
 import { Text, TouchableOpacity, StyleSheet, View } from "react-native";
+import { Link } from "expo-router";
 import { COLORS, FONTS } from "../../../constants";
 import GenericButton from "../../../components/buttons/genericButton";
 
@@ -21,6 +22,9 @@ const Footer = ({ info, spotInfo, label, handleClickButton }) => {
                         label={label}
                         shouldCenterButton={shouldCenterButton}
                         onPress={handleClickButton} />
+                    {/* <Link href={'event-details/get-ticket-details/GetTicket'}>
+                        <Text>Get a Ticket</Text>
+                    </Link> */}
                 </View>
             </View>
         </View>

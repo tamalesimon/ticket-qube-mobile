@@ -5,6 +5,11 @@ import { COLORS, FONTS, ICONS } from '../../../constants';
 const TicketCard = () => {
   const [isClicked, setIsClicked] = useState(false);
   const [count, setCount] = useState(0);
+  const [showmore, setShowmore] = useState(false);
+
+  const handleShowMore = () => {
+    setShowmore(!showmore)
+  }
 
   const handleClick = () => {
     setIsClicked(!isClicked);
@@ -19,7 +24,7 @@ const TicketCard = () => {
       setCount(count + 1)
     }
   }
-  const clicked = { backgroundColor: COLORS.grayBase, color: COLORS.white }
+  const clicked = { backgroundColor: COLORS.secondaryBase, color: COLORS.white }
   const borderClicked = { borderColor: COLORS.grayBase }
   const notClicked = { backgroundColor: COLORS.gray50 }
 
@@ -48,10 +53,10 @@ const TicketCard = () => {
           <View style={styles.dividerLine} />
         </View>
         <View style={styles.showBenefitsCounter}>
-          <Pressable style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
-            <ICONS.CheveronRightIcon />
+          <TouchableOpacity onPress={handleShowMore} style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+            {showmore ? <ICONS.CheveronRightIcon /> : <ICONS.CheveronRightIcon />}
             <Text style={styles.showBenefits}>Show benefits</Text>
-          </Pressable>
+          </TouchableOpacity>
           <View style={styles.counterContainer}>
             <TouchableOpacity onPress={handleDecrement}>
               <ICONS.MinusIcon />
@@ -62,6 +67,11 @@ const TicketCard = () => {
             </TouchableOpacity>
           </View>
         </View>
+        {showmore && <View style={styles.showDetails}>
+          <Text>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut aliquid scire se gaudeant? Summus dolor plures dies manere non potest? Tu quidem reddes; Nihil enim arbitror esse magna laude dignum, quod te praetermissurum credam aut mortis aut doloris metu.
+          </Text>
+        </View>}
       </View>
     </View>
   )
@@ -80,8 +90,8 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.gray50,
     paddingHorizontal: 20,
     paddingVertical: 16,
-    borderTopEndRadius: 16,
-    borderTopStartRadius: 16,
+    borderTopEndRadius: 14,
+    borderTopStartRadius: 14,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center'
@@ -110,7 +120,7 @@ const styles = StyleSheet.create({
     fontWeight: 700,
     color: COLORS.grayBase,
     lineHeight: 21,
-    width:200
+    width: 200
   },
   priceSpots: {
     flexDirection: 'row',
@@ -138,7 +148,7 @@ const styles = StyleSheet.create({
     paddingBottom: 24
   },
   showDetails: {
-
+    marginTop: 16
   },
   counterContainer: {
     flexDirection: 'row',
