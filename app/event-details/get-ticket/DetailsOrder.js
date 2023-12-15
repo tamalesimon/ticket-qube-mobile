@@ -28,7 +28,9 @@ const DetailsOrder = () => {
         ),
         headerTitleAlign: 'center',
     }
-    
+    const handleClickButton = () => {
+        router.push("event-details/get-ticket/TicketOrderCompleted")
+      }
     return (
         <SafeAreaView style={{ backgroundColor: "white", flex: 1, overflow: 'hidden', paddingHorizontal: 24, gap: 24, paddingTop: 16 }}>
             <Stack.Screen
@@ -41,6 +43,7 @@ const DetailsOrder = () => {
                 info={"UGX 152,000"}
                 spotInfo={"You're going! +1"}
                 label={"Complete payment"}
+                handleClickButton={handleClickButton}
             />
         </SafeAreaView>
     )
