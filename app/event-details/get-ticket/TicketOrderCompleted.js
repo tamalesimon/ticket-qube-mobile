@@ -2,10 +2,10 @@ import { View, Text, SafeAreaView, Image, StyleSheet, TouchableOpacity } from 'r
 import React from 'react'
 import { useRouter, Stack } from 'expo-router';
 import { useNavigation } from '@react-navigation/native';
-import { COLORS, FONTS } from '~/constants'
+import { COLORS, FONTS, ICONS } from '~/constants'
 import GenericButton from '~/components/buttons/genericButton'
 import OrderCompleted from '~/assets/images/ticket-order-completed.png'
-import { ICONS } from '../../../constants'
+
 
 
 const TicketOrderCompleted = () => {
@@ -56,8 +56,8 @@ const TicketOrderCompleted = () => {
                     </View>
                 </View>
                 <View style={styles.button_container}>
-                    <GenericButton bgColor={'primaryBase'} label={'View ticket'} fontColor={'white'} onPress={handleViewTickets} />
-                    <GenericButton borderWidth={1} borderColor={'primaryBase'} label={'Discover more events'} fontColor={'primaryBase'} onPress={handleViewEvents} />
+                    <GenericButton bgColor={'primaryBase'} label={'View ticket'} fontColor={'white'} onPress={handleViewTickets} shouldCenterButton />
+                    <GenericButton borderWidth={1} borderColor={'primaryBase'} label={'Discover more events'} fontColor={'primaryBase'} onPress={handleViewEvents} shouldCenterButton />
                 </View>
             </View>
         </SafeAreaView>
