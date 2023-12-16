@@ -308,7 +308,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   headerButtonContainer: {
-    marginHorizontal: 2, //24px
+    marginHorizontal: 24, //24px
     alignItems: 'center',
     justifyContent: 'center',
   },
