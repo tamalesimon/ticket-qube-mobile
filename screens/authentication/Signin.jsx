@@ -100,10 +100,10 @@ const Signin = ({ navigation }) => {
                         </TouchableOpacity>
                         <View style={{ marginTop: 24 }}>
                             <View style={{ gap: 12 }}>
-                                <GenericButton bgColor="primaryBase" fontColor={"white"} label={"Sign In"} onPress={handleSignin} />
+                                <GenericButton bgColor="primaryBase" fontColor={"white"} label={"Sign In"} onPress={handleSignin} shouldCenterButton />
                                 <Text style={{ marginHorizontal: 24, textAlign: "center", color: COLORS.gray400, fontSize: 14, fontFamily: FONTS.NotoSansJPRegular }}>Or</Text>
-                                <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="primary900" label={"Sign In with Google"} icon={ICONS.GoogleIcon} />
-                                <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="primary900" label={"Sign In with Apple"} icon={ICONS.AppleIcon} />
+                                <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="primary900" label={"Sign In with Google"} icon={ICONS.GoogleIcon} shouldCenterButton />
+                                <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="primary900" label={"Sign In with Apple"} icon={ICONS.AppleIcon} shouldCenterButton/>
                             </View>
                             <View style={{ alignItems: 'center' }}>
                                 <AcceptTerms />

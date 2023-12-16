@@ -11,13 +11,15 @@ export default function GenericButton({
     bgColor,
     fontColor,
     shouldCenterButton,
-    fontSize
+    fontSize,
+    withWidth
 }) {
 
+    const buttonWidthChange = withWidth ? { ...styles.button, width: withWidth } : styles.button;
     const buttonStyle = shouldCenterButton ? { ...styles.button, width: '100%' } : styles.button;
     const IconComponent = ICONS[iconName]
     return (
-        <TouchableOpacity onPress={onPress} style={{ ...buttonStyle, borderWidth: borderWidth, borderColor: COLORS[borderColor], backgroundColor: COLORS[bgColor], ...(IconComponent && { gap: 8 }) }}>
+        <TouchableOpacity onPress={onPress} style={{ ...buttonStyle, borderWidth: borderWidth, buttonWithChange: buttonWidthChange, borderColor: COLORS[borderColor], backgroundColor: COLORS[bgColor], ...(IconComponent && { gap: 8 }) }}>
             <View>
                 {IconComponent && <IconComponent />}
             </View>
@@ -34,6 +36,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
+        alignSelf: 'center'
     },
     label: {
         fontFamily: FONTS.NotoSansJPRegular,
