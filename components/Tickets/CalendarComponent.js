@@ -11,7 +11,7 @@ const CalendarComponent = () => {
                         <TouchableOpacity>
                             <ICONS.ChevronLeft />
                         </TouchableOpacity>
-                        <Text>October 2023</Text>
+                        <Text style={{ paddingHorizontal: 8 }}>October 2023</Text>
                         <TouchableOpacity>
                             <ICONS.ChevronRight />
                         </TouchableOpacity>
