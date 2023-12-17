@@ -42,12 +42,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     padding: 4,
     backgroundColor: COLORS.white,
-    borderRadius: 8
+    borderRadius: 8,
+    marginHorizontal: 24,
+    marginTop: 16
   },
   tab: {
     paddingHorizontal: 47.25,
     paddingVertical: 7,
-    borderRadius: 8
+    borderRadius: 8,
+    width: '50%'
   },
   tabSelected: {
     backgroundColor: COLORS.secondaryBase,
@@ -57,7 +60,8 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: 400,
     lineHeight: 18,
-    color: COLORS.gray400
+    color: COLORS.gray400,
+    textAlign: 'center'
   },
   tabTextSelected: {
     color: COLORS.white,

@@ -26,6 +26,8 @@ export const screenOptions = {
   tabBarStyle: {
     height: 70,
     paddingTop: 12,
+    borderTopWidth: 0, // Set the top border width to 0
+    borderTopColor: 'transparent', // Set the top border color to transparent
   },
   tabBarLabelStyle: {
     paddingBottom: 12,
@@ -219,7 +221,7 @@ export const genericNoTitleScreenOptions = {
       </View>
     );
   },
-  headerTitle:'',
+  headerTitle: '',
   headerTitleAlign: 'center',
 }
 
