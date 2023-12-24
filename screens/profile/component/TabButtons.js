@@ -13,7 +13,7 @@ const Tab = ({ name, activeTab, onHandleClick }) => {
 
 const TabButtons = ({ tabs, activeTab, setActiveTab }) => {
     return (
-        <View style={{ justifyContent: 'center', flex:'auto' }}>
+        <View>
             <FlatList
                 data={tabs}
                 activeTab={activeTab}
@@ -23,7 +23,7 @@ const TabButtons = ({ tabs, activeTab, setActiveTab }) => {
                 horizontal
                 showsHorizontalScrollIndicator={false}
                 keyExtractor={(item) => item}
-                contentContainerStyle={{ columnGap: 16, justifyContent: 'center' }}
+                contentContainerStyle={styles.container}
             />
         </View>
     )
@@ -33,12 +33,15 @@ export default TabButtons;
 
 const styles = StyleSheet.create({
     container: {
-        alignSelf: 'center',
-        textAlign: 'center'
+        // alignSelf: 'center',
+        // textAlign: 'center'
         // marginTop: 24,
         // marginBottom: 16,
         // borderColor: COLORS.white,
         // borderWidth: 4
+        flex: 1,
+        justifyContent: 'center',
+        columnGap: 24
     },
     btn: (name, activeTab) => ({
         padding: 16,

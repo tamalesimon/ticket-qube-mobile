@@ -28,7 +28,8 @@ const initialState = {
 const headers = {
   headers: {
     'Content-Type': 'application/json; charset=utf-8',
-    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Origin': 'https://localhost:8080',
+    'Access-Control-Allow-Credentials': true,
     'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
   }
@@ -36,8 +37,17 @@ const headers = {
 
 const axiosInstance = axios.create({
   baseURL: LocalAPI,
-  headers: headers.headers
+  headers: headers.headers,
+  withCredentials: false,
+  credentials: 'same-origin'
 });
+
+axiosInstance.interceptors.request.use(config => {
+  config.fetchOptions = {
+    mode: 'no-cors'
+  };
+  return config;
+})
 
 
 export const createAccount = createAsyncThunk('users/signup', async (userDetails) => {
