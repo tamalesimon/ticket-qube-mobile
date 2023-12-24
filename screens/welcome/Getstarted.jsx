@@ -18,9 +18,9 @@ export default function GetStarted({ navigation }) {
             </View>
             <View>
               <View style={{ gap: 12, }}>
-                <GenericButton bgColor="primaryBase" fontColor={"white"} label={"Continue with Email"} onPress={() => navigation.navigate('Signin')} />
-                <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="white" label={"Continue with Google"} icon={ICONS.GoogleIcon} />
-                <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="white" label={"Continue with Apple"} icon={ICONS.AppleIcon} />
+                <GenericButton bgColor="primaryBase" fontColor={"white"} label={"Continue with Email"} onPress={() => navigation.navigate('Signin')} shouldCenterButton />
+                <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="white" label={"Continue with Google"} icon={ICONS.GoogleIcon} shouldCenterButton />
+                <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="white" label={"Continue with Apple"} icon={ICONS.AppleIcon} shouldCenterButton />
               </View>
             </View>
             <View style={{ alignItems: 'center' }}>

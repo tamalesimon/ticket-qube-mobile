@@ -114,10 +114,10 @@ const Signup = ({ navigation }) => {
                         />
                         <View style={{ marginTop: 24 }}>
                             <View style={{ gap: 12 }}>
-                                <GenericButton bgColor="primaryBase" fontColor={"white"} label={"Sign Up"} onPress={handleSignup} />
+                                <GenericButton bgColor="primaryBase" fontColor={"white"} label={"Sign Up"} onPress={handleSignup} shouldCenterButton />
                                 <Text style={{ fontFamily: FONTS.NotoSansJPRegular, color: COLORS.gray400, fontWeight: 400, fontSize: FONTSIZE.medium, textAlign: "center", marginHorizontal: 24 }}>Or</Text>
-                                <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="primary900" label={"Sign Up with Google"} icon={ICONS.GoogleIcon} />
-                                <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="primary900" label={"Sign Up with Apple"} icon={ICONS.AppleIcon} />
+                                <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="primary900" label={"Sign Up with Google"} icon={ICONS.GoogleIcon} shouldCenterButton />
+                                <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="primary900" label={"Sign Up with Apple"} icon={ICONS.AppleIcon} shouldCenterButton />
                             </View>
                             <View style={{ alignItems: "center" }}>
                                 <AcceptTerms />
