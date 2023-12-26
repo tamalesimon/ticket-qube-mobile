@@ -9,7 +9,7 @@ import {
   exploreScreenOptions,
   favoritesScreenOptions,
   ticketsScreenOptions,
-  profileScreenOptions
+  profileTabOptions
 } from "../../components/header/screenOptions";
 
 const Tab = createBottomTabNavigator();
@@ -40,7 +40,7 @@ export default function Tabs() {
       <Tab.Screen
         name="Profile"
         component={Profile}
-        options={profileScreenOptions}
+        options={profileTabOptions}
       />
     </Tab.Navigator>
   );

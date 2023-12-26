@@ -130,13 +130,7 @@ export const ticketsScreenOptions = {
   headerTitleAlign: 'center',
 }
 
-export const profileScreenOptions = {
-  headerStyle: {
-    backgroundColor: COLORS.gray50, //turn it back to white
-    elevation: 0,
-    borderBottomWidth: 0,
-  },
-  headerShadowVisible: false,
+export const profileTabOptions = {
   tabBarActiveTintColor: COLORS.primaryBase,
   tabBarStyle: {
     height: 70,
@@ -147,34 +141,11 @@ export const profileScreenOptions = {
   tabBarLabelStyle: {
     paddingBottom: 12,
   },
-  headerTitleStyle: {
-    fontFamily: FONTS.NotoSansJPBold,
-    fontWeight: '700',
-  },
   tabBarIcon: ({ focused }) => (
     <View style={styles.tabBarIconContainer}>
       {focused ? <ICONS.ProfileIconActive /> : <ICONS.ProfileIconCircle />}
     </View>
   ),
-  headerLeft: () => (
-    <View style={styles.headerButtonContainer}>
-      <BackLeft />
-    </View>
-  ),
-  headerRight: () => (
-    <View style={styles.headerButtonContainer}>
-      <View style={styles.sharedContainer}>
-        <TouchableOpacity>
-          <ICONS.EditIcon />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <ICONS.SettingsIcon />
-        </TouchableOpacity>
-      </View>
-    </View>
-  ),
-  headerTitle: 'Profile',
-  headerTitleAlign: 'center',
 }
 
 export const eventDetailsScreenOptions = {
