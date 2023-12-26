@@ -7,11 +7,8 @@ import UpcomingPastTickets from '../../components/Tickets/UpcomingPastTickets';
 
 
 export default function Tickets() {
-  const tabOptions = [
-    { label: "Upcoming", value: "upcoming" },
-    { label: "Past", value: "past" }
-  ];
-  const [selected, setSelected] = useState(tabOptions[0].value)
+  const tabOptions = ["Upcoming", "Past"];
+  const [selected, setSelected] = useState(tabOptions[0])
   const handleTabPress = (tab) => {
     setSelected(tab)
   }
@@ -20,13 +17,13 @@ export default function Tickets() {
       <CalendarComponent />
       <View style={styles.tabContainer}>
         {tabOptions.map((tabOption) => (
-          <TouchableOpacity style={[styles.tab, selected === tabOption.value && styles.tabSelected]} onPress={() => handleTabPress(tabOption.value)}>
-            <Text style={[styles.tabText, selected === tabOption.value && styles.tabTextSelected]}>{tabOption.label}</Text>
+          <TouchableOpacity style={[styles.tab, selected === tabOption && styles.tabSelected]} onPress={() => handleTabPress(tabOption)}>
+            <Text style={[styles.tabText, selected === tabOption && styles.tabTextSelected]}>{tabOption}</Text>
           </TouchableOpacity>
         ))
         }
       </View>
-      <ScrollView style={styles.upcoming_past_tickets}>
+      <ScrollView style={styles.upcoming_past_tickets} showsVerticalScrollIndicator={false}>
         <UpcomingPastTickets />
       </ScrollView>
     </SafeAreaView>

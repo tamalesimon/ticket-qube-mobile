@@ -1,6 +1,6 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
-import { useNavigation } from 'expo-router'
+import { View, StyleSheet, TouchableOpacity } from 'react-native'
+import { useNavigation, useRouter } from 'expo-router'
 import { ICONS, FONTS, COLORS } from '../../constants'
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleSheet } from "../../redux/layoutSlice"
@@ -13,6 +13,8 @@ import LikesHeart from '../../screens/event/components/LikesHeart'
 import Upload from '../../screens/event/components/Upload'
 import CircleQuestion from '../../screens/event/components/CircleQuestion'
 import CloseIcon from '../../screens/event/components/CloseIcon'
+
+
 
 export const screenOptions = {
   // headerShown: false,
@@ -129,7 +131,22 @@ export const ticketsScreenOptions = {
 }
 
 export const profileScreenOptions = {
-  ...screenOptions,
+  headerStyle: {
+    backgroundColor: COLORS.gray50, //turn it back to white
+    elevation: 0,
+    borderBottomWidth: 0,
+  },
+  headerShadowVisible: false,
+  tabBarActiveTintColor: COLORS.primaryBase,
+  tabBarStyle: {
+    height: 70,
+    paddingTop: 12,
+    borderTopWidth: 0, // Set the top border width to 0
+    borderTopColor: 'transparent', // Set the top border color to transparent
+  },
+  tabBarLabelStyle: {
+    paddingBottom: 12,
+  },
   headerTitleStyle: {
     fontFamily: FONTS.NotoSansJPBold,
     fontWeight: '700',
@@ -146,7 +163,14 @@ export const profileScreenOptions = {
   ),
   headerRight: () => (
     <View style={styles.headerButtonContainer}>
-      <VerticalDots />
+      <View style={styles.sharedContainer}>
+        <TouchableOpacity>
+          <ICONS.EditIcon />
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <ICONS.SettingsIcon />
+        </TouchableOpacity>
+      </View>
     </View>
   ),
   headerTitle: 'Profile',
@@ -321,6 +345,7 @@ const styles = StyleSheet.create({
   sharedContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    gap: 16
   }
 })

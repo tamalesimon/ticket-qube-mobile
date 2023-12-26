@@ -64,6 +64,8 @@ import LampOn from "../assets/svgIcons/LampOn"
 import ChevronDown from "../assets/svgIcons/ChevronDown"
 import ChevronUp from "../assets/svgIcons/ChevronUp"
 import CalendarIcon from "../assets/svgIcons/CalendarIcon"
+import EditIcon from "../assets/svgIcons/EditIcon.jsx"
+import SettingsIcon from "../assets/svgIcons/SettingsIcon.jsx"
 
 
 export default {
@@ -132,5 +134,7 @@ export default {
     LampOn,
     ChevronDown,
     ChevronUp,
-    CalendarIcon
+    CalendarIcon,
+    EditIcon,
+    SettingsIcon
 }
