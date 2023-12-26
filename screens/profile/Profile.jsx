@@ -12,6 +12,31 @@ const activities = [
 export default function Profile() {
   const tabs = ["Events", "Collections", "About"];
   const [activeTab, setActiveTab] = useState(tabs[0])
+
+  const tabContent = () => {
+    switch (activeTab) {
+      case "Events":
+        return (
+          <View style={{ marginTop: 16 }}>
+            <Text>Events</Text>
+          </View>
+        )
+      case "Collections":
+        return (
+          <View style={{ marginTop: 16 }}>
+            <Text>Collections</Text>
+          </View>
+        )
+      case "About":
+        return (
+          <View style={{ marginTop: 16 }}>
+            <Text>About</Text>
+          </View>
+        )
+      default:
+        break;
+    }
+  }
   return (
     <SafeAreaView style={{ backgroundColor: COLORS.gray50, flex: 1, }}>
       <View style={styles.profileDetails}>
@@ -31,8 +56,9 @@ export default function Profile() {
           ))
         }
       </View>
-      <LinearGradient colors={[COLORS.white, COLORS.gray50]} style={{ marginTop: 32, borderTopStartRadius: 40, borderTopEndRadius: 40, paddingTop: 16, paddingHorizontal: 24 }}>
+      <LinearGradient colors={[COLORS.white, COLORS.gray50]} style={{ marginTop: 32, borderTopStartRadius: 40, borderTopEndRadius: 40, paddingTop: 24, paddingHorizontal: 24 }}>
         <TabButtons tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
+        {tabContent()}
       </LinearGradient>
     </SafeAreaView>
   );
