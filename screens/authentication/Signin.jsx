@@ -16,43 +16,39 @@ import LoadingIndicator from "../../components/loaders/LoadingIndicator";
 
 const Signin = ({ navigation }) => {
     const dispatch = useDispatch();
-    const { isLoading, error, status, isAuthenticated } = useSelector((state) => state.auth)
+    const { isLoading, error, status, isAuthenticated, isVerified, updatedDetails } = useSelector((state) => state.auth)
     const initialFormData = { email: '', password: '' }
     const { formData, formErrors, setFormData, handleSubmit } = useFormValidation(initialFormData);
+    const [showLoadingIndicator, setShowLoadingIndicator] = useState(true);
 
     const handleNavigation = () => {
-        // if (status) {
-        //     navigation.replace('NavigationTabs');
-        // }
-
-        AsyncStorage.getItem("qubeId").then(async (value) => {
+        AsyncStorage.getItem("Onboarded").then(async (value) => {
             if (value == null) {
-                await AsyncStorage.setItem("qubeId", "true");
+                await AsyncStorage.setItem("Onboarded", "true");
                 navigation.navigate("DOB");
             } else {
-                if (status && value) {
+                if (status && updatedDetails) {
                     navigation.replace('NavigationTabs');
                 }
             }
         })
     }
 
-    // useEffect(() => {
-    //     AsyncStorage.getItem("qubeId").then(async (value) => {
-    //         if (value == null) {
-    //             await AsyncStorage.setItem("qubeId", "true");
-    //             navigation.navigate("DOB");
-    //         }
-    //     })
-    // }, [])
-
     useEffect(() => {
-        handleNavigation();
         navigation.setOptions({
             headerStyle: {
                 backgroundColor: isLoading ? '#7F7F7F' : 'white'
             }
         });
+
+        if (isLoading) {
+            setTimeout(() => {
+                setShowLoadingIndicator(false);
+                handleNavigation();
+            }, 1500); // 3000 milliseconds = 3 seconds
+        } else {
+            setShowLoadingIndicator(false);
+        }
     }, [status, isLoading])
 
 
@@ -61,6 +57,7 @@ const Signin = ({ navigation }) => {
         if (isValid) {
             console.log(data)
             dispatch(signin(data));
+            handleNavigation()
         } else {
             console.log(formErrors)
         }
@@ -103,7 +100,7 @@ const Signin = ({ navigation }) => {
                                 <GenericButton bgColor="primaryBase" fontColor={"white"} label={"Sign In"} onPress={handleSignin} shouldCenterButton />
                                 <Text style={{ marginHorizontal: 24, textAlign: "center", color: COLORS.gray400, fontSize: 14, fontFamily: FONTS.NotoSansJPRegular }}>Or</Text>
                                 <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="primary900" label={"Sign In with Google"} icon={ICONS.GoogleIcon} shouldCenterButton />
-                                <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="primary900" label={"Sign In with Apple"} icon={ICONS.AppleIcon} shouldCenterButton/>
+                                <GenericButton borderWidth={1} borderColor={"gray200"} fontColor="primary900" label={"Sign In with Apple"} icon={ICONS.AppleIcon} shouldCenterButton />
                             </View>
                             <View style={{ alignItems: 'center' }}>
                                 <AcceptTerms />

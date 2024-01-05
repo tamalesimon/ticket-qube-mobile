@@ -94,7 +94,7 @@ export const signin = createAsyncThunk('users/signin', async (useDetails) => {
   }
 });
 
-export const updateDetails = createAsyncThunk('user/update-details', async({userDetails, userId}, {rejectWithValue}) => {
+export const updateDetails = createAsyncThunk('user/update-details', async ({ userDetails, userId }, { rejectWithValue }) => {
   try {
     const response = await axiosInstance.post(`${LocalAPI}/user/${userId}`, userDetails)
     return response.data
@@ -161,7 +161,7 @@ const authSlice = createSlice({
       })
       .addCase(signin.fulfilled, (state, action) => {
         state.isLoading = true;
-        state.isAuthenticated = true;
+        state.isAuthenticated = false;
         state.isVerified = true;
         state.userInfo = action.payload;
         state.token = action.payload.token;

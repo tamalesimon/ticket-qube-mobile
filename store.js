@@ -11,15 +11,15 @@ const store = configureStore({
     devTools: window.__REDUX_DEVTOOLS_EXTENSION__ && window?.__REDUX_DEVTOOLS_EXTENSION__()
 });
 
-axios.interceptors.request.use((config)=> {
-    const { auth } = store.getState();
-    const token = auth.token;
+// axios.interceptors.request.use((config)=> {
+//     const { auth } = store.getState();
+//     const token = auth.token;
 
-    if(token) {
-        config.headers.Authorization = `Bearer ${token}`
-    }
+//     if(token) {
+//         config.headers.Authorization = `Bearer ${token}`
+//     }
 
-    return token ? { ...config, headers: { ...config.headers, Authorization: `Bearer ${token}` } } : config;
-})
+//     return token ? { ...config, headers: { ...config.headers, Authorization: `Bearer ${token}` } } : config;
+// })
 
 export default store;

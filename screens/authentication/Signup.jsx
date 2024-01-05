@@ -18,9 +18,9 @@ const Signup = ({ navigation }) => {
     const dispatch = useDispatch();
     const { isLoading, error, isSignedUp, isCreated } = useSelector(state => state.auth);
     const [nameInput, setNameInput] = useState('');
-    const initialFormData = { firstName: '', lastName: '', email: '', password: '', phoneNumber: '256779813251', dateOfBirth: '1993-04-17T00:00:00', userRole: 'CLIENT', country: 'UGANDA', timezone: 'AFRICA_KAMPALA' }
+    const initialFormData = { firstName: '', lastName: '', email: '', password: '', userRole: 'CLIENT' }
     const { formData, formErrors, handleSubmit, setFormData } = useFormValidation(initialFormData);
-    const { firstName, lastName, email, password, phoneNumber, dateOfBirth, userRole } = formData;
+    const { firstName, lastName, email, password, userRole } = formData;
 
 
     const handleNavigation = () => {
@@ -47,7 +47,6 @@ const Signup = ({ navigation }) => {
         if (isValid) {
             dispatch(createAccount(data));
         }
-        console.log('form Data', data)
     }
 
     const handleInputText = (text) => {

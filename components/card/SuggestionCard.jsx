@@ -34,14 +34,14 @@ export default function SuggestionCard({ item, selectedEvent, handleEventClicked
 const styles = StyleSheet.create({
     container: {
         height: 122,
-        backgroundColor: COLORS.white,
+        backgroundColor: COLORS.gray50,
         padding: 12,
         borderRadius: 16,
         flexDirection: 'row',
         alignItems: 'center',
-        // marginBottom: 18,
+        marginBottom: 12,
         marginHorizontal: 2,
-        zIndex: 99,
+        // zIndex: 99,
         gap: 12,
         overflow: 'hidden',
         shadowColor: "white",

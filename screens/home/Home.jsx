@@ -12,7 +12,7 @@ import { StatusBar } from 'expo-status-bar';
 export default function HomeTabs() {
   return (
 
-    <SafeAreaView style={{ backgroundColor: "#FDFDFD", flex: 1, padding: 24 }}>
+    <SafeAreaView style={{ backgroundColor: COLORS.white, flex: 1, paddingHorizontal: 24, paddingTop: 24 }}>
       <StatusBar style="auto" />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{ marginBottom: 12 }} >

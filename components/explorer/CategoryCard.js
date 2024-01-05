@@ -1,13 +1,14 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 import { COLORS, FONTS } from '../../constants';
+import artwork from '../../assets/patterns/Artboard 6.png';
 
 
 const CategoryCard = ({ cardColor, title, second }) => {
     const cardTitle = "Art & Crafts";
     const titleParts = title?.split("&");
     return (
-        <TouchableOpacity>
+        <TouchableOpacity style={{ flexDirection: 'row' }}>
             <View style={{ ...styles.container, backgroundColor: cardColor }}>
                 <View>
                     <Text style={{ ...styles.cardTitle }}>
@@ -21,7 +22,9 @@ const CategoryCard = ({ cardColor, title, second }) => {
                 <View style={{ ...styles.cardTicker, backgroundColor: second }}>
                     <Text style={{ ...styles.cardSubtitle, }}>12 upcoming events</Text>
                 </View>
+                <View><Image source={{ uri: '../../assets/patterns/Artboard 6.png' }} style={{ resizeMode: "center" }} /></View>
             </View>
+
         </TouchableOpacity>
     )
 }
