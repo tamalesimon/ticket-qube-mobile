@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+import { API_LOCAL, API_DEV } from '@env'
+
 const initialState = ({
     tickets: [],
     totalAmount: 0.00,
@@ -10,7 +12,7 @@ const initialState = ({
 });
 
 const axiosInstance = axios.create({
-    baseURL: 'http://localhost:3000',
+    baseURL: API_DEV,
     headers: {
         'Content-Type': 'application/json; charset=utf-8',
         'Access-Control-Allow-Origin': '*',

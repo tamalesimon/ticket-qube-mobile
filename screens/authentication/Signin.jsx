@@ -26,10 +26,8 @@ const Signin = ({ navigation }) => {
             if (value == null) {
                 await AsyncStorage.setItem("Onboarded", "true");
                 navigation.navigate("DOB");
-            } else {
-                if (status && updatedDetails) {
-                    navigation.replace('NavigationTabs');
-                }
+            } else if (value) {
+                navigation.replace('NavigationTabs');
             }
         })
     }

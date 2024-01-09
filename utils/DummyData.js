@@ -1,13 +1,17 @@
 export const DummyData = [
     { id: 1, name: "Music" },
-    { id: 2, name: "Charity & Cause" },
-    { id: 3, name: "Seminar" },
-    { id: 4, name: "Film & Entertainment" },
-    { id: 5, name: "Festival" },
-    { id: 6, name: "Conference" },
-    { id: 7, name: "Art" },
-    { id: 8, name: "Concert" },
-    { id: 9, name: "Sports & Fitness" },
-    { id: 10, name: "Church" },
-    { id: 11, name: "Expos" },
+    { id: 2, name: "Food & Drink" },
+    { id: 3, name: "Art & Culture" },
+    { id: 4, name: "Technology" },
+    { id: 5, name: "Health & Wellness" },
+    { id: 6, name: "Film & Entertainment" },
+    { id: 7, name: "Religion & Spirituality" },
+    { id: 8, name: "Others" },
 ]
+
+// (1, 'Music', 'All music related events'),
+//     (2, 'Food & Drink', 'All food related events'),
+//     (3, 'Art & Culture', 'All art related events'),
+//     (4, 'Technology', 'All tech related events'),
+//     (5, 'Health & Wellness', 'All health related events'),
+//     (6, 'Film & Entertainment', 'All film related events')

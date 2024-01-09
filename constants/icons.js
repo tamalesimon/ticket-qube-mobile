@@ -66,6 +66,7 @@ import ChevronUp from "../assets/svgIcons/ChevronUp"
 import CalendarIcon from "../assets/svgIcons/CalendarIcon"
 import EditIcon from "../assets/svgIcons/EditIcon.jsx"
 import SettingsIcon from "../assets/svgIcons/SettingsIcon.jsx"
+import DotIcon from "../assets/svgIcons/DotIcon.jsx"
 
 
 export default {
@@ -136,5 +137,6 @@ export default {
     ChevronUp,
     CalendarIcon,
     EditIcon,
-    SettingsIcon
+    SettingsIcon,
+    DotIcon
 }

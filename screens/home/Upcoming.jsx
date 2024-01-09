@@ -6,6 +6,7 @@ import useFetch from '../../utils/useFetch';
 import useDataFetch from '../../utils/useDataFetch';
 import { Skeleton } from 'moti/skeleton';
 import SkeletonLoaderCard from '../../components/loaders/SkeletonLoaderCard';
+import Noupcoming from './Noupcoming';
 
 export default function Upcoming() {
     const { data, error, isLoading, refetch } = useDataFetch('3004/upcoming');
@@ -17,18 +18,10 @@ export default function Upcoming() {
                     isLoading ?
                         <SkeletonLoaderCard />
                         :
-                        <FlatList
-                            data={data}
-                            renderItem={({ item }) => <EventCard item={item} />}
-                            keyExtractor={item => item?.id}
-                            horizontal
-                            showsHorizontalScrollIndicator={false}
-                            contentContainerStyle={styles.eventSection}
-                            snapToInterval={250 + 16}
-                            decelerationRate="fast"
-                        />
+                        <Noupcoming />
                 }
-            </View>)
+            </View>
+        )
     }
     return (
         <View>

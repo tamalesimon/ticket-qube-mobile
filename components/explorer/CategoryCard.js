@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Image, ImageBackground } from 'react-native'
 import React from 'react'
 import { COLORS, FONTS } from '../../constants';
 import artwork from '../../assets/patterns/Artboard 6.png';
@@ -8,22 +8,34 @@ const CategoryCard = ({ cardColor, title, second }) => {
     const cardTitle = "Art & Crafts";
     const titleParts = title?.split("&");
     return (
-        <TouchableOpacity style={{ flexDirection: 'row' }}>
-            <View style={{ ...styles.container, backgroundColor: cardColor }}>
+        <TouchableOpacity>
+            <ImageBackground source={{ uri: ""}} style={{ ...styles.container, backgroundColor: cardColor }}>
                 <View>
-                    <Text style={{ ...styles.cardTitle }}>
-                        {titleParts.map((part, index) => (
-                            <React.Fragment key={index}>
-                                <Text>{part.trim()} {"\n"}{index === 0 && <Text style={styles.cardTitle}>&</Text>} </Text>
-                            </React.Fragment>
-                        ))}
-                    </Text>
+                    <View>
+                        <Text style={{ ...styles.cardTitle }}>
+                            {titleParts.map((part, index) => (
+                                <React.Fragment key={index}>
+                                    <Text>{part.trim()} {"\n"}{index === 0 && <Text style={styles.cardTitle}>&</Text>} </Text>
+                                </React.Fragment>
+                            ))}
+                        </Text>
+                    </View>
+                    <View style={{ ...styles.cardTicker, backgroundColor: second }}>
+                        <Text style={{ ...styles.cardSubtitle, }}>12 upcoming events</Text>
+                    </View>
                 </View>
-                <View style={{ ...styles.cardTicker, backgroundColor: second }}>
-                    <Text style={{ ...styles.cardSubtitle, }}>12 upcoming events</Text>
-                </View>
-                <View><Image source={{ uri: '../../assets/patterns/Artboard 6.png' }} style={{ resizeMode: "center" }} /></View>
-            </View>
+                {/* <View>
+                    <Image source={{ uri: "../../assets/patterns/Artboard 6.png" }} style={{
+                        width: 200,
+                        height: 150,
+                        // borderRadius: 12,
+                        // paddingTop: 8,
+                        // paddingLeft: 8,
+                        overflow: 'hidden',
+                        opacity:0.1
+                    }} />
+                </View> */}
+            </ImageBackground>
 
         </TouchableOpacity>
     )
@@ -38,7 +50,7 @@ const styles = StyleSheet.create({
         padding: 16,
         // gap: 24,
         backgroundColor: "#2DD4BF",
-        flexDirection: "column",
+        flexDirection: "row",
         justifyContent: "space-between"
     },
     cardTitle: {

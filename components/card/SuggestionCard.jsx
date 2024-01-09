@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
 import { ICONS, COLORS, FONTS } from '../../constants'
-import { checkImageURL, returnDateDay, returnDateMonth } from '../../utils/utils';
+import { checkImageURL, returnDateDay, returnDateMonth, moneyFormat } from '../../utils/utils';
 
 export default function SuggestionCard({ item, selectedEvent, handleEventClicked }) {
     return (
@@ -11,8 +11,8 @@ export default function SuggestionCard({ item, selectedEvent, handleEventClicked
                 style={styles.imageIcon}
             >
                 <View style={styles.dateContainer}>
-                    <Text style={styles.dateDay}>{returnDateDay(item.startDate)}</Text>
-                    <Text style={styles.dateMonth}>{returnDateMonth(item.startDate)}</Text>
+                    <Text style={styles.dateDay}>{returnDateDay(item.startTime)}</Text>
+                    <Text style={styles.dateMonth}>{returnDateMonth(item.startTime)}</Text>
                 </View>
             </ImageBackground>
             <View style={styles.detailsContainer}>
@@ -23,7 +23,7 @@ export default function SuggestionCard({ item, selectedEvent, handleEventClicked
                         <Text style={styles.location}>{item.location}</Text>
                     </View>
                     <View style={styles.price}>
-                        <Text style={styles.priceText}>$ {item.tickets[0].price}</Text>
+                        <Text style={styles.priceText}>{moneyFormat(item.tickets[1].currency, item.tickets[1].price)}</Text>
                     </View>
                 </View>
             </View>
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        fontSize: 12
+        fontSize: 12,
     },
     locationContainer: {
         flexDirection: 'row',
@@ -112,14 +112,15 @@ const styles = StyleSheet.create({
         fontWeight: 500,
         color: COLORS.gray400,
         fontSize: 12,
-        width: 140
+        // width: 140
 
     },
     price: {
-        paddingHorizontal: 17,
-        paddingVertical: 3,
+        // paddingHorizontal: 17,
+        padding: 4,
         backgroundColor: COLORS.primary100,
-        borderRadius: 8
+        borderRadius: 8,
+        alignSelf: 'flex-end'
     },
     priceText: {
         fontFamily: FONTS.NotoSansJPRegular,
