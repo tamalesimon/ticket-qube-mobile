@@ -23,12 +23,12 @@ const Details = ({ data, isLoading }) => {
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                 <View style={styles.dateContainer}>
-                                    <Text style={styles.dateText}>{returnDateDay(data?.startDate)}</Text>
-                                    <Text style={styles.dateMonth}>{returnDateMonth(data?.startDate)}</Text>
+                                    <Text style={styles.dateText}>{returnDateDay(data?.startTime)}</Text>
+                                    <Text style={styles.dateMonth}>{returnDateMonth(data?.startTime)}</Text>
                                 </View>
                                 <View>
-                                    <Text style={styles.day}>{returnDateDayString(data?.startDate)}</Text>
-                                    <Text style={styles.time}>{returnDateTime(data?.startDate)} - {returnDateTime(data?.endDate)}</Text>
+                                    <Text style={styles.day}>{returnDateDayString(data?.startTime)}</Text>
+                                    <Text style={styles.time}>{returnDateTime(data?.startTime)} - {returnDateTime(data?.endTime)}</Text>
                                 </View>
                             </View>
                             <TouchableOpacity style={styles.calender}>

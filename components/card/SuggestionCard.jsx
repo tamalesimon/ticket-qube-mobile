@@ -7,7 +7,7 @@ export default function SuggestionCard({ item, selectedEvent, handleEventClicked
     return (
         <TouchableOpacity style={styles.container} onPress={handleEventClicked}>
             <ImageBackground
-                source={{ uri: checkImageURL(item?.picture) ? item.picture : 'https://img.freepik.com/premium-photo/abstract-futuristic-contemporary-modern-watercolor-art_93314-4483.jpg' }}
+                source={{ uri: checkImageURL(item?.imageUrl) ? item.imageUrl : 'https://img.freepik.com/premium-photo/abstract-futuristic-contemporary-modern-watercolor-art_93314-4483.jpg' }}
                 style={styles.imageIcon}
             >
                 <View style={styles.dateContainer}>
@@ -44,14 +44,14 @@ const styles = StyleSheet.create({
         // zIndex: 99,
         gap: 12,
         overflow: 'hidden',
-        shadowColor: "white",
-        shadowOffset: {
-            width: 0,
-            height: 18,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 20.00,
-        elevation: 24
+        // shadowColor: "white",
+        // shadowOffset: {
+        //     width: 0,
+        //     height: 18,
+        // },
+        // shadowOpacity: 0.25,
+        // shadowRadius: 20.00,
+        // elevation: 24
     },
     imageIcon: {
         width: 88,

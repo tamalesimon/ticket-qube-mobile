@@ -14,9 +14,9 @@ const EventItenary = ({ data, isLoading }) => {
                     <Text style={styles.sectionTitle}>Activity list</Text>
                     <View style={{ flexDirection: 'row', gap: 16 }}>
                         {
-                            data?.eventActivities?.map((item) => {
+                            data?.activities?.map((item) => {
                                 return (
-                                    <View style={styles.container} key={item.id}>
+                                    <View style={styles.container} key={item.activityId}>
                                         <Image source={{ uri: checkImageURL(item?.picture) ? item.picture : "../../../assets/images/test_image.jpg" }} style={{ resizeMode: 'cover', borderRadius: 117, width: 64, height: 64 }} />
                                         <View style={styles.detailsName}>
                                             <Text>{item.name}</Text>
@@ -24,7 +24,7 @@ const EventItenary = ({ data, isLoading }) => {
                                         </View>
                                         <View style={styles.timeDetails}>
                                             <ICONS.ClockDetailsTime />
-                                            <Text>{`${returnDateTime(item?.startDate)} - ${returnDateTime(item?.endDate)}`}</Text>
+                                            <Text>{`${returnDateTime(item?.startTime)} - ${returnDateTime(item?.endTime)}`}</Text>
                                         </View>
                                     </View>
                                 )

@@ -8,7 +8,7 @@ const EventImage = ({ data, isLoading }) => {
         <View style={{ marginBottom: 16 }}>
             <Skeleton colorMode="light" height={240} show={isLoading}>
                 <ImageBackground
-                    source={{ uri: checkImageURL(data?.picture) ? data.picture : '../../../assets/images/test_image.jpg' }}
+                    source={{ uri: checkImageURL(data?.imageUrl) ? data.imageUrl : '../../../assets/images/test_image.jpg' }}
                     style={styles.image}
                     resizeMode='cover'
                 >
