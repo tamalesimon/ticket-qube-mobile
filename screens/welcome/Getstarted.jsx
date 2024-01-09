@@ -13,8 +13,8 @@ export default function GetStarted({ navigation }) {
       <SafeAreaView style={{ flex: 1, padding: 24 }}>
         <View>
           <View style={{ flexDirection: 'column', gap: 8, marginTop: Display.setHeight(22) }}>
-            <View style={{ flexDirection: 'column', alignItems: 'center', gap: 8, marginBottom: Display.setHeight(28) }}>
-              <Image source={require('../../assets/LogoTitle.png')} resizeMode='contain' />
+            <View style={{ flexDirection: 'column', alignItems: 'center', gap: 8, marginBottom: Display.setHeight(8) }}>
+              <Image source={require('../../assets/images/Artboard.png')} resizeMode='contain' style={{ width: "40%" }} />
             </View>
             <View>
               <View style={{ gap: 12, }}>

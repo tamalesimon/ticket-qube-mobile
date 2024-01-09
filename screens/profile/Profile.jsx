@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useRouter, Stack } from 'expo-router'
 import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Image, ImageBackground } from 'react-native';
 import { ICONS, COLORS, FONTS } from '../../constants';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -10,6 +11,39 @@ const activities = [
   { id: 3, name: "Following", total: 30 },
 ];
 export default function Profile() {
+
+  const profileScreenOptions = {
+    headerStyle: {
+      backgroundColor: COLORS.gray50, // turn it back to white
+      elevation: 0,
+      borderBottomWidth: 0,
+    },
+    headerShadowVisible: false,
+    headerTitleStyle: {
+      fontFamily: FONTS.NotoSansJPBold,
+      fontWeight: '700',
+    },
+    headerLeft: () => (
+      <View style={styles.headerButtonContainer}>
+        <ICONS.ArrowLeftIcon />
+      </View>
+    ),
+    headerRight: () => (
+      <View style={styles.headerButtonContainer}>
+        <View style={styles.sharedContainer}>
+          <TouchableOpacity onPress={() => console.log("it works: Edit profile")}>
+            <ICONS.EditIcon />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => console.log("it works: Go to settings")}>
+            <ICONS.SettingsIcon />
+          </TouchableOpacity>
+        </View>
+      </View>
+    ),
+    headerTitle: 'Profile',
+    headerTitleAlign: 'center',
+  };
+
   const tabs = ["Events", "Collections", "About"];
   const [activeTab, setActiveTab] = useState(tabs[0])
 
@@ -39,6 +73,7 @@ export default function Profile() {
   }
   return (
     <SafeAreaView style={{ backgroundColor: COLORS.gray50, flex: 1, }}>
+      <Stack.Screen options={{ ...profileScreenOptions, headerTitle: 'Profile' }} />
       <View style={styles.profileDetails}>
         <Image style={styles.userImage} source={{ uri: 'https://img.freepik.com/premium-photo/beauty-face-smiling-black-woman-portrait-beautiful-candid-real-face-african-american-girl-high-quality-photo_21730-15880.jpg' }} />
         <View style={styles.userText}>
@@ -125,5 +160,16 @@ const styles = StyleSheet.create({
     fontWeight: 400,
     lineHeight: 18,
     color: COLORS.gray400
+  },
+  headerButtonContainer: {
+    marginHorizontal: 24, //24px
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  sharedContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 16
   }
 })

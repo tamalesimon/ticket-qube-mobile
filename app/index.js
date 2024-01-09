@@ -132,6 +132,7 @@ export default function Page() {
           component={FollowOrganiser}
           options={{
             ...screenOptions,
+            genericNoTitleScreenOptions,
             headerRight: () => (
               <TouchableOpacity onPress={() => navigation.navigate('PickInterest')}>
                 <Text style={styles.skipText}>Skip for now</Text>
@@ -144,6 +145,7 @@ export default function Page() {
           component={PickInterest}
           options={{
             ...screenOptions,
+            genericNoTitleScreenOptions,
             headerRight: () => (
               <TouchableOpacity onPress={() => navigation.navigate('NavigationTabs')}>
                 <Text style={styles.skipText}>Skip for now</Text>
@@ -294,6 +296,7 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.NotoSansJPRegular,
     fontWeight: 500,
     fontSize: 14,
-    color: COLORS.primaryBase
+    color: COLORS.primaryBase,
+    marginRight: 24
   }
 })

@@ -18,9 +18,9 @@ const initialState = {
   isLoading: false,
   status: null,
   otp: '',
+  updatedDetails: {},
   qubeUserId: '',
   isSignedUp: {},
-  isVerified: '',
   isLoggedIn: {},
   isError: {}
 }
@@ -29,7 +29,7 @@ const headers = {
   headers: {
     'Content-Type': 'application/json; charset=utf-8',
     'Access-Control-Allow-Origin': 'https://localhost:8080',
-    'Access-Control-Allow-Credentials': true,
+    'Access-Control-Allow-Credentials': false,
     'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
   }
@@ -94,6 +94,15 @@ export const signin = createAsyncThunk('users/signin', async (useDetails) => {
   }
 });
 
+export const updateDetails = createAsyncThunk('user/update-details', async ({ userDetails, userId }, { rejectWithValue }) => {
+  try {
+    const response = await axiosInstance.post(`${LocalAPI}/user/${userId}`, userDetails)
+    return response.data
+  } catch (error) {
+    return rejectWithValue(error.response.data);
+  }
+})
+
 export const forgotPassword = createAsyncThunk('/users/forgot-password', async (email, { getState }) => {
   try {
     const bearerToken = getState().auth.token;
@@ -152,7 +161,7 @@ const authSlice = createSlice({
       })
       .addCase(signin.fulfilled, (state, action) => {
         state.isLoading = true;
-        state.isAuthenticated = true;
+        state.isAuthenticated = false;
         state.isVerified = true;
         state.userInfo = action.payload;
         state.token = action.payload.token;
@@ -163,6 +172,7 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload ? action.payload : action.error.message;
       })
+
       .addCase(verifyOtp.pending, state => {
         state.isLoading = true;
         state.isVerified = null;
@@ -177,6 +187,17 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload ? action.payload : action.error.message;
       })
+
+      .addCase(updateDetails.pending, state => {
+        state.updatedDetails = {}
+      })
+      .addCase(updateDetails.fulfilled, (state, action) => {
+        state.updatedDetails = action.payload
+      })
+      .addCase(updateDetails.rejected, (state, action) => {
+        state.error = action.payload
+      })
+
       .addCase(forgotPassword.pending, state => {
         state.isLoading = true;
         state.isExisting = false;

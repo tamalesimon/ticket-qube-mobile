@@ -1,5 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
+import { API_LOCAL, API_DEV } from '@env'
+import { useSelector } from "react-redux";
 
 
 const initialState = {
@@ -13,14 +16,21 @@ const initialState = {
     error: null,
 }
 
-const axiosInstance = axios.create({
-    baseURL: 'http://localhost:3000',
+const headers = {
     headers: {
         'Content-Type': 'application/json; charset=utf-8',
-        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Origin': 'https://localhost:8080',
+        'Access-Control-Allow-Credentials': false,
         'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
         'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
     }
+};
+
+const axiosInstance = axios.create({
+    baseURL: API_LOCAL,
+    headers: headers.headers,
+    withCredentials: false,
+    credentials: 'same-origin'
 });
 
 export const fetchEvents = createAsyncThunk('events/fetchEvents', async () => {
@@ -41,12 +51,18 @@ export const fetchEventsUpcoming = createAsyncThunk('events/fetchEventsUpcoming'
     }
 });
 
-export const fetchEventsSuggestion = createAsyncThunk('events/fetchEventsSuggestion', async () => {
-    try {
-        const response = await axiosInstance.get('/events/suggestion');
+export const fetchEventsSuggestion = createAsyncThunk('fetchEventsSuggestions', async (queryDetails, token) => {
+    // const authenticationDetails = await AsyncStorage.getItem('qubeUserLoginDetails');
+    // const tokenDetails = JSON.parse(authenticationDetails)
+    // const token = tokenDetails.token
+
+    // const token = useSelector(state => state.authSlice.token)
+    if (token) {
+        const response = await axiosInstance.get(`/client-event/_search/${queryDetails}`, {
+            ...headers,
+            'Authorization': `Bearer ${token}`
+        });
         return response.data;
-    } catch (error) {
-        throw error.response.data.message
     }
 });
 
@@ -59,7 +75,7 @@ export const fetchEventsPast = createAsyncThunk('events/fetchEventsPast', async 
     }
 });
 
-export const fetchEventById = createAsyncThunk("events/byId",  async () => {
+export const fetchEventById = createAsyncThunk("events/byId", async () => {
     try {
         const response = await axiosInstance.get('/events/:id');
         return response.data;
@@ -125,7 +141,7 @@ const eventSlice = createSlice({
             })
             .addCase(fetchEventsSuggestion.fulfilled, (state, action) => {
                 state.loading = false;
-                state.eventsSuggestion = action.payload;
+                state.eventsSuggestion = action.payload.data;
             })
             .addCase(fetchEventsSuggestion.rejected, (state, action) => {
                 state.loading = false;

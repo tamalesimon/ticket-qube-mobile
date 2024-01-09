@@ -10,6 +10,7 @@ export default function InputField({
     value,
     onChangeText,
     setFormData,
+    paddingTop,
     error,
     ...props
 }) {
@@ -33,10 +34,11 @@ export default function InputField({
             setIsEmpty(true)
         }
     };
+    const padTop = paddingTop ? 8 : "";
     const borderColor = error && isEmpty ? COLORS.errorLight : (isFocused || value && !error ? COLORS.primaryBase : '');
     return (
         <View style={{ ...styles.container, borderColor: borderColor, borderWidth: isFocused || error && isEmpty || value && !error ? 1 : 0 }}>
-            {IconComponent && <IconComponent style={{ paddingTop: 8 }} />}
+            {IconComponent && <IconComponent style={{ paddingTop: padTop }} />}
             <TextInput
                 style={styles.textInput}
                 placeholder={placeholder}
