@@ -15,11 +15,11 @@ const EventOrganizer = ({ data, isLoading }) => {
                     <View style={styles.container}>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <View style={{ marginRight: 16 }}>
-                                <Image source={{ uri: checkImageURL(data?.organizer?.picture) ? data.organizer?.picture : '../../../assets/images/test_image.jpg' }} style={{ resizeMode: 'cover', borderRadius: 117, width: 48, height: 48 }} />
+                                <Image source={{ uri: checkImageURL(data?.organization?.picture) ? data.organization?.picture : '../../../assets/images/test_image.jpg' }} style={{ resizeMode: 'cover', borderRadius: 117, width: 48, height: 48 }} />
                             </View>
                             <View>
                                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                    <Text style={styles.organizerName}>{data?.organizer?.name}</Text>
+                                    <Text style={styles.organizerName}>{data?.organization?.name}</Text>
                                     <ICONS.BadgeVerified />
                                 </View>
                                 <Text style={styles.genre}>{data?.category?.name}</Text>

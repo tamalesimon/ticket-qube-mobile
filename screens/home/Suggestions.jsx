@@ -21,8 +21,9 @@ export default function Suggestions() {
     }, [])
 
     const handleEventClicked = (item) => {
-        router.push(`event-details/${item.id}`)
-        setSelectedEvent(item.id);
+        router.push(`event-details/${item.eventId}`)
+        setSelectedEvent(item.eventId);
+        console.log("selected Event id: " + item.eventId);
     }
 
     const renderSuggestion = () => {
@@ -39,7 +40,7 @@ export default function Suggestions() {
                                 {
                                     eventsSuggestion?.map((item) => {
                                         return (
-                                            <SuggestionCard style={styles.suggestionSection} handleEventClicked={() => handleEventClicked(item)} selectedEvent={selectedEvent} key={item?.id} item={item} />
+                                            <SuggestionCard style={styles.suggestionSection} handleEventClicked={() => handleEventClicked(item)} selectedEvent={selectedEvent} key={item?.eventId} item={item} />
                                         )
                                     })
                                 }

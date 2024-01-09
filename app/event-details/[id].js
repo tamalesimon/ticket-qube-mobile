@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams, useNavigation } from 'expo-router';
+import { useDispatch, useSelector } from "react-redux";
+import { fetchEventById } from "../../redux/eventsSlice";
 import { SafeAreaView, Text, useWindowDimensions, View, StyleSheet } from "react-native";
 import { COLORS, ICONS } from "~/constants";
-import { useSelector } from "react-redux";
 import { EventImage, Details, EventOrganizer, Footer, EventItenary, EventLocation, ShareEvent } from "~/screens/event/components";
 import useDataFetch from "../../utils/useDataFetch";
 import { ScrollView } from "react-native-gesture-handler";
@@ -13,8 +14,14 @@ import LikesHeart from "../../screens/event/components/LikesHeart";
 const EventDetails = () => {
     const router = useRouter();
     const params = useSearchParams();
+    const dispatch = useDispatch();
+    const { eventByid, loading } = useSelector(state => state.events)
 
     const { data, isLoading, error, refetch } = useDataFetch('3000/suggestion', params.id)
+
+    useEffect(() => {
+        dispatch(fetchEventById(params.id))
+    }, [])
 
     const navigation = useNavigation();
     const bottomSheetRef = useRef(null);
@@ -45,18 +52,18 @@ const EventDetails = () => {
                 </View>
             </View>
             <ScrollView showsVerticalScrollIndicator={false}>
-                <EventImage data={data} isLoading={isLoading} />
-                <Details data={data} isLoading={isLoading} />
-                <EventOrganizer data={data} isLoading={isLoading} />
-                <EventItenary data={data} isLoading={isLoading} />
-                <EventLocation data={data} isLoading={isLoading} />
+                <EventImage data={eventByid} isLoading={isLoading} />
+                <Details data={eventByid} isLoading={isLoading} />
+                <EventOrganizer data={eventByid} isLoading={isLoading} />
+                <EventItenary data={eventByid} isLoading={isLoading} />
+                <EventLocation data={eventByid} isLoading={isLoading} />
             </ScrollView>
             <Footer
-                info={data}
-                spotInfo={"You're going! +1"}
+                info={eventByid}
+                spotInfo={"You're going! Right"}
                 label={"Get a Ticket"}
                 handleClickButton={navigateToNext} />
-            <ShareEvent activeHeight={height * 0.45} ref={bottomSheetRef} handlePress={closeHandler} data={data} />
+            <ShareEvent activeHeight={height * 0.45} ref={bottomSheetRef} handlePress={closeHandler} data={eventByid} />
         </SafeAreaView>
     );
 }

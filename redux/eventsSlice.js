@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 
 const initialState = {
     item: null,
+    eventByid: {},
     events: [],
     eventsUpcoming: [],
     eventsSuggestion: [],
@@ -52,11 +53,6 @@ export const fetchEventsUpcoming = createAsyncThunk('events/fetchEventsUpcoming'
 });
 
 export const fetchEventsSuggestion = createAsyncThunk('fetchEventsSuggestions', async (queryDetails, token) => {
-    // const authenticationDetails = await AsyncStorage.getItem('qubeUserLoginDetails');
-    // const tokenDetails = JSON.parse(authenticationDetails)
-    // const token = tokenDetails.token
-
-    // const token = useSelector(state => state.authSlice.token)
     if (token) {
         const response = await axiosInstance.get(`/client-event/_search/${queryDetails}`, {
             ...headers,
@@ -66,7 +62,7 @@ export const fetchEventsSuggestion = createAsyncThunk('fetchEventsSuggestions', 
     }
 });
 
-export const fetchEventsPast = createAsyncThunk('events/fetchEventsPast', async () => {
+export const fetchEventsPast = createAsyncThunk('pastEvents', async () => {
     try {
         const response = await axiosInstance.get('/events/past');
         return response.data;
@@ -75,12 +71,13 @@ export const fetchEventsPast = createAsyncThunk('events/fetchEventsPast', async 
     }
 });
 
-export const fetchEventById = createAsyncThunk("events/byId", async () => {
-    try {
-        const response = await axiosInstance.get('/events/:id');
+export const fetchEventById = createAsyncThunk("eventById", async (eventId, token) => {
+    if (token) {
+        const response = await axiosInstance.get(`/client-event/${eventId}`, {
+            ...headers,
+            "Authorization": `Bearer ${token}`
+        });
         return response.data;
-    } catch (error) {
-        throw error.response.data.message
     }
 })
 
@@ -144,6 +141,19 @@ const eventSlice = createSlice({
                 state.eventsSuggestion = action.payload.data;
             })
             .addCase(fetchEventsSuggestion.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(fetchEventById.pending, (state, action) => {
+                state.loading = false
+                // const index = state.events.findIndex((e) => e.id === action.payload)
+
+            })
+            .addCase(fetchEventById.fulfilled, (state, action) => {
+                state.loading = false;
+                state.eventByid = action.payload;
+            })
+            .addCase(fetchEventById.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             })
