@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { View, Text, TouchableOpacity, SafeAreaView, StyleSheet } from 'react-native';
 import { COLORS, FONTS, FONTSIZE, images, ICONS } from '../../constants';
@@ -12,25 +12,38 @@ import { useFormValidation } from '../../hooks/useFormValidation.js';
 import Display from '../../utils/Display';
 import LoadingIndicator from "../../components/loaders/LoadingIndicator";
 
+import { setCredentials } from "../../redux/auth/authSlice.js";
+import { useSigninMutation } from "../../redux/auth/authApiSlice.js";
+
 
 
 const Signin = ({ navigation }) => {
     const dispatch = useDispatch();
-    const { isLoading, error, status, isAuthenticated, isVerified, updatedDetails } = useSelector((state) => state.auth)
+    const emailRef = useRef();
+    const errRef = useRef();
+    const [errMsg, setErrMsg] = useState('')
+
+    const [signin, { isLoading }] = useSigninMutation()
+    const { token } = useSelector((state) => state.auth)
+
     const initialFormData = { email: '', password: '' }
     const { formData, formErrors, setFormData, handleSubmit } = useFormValidation(initialFormData);
-    const [showLoadingIndicator, setShowLoadingIndicator] = useState(true);
 
-    const handleNavigation = () => {
-        AsyncStorage.getItem("Onboarded").then(async (value) => {
-            if (value == null) {
-                await AsyncStorage.setItem("Onboarded", "true");
-                navigation.navigate("DOB");
-            } else if (value) {
-                navigation.replace('NavigationTabs');
-            }
-        })
-    }
+
+    // const handleNavigation = () => {
+    //     AsyncStorage.getItem("Onboarded").then(async (value) => {
+    //         if (value == null) {
+    //             await AsyncStorage.setItem("Onboarded", "true");
+    //             navigation.navigate("DOB");
+    //         } else if (value) {
+    //             navigation.replace('NavigationTabs');
+    //         }
+    //     })
+    // }
+
+    useEffect(() => {
+        emailRef.current.focus()
+    }, [])
 
     useEffect(() => {
         navigation.setOptions({
@@ -38,31 +51,39 @@ const Signin = ({ navigation }) => {
                 backgroundColor: isLoading ? '#7F7F7F' : 'white'
             }
         });
-
-        if (isLoading) {
-            setTimeout(() => {
-                setShowLoadingIndicator(false);
-                handleNavigation();
-            }, 1500); // 3000 milliseconds = 3 seconds
-        } else {
-            setShowLoadingIndicator(false);
-        }
-    }, [status, isLoading])
+    }, [isLoading])
 
 
-    const handleSignin = () => {
-        const { isValid, data } = handleSubmit();
-        if (isValid) {
-            console.log(data)
-            dispatch(signin(data));
-            handleNavigation()
-        } else {
-            console.log(formErrors)
+    const handleSignin = async () => {
+        const { data } = handleSubmit();
+        try {
+            const response = await signin(data).unwrap()
+            dispatch(setCredentials({ ...response, data }))
+            if (response.status === 'ACTIVE') {
+                navigation.navigate('NavigationTabs')
+            } else if (response.status === 'PENDING-VERIFICATION') {
+                navigation.navigate('VerifyOtp')
+            }
+        } catch (err) {
+            if (!err?.originalStatus) {
+                setErrMsg("NO SERVER RESPONSE, TRY AGAIN LATER!")
+            } else if (err?.originalStatus.status === 404) {
+                setErrMsg("USER NOT FOUND, PLEASE SIGNUP FIRST!")
+            } else if (err?.originalStatus.status === 401) {
+                setErrMsg("UNAUTHORIZED")
+            } else {
+                setErrMsg("SOMETHING WENT WRONG, TRY AGAIN LATER!")
+            }
+            errRef.current.focus()
         }
     }
 
-    return (
-        <SafeAreaView style={{ backgroundColor: COLORS.white, flex: 1, padding: 24 }}>
+    const content = isLoading ?
+        (
+            <View style={styles.loader}>
+                <LoadingIndicator />
+            </View>
+        ) : (
             <View>
                 <View style={{ flexDirection: 'column', marginTop: 32 }}>
                     <View style={{}}>
@@ -75,6 +96,7 @@ const Signin = ({ navigation }) => {
                             placeholderTextColor={COLORS.gray400}
                             icon={ICONS.MailIcon}
                             inputType={'email'}
+                            inputRef={emailRef}
                             onChangeText={(text) => setFormData(prevState => ({ ...prevState, email: text }))}
                             setFormData={setFormData}
                             value={formData.email}
@@ -107,13 +129,11 @@ const Signin = ({ navigation }) => {
                     </View>
                 </View>
             </View>
-            {
-                isLoading && (
-                    <View style={styles.loader}>
-                        <LoadingIndicator />
-                    </View>
-                )
-            }
+        )
+
+    return (
+        <SafeAreaView style={{ backgroundColor: COLORS.white, flex: 1, padding: 24 }}>
+            {content}
         </SafeAreaView>
     )
 }

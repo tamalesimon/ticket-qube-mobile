@@ -7,6 +7,7 @@ export default function InputField({
     placeholder,
     icon: IconComponent,
     inputType,
+    inputRef,
     value,
     onChangeText,
     setFormData,
@@ -41,6 +42,7 @@ export default function InputField({
             {IconComponent && <IconComponent style={{ paddingTop: padTop }} />}
             <TextInput
                 style={styles.textInput}
+                ref={inputRef}
                 placeholder={placeholder}
                 cursorColor={COLORS.primaryBase}
                 secureTextEntry={secureTextEntry}

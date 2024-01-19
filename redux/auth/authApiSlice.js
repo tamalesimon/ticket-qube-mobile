@@ -1,4 +1,4 @@
-import { apiSlice } from "../../redux/api/apiSlice";
+import { apiSlice } from "../api/apiSlice";
 
 export const authApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -11,7 +11,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         }),
         signin: builder.mutation({
             query: credentials => ({
-                url: "/users/signin",
+                url: "/users/login",
                 method: "POST",
                 body: { ...credentials }
             }),
@@ -46,3 +46,12 @@ export const authApiSlice = apiSlice.injectEndpoints({
         }),
     }),
 });
+
+export const {
+    useSignupMutation,
+    useSigninMutation,
+    useForgotPasswordMutation,
+    useResetPasswordMutation,
+    useVerifyUserMutation,
+    useCreateAccountMutation
+} = authApiSlice;
