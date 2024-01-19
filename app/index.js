@@ -22,35 +22,29 @@ const Stack = createNativeStackNavigator();
 
 export default function Page() {
   const navigation = useNavigation();
-  const { isSignedUp, isVerified, isLoggedIn } = useSelector(state => state.auth)
-  const [isToken, setIsToken] = useState(null)
-  const [isExpiring, setIsExpiring] = useState(null)
+  // const { isSignedUp, isVerified, isLoggedIn } = useSelector(state => state.auth)
+  // const [isToken, setIsToken] = useState(null)
+  // const [isExpiring, setIsExpiring] = useState(null)
 
-  useEffect(() => {
-    AsyncStorage.getItem("QubeFirstLaunch").then(async (value) => {
-      if (value === null) {
-        AsyncStorage.setItem("QubeFirstLaunch", "true");
-        navigation.navigate("Get Started");
-      } else {
-        const authDetails = await AsyncStorage.getItem("qubeUserLoginDetails")
-        const tokenDetails = JSON.parse(authDetails);
-        console.log(tokenDetails)
-        if (tokenDetails) {
-          setIsExpiring(tokenDetails.expiresAt)
-          setIsToken(tokenDetails.token)
-          navigation.navigate("Signin");
-        } else {
-          navigation.navigate("Get Started");
-        }
-      }
-    })
-  }, [])
-
-  const qubeAuthStatus = {
-    loggedIn_active: isToken && isLoggedIn.status === "ACTIVE",
-    signedUp_inactive: isSignedUp.status === "PENDING",
-    signedUp_active: isSignedUp.status === "ACTIVE",
-  }
+  // useEffect(() => {
+  //   AsyncStorage.getItem("QubeFirstLaunch").then(async (value) => {
+  //     if (value === null) {
+  //       AsyncStorage.setItem("QubeFirstLaunch", "true");
+  //       navigation.navigate("Get Started");
+  //     } else {
+  //       const authDetails = await AsyncStorage.getItem("qubeUserLoginDetails")
+  //       const tokenDetails = JSON.parse(authDetails);
+  //       console.log(tokenDetails)
+  //       if (tokenDetails) {
+  //         setIsExpiring(tokenDetails.expiresAt)
+  //         setIsToken(tokenDetails.token)
+  //         navigation.navigate("Signin");
+  //       } else {
+  //         navigation.navigate("Get Started");
+  //       }
+  //     }
+  //   })
+  // }, [])
 
   return (
     <Stack.Navigator>
@@ -273,13 +267,6 @@ export default function Page() {
   );
 }
 
-// export default function Page(){
-//   return (
-//     <Provider store={store}>
-//       <App />
-//     </Provider>
-//   )
-// }
 
 const screenOptions = {
   headerStyle: {
