@@ -8,7 +8,7 @@ import { selectCurrentUserToken } from '../../redux/auth/authSlice';
 
 import SuggestionCard from '../../components/card/SuggestionCard';
 import SectionHeaders from '../../components/titleHeaders/SectionHeaders'
-
+import { shortenEventName } from '../../utils/utils';
 import SkeletonLoaderList from '../../components/loaders/SkeletonLoaderList';
 
 export default function Suggestions() {

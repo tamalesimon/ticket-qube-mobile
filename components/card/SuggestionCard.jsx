@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
 import { ICONS, COLORS, FONTS } from '../../constants'
-import { checkImageURL, returnDateDay, returnDateMonth, moneyFormat } from '../../utils/utils';
+import { checkImageURL, returnDateDay, returnDateMonth, moneyFormat, shortenEventName } from '../../utils/utils';
 
 export default function SuggestionCard({ item, selectedEvent, handleEventClicked }) {
     return (
@@ -20,7 +20,7 @@ export default function SuggestionCard({ item, selectedEvent, handleEventClicked
                 <View style={styles.detailsSubtitle}>
                     <View style={styles.locationContainer}>
                         <ICONS.MapPinSmallIcon />
-                        <Text style={styles.location}>{item.location}</Text>
+                        <Text style={styles.location}>{shortenEventName(item.location)}</Text>
                     </View>
                     <View style={styles.price}>
                         <Text style={styles.priceText}>{moneyFormat(item.tickets[1].currency, item.tickets[1].price)}</Text>

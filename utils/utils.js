@@ -30,7 +30,7 @@ export const returnDateTime = (eventDate) => {
 
 export const shortenEventName = (eventName) => {
   if (!eventName) return null
-  const shortenedName = eventName.substring(0, 17) + "...";
+  const shortenedName = eventName.substring(0, 19);
   return shortenedName;
 }
 
