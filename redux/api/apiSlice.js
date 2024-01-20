@@ -6,7 +6,7 @@ const baseQuery = fetchBaseQuery({
     baseUrl: API_LOCAL,
     credentials: 'include',
     prepareHeaders: (headers, { getState }) => {
-        const token = getState().auth.accessToken
+        const token = getState().auth.token
         if (token) {
             headers.set('Authorization', `Bearer ${token}`)
             headers.set('Content-Type', 'application/json')
@@ -33,7 +33,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
             result = await baseQuery(args, api, extraOptions)
 
         } else {
-            api.dispatch(logout())
+            api.dispatch(logOut())
         }
     }
     return result

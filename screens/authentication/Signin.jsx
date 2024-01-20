@@ -1,11 +1,9 @@
 import React, { useRef, useState, useEffect } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { View, Text, TouchableOpacity, SafeAreaView, StyleSheet } from 'react-native';
 import { COLORS, FONTS, FONTSIZE, images, ICONS } from '../../constants';
 import GenericButton from "../../components/buttons/genericButton";
 import AcceptTerms from "../../components/terms/AcceptTerms";
-import { useSelector, useDispatch } from "react-redux";
-import { signin } from "../../redux/authSlice";
+import { useDispatch } from "react-redux";
 import globalStyles from '../../styles/globalStyles';
 import InputField from "../../components/inputField/InputField";
 import { useFormValidation } from '../../hooks/useFormValidation.js';
@@ -21,25 +19,12 @@ const Signin = ({ navigation }) => {
     const dispatch = useDispatch();
     const emailRef = useRef();
     const errRef = useRef();
-    const [errMsg, setErrMsg] = useState('')
+    const [errMsg, setErrMsg] = useState('') //TODO: handle toast errors
 
     const [signin, { isLoading }] = useSigninMutation()
-    const { token } = useSelector((state) => state.auth)
 
     const initialFormData = { email: '', password: '' }
     const { formData, formErrors, setFormData, handleSubmit } = useFormValidation(initialFormData);
-
-
-    // const handleNavigation = () => {
-    //     AsyncStorage.getItem("Onboarded").then(async (value) => {
-    //         if (value == null) {
-    //             await AsyncStorage.setItem("Onboarded", "true");
-    //             navigation.navigate("DOB");
-    //         } else if (value) {
-    //             navigation.replace('NavigationTabs');
-    //         }
-    //     })
-    // }
 
     useEffect(() => {
         emailRef.current.focus()

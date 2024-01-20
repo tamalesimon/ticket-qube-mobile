@@ -1,24 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchEventsSuggestion } from "../../redux/eventsSlice"
 import { useRouter } from 'expo-router';
+
+import { useGetEventSuggestionsMutation } from '../../redux/events/eventsApiSlice';
+import { selectCurrentUserToken } from '../../redux/auth/authSlice';
+
 import SuggestionCard from '../../components/card/SuggestionCard';
 import SectionHeaders from '../../components/titleHeaders/SectionHeaders'
-import useDataFetch from '../../utils/useDataFetch'
+import { shortenEventName } from '../../utils/utils';
 import SkeletonLoaderList from '../../components/loaders/SkeletonLoaderList';
 
 export default function Suggestions() {
     const dispatch = useDispatch();
-    const { eventsSuggestion, loading } = useSelector(state => state.events)
-    const { token } = useSelector(state => state.auth)
+    const errRef = useRef();
+
+    const [getEventSuggestions, { data: events, error, isError, isLoading, isSuccess }] = useGetEventSuggestionsMutation();
+
     const router = useRouter();
-    const { data, isLoading, error, refetch } = useDataFetch('3000/suggestion')
     const [selectedEvent, setSelectedEvent] = useState();
 
     useEffect(() => {
-        dispatch(fetchEventsSuggestion('suggestions?page=0&size=5', token))
-    }, [])
+        const queryOptions = getEventSuggestions('suggestions?page=0&size=5').unwrap
+        console.log("query Options: " + queryOptions)
+        console.log("token: " + selectCurrentUserToken)
+    }, [getEventSuggestions])
 
     const handleEventClicked = (item) => {
         router.push(`event-details/${item.eventId}`)
@@ -26,35 +32,60 @@ export default function Suggestions() {
         console.log("selected Event id: " + item.eventId);
     }
 
-    const renderSuggestion = () => {
-        return (
-            <View>
-                <SectionHeaders sectionTitle="Suggestions for you" isLoading={isLoading} />
-                {
-                    isLoading ?
-                        (<View style={{ marginTop: 16 }}>
-                            <SkeletonLoaderList />
-                        </View>) :
-                        (
-                            <View style={{ marginTop: 16 }}>
-                                {
-                                    eventsSuggestion?.map((item) => {
-                                        return (
-                                            <SuggestionCard style={styles.suggestionSection} handleEventClicked={() => handleEventClicked(item)} selectedEvent={selectedEvent} key={item?.eventId} item={item} />
-                                        )
-                                    })
-                                }
-                            </View>
-                        )
-                }
+    let content;
 
-
+    if (isLoading) {
+        content = (
+            <View style={{ marginTop: 16 }}>
+                <SkeletonLoaderList />
             </View>
         )
+    } else if (isSuccess) {
+        content = (
+            <View style={{ marginTop: 16 }}>
+                {
+                    events.data.map((item) => {
+                        return (
+                            <SuggestionCard style={styles.suggestionSection} handleEventClicked={() => handleEventClicked(item)} selectedEvent={selectedEvent} key={item?.eventId} item={item} />
+                        )
+                    })
+                }
+            </View>
+        )
+    } else if (isError) {
+        console.log("Something is wrong: " + JSON.stringify(error))
     }
+
+    // const renderSuggestion = () => {
+    //     return (
+    //         <View>
+    //             <SectionHeaders sectionTitle="Suggestions for you" isLoading={isLoading} />
+    //             {
+    //                 isLoading ?
+    //                     (<View style={{ marginTop: 16 }}>
+    //                         <SkeletonLoaderList />
+    //                     </View>) :
+    //                     (
+    //                         <View style={{ marginTop: 16 }}>
+    //                             {
+    //                                 eventsSuggestion?.map((item) => {
+    //                                     return (
+    //                                         <SuggestionCard style={styles.suggestionSection} handleEventClicked={() => handleEventClicked(item)} selectedEvent={selectedEvent} key={item?.eventId} item={item} />
+    //                                     )
+    //                                 })
+    //                             }
+    //                         </View>
+    //                     )
+    //             }
+
+
+    //         </View>
+    //     )
+    // }
     return (
         <View>
-            {renderSuggestion()}
+            <SectionHeaders sectionTitle="Suggestions for you" isLoading={isLoading} />
+            {content}
         </View>
     );
 }
