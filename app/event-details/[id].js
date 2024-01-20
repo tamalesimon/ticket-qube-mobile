@@ -11,17 +11,24 @@ import BackLeft from "../../components/header/explore/BackLeft";
 import Upload from "../../screens/event/components/Upload";
 import LikesHeart from "../../screens/event/components/LikesHeart";
 
+import { useGetEventByIdMutation } from "../../redux/events/eventsApiSlice";
+
+import { selectCurrentEventId } from "../../redux/events/eventSlice";
+
 const EventDetails = () => {
     const router = useRouter();
     const params = useSearchParams();
     const dispatch = useDispatch();
-    const { eventByid, loading } = useSelector(state => state.events)
+    // const { eventByid, loading } = useSelector(state => state.events)
 
-    const { data, isLoading, error, refetch } = useDataFetch('3000/suggestion', params.id)
+    const [getEventById, { data: event, error, isLoading, isSuccess, isError }] = useGetEventByIdMutation();
+    const eventId = useSelector(selectCurrentEventId)
 
     useEffect(() => {
-        dispatch(fetchEventById(params.id))
-    }, [])
+        const selectedEvent = getEventById(eventId).unwrap
+        console.log("selected Id: " + eventId)
+        console.log("selected Event: ", selectedEvent)
+    }, [eventId])
 
     const navigation = useNavigation();
     const bottomSheetRef = useRef(null);
@@ -37,35 +44,41 @@ const EventDetails = () => {
     const navigateToNext = () => {
         router.push("event-details/get-ticket/GetTicket")
     }
-    return (
-        <SafeAreaView style={{ backgroundColor: COLORS.white, flex: 1, paddingHorizontal: 24, paddingBottom: 24, paddingTop: 12 }}>
-            {/* <View>
-                <Text>{JSON.stringify(data)}</Text>
-            </View> */}
-            <View style={styles.container}>
-                <View style={styles.buttonsContainer}>
-                    <BackLeft handlePress={() => router.back()} />
-                    <View style={styles.buttonsRightHeader}>
-                        <Upload handlePress={openHandler} />
-                        <LikesHeart handlePress={closeHandler} />
+
+    let content;
+    if (isLoading) {
+        console.log("loading...")
+    } else if (isSuccess) {
+        content = (
+            <SafeAreaView style={{ backgroundColor: COLORS.white, flex: 1, paddingHorizontal: 24, paddingBottom: 24, paddingTop: 12 }}>
+                <View style={styles.container}>
+                    <View style={styles.buttonsContainer}>
+                        <BackLeft handlePress={() => router.back()} />
+                        <View style={styles.buttonsRightHeader}>
+                            <Upload handlePress={openHandler} />
+                            <LikesHeart handlePress={closeHandler} />
+                        </View>
                     </View>
                 </View>
-            </View>
-            <ScrollView showsVerticalScrollIndicator={false}>
-                <EventImage data={eventByid} isLoading={isLoading} />
-                <Details data={eventByid} isLoading={isLoading} />
-                <EventOrganizer data={eventByid} isLoading={isLoading} />
-                <EventItenary data={eventByid} isLoading={isLoading} />
-                <EventLocation data={eventByid} isLoading={isLoading} />
-            </ScrollView>
-            <Footer
-                info={eventByid}
-                spotInfo={"You're going! Right"}
-                label={"Get a Ticket"}
-                handleClickButton={navigateToNext} />
-            <ShareEvent activeHeight={height * 0.45} ref={bottomSheetRef} handlePress={closeHandler} data={eventByid} />
-        </SafeAreaView>
-    );
+                <ScrollView showsVerticalScrollIndicator={false}>
+                    <EventImage data={event} isLoading={isLoading} />
+                    <Details data={event} isLoading={isLoading} />
+                    <EventOrganizer data={event} isLoading={isLoading} />
+                    <EventItenary data={event} isLoading={isLoading} />
+                    <EventLocation data={event} isLoading={isLoading} />
+                </ScrollView>
+                <Footer
+                    info={event}
+                    spotInfo={"You're going! Right"}
+                    label={"Get a Ticket"}
+                    handleClickButton={navigateToNext} />
+                <ShareEvent activeHeight={height * 0.45} ref={bottomSheetRef} handlePress={closeHandler} data={event} />
+            </SafeAreaView>
+        )
+    } else if (isError) {
+        console.log("Something is wrong: " + JSON.stringify(error))
+    }
+    return content;
 }
 
 export default EventDetails;
