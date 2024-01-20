@@ -5,10 +5,12 @@ import { useRouter } from 'expo-router';
 
 import { useGetEventSuggestionsMutation } from '../../redux/events/eventsApiSlice';
 import { selectCurrentUserToken } from '../../redux/auth/authSlice';
+import { selectCurrentEventId } from '../../redux/events/eventSlice';
+import { setEvents, setEventId } from '../../redux/events/eventSlice';
 
 import SuggestionCard from '../../components/card/SuggestionCard';
 import SectionHeaders from '../../components/titleHeaders/SectionHeaders'
-import { shortenEventName } from '../../utils/utils';
+
 import SkeletonLoaderList from '../../components/loaders/SkeletonLoaderList';
 
 export default function Suggestions() {
@@ -21,14 +23,14 @@ export default function Suggestions() {
     const [selectedEvent, setSelectedEvent] = useState();
 
     useEffect(() => {
-        const queryOptions = getEventSuggestions('suggestions?page=0&size=5').unwrap
-        console.log("query Options: " + queryOptions)
+        const suggestionResults = getEventSuggestions('suggestions?page=0&size=5').unwrap
+        dispatch(setEvents({ ...suggestionResults }));
         console.log("token: " + selectCurrentUserToken)
     }, [getEventSuggestions])
 
-    const handleEventClicked = (item) => {
+    const handleEventClicked = async (item) => {
+        dispatch(setEventId(item.eventId))
         router.push(`event-details/${item.eventId}`)
-        setSelectedEvent(item.eventId);
         console.log("selected Event id: " + item.eventId);
     }
 
@@ -55,33 +57,6 @@ export default function Suggestions() {
     } else if (isError) {
         console.log("Something is wrong: " + JSON.stringify(error))
     }
-
-    // const renderSuggestion = () => {
-    //     return (
-    //         <View>
-    //             <SectionHeaders sectionTitle="Suggestions for you" isLoading={isLoading} />
-    //             {
-    //                 isLoading ?
-    //                     (<View style={{ marginTop: 16 }}>
-    //                         <SkeletonLoaderList />
-    //                     </View>) :
-    //                     (
-    //                         <View style={{ marginTop: 16 }}>
-    //                             {
-    //                                 eventsSuggestion?.map((item) => {
-    //                                     return (
-    //                                         <SuggestionCard style={styles.suggestionSection} handleEventClicked={() => handleEventClicked(item)} selectedEvent={selectedEvent} key={item?.eventId} item={item} />
-    //                                     )
-    //                                 })
-    //                             }
-    //                         </View>
-    //                     )
-    //             }
-
-
-    //         </View>
-    //     )
-    // }
     return (
         <View>
             <SectionHeaders sectionTitle="Suggestions for you" isLoading={isLoading} />

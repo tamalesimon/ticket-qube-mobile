@@ -13,10 +13,13 @@ const eventSlice = createSlice({
             state.eventId = action.payload.eventId
             state.status = action.payload.status
         },
+        setEventId: (state, action) => {
+            state.eventId = action.payload
+        }
     }
 })
 
-export const { setEvents } = eventSlice.actions;
+export const { setEvents, setEventId } = eventSlice.actions;
 
 export default eventSlice.reducer
 
