@@ -1,11 +1,14 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity, Pressable } from 'react-native';
 import React, { useState } from 'react';
 import { COLORS, FONTS, ICONS } from '../../../constants';
+import { moneyFormat } from '../../../utils/utils';
 
-const TicketCard = () => {
+const TicketCard = ({ item, title }) => {
   const [isClicked, setIsClicked] = useState(false);
   const [count, setCount] = useState(0);
   const [showmore, setShowmore] = useState(false);
+  const currency = item?.currency
+  const price = item?.price
 
   const handleShowMore = () => {
     setShowmore(!showmore)
@@ -20,8 +23,10 @@ const TicketCard = () => {
     }
   }
   const handleIncrement = () => {
-    if (isClicked && count < 10) {
-      setCount(count + 1)
+    if (isClicked && item.price === 0) {
+      setCount(1);
+    } else if (isClicked && count < 10) {
+      setCount(count + 1);
     }
   }
   const clicked = { backgroundColor: COLORS.secondaryBase, color: COLORS.white }
@@ -32,7 +37,7 @@ const TicketCard = () => {
     <View style={[styles.cardContainer, isClicked ? borderClicked : '']}>
       <TouchableOpacity onPress={handleClick}>
         <View style={[styles.cardHeader, isClicked ? clicked : notClicked]}>
-          <Text style={[styles.cardTitle, isClicked ? clicked : '']}>Premium price</Text>
+          <Text style={[styles.cardTitle, isClicked ? clicked : '']}>{item?.name}</Text>
           {isClicked ? <ICONS.CheckCircleSelected /> : <ICONS.CheckCircle />}
         </View>
       </TouchableOpacity>
@@ -41,11 +46,11 @@ const TicketCard = () => {
           <Image style={styles.imageRect} source={require('../../../assets/images/test_image.jpg')} resizeMode='cover' />
           <View>
             <View style={{ paddingRight: 2 }}>
-              <Text style={styles.eventTitle}>Xenson Senkaba Art Fest: 2023</Text>
+              <Text style={styles.eventTitle}>{title}</Text>
             </View>
             <View style={styles.priceSpots}>
               <Text style={styles.spotsLeft}>10 spots left</Text>
-              <Text style={styles.price}>ugx 150,000</Text>
+              <Text style={styles.price}>{moneyFormat("ugx", price)}</Text>
             </View>
           </View>
         </View>
@@ -69,7 +74,7 @@ const TicketCard = () => {
         </View>
         {showmore && <View style={styles.showDetails}>
           <Text>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut aliquid scire se gaudeant? Summus dolor plures dies manere non potest? Tu quidem reddes; Nihil enim arbitror esse magna laude dignum, quod te praetermissurum credam aut mortis aut doloris metu.
+            {item?.description}
           </Text>
         </View>}
       </View>

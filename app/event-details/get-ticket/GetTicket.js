@@ -5,10 +5,15 @@ import { COLORS, FONTS, ICONS } from '~/constants';
 import TicketCard from '~/screens/event/components/TicketCard';
 import { Footer } from '~/screens/event/components';
 import FiveDayStrip from '~/screens/event/components/EventDateStrip'
+import { selectCurrentEventTickets, selectSelectedEventTitle } from '../../../redux/events/eventSlice';
+import { useSelector } from 'react-redux';
 
 const GetTicket = () => {
     const navigation = useNavigation();
     const router = useRouter();
+    const tickets = useSelector(selectCurrentEventTickets)
+    const ticketTitle = useSelector(selectSelectedEventTitle)
+
     const genericScreenOptions = {
         headerStyle: {
             backgroundColor: COLORS.gray50,
@@ -39,6 +44,7 @@ const GetTicket = () => {
     const handleClickButton = () => {
         router.push("event-details/get-ticket/ContactInfo")
     }
+    console.log("tickets in getTickets: ", tickets)
     return (
         <SafeAreaView style={{ backgroundColor: COLORS.gray50, flex: 1, overflow: 'hidden' }}>
             <Stack.Screen
@@ -49,8 +55,13 @@ const GetTicket = () => {
             </View>
             <View style={styles.chooseTicketContainer}>
                 <Text style={styles.ticketsTitle}>Select your ticket</Text>
-                <TicketCard />
-                <TicketCard />
+                {
+                    tickets.map((item) => {
+                        return (
+                            <TicketCard key={item?.ticketId} item={item} title={ticketTitle} />
+                        )
+                    })
+                }
             </View>
             <Footer info={"UGX 150,000"} spotInfo="You're going! +1" label={"Continue"} handleClickButton={handleClickButton} />
         </SafeAreaView>

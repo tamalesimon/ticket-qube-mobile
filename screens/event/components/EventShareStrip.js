@@ -7,7 +7,7 @@ import { checkImageURL } from '../../../utils/utils';
 export default function EventShareStrip({ data }) {
     return (
         <View style={styles.container}>
-            <Image style={styles.imageRect} resizeMode='cover' source={{ uri: checkImageURL(data?.picture) ? data.picture : require('../../../assets/images/test_image.jpg') }} />
+            <Image style={styles.imageRect} resizeMode='cover' source={{ uri: checkImageURL(data?.imageUrl) ? data.imageUrl : require('../../../assets/images/test_image.jpg') }} />
             <View style={{ gap: 8 }}>
                 <Text style={styles.eventTitle}>{data?.name}</Text>
                 <View style={{ flexDirection: 'row', gap: 8, alignItems: 'center', justifyContent: 'space-between' }}>

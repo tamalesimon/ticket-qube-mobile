@@ -19,7 +19,7 @@ const GetTicket = () => {
                 <TicketCard />
                 <TicketCard />
             </View>
-            <Footer info={"UGX 150,000"} spotInfo="You're going! +1" label={"Continue"} />
+            {/* <Footer info={"UGX 150,000"} spotInfo="You're going! +1" label={"Continue"} /> */}
         </SafeAreaView>
     )
 }
