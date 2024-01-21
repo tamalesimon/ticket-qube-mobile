@@ -5,13 +5,13 @@ import { useRouter } from 'expo-router';
 
 import { useGetEventSuggestionsMutation } from '../../redux/events/eventsApiSlice';
 import { selectCurrentUserToken } from '../../redux/auth/authSlice';
-import { selectCurrentEventId } from '../../redux/events/eventSlice';
-import { setEvents, setEventId } from '../../redux/events/eventSlice';
+import { selectCurrentEventId, setEvents, setEventId, setEventTickets, setSelectedEventTitle } from '../../redux/events/eventSlice';
 
 import SuggestionCard from '../../components/card/SuggestionCard';
 import SectionHeaders from '../../components/titleHeaders/SectionHeaders'
 
 import SkeletonLoaderList from '../../components/loaders/SkeletonLoaderList';
+import TicketCard from '../event/components/TicketCard';
 
 export default function Suggestions() {
     const dispatch = useDispatch();
@@ -25,13 +25,14 @@ export default function Suggestions() {
     useEffect(() => {
         const suggestionResults = getEventSuggestions('suggestions?page=0&size=5').unwrap
         dispatch(setEvents({ ...suggestionResults }));
-        console.log("token: " + selectCurrentUserToken)
     }, [getEventSuggestions])
 
     const handleEventClicked = async (item) => {
         dispatch(setEventId(item.eventId))
+        dispatch(setEventTickets(item.tickets))
+        dispatch(setSelectedEventTitle(item.name))
+        console.log("checking: ", item.name)
         router.push(`event-details/${item.eventId}`)
-        console.log("selected Event id: " + item.eventId);
     }
 
     let content;
