@@ -3,8 +3,8 @@ import Svg, { Path } from "react-native-svg"
 const CheronRightIcon = (props) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
-    width={6}
-    height={11}
+    width={14}
+    height={14}
     fill="none"
     {...props}
   >
@@ -12,8 +12,8 @@ const CheronRightIcon = (props) => (
       stroke="#FF8142"
       strokeLinecap="round"
       strokeLinejoin="round"
-      strokeWidth={1.5}
-      d="m1 1.5 4 4-4 4"
+      strokeWidth={2}
+      d="M5.25 3.5 8.75 7l-3.5 3.5"
     />
   </Svg>
 )

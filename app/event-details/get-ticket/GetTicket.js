@@ -5,7 +5,7 @@ import { COLORS, FONTS, ICONS } from '~/constants';
 import TicketCard from '~/screens/event/components/TicketCard';
 import { Footer } from '~/screens/event/components';
 import FiveDayStrip from '~/screens/event/components/EventDateStrip'
-import { selectCurrentEventTickets, selectSelectedEventTitle } from '../../../redux/events/eventSlice';
+import { selectCurrentEventTickets, selectSelectedEventTitle, selectSelectedEventDate } from '../../../redux/events/eventSlice';
 import { useSelector } from 'react-redux';
 
 const GetTicket = () => {
@@ -13,6 +13,9 @@ const GetTicket = () => {
     const router = useRouter();
     const tickets = useSelector(selectCurrentEventTickets)
     const ticketTitle = useSelector(selectSelectedEventTitle)
+    const ticketDate = useSelector(selectSelectedEventDate)
+
+    const { startTime, endTime } = ticketDate;
 
     const genericScreenOptions = {
         headerStyle: {
@@ -51,7 +54,7 @@ const GetTicket = () => {
                 options={{ ...genericScreenOptions, headerTitle: 'Get Ticket' }}
             />
             <View style={styles.calendarContainer}>
-                <FiveDayStrip date="2023-09-09" />
+                <FiveDayStrip startTime={startTime} endTime={endTime} />
             </View>
             <View style={styles.chooseTicketContainer}>
                 <Text style={styles.ticketsTitle}>Select your ticket</Text>
