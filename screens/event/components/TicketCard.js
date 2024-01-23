@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, Pressable } from 'reac
 import React, { useState } from 'react';
 import { COLORS, FONTS, ICONS } from '../../../constants';
 import { moneyFormat } from '../../../utils/utils';
+import DashedLine from 'react-native-dashed-line';
 
 const TicketCard = ({ item, title }) => {
   const [isClicked, setIsClicked] = useState(false);
@@ -54,12 +55,14 @@ const TicketCard = ({ item, title }) => {
             </View>
           </View>
         </View>
-        <View style={styles.dividerContainer}>
-          <View style={styles.dividerLine} />
+        <View style={{ marginVertical: 16.5 }}>
+          <DashedLine dashLength={10} dashThickness={1} dashColor={"#EBEEF2"} />
         </View>
         <View style={styles.showBenefitsCounter}>
           <TouchableOpacity onPress={handleShowMore} style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
-            {showmore ? <ICONS.CheveronRightIcon /> : <ICONS.CheveronRightIcon />}
+            {
+              showmore ? <ICONS.ChevronDownIcon /> : <ICONS.CheronRightIcon />
+            }
             <Text style={styles.showBenefits}>Show benefits</Text>
           </TouchableOpacity>
           <View style={styles.counterContainer}>

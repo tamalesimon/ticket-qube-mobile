@@ -2,28 +2,40 @@ import { View, Text, StyleSheet } from 'react-native'
 import { COLORS, FONTS } from '../../../constants';
 import React from 'react'
 
-const EventDateStrip = ({ date }) => {
+const EventDateStrip = ({ startTime, endTime }) => {
 
-    const currentDate = new Date(date);
+    const startDate = new Date(startTime);
+    const endDate = new Date(endTime)
 
     const dateList = [];
 
     const options = { day: 'numeric', month: 'short' };
 
-    for (let i = -2; i <= 2; i++) {
-        const day = new Date(currentDate);
-        day.setDate(currentDate.getDate() + i);
+    // Calculate the time difference in milliseconds
+    const timeDiff = endDate.getTime() - startDate.getTime();
+
+    // Convert the time difference into days
+    const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+    console.log('Number of Days:', daysDiff);
+
+
+    for (let i = -1; i <= 3; i++) {
+        const day = new Date(startDate);
+        day.setDate(startDate.getDate() + i);
         const formattedDate = day.toLocaleDateString(undefined, options);
         const [formattedDay, formattedMonth] = formattedDate.split(' ');
         dateList.push({ day: formattedDay, month: formattedMonth });
     }
 
+    const numbersArray = Array.from({ length: daysDiff }, (_, i) => i + 1);
+
     return (
         <View style={styles.container}>
             {dateList.map((date, index) => (
-                <View key={index} style={[styles.dateContainer, index === 2 && { backgroundColor: COLORS.secondaryBase }]}>
-                    <Text style={[styles.day, index === 2 && { color: COLORS.white }]}>{date.month}</Text>
-                    <Text style={[styles.month, index === 2 && { color: COLORS.white }]}>{date.day}</Text>
+                <View key={index} style={[styles.dateContainer, numbersArray.includes(index) && { backgroundColor: COLORS.secondaryBase }]}>
+                    <Text style={[styles.day, numbersArray.includes(index) && { color: COLORS.white }]}>{date.month}</Text>
+                    <Text style={[styles.month, numbersArray.includes(index) && { color: COLORS.white }]}>{date.day}</Text>
                 </View>
             ))}
         </View>
@@ -31,6 +43,7 @@ const EventDateStrip = ({ date }) => {
 };
 
 export default EventDateStrip;
+
 
 const styles = StyleSheet.create({
     container: {
