@@ -5,17 +5,17 @@ import { COLORS, FONTS } from "../../../constants";
 import GenericButton from "../../../components/buttons/genericButton";
 import { moneyFormat } from "../../../utils/utils";
 
-import { selectCurrentEventTickets } from "../../../redux/events/eventSlice";
+import { selectCurrentEventTickets, selectTotalTicketAmount } from "../../../redux/events/eventSlice";
 
 const Footer = ({ info, spotInfo, label, handleClickButton }) => {
     const shouldCenterButton = !info && !spotInfo;
     const ticketDetails = useSelector(selectCurrentEventTickets);
-    console.log("ticket: ", ticketDetails)
+    const totalTicketAmount = useSelector(selectTotalTicketAmount);
     return (
         <View style={styles.wrapper}>
             <View style={styles.container}>
                 <View>
-                    {/* {info && <Text style={styles.amount}>{moneyFormat(ticketDetails[1]?.currency, ticketDetails[1]?.price)}</Text>} */}
+                    <Text style={styles.amount}>{totalTicketAmount}</Text>
                     {spotInfo && <Text style={styles.spots}>{spotInfo}</Text>}
                 </View>
                 <View style={{
