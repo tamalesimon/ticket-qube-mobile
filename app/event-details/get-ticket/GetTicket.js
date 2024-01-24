@@ -7,6 +7,7 @@ import { Footer } from '~/screens/event/components';
 import FiveDayStrip from '~/screens/event/components/EventDateStrip'
 import { selectCurrentEventTickets, selectSelectedEventTitle, selectSelectedEventDate } from '../../../redux/events/eventSlice';
 import { useSelector } from 'react-redux';
+import { useState } from 'react';
 
 const GetTicket = () => {
     const navigation = useNavigation();
@@ -16,6 +17,17 @@ const GetTicket = () => {
     const ticketDate = useSelector(selectSelectedEventDate)
 
     const { startTime, endTime } = ticketDate;
+    const { name, imageUrl } = ticketTitle;
+
+    const [selectedTicket, setSelectedTicket] = useState();
+    const [ticketAmount, setTicketAmount] = useState();
+
+    const handleTicketSelect = async (item) => {
+        const { ticketId, name } = item
+        setSelectedTicket(ticketId)
+        console.log("selected ticket -> ", selectedTicket)
+        console.log("ticket amount: ", ticketAmount)
+    }
 
     const genericScreenOptions = {
         headerStyle: {
@@ -61,12 +73,21 @@ const GetTicket = () => {
                 {
                     tickets.map((item) => {
                         return (
-                            <TicketCard key={item?.ticketId} item={item} title={ticketTitle} />
+                            <TicketCard
+                                key={item?.ticketId}
+                                item={item}
+                                title={name}
+                                imageUrl={imageUrl}
+                                handleTicketSelect={() => handleTicketSelect(item)}
+                                ticketAmount={ticketAmount}
+                                selectedTicket={selectedTicket}
+                                setTicketAmount={setTicketAmount}
+                            />
                         )
                     })
                 }
             </View>
-            <Footer info={"UGX 150,000"} spotInfo="You're going! +1" label={"Continue"} handleClickButton={handleClickButton} />
+            <Footer info={ticketAmount ? ticketAmount : 0} spotInfo="You're going! +1" label={"Continue"} handleClickButton={handleClickButton} />
         </SafeAreaView>
     )
 }

@@ -4,7 +4,7 @@ import { COLORS, FONTS, ICONS } from '../../../constants';
 import { moneyFormat } from '../../../utils/utils';
 import DashedLine from 'react-native-dashed-line';
 
-const TicketCard = ({ item, title }) => {
+const TicketCard = ({ item, title, handleTicketSelect, selectedTicket, setTicketAmount }) => {
   const [isClicked, setIsClicked] = useState(false);
   const [count, setCount] = useState(0);
   const [showmore, setShowmore] = useState(false);
@@ -19,15 +19,18 @@ const TicketCard = ({ item, title }) => {
     setIsClicked(!isClicked);
   }
   const handleDecrement = () => {
-    if (isClicked && count > 0) {
+    if (selectedTicket === item.ticketId && count > 0) {
       setCount(count - 1)
+      setTicketAmount(price * count)
     }
   }
   const handleIncrement = () => {
-    if (isClicked && item.price === 0) {
+    if (selectedTicket === item.ticketId && item.price === 0) {
       setCount(1);
-    } else if (isClicked && count < 10) {
+      setTicketAmount(price)
+    } else if (selectedTicket === item.ticketId && count < 10) {
       setCount(count + 1);
+      setTicketAmount(price * count)
     }
   }
   const clicked = { backgroundColor: COLORS.secondaryBase, color: COLORS.white }
@@ -35,11 +38,12 @@ const TicketCard = ({ item, title }) => {
   const notClicked = { backgroundColor: COLORS.gray50 }
 
   return (
-    <View style={[styles.cardContainer, isClicked ? borderClicked : '']}>
-      <TouchableOpacity onPress={handleClick}>
-        <View style={[styles.cardHeader, isClicked ? clicked : notClicked]}>
-          <Text style={[styles.cardTitle, isClicked ? clicked : '']}>{item?.name}</Text>
-          {isClicked ? <ICONS.CheckCircleSelected /> : <ICONS.CheckCircle />}
+    <View style={[styles.cardContainer, selectedTicket === item.ticketId ? borderClicked : null,
+    ]}>
+      <TouchableOpacity onPress={handleTicketSelect}>
+        <View style={[styles.cardHeader, notClicked, selectedTicket === item.ticketId ? clicked : null]}>
+          <Text style={[styles.cardTitle, selectedTicket === item.ticketId ? clicked : '']}>{item?.name}</Text>
+          {selectedTicket === item.ticketId ? <ICONS.CheckCircleSelected /> : <ICONS.CheckCircle />}
         </View>
       </TouchableOpacity>
       <View style={styles.cardDetails}>
