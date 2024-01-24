@@ -28,12 +28,12 @@ export default function Suggestions() {
     }, [getEventSuggestions, dispatch])
 
     const handleEventClicked = async (item) => {
-        const { eventId, tickets, name, startTime, endTime } = item;
+        const { eventId, tickets, name, startTime, endTime, imageUrl } = item;
 
         dispatch(setEventId(eventId))
         dispatch(setEventTickets(tickets))
-        dispatch(setSelectedEventTitle(name))
-        dispatch(setSelectedEventDate({startTime, endTime}))
+        dispatch(setSelectedEventTitle({ name, imageUrl }))
+        dispatch(setSelectedEventDate({ startTime, endTime }))
 
         router.push(`event-details/${eventId}`)
     }
