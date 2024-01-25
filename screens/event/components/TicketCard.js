@@ -6,7 +6,7 @@ import { moneyFormat } from '../../../utils/utils';
 import DashedLine from 'react-native-dashed-line';
 import { setTotalTicketAmount, setTotalPlusOne } from '../../../redux/events/eventSlice';
 
-const TicketCard = ({ item, title, handleTicketSelect, selectedTicket, setTicketAmount, setPlusOne }) => {
+const TicketCard = ({ item, title, handleTicketSelect, selectedTicket, setTicketAmount, setPlusOne, imageUrl }) => {
   const dispatch = useDispatch();
   const [isClicked, setIsClicked] = useState(false);
   const [count, setCount] = useState(0);
@@ -51,7 +51,7 @@ const TicketCard = ({ item, title, handleTicketSelect, selectedTicket, setTicket
       </TouchableOpacity>
       <View style={styles.cardDetails}>
         <View style={styles.cardSpecifics} >
-          <Image style={styles.imageRect} source={require('../../../assets/images/test_image.jpg')} resizeMode='cover' />
+          <Image style={styles.imageRect} source={imageUrl} resizeMode='cover' />
           <View>
             <View style={{ paddingRight: 2 }}>
               <Text style={styles.eventTitle}>{title}</Text>

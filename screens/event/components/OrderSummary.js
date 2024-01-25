@@ -1,19 +1,27 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
-import { FONTS, COLORS, ICONS } from '../../../constants'
+import { FONTS, COLORS, ICONS } from '../../../constants';
+import { useSelector } from 'react-redux';
+import { selectCurrentEventTickets, selectPlusOne, selectTotalTicketAmount, selectSelectedEventTitle, selectTicketDetails } from '../../../redux/events/eventSlice'
 
 const OrderSummary = () => {
+    const plusOne = useSelector(selectPlusOne)
+    const ticket = useSelector(selectTicketDetails)
+    const ticketTotalAmount = useSelector(selectTotalTicketAmount)
+
+    const { name, price, currency } = ticket
+
     return (
         <View style={styles.order_summary}>
             <Text style={styles.order_section_title}>Order summary</Text>
             <View style={styles.order_items}>
                 <View style={styles.order_summary_item}>
-                    <Text style={styles.order_item_text}>1x Premium price</Text>
-                    <Text style={styles.order_item_money}>UGX 150,000</Text>
+                    <Text style={styles.order_item_text}>{plusOne}x {name}</Text>
+                    <Text style={styles.order_item_money}>UGX {price}</Text>
                 </View>
                 <View style={styles.order_summary_item}>
                     <Text style={styles.order_item_text}>Subtotal</Text>
-                    <Text style={styles.order_item_money}>UGX 150,000</Text>
+                    <Text style={styles.order_item_money}>UGX {ticketTotalAmount}</Text>
                 </View>
                 <View style={styles.order_summary_item}>
                     <Text style={styles.order_item_text}>Fees</Text>
@@ -22,7 +30,7 @@ const OrderSummary = () => {
                 <View style={styles.divider} />
                 <View style={styles.order_summary_item}>
                     <Text style={styles.order_total}>Total</Text>
-                    <Text style={styles.order_total_money}>UGX 152,000</Text>
+                    <Text style={styles.order_total_money}>UGX {ticketTotalAmount + 2000}</Text>
                 </View>
             </View>
         </View>
