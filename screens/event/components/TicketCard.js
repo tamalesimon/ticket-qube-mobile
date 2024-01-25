@@ -4,9 +4,9 @@ import { useDispatch } from 'react-redux';
 import { COLORS, FONTS, ICONS } from '../../../constants';
 import { moneyFormat } from '../../../utils/utils';
 import DashedLine from 'react-native-dashed-line';
-import { setTotalTicketAmount } from '../../../redux/events/eventSlice';
+import { setTotalTicketAmount, setTotalPlusOne } from '../../../redux/events/eventSlice';
 
-const TicketCard = ({ item, title, handleTicketSelect, selectedTicket, setTicketAmount }) => {
+const TicketCard = ({ item, title, handleTicketSelect, selectedTicket, setTicketAmount, setPlusOne }) => {
   const dispatch = useDispatch();
   const [isClicked, setIsClicked] = useState(false);
   const [count, setCount] = useState(0);
@@ -25,6 +25,7 @@ const TicketCard = ({ item, title, handleTicketSelect, selectedTicket, setTicket
     if (selectedTicket === item.ticketId && count > 0) {
       setCount((prevCount) => prevCount - 1)
       dispatch(setTotalTicketAmount(price * (count - 1)))
+      setPlusOne(count - 1)
     }
   }
   const handleIncrement = async () => {
@@ -32,6 +33,7 @@ const TicketCard = ({ item, title, handleTicketSelect, selectedTicket, setTicket
       const newCount = count < 10 ? count + 1 : 1;
       setCount(newCount);
       dispatch(setTotalTicketAmount(price * newCount));
+      setPlusOne(newCount)
     }
   }
   const clicked = { backgroundColor: COLORS.secondaryBase, color: COLORS.white }
