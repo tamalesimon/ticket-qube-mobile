@@ -10,7 +10,8 @@ const eventSlice = createSlice({
         selectedEventTitle: null,
         selectedEventDate: null,
         totalTicketAmount: 0,
-        plusOne: 0
+        plusOne: 0,
+        selectedTicketDetails: null
     },
     reducers: {
         setEvents: (state, action) => {
@@ -35,6 +36,9 @@ const eventSlice = createSlice({
         },
         setTotalPlusOne: (state, action) => {
             state.plusOne = action.payload
+        },
+        setSelectedTicketDetails:  (state, action) => {
+            state.selectedTicketDetails = action.payload
         }
 
     }
@@ -47,7 +51,8 @@ export const {
     setSelectedEventTitle,
     setSelectedEventDate,
     setTotalTicketAmount,
-    setTotalPlusOne
+    setTotalPlusOne,
+    setSelectedTicketDetails
 } = eventSlice.actions;
 
 export default eventSlice.reducer
@@ -59,3 +64,4 @@ export const selectSelectedEventTitle = (state) => state.events.selectedEventTit
 export const selectSelectedEventDate = (state) => state.events.selectedEventDate
 export const selectTotalTicketAmount = (state) => state.events.totalTicketAmount
 export const selectPlusOne = (state) => state.events.plusOne
+export const selectTicketDetails = (state) => state.events.selectedTicketDetails

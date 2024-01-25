@@ -5,17 +5,19 @@ import { COLORS, FONTS, ICONS } from '~/constants';
 import TicketCard from '~/screens/event/components/TicketCard';
 import { Footer } from '~/screens/event/components';
 import FiveDayStrip from '~/screens/event/components/EventDateStrip'
-import { selectCurrentEventTickets, selectSelectedEventTitle, selectSelectedEventDate, selectPlusOne } from '../../../redux/events/eventSlice';
-import { useSelector } from 'react-redux';
+import { selectCurrentEventTickets, selectSelectedEventTitle, selectSelectedEventDate, selectPlusOne, setTotalPlusOne, setSelectedTicketDetails } from '../../../redux/events/eventSlice';
+import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
+import { useEffect } from 'react';
 
 const GetTicket = () => {
     const navigation = useNavigation();
+    const dispatch = useDispatch();
     const router = useRouter();
     const tickets = useSelector(selectCurrentEventTickets)
     const ticketTitle = useSelector(selectSelectedEventTitle)
     const ticketDate = useSelector(selectSelectedEventDate)
-    // const plusOne = useSelector(selectPlusOne)
+
 
     const { startTime, endTime } = ticketDate;
     const { name, imageUrl } = ticketTitle;
@@ -25,21 +27,14 @@ const GetTicket = () => {
     const [plusOne, setPlusOne] = useState();
 
     const handleTicketSelect = async (item) => {
-        const { ticketId, name } = item
+        const { ticketId, name, price, currency } = item
         setSelectedTicket(ticketId)
-        console.log("selected ticket -> ", selectedTicket)
-        console.log("ticket amount: ", ticketAmount)
+        dispatch(setSelectedTicketDetails({ ticketId, name, price, currency }))
     }
 
-    const amountSubtitle = () => {
-        if (plusOne === 0) {
-            return "Are you going!"
-        } else if (plusOne === 1) {
-            return "You're going!"
-        } else if (plusOne >= 2) {
-            return `You and +${plusOne} others are going!`
-        }
-    }
+    useEffect(() => {
+        dispatch(setTotalPlusOne(plusOne))
+    }, [plusOne])
 
     const genericScreenOptions = {
         headerStyle: {
@@ -100,7 +95,7 @@ const GetTicket = () => {
                     })
                 }
             </View>
-            <Footer info={ticketAmount ? ticketAmount : 0} spotInfo={amountSubtitle()} label={"Continue"} handleClickButton={handleClickButton} />
+            <Footer info={ticketAmount ? ticketAmount : 0} label={"Continue"} handleClickButton={handleClickButton} />
         </SafeAreaView>
     )
 }

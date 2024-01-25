@@ -5,22 +5,35 @@ import { COLORS, FONTS } from "../../../constants";
 import GenericButton from "../../../components/buttons/genericButton";
 import { moneyFormat } from "../../../utils/utils";
 
-import { selectCurrentEventTickets, selectTotalTicketAmount } from "../../../redux/events/eventSlice";
+import { selectCurrentEventTickets, selectTotalTicketAmount, selectPlusOne } from "../../../redux/events/eventSlice";
 
-const Footer = ({ info, spotInfo, label, handleClickButton }) => {
-    const shouldCenterButton = !info && !spotInfo;
+const Footer = ({ info, label, handleClickButton }) => {
+
     const ticketDetails = useSelector(selectCurrentEventTickets);
     const totalTicketAmount = useSelector(selectTotalTicketAmount);
+    const plusOne = useSelector(selectPlusOne)
+    const shouldCenterButton = !totalTicketAmount && !info;
+
+    const amountSubtitle = () => {
+        if (plusOne === 0) {
+            return "Are you going!"
+        } else if (plusOne === 1) {
+            return "You're going!"
+        } else {
+            return `You and +${plusOne - 1} others are going!`
+        }
+    }
+
     return (
         <View style={styles.wrapper}>
             <View style={styles.container}>
                 <View>
                     <Text style={styles.amount}>{totalTicketAmount}</Text>
-                    {spotInfo && <Text style={styles.spots}>{spotInfo}</Text>}
+                    <Text style={styles.spots}>{amountSubtitle()}</Text>
                 </View>
                 <View style={{
-                    alignItems: shouldCenterButton ? 'center' : 'flex-start',
-                    width: shouldCenterButton ? '100%' : undefined,
+                    alignItems: 'flex-start',
+                    width: undefined,
                 }}>
                     <GenericButton
                         bgColor={"primaryBase"}
@@ -28,9 +41,6 @@ const Footer = ({ info, spotInfo, label, handleClickButton }) => {
                         label={label}
                         shouldCenterButton={shouldCenterButton}
                         onPress={handleClickButton} />
-                    {/* <Link href={'event-details/get-ticket-details/GetTicket'}>
-                        <Text>Get a Ticket</Text>
-                    </Link> */}
                 </View>
             </View>
         </View>
