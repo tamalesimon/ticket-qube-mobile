@@ -1,44 +1,68 @@
 import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import React, { useState } from 'react'
-import { Footer } from './components'
-import { COLORS, FONTS, FONTSIZE, ICONS } from '../../constants'
+import { Footer } from '../../../screens/event/components'
+import { COLORS, FONTS, FONTSIZE, ICONS } from '../../../constants';
+import { selectPaymentMethods, setPaymentMethod } from '../../../redux/payments/paymentSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRouter, Stack } from 'expo-router';
 
 
 const SelectPayment = () => {
-  const [selectedPayment, setSelectedPayment] = useState(false)
+  const [selectedPayment, setSelectedPayment] = useState()
+  const [isSelected, setIsSelected] = useState(false)
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const paymentMethods = useSelector(selectPaymentMethods)
+
   const handleSelectedPaymentOption = () => {
-    const selectedPaymentOption = paymentOptions.find(Option => Option.id === selectedPayment)
-    navigation.navigate('DetailsOrder', {selectedPaymentOption});
+    const selectedPaymentOption = paymentMethods.find(Option => Option.id === selectedPayment)
+    router.back()
+    // navigation.navigate("event-details/get-ticket/DetailsOrder")
   }
-  const paymentOptions = [{
-    id: 1,
-    name: "Card",
-    icon: "MasterCardVisa"
-  }, {
-    id: 2,
-    name: "MoMo",
-    icon: "MTN"
-  }, {
-    id: 3,
-    name: "Airtel",
-    icon: "Airtel"
-  }, {
-    id: 4,
-    name: "Apple pay",
-    icon: "ApplePay"
-  }, {
-    id: 5,
-    name: "PayPal",
-    icon: "PayPal"
-  }, {
-    id: 6,
-    name: "Payoneer",
-    icon: "Payoneer"
-  }]
+
+  const handleSelectedPayment = (item) => {
+    setSelectedPayment(item.id)
+    const { name, icon } = item
+    dispatch(setPaymentMethod({ name, icon }))
+  }
+  const screenOptions = {
+    headerStyle: {
+      backgroundColor: COLORS.white,
+      elevation: 0,
+      borderBottomWidth: 0,
+    },
+    headerShadowVisible: false,
+    headerTitleStyle: {
+      fontFamily: FONTS.NotoSansJPBold,
+      // fontWeight: '700',
+      lineHeight: 24,
+      // backgroundColor: COLORS.gray500,
+      color: COLORS.grayBase
+    },
+    headerLeft: () => (
+      <View style={styles.headerButtonContainer}>
+        <TouchableOpacity onPress={() => { router.back() }}>
+          <ICONS.ArrowLeftIcon />
+        </TouchableOpacity>
+      </View>
+    ),
+    headerRight: () => (
+      <View style={styles.headerButtonContainer}>
+        <TouchableOpacity>
+          <ICONS.CircleQuestion />
+        </TouchableOpacity>
+      </View>
+    ),
+    headerTitleAlign: 'center',
+  }
+
   return (
     <SafeAreaView style={{ backgroundColor: "white", flex: 1, overflow: 'hidden', paddingHorizontal: 24 }}>
+      <Stack.Screen
+        options={{ ...screenOptions, headerTitle: 'Select Payment' }} />
       <View>
         <TouchableOpacity style={styles.one_click_payment}>
           <Text style={styles.one_click_payment_text}>One click payment</Text>
@@ -50,16 +74,13 @@ const SelectPayment = () => {
           <View style={styles.dividerLine} />
         </View>
         {
-          paymentOptions.map((item) => {
-            const handleSelected = () => setSelectedPayment(item.id);
-            const isSelected = selectedPayment == item.id;
+          paymentMethods?.map((item) => {
             const IconComponent = ICONS[item.icon];
-
             return (
-              <TouchableOpacity key={item.id} onPress={handleSelected}>
+              <TouchableOpacity key={item.id} onPress={() => handleSelectedPayment(item)}>
                 <View style={styles.other_payments}>
                   <View style={styles.other_payments_icon_text}>
-                    {isSelected ? <ICONS.SelectCircleSelected /> : <ICONS.SelectCircle />}
+                    {selectedPayment === item.id ? <ICONS.SelectCircleSelected /> : <ICONS.SelectCircle />}
                     <Text style={styles.other_payments_text}>{item.name}</Text>
                   </View>
                   <View><IconComponent /></View>
@@ -69,7 +90,7 @@ const SelectPayment = () => {
           })
         }
       </View>
-      <Footer label={"Confirm"} handleClickButton={handleSelectedPaymentOption} />
+      <Footer label={"Confirm"} handleClickButton={handleSelectedPaymentOption} hideAmount={true} />
     </SafeAreaView>
   )
 }
@@ -128,4 +149,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: COLORS.gray300
   },
+  headerButtonContainer: {
+    marginHorizontal: 24, //24px
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 })
+

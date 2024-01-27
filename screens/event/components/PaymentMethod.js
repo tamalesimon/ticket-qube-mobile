@@ -1,23 +1,37 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react';
 import { FONTS, COLORS, ICONS } from '../../../constants';
+import { useRouter } from 'expo-router';
+import { useSelector } from 'react-redux';
+import { selectPaymentMethod } from '../../../redux/payments/paymentSlice';
 
-const PaymentMethod = () => {
+const PaymentMethod = (han) => {
+    const router = useRouter();
+    const paymentMethod = useSelector(selectPaymentMethod)
+    const IconComponent = ICONS[paymentMethod?.icon]
+
+    const handleChangePayment = () => {
+        router.push("event-details/payment/SelectPayment")
+    }
     return (
         <View style={styles.payment_method}>
             <View style={styles.payment_method_change}>
                 <Text style={styles.order_section_title}>Payment method</Text>
-                <TouchableOpacity style={styles.change_button}>
+                <TouchableOpacity style={styles.change_button} onPress={handleChangePayment} >
                     <Text style={styles.change_button_text}>Change</Text>
                     <ICONS.CheronRightIcon style={{ paddingTop: 3 }} />
                 </TouchableOpacity>
             </View>
             <View style={styles.payment_method_items}>
-                <View style={styles.payment_method}>
-                    <Text style={styles.payment_method_title}>MoMo</Text>
-                    <Text style={styles.payment_method_subtitle}>+256779813251</Text>
-                </View>
-                <Text>Icon here</Text>
+                {paymentMethod ? <>
+                    <View style={styles.payment_method}>
+                        <Text style={styles.payment_method_title}>{paymentMethod?.name}</Text>
+                        <Text style={styles.payment_method_subtitle}>+256779813251</Text>
+                    </View>
+                    <View>
+                        <IconComponent />
+                    </View>
+                </> : <Text>None</Text>}
             </View>
         </View>
     )
@@ -33,7 +47,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginBottom:16
+        marginBottom: 16
     },
     change_button: {
         flexDirection: 'row',

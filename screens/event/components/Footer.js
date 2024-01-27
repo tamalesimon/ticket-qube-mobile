@@ -7,12 +7,12 @@ import { moneyFormat } from "../../../utils/utils";
 
 import { selectCurrentEventTickets, selectTotalTicketAmount, selectPlusOne } from "../../../redux/events/eventSlice";
 
-const Footer = ({ info, label, handleClickButton }) => {
+const Footer = ({ info, label, handleClickButton, hideAmount }) => {
 
     const ticketDetails = useSelector(selectCurrentEventTickets);
     const totalTicketAmount = useSelector(selectTotalTicketAmount);
     const plusOne = useSelector(selectPlusOne)
-    const shouldCenterButton = !totalTicketAmount && !info;
+    const shouldCenterButton = hideAmount;
 
     const amountSubtitle = () => {
         if (plusOne === 0) {
@@ -27,13 +27,13 @@ const Footer = ({ info, label, handleClickButton }) => {
     return (
         <View style={styles.wrapper}>
             <View style={styles.container}>
-                <View>
+                {!hideAmount ? <View>
                     <Text style={styles.amount}>{totalTicketAmount}</Text>
                     <Text style={styles.spots}>{amountSubtitle()}</Text>
-                </View>
+                </View> : null}
                 <View style={{
-                    alignItems: 'flex-start',
-                    width: undefined,
+                    alignItems: hideAmount ? 'center' : 'flex-start',
+                    width: hideAmount ? '100%' : undefined,
                 }}>
                     <GenericButton
                         bgColor={"primaryBase"}

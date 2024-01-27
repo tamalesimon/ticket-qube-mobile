@@ -1,15 +1,35 @@
 import { View, Text, StyleSheet } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FONTS, COLORS, ICONS } from '../../../constants';
-import { useSelector } from 'react-redux';
-import { selectCurrentEventTickets, selectPlusOne, selectTotalTicketAmount, selectSelectedEventTitle, selectTicketDetails } from '../../../redux/events/eventSlice'
+import { useSelector, useDispatch } from 'react-redux';
+import { selectPlusOne, selectTotalTicketAmount, selectTicketDetails, setTotalTicketAmount } from '../../../redux/events/eventSlice'
+import { formatMoney } from '../../../utils/utils';
 
 const OrderSummary = () => {
+    const dispatch = useDispatch();
     const plusOne = useSelector(selectPlusOne)
     const ticket = useSelector(selectTicketDetails)
     const ticketTotalAmount = useSelector(selectTotalTicketAmount)
+    const fees = 2000; //todo: get fees from somewhere
 
+    useEffect(() => {
+        dispatch(setTotalTicketAmount(ticketTotalAmount + fees))
+    }, [fees])
     const { name, price, currency } = ticket
+
+    const getFees = () => {
+        if (price === 0) {
+            return 0
+        } else return fees;
+    }
+
+    const getTotal = () => {
+        if (ticketTotalAmount === 0 && price === 0) {
+            return 'Free';
+        } else {
+            return ticketTotalAmount;
+        }
+    }
 
     return (
         <View style={styles.order_summary}>
@@ -17,20 +37,20 @@ const OrderSummary = () => {
             <View style={styles.order_items}>
                 <View style={styles.order_summary_item}>
                     <Text style={styles.order_item_text}>{plusOne}x {name}</Text>
-                    <Text style={styles.order_item_money}>UGX {price}</Text>
+                    <Text style={styles.order_item_money}>{formatMoney(currency, price)}</Text>
                 </View>
                 <View style={styles.order_summary_item}>
                     <Text style={styles.order_item_text}>Subtotal</Text>
-                    <Text style={styles.order_item_money}>UGX {ticketTotalAmount}</Text>
+                    <Text style={styles.order_item_money}>{formatMoney(currency, ticketTotalAmount)}</Text>
                 </View>
                 <View style={styles.order_summary_item}>
                     <Text style={styles.order_item_text}>Fees</Text>
-                    <Text style={styles.order_item_money}>UGX 2,000</Text>
+                    <Text style={styles.order_item_money}>{formatMoney(currency, getFees())}</Text>
                 </View>
                 <View style={styles.divider} />
                 <View style={styles.order_summary_item}>
                     <Text style={styles.order_total}>Total</Text>
-                    <Text style={styles.order_total_money}>UGX {ticketTotalAmount + 2000}</Text>
+                    <Text style={styles.order_total_money}>{formatMoney(currency, getTotal())}</Text>
                 </View>
             </View>
         </View>

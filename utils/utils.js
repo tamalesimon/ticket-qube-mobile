@@ -54,3 +54,10 @@ export const moneyFormat = (currency, price) => {
   }
 };
 
+export const formatMoney =  (currency, price) => {
+  return  new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: currency
+  }).format(price);
+}
+
