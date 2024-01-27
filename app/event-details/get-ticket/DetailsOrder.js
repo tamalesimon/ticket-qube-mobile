@@ -2,6 +2,8 @@ import { SafeAreaView, View, StyleSheet, TouchableOpacity } from 'react-native'
 import { useRouter, Stack } from 'expo-router'
 import { COLORS, FONTS, FONTSIZE, ICONS } from '~/constants';
 import { Footer, OrderSummary, PaymentMethod, EventSummaryOrderDetail } from '~/screens/event/components'
+import { useDispatch, useSelector } from 'react-redux';
+import { setTotalTicketAmount } from '../../../redux/events/eventSlice';
 
 const DetailsOrder = () => {
     const router = useRouter();
@@ -30,7 +32,8 @@ const DetailsOrder = () => {
     }
     const handleClickButton = () => {
         router.push("event-details/get-ticket/TicketOrderCompleted")
-      }
+    }
+
     return (
         <SafeAreaView style={{ backgroundColor: "white", flex: 1, overflow: 'hidden', paddingHorizontal: 24, gap: 24, paddingTop: 16 }}>
             <Stack.Screen

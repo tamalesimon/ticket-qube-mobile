@@ -212,11 +212,11 @@ export default function Page() {
 
     // <Stack.Navigator>
     //   <Stack.Group>
-    //     <Stack.Screen
-    //       name="Select Payment"
-    //       component={SelectPayment}
-    //       options={SelectPaymentsScreenOptions}
-    //     />
+        // <Stack.Screen
+        //   name="Select Payment"
+        //   component={SelectPayment}
+        //   options={SelectPaymentsScreenOptions}
+        // />
     //   </Stack.Group>
     // </Stack.Navigator>
 
