@@ -13,6 +13,7 @@ const TicketCard = ({ item, title, handleTicketSelect, selectedTicket, setTicket
   const [showmore, setShowmore] = useState(false);
   const currency = item?.currency
   const price = item?.price
+  const slots = item?.availableSlots - count;
 
   const handleShowMore = () => {
     setShowmore(!showmore)
@@ -57,7 +58,7 @@ const TicketCard = ({ item, title, handleTicketSelect, selectedTicket, setTicket
               <Text style={styles.eventTitle}>{title}</Text>
             </View>
             <View style={styles.priceSpots}>
-              <Text style={styles.spotsLeft}>10 spots left</Text>
+              <Text style={styles.spotsLeft}>{slots} spots left</Text>
               <Text style={styles.price}>{moneyFormat("ugx", price)}</Text>
             </View>
           </View>

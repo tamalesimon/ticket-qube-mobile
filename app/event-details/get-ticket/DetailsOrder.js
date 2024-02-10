@@ -16,7 +16,7 @@ const DetailsOrder = () => {
         headerShadowVisible: false,
         headerTitleStyle: {
             fontFamily: FONTS.NotoSansJPBold,
-            // fontWeight: '700',
+            // fontWeight:  700,
             lineHeight: 24,
             // backgroundColor: COLORS.gray500,
             color: COLORS.grayBase

@@ -40,7 +40,7 @@ export const homeScreenOptions = {
   ...screenOptions,
   headerTitleStyle: {
     fontFamily: FONTS.NotoSansJPBold,
-    fontWeight: '700',
+    fontWeight: 700,
   },
   headerTitle: '',
   tabBarIcon: ({ focused }) => (
@@ -64,7 +64,7 @@ export const exploreScreenOptions = {
   ...screenOptions,
   headerTitleStyle: {
     fontFamily: FONTS.NotoSansJPBold,
-    fontWeight: '700',
+    fontWeight: 700,
   },
   tabBarIcon: ({ focused }) => (
     <View style={styles.tabBarIconContainer}>
@@ -89,7 +89,7 @@ export const favoritesScreenOptions = {
   ...screenOptions,
   headerTitleStyle: {
     fontFamily: FONTS.NotoSansJPBold,
-    fontWeight: '700',
+    fontWeight: 700,
   },
   tabBarIcon: ({ focused }) => (
     <View style={styles.tabBarIconContainer}>
@@ -109,7 +109,7 @@ export const ticketsScreenOptions = {
   ...screenOptions,
   headerTitleStyle: {
     fontFamily: FONTS.NotoSansJPBold,
-    fontWeight: '700',
+    fontWeight: 700,
   },
   tabBarIcon: ({ focused }) => (
     <View style={styles.tabBarIconContainer}>
@@ -178,7 +178,7 @@ export const genericScreenOptions = {
   headerShadowVisible: false,
   headerTitleStyle: {
     fontFamily: FONTS.NotoSansJPBold,
-    // fontWeight: '700',
+    // fontWeight:  700,
     lineHeight: 24,
     // backgroundColor: COLORS.gray500,
     color: COLORS.grayBase
@@ -203,7 +203,7 @@ export const genericNoTitleScreenOptions = {
   headerShadowVisible: false,
   headerTitleStyle: {
     fontFamily: FONTS.NotoSansJPBold,
-    // fontWeight: '700',
+    // fontWeight:  700,
     lineHeight: 24,
     // backgroundColor: COLORS.gray500,
     color: COLORS.grayBase
@@ -229,7 +229,7 @@ export const WhiteBGScreenOptions = {
   headerShadowVisible: false,
   headerTitleStyle: {
     fontFamily: FONTS.NotoSansJPBold,
-    // fontWeight: '700',
+    // fontWeight:  700,
     lineHeight: 24,
     // backgroundColor: COLORS.gray500,
     color: COLORS.grayBase
@@ -251,7 +251,7 @@ export const HeadersWithClose = {
   headerShadowVisible: false,
   headerTitleStyle: {
     fontFamily: FONTS.NotoSansJPBold,
-    // fontWeight: '700',
+    // fontWeight:  700,
     lineHeight: 24,
     // backgroundColor: COLORS.gray500,
     color: COLORS.grayBase
@@ -274,7 +274,7 @@ export const SelectPaymentsScreenOptions = {
   headerShadowVisible: false,
   headerTitleStyle: {
     fontFamily: FONTS.NotoSansJPBold,
-    // fontWeight: '700',
+    // fontWeight:  700,
     lineHeight: 24,
     // backgroundColor: COLORS.gray500,
     color: COLORS.grayBase
@@ -311,7 +311,7 @@ const styles = StyleSheet.create({
   },
   headerTitleStyle: {
     fontFamily: FONTS.NotoSansJPBold,
-    fontWeight: '700',
+    fontWeight: 700,
   },
   sharedContainer: {
     flexDirection: 'row',
