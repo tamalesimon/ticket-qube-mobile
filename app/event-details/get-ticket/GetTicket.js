@@ -27,9 +27,9 @@ const GetTicket = () => {
     const [plusOne, setPlusOne] = useState();
 
     const handleTicketSelect = async (item) => {
-        const { ticketId, name, price, currency } = item
+        const { ticketId, name, price, currency, processingFee, availableSlots } = item
         setSelectedTicket(ticketId)
-        dispatch(setSelectedTicketDetails({ ticketId, name, price, currency }))
+        dispatch(setSelectedTicketDetails({ ticketId, name, price, currency, processingFee, availableSlots }))
     }
 
     useEffect(() => {
@@ -45,7 +45,7 @@ const GetTicket = () => {
         headerShadowVisible: false,
         headerTitleStyle: {
             fontFamily: FONTS.NotoSansJPBold,
-            // fontWeight: '700',
+            // fontWeight:  700,
             lineHeight: 24,
             // backgroundColor: COLORS.gray500,
             color: COLORS.grayBase

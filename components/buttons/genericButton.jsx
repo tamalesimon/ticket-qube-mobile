@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     },
     label: {
         fontFamily: FONTS.NotoSansJPRegular,
-        fontWeight: '700',
+        fontWeight: 700,
         lineHeight: 24
     }
 })

@@ -21,7 +21,7 @@ export default function Profile() {
     headerShadowVisible: false,
     headerTitleStyle: {
       fontFamily: FONTS.NotoSansJPBold,
-      fontWeight: '700',
+      fontWeight: 700,
     },
     headerLeft: () => (
       <View style={styles.headerButtonContainer}>

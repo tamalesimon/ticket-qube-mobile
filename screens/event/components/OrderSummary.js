@@ -12,16 +12,14 @@ const OrderSummary = () => {
     const ticketTotalAmount = useSelector(selectTotalTicketAmount)
     const fees = 2000; //todo: get fees from somewhere
 
-    useEffect(() => {
-        dispatch(setTotalTicketAmount(ticketTotalAmount + fees))
-    }, [fees])
-    const { name, price, currency } = ticket
 
-    const getFees = () => {
-        if (price === 0) {
-            return 0
-        } else return fees;
-    }
+    const { name, price, currency, processingFee } = ticket
+
+    useEffect(() => {
+        dispatch(setTotalTicketAmount(ticketTotalAmount + (processingFee * plusOne)))
+    }, [processingFee])
+
+    console.log('ticket in order details: => ', ticket)
 
     const getTotal = () => {
         if (ticketTotalAmount === 0 && price === 0) {
@@ -41,16 +39,18 @@ const OrderSummary = () => {
                 </View>
                 <View style={styles.order_summary_item}>
                     <Text style={styles.order_item_text}>Subtotal</Text>
-                    <Text style={styles.order_item_money}>{formatMoney(currency, ticketTotalAmount)}</Text>
+                    <Text style={styles.order_item_money}>{formatMoney(currency, (price * plusOne))}</Text>
                 </View>
                 <View style={styles.order_summary_item}>
                     <Text style={styles.order_item_text}>Fees</Text>
-                    <Text style={styles.order_item_money}>{formatMoney(currency, getFees())}</Text>
+                    <Text style={styles.order_item_money}>{formatMoney(currency, (processingFee * plusOne))}</Text>
                 </View>
                 <View style={styles.divider} />
                 <View style={styles.order_summary_item}>
                     <Text style={styles.order_total}>Total</Text>
-                    <Text style={styles.order_total_money}>{formatMoney(currency, getTotal())}</Text>
+                    <Text style={styles.order_total_money}>{
+                        ticketTotalAmount && price === 0 ? 'Free' : formatMoney(currency, ticketTotalAmount)
+                    }</Text>
                 </View>
             </View>
         </View>
