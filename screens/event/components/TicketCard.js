@@ -1,13 +1,16 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity, Pressable } from 'react-native';
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { COLORS, FONTS, ICONS } from '../../../constants';
 import { moneyFormat } from '../../../utils/utils';
 import DashedLine from 'react-native-dashed-line';
 import { setTotalTicketAmount, setTotalPlusOne } from '../../../redux/events/eventSlice';
+import { setPaymentObject, selectPaymentObject } from '../../../redux/payments/paymentSlice';
+
 
 const TicketCard = ({ item, title, handleTicketSelect, selectedTicket, setTicketAmount, setPlusOne, imageUrl }) => {
   const dispatch = useDispatch();
+  const paymentObject = useSelector(selectPaymentObject)
   const [isClicked, setIsClicked] = useState(false);
   const [count, setCount] = useState(0);
   const [showmore, setShowmore] = useState(false);
@@ -34,6 +37,10 @@ const TicketCard = ({ item, title, handleTicketSelect, selectedTicket, setTicket
       const newCount = count < 10 ? count + 1 : 1;
       setCount(newCount);
       dispatch(setTotalTicketAmount(price * newCount));
+      dispatch(setPaymentObject({
+        ...paymentObject,
+        numberOfTickets: newCount
+      }))
       setPlusOne(newCount)
     }
   }

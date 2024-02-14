@@ -4,9 +4,15 @@ import { COLORS, FONTS, FONTSIZE, ICONS } from '~/constants';
 import { Footer, OrderSummary, PaymentMethod, EventSummaryOrderDetail } from '~/screens/event/components'
 import { useDispatch, useSelector } from 'react-redux';
 import { setTotalTicketAmount } from '../../../redux/events/eventSlice';
+import { selectPaymentMethod, selectPaymentObject, setPaymentObject } from '../../../redux/payments/paymentSlice';
+import { useBookTicketMutation } from '../../../redux/payments/paymentApiSlice';
 
 const DetailsOrder = () => {
     const router = useRouter();
+    const paymentMethod = useSelector(selectPaymentMethod)
+    const paymentObject = useSelector(selectPaymentObject)
+
+    const [bookTicket, { error, isLoading, isSuccess }] = useBookTicketMutation()
     const WhiteBGScreenOptions = {
         headerStyle: {
             backgroundColor: COLORS.white,
@@ -30,8 +36,22 @@ const DetailsOrder = () => {
         ),
         headerTitleAlign: 'center',
     }
-    const handleClickButton = () => {
-        router.push("event-details/get-ticket/TicketOrderCompleted")
+    const handleClickButton = async () => {
+        try {
+            const response = await bookTicket(paymentObject).unwrap()
+
+            console.log("Response: ", response)
+            // if (paymentMethod !== null && response.) {
+                
+            //     router.push("event-details/get-ticket/TicketOrderCompleted")
+            // } else {
+            //     console.log("Payment_Object: ", paymentObject)
+            //     console.log("Please select a payment method to proceed")
+            // }
+        } catch (err) {
+
+        }
+
     }
 
     return (

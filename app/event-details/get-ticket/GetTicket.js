@@ -6,6 +6,7 @@ import TicketCard from '~/screens/event/components/TicketCard';
 import { Footer } from '~/screens/event/components';
 import FiveDayStrip from '~/screens/event/components/EventDateStrip'
 import { selectCurrentEventTickets, selectSelectedEventTitle, selectSelectedEventDate, selectPlusOne, setTotalPlusOne, setSelectedTicketDetails } from '../../../redux/events/eventSlice';
+import { setPaymentObject } from '../../../redux/payments/paymentSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -29,6 +30,9 @@ const GetTicket = () => {
     const handleTicketSelect = async (item) => {
         const { ticketId, name, price, currency, processingFee, availableSlots } = item
         setSelectedTicket(ticketId)
+        dispatch(setPaymentObject({
+            ticketId
+        }))
         dispatch(setSelectedTicketDetails({ ticketId, name, price, currency, processingFee, availableSlots }))
     }
 
@@ -66,7 +70,7 @@ const GetTicket = () => {
     const handleClickButton = () => {
         router.push("event-details/get-ticket/ContactInfo")
     }
-    console.log("tickets in getTickets: ", tickets)
+
     return (
         <SafeAreaView style={{ backgroundColor: COLORS.gray50, flex: 1, overflow: 'hidden' }}>
             <Stack.Screen

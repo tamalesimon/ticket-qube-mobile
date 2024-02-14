@@ -15,20 +15,9 @@ const paymentSlice = createSlice({
             id: 3,
             name: "Airtel",
             icon: "Airtel"
-        }, {
-            id: 4,
-            name: "Apple pay",
-            icon: "ApplePay"
-        }, {
-            id: 5,
-            name: "PayPal",
-            icon: "PayPal"
-        }, {
-            id: 6,
-            name: "Payoneer",
-            icon: "Payoneer"
         }],
         paymentMethod: null,
+        paymentObject: null,
         paymentStatus: null,
         paymentError: null
     },
@@ -42,11 +31,15 @@ const paymentSlice = createSlice({
         setPaymentError: (state, action) => {
             state.paymentError = action.payload
         },
+        setPaymentObject: (state, action) => {
+            state.paymentObject = action.payload
+        }
     }
 })
 
-export const { setPaymentMethod, setPaymentStatus, setPaymentError } = paymentSlice.actions;
+export const { setPaymentMethod, setPaymentStatus, setPaymentError, setPaymentObject } = paymentSlice.actions;
 export default paymentSlice.reducer;
 
 export const selectPaymentMethods = state => state.payments.paymentMethods
 export const selectPaymentMethod = state => state.payments.paymentMethod
+export const selectPaymentObject = state => state.payments.paymentObject
