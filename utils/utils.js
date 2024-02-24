@@ -61,3 +61,11 @@ export const formatMoney =  (currency, price) => {
   }).format(price);
 }
 
+export const formatMoneyUtil = (price) => {
+  if (price === 0) {
+    return price;
+  } else {
+    return new Intl.NumberFormat('en-US').format(price);
+  }
+}
+

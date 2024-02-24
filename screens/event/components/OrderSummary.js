@@ -23,7 +23,7 @@ const OrderSummary = () => {
             ...paymentObject,
             totalPrice: totalPrice.toString()
         }))
-    }, [processingFee])
+    }, [])
 
     console.log('ticket in order details: => ', ticket)
 
