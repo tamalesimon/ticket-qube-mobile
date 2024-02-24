@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { FONTS, COLORS, ICONS } from '../../../constants';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectPlusOne, selectTotalTicketAmount, selectTicketDetails, setTotalTicketAmount } from '../../../redux/events/eventSlice'
+import { selectPaymentObject, setPaymentObject } from '../../../redux/payments/paymentSlice';
 import { formatMoney } from '../../../utils/utils';
 
 const OrderSummary = () => {
@@ -10,14 +11,19 @@ const OrderSummary = () => {
     const plusOne = useSelector(selectPlusOne)
     const ticket = useSelector(selectTicketDetails)
     const ticketTotalAmount = useSelector(selectTotalTicketAmount)
-    const fees = 2000; //todo: get fees from somewhere
+    const paymentObject = useSelector(selectPaymentObject)
 
 
     const { name, price, currency, processingFee } = ticket
 
     useEffect(() => {
-        dispatch(setTotalTicketAmount(ticketTotalAmount + (processingFee * plusOne)))
-    }, [processingFee])
+        const totalPrice = ticketTotalAmount + (processingFee * plusOne);
+        dispatch(setTotalTicketAmount(totalPrice))
+        dispatch(setPaymentObject({
+            ...paymentObject,
+            totalPrice: totalPrice.toString()
+        }))
+    }, [])
 
     console.log('ticket in order details: => ', ticket)
 

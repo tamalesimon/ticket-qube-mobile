@@ -1,6 +1,6 @@
 import { View, Text, SafeAreaView, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { useRouter, Stack } from 'expo-router';
+import { useRouter, Stack, useLocalSearchParams } from 'expo-router';
 import { useNavigation } from '@react-navigation/native';
 import { COLORS, FONTS, ICONS } from '~/constants'
 import GenericButton from '~/components/buttons/genericButton'
@@ -9,6 +9,8 @@ import OrderCompleted from '~/assets/images/ticket-order-completed.png'
 
 
 const TicketOrderCompleted = () => {
+    // const { name } = route.eventName
+    const eventName = useLocalSearchParams()
     const router = useRouter();
     const navigation = useNavigation();
     const HeadersWithClose = {
@@ -35,6 +37,7 @@ const TicketOrderCompleted = () => {
         headerTitleAlign: 'center',
         headerTitle: ''
     }
+    console.log("Event Name: ", eventName);
     const handleViewTickets = () => {
         navigation.navigate(`Tickets/${id}`)
     }
@@ -52,7 +55,7 @@ const TicketOrderCompleted = () => {
                     <View style={styles.text_container}>
                         <Text style={styles.title}>Order Complete</Text>
                         <Text style={styles.sub_title}>Your payment was successful!{<br />}
-                            See you at the [eventName_placeholder] </Text>
+                            See you at the {eventName.eventName} </Text>
                     </View>
                 </View>
                 <View style={styles.button_container}>

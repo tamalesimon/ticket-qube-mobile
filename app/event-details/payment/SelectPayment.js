@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native'
 import React, { useState } from 'react'
 import { Footer } from '../../../screens/event/components'
 import { COLORS, FONTS, FONTSIZE, ICONS } from '../../../constants';
-import { selectPaymentMethods, setPaymentMethod } from '../../../redux/payments/paymentSlice';
+import { selectPaymentMethods, setPaymentMethod, selectPaymentObject, setPaymentObject } from '../../../redux/payments/paymentSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter, Stack } from 'expo-router';
 
@@ -13,6 +13,7 @@ const SelectPayment = () => {
   const [isSelected, setIsSelected] = useState(false)
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const paymentObject = useSelector(selectPaymentObject)
   const router = useRouter();
 
   const paymentMethods = useSelector(selectPaymentMethods)
@@ -27,6 +28,10 @@ const SelectPayment = () => {
     setSelectedPayment(item.id)
     const { name, icon } = item
     dispatch(setPaymentMethod({ name, icon }))
+    dispatch(setPaymentObject({
+      ...paymentObject,
+      paymentMode: item.name
+    }))
   }
   const screenOptions = {
     headerStyle: {

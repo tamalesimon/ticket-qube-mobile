@@ -1,17 +1,27 @@
+import { useState } from 'react';
 import { SafeAreaView, View, StyleSheet, TouchableOpacity } from 'react-native'
 import { useRouter, Stack } from 'expo-router'
 import { COLORS, FONTS, FONTSIZE, ICONS } from '~/constants';
 import { Footer, OrderSummary, PaymentMethod, EventSummaryOrderDetail } from '~/screens/event/components'
 import { useDispatch, useSelector } from 'react-redux';
 import { setTotalTicketAmount } from '../../../redux/events/eventSlice';
+import { selectPaymentMethod, selectPaymentObject, setPaymentObject } from '../../../redux/payments/paymentSlice';
+import { useBookTicketMutation } from '../../../redux/payments/paymentApiSlice';
+import LoadingIndicator from '../../../components/loaders/LoadingIndicator';
+
 
 const DetailsOrder = () => {
     const router = useRouter();
+    const paymentMethod = useSelector(selectPaymentMethod)
+    const paymentObject = useSelector(selectPaymentObject)
+
+    const [bookingLoading, setBookingLoading] = useState(false);
+
+    const [bookTicket, { error, isLoading, isSuccess }] = useBookTicketMutation()
     const WhiteBGScreenOptions = {
         headerStyle: {
-            backgroundColor: COLORS.white,
+            backgroundColor: bookingLoading ? '#7F7F7F' : COLORS.white,
             elevation: 0,
-            borderBottomWidth: 0,
         },
         headerShadowVisible: false,
         headerTitleStyle: {
@@ -30,8 +40,28 @@ const DetailsOrder = () => {
         ),
         headerTitleAlign: 'center',
     }
-    const handleClickButton = () => {
-        router.push("event-details/get-ticket/TicketOrderCompleted")
+    const handleClickButton = async () => {
+        try {
+            const response = await bookTicket(paymentObject).unwrap()
+
+            console.log("Response: ", response)
+            setBookingLoading(true)
+            if (paymentMethod !== null && response.bookingId) {
+                setTimeout(() => {
+                    setBookingLoading(false)
+                    router.push({
+                        pathname: "event-details/get-ticket/TicketOrderCompleted",
+                        params: { eventName: "Eating Contest" }
+                    })
+                }, 3000)
+            } else {
+                console.log("Payment_Object: ", paymentObject)
+                console.log("Please select a payment method to proceed")
+                console.log("Error: ", error?.message || "Unknown Error Occurred, try again later")
+            }
+        } catch (err) {
+
+        }
     }
 
     return (
@@ -48,6 +78,11 @@ const DetailsOrder = () => {
                 label={"Complete payment"}
                 handleClickButton={handleClickButton}
             />
+            {bookingLoading &&
+                <View style={styles.loader}>
+                    <LoadingIndicator />
+                </View>
+            }
         </SafeAreaView>
     )
 }
@@ -64,5 +99,15 @@ const styles = StyleSheet.create({
         marginHorizontal: 24, //24px
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    loader: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)'
     }
 })

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "expo-router";
 import { COLORS, FONTS } from "../../../constants";
 import GenericButton from "../../../components/buttons/genericButton";
-import { moneyFormat } from "../../../utils/utils";
+import { moneyFormat, formatMoney, formatMoneyUtil } from "../../../utils/utils";
 
 import { selectCurrentEventTickets, selectTotalTicketAmount, selectPlusOne } from "../../../redux/events/eventSlice";
 
@@ -24,11 +24,14 @@ const Footer = ({ info, label, handleClickButton, hideAmount }) => {
         }
     }
 
+    const currencyType = ticketDetails[0]?.currency?.toUpperCase();
+    console.log("ticket-details", ticketDetails)
+
     return (
         <View style={styles.wrapper}>
             <View style={styles.container}>
                 {!hideAmount ? <View>
-                    <Text style={styles.amount}>{totalTicketAmount}</Text>
+                    <Text style={styles.amount}>{currencyType ? currencyType : null}{" "}{formatMoneyUtil(totalTicketAmount)}</Text>
                     <Text style={styles.spots}>{amountSubtitle()}</Text>
                 </View> : null}
                 <View style={{
