@@ -51,7 +51,10 @@ const DetailsOrder = () => {
                     setBookingLoading(false)
                     router.push({
                         pathname: "event-details/get-ticket/TicketOrderCompleted",
-                        params: { eventName: "Eating Contest" }
+                        params: {
+                            eventName: response?.event?.name,
+                            bookingId: response.bookingId
+                        }
                     })
                 }, 3000)
             } else {

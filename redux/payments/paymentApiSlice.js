@@ -9,18 +9,11 @@ export const paymentsApiSlice = apiSlice.injectEndpoints({
                 body: paymentObject
             }),
         }),
-        getUserBookings: builder.mutation({
-            query: () => ({
-                url: `/booking`,
-                method: 'GET',
-            }),
-        }),
     })
 })
 
 export const {
     useBookTicketMutation,
-    useGetUserBookingsMutation
 } = paymentsApiSlice;
 
 
