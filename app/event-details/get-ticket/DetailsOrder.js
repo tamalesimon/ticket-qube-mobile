@@ -46,14 +46,14 @@ const DetailsOrder = () => {
 
             console.log("Response: ", response)
             setBookingLoading(true)
-            if (paymentMethod !== null && response.bookingId) {
+            if (paymentMethod && response.bookingId) {
                 setTimeout(() => {
                     setBookingLoading(false)
                     router.push({
                         pathname: "event-details/get-ticket/TicketOrderCompleted",
                         params: {
                             eventName: response?.event?.name,
-                            bookingId: response.bookingId
+                            bookingId: response?.bookingId
                         }
                     })
                 }, 3000)

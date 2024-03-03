@@ -1,16 +1,25 @@
 import { View, Text, SafeAreaView, Image, StyleSheet, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter, Stack, useLocalSearchParams } from 'expo-router';
 import { useNavigation } from '@react-navigation/native';
 import { COLORS, FONTS, ICONS } from '~/constants'
 import GenericButton from '~/components/buttons/genericButton'
 import OrderCompleted from '~/assets/images/ticket-order-completed.png'
+import { useGetBookingByIdMutation } from '../../../redux/bookings/bookingApiSlice';
+import { selectBookingId, selectCurrentBooking } from '../../../redux/bookings/bookingSlice';
+import { useSelector } from 'react-redux';
+
 
 
 
 const TicketOrderCompleted = () => {
-    // const { name } = route.eventName
-    const eventName = useLocalSearchParams()
+    const [bookingStatus, setBookingStatus] = useState("INITIATED")
+    const [getBookingById, { data, error, isLoading, isSuccess }] = useGetBookingByIdMutation();
+    // const bookingId = useSelector(selectBookingId)
+    // const booking = useSelector(selectCurrentBooking)
+    // const bookingStatus = booking?.status
+    const params = useLocalSearchParams()
+    const { eventName, bookingId } = params
     const router = useRouter();
     const navigation = useNavigation();
     const HeadersWithClose = {
@@ -37,13 +46,36 @@ const TicketOrderCompleted = () => {
         headerTitleAlign: 'center',
         headerTitle: ''
     }
-    console.log("Event Name: ", eventName);
+    // console.log("Event Name: ", eventName);
     const handleViewTickets = () => {
         navigation.navigate(`Tickets/${id}`)
     }
     const handleViewEvents = () => {
         navigation.navigate("Explore")
     }
+
+    const confirmBookingStatus = async () => {
+        while (true) {
+            const response = await getBookingById(bookingId).unwrap();
+            console.log("booking: ", response?.status)
+            setBookingStatus(response?.status)
+
+            if (response?.status === "ACTIVE") {
+                console.log("Booking Status is now ACTIVE");
+                return; // Exit the loop if booking status is "ACTIVE"
+            }
+
+            await delay(3000);
+        }
+    }
+
+    const delay = (ms) => new Promise(res => setTimeout(res, ms));
+
+    useEffect(() => {
+        confirmBookingStatus();
+    }, [])
+
+
     return (
         <SafeAreaView style={{ backgroundColor: "white", flex: 1, overflow: 'hidden', paddingHorizontal: 24 }}>
             <Stack.Screen
@@ -55,7 +87,7 @@ const TicketOrderCompleted = () => {
                     <View style={styles.text_container}>
                         <Text style={styles.title}>Order Complete</Text>
                         <Text style={styles.sub_title}>Your payment was successful!{<br />}
-                            See you at the {eventName.eventName} </Text>
+                            See you at the {eventName} </Text>
                     </View>
                 </View>
                 <View style={styles.button_container}>
