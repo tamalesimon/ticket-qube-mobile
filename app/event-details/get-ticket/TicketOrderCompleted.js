@@ -48,7 +48,7 @@ const TicketOrderCompleted = () => {
     }
     // console.log("Event Name: ", eventName);
     const handleViewTickets = () => {
-        navigation.navigate(`Tickets/${id}`)
+        router.push(`tickets/TicketReciept`)
     }
     const handleViewEvents = () => {
         navigation.navigate("Explore")
