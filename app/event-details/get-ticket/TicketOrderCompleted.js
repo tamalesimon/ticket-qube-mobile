@@ -6,6 +6,7 @@ import { COLORS, FONTS, ICONS } from '~/constants'
 import GenericButton from '~/components/buttons/genericButton'
 import OrderCompleted from '~/assets/images/ticket-order-completed.png'
 import { useGetBookingByIdMutation } from '../../../redux/bookings/bookingApiSlice';
+import InLineLoader from '~/components/loaders/InlineLoader'
 import { selectBookingId, selectCurrentBooking } from '../../../redux/bookings/bookingSlice';
 import { useSelector } from 'react-redux';
 
@@ -14,6 +15,7 @@ import { useSelector } from 'react-redux';
 
 const TicketOrderCompleted = () => {
     const [bookingStatus, setBookingStatus] = useState("INITIATED")
+    const [isProcessing, setIsProcessing] = useState(true)
     const [getBookingById, { data, error, isLoading, isSuccess }] = useGetBookingByIdMutation();
     // const bookingId = useSelector(selectBookingId)
     // const booking = useSelector(selectCurrentBooking)
@@ -61,6 +63,7 @@ const TicketOrderCompleted = () => {
             setBookingStatus(response?.status)
 
             if (response?.status === "ACTIVE") {
+                setIsProcessing(false);
                 console.log("Booking Status is now ACTIVE");
                 return; // Exit the loop if booking status is "ACTIVE"
             }
@@ -75,13 +78,23 @@ const TicketOrderCompleted = () => {
         confirmBookingStatus();
     }, [])
 
-
-    return (
-        <SafeAreaView style={{ backgroundColor: "white", flex: 1, overflow: 'hidden', paddingHorizontal: 24 }}>
-            <Stack.Screen
-                options={{ ...HeadersWithClose, headerTitle: "" }}
-            />
-            <View style={styles.container}>
+    const content = () => {
+        if (isProcessing) {
+            return (
+                <View style={styles.text_image_container}>
+                    {/* <Image style={{ alignSelf: 'cent</View>er' }} source={OrderCompleted} resizeMode='contain' /> */}
+                    <View style={styles.text_container}>
+                        <View style={{ flexDirection: 'row', gap: 4, alignItems: 'center', justifyContent: 'center', }}>
+                            <InLineLoader />
+                            <Text style={styles.title}>Processing...</Text>
+                        </View>
+                        <Text style={styles.sub_title}>Please wait while we confirm your booking</Text>
+                    </View>
+                </View>
+            )
+        }
+        else {
+            return (
                 <View style={styles.text_image_container}>
                     <Image style={{ alignSelf: 'center' }} source={OrderCompleted} resizeMode='contain' />
                     <View style={styles.text_container}>
@@ -90,10 +103,23 @@ const TicketOrderCompleted = () => {
                             See you at the {eventName} </Text>
                     </View>
                 </View>
-                <View style={styles.button_container}>
-                    <GenericButton bgColor={'primaryBase'} label={'View ticket'} fontColor={'white'} onPress={handleViewTickets} shouldCenterButton />
-                    <GenericButton borderWidth={1} borderColor={'primaryBase'} label={'Discover more events'} fontColor={'primaryBase'} onPress={handleViewEvents} shouldCenterButton />
-                </View>
+            )
+        }
+    }
+
+
+    return (
+        <SafeAreaView style={{ backgroundColor: "white", flex: 1, overflow: 'hidden', paddingHorizontal: 24 }}>
+            <Stack.Screen
+                options={{ ...HeadersWithClose, headerTitle: "" }}
+            />
+            <View style={styles.container}>
+                {content()}
+                {!isProcessing &&
+                    <View style={styles.button_container}>
+                        <GenericButton bgColor={'primaryBase'} label={'View ticket'} fontColor={'white'} onPress={handleViewTickets} shouldCenterButton />
+                        <GenericButton borderWidth={1} borderColor={'primaryBase'} label={'Discover more events'} fontColor={'primaryBase'} onPress={handleViewEvents} shouldCenterButton />
+                    </View>}
             </View>
         </SafeAreaView>
     )

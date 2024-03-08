@@ -95,7 +95,7 @@ const TicketReciept = () => {
             <FooterMultipleButtons
                 iconName={"Download"}
                 iconName2={"BxQr"}
-                label={"Download Image"}
+                label={"Download Receipt"}
                 label2={"Show QR Code"}
                 fontSize={12}
                 handleClickButton={() => { }}
