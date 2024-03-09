@@ -1,12 +1,16 @@
-import { View, Text, SafeAreaView, Image, StyleSheet } from 'react-native'
+import { View, Text, SafeAreaView, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { useRouter, Stack, useLocalSearchParams } from 'expo-router';
 import { COLORS, FONTS, ICONS } from '../../constants'
 import TestImage from '../../assets/images/artur-matosyan-4YWUMaftmag-unsplash.jpg'
 import GenericButton from '../../components/buttons/genericButton'
 import { FooterMultipleButtons } from '../../screens/event/components'
+import { useSelector } from 'react-redux';
+import { selectCurrentBooking } from '../../redux/bookings/bookingSlice';
 
 const TicketReciept = () => {
+    const router = useRouter();
+    const myBooking = useSelector(selectCurrentBooking);
     const HeaderStack = {
         headerTitleStyle: {
             fontFamily: FONTS.NotoSansJPBold,
@@ -42,6 +46,12 @@ const TicketReciept = () => {
         ),
 
         headerTitleAlign: 'center',
+    }
+    const handleRecieptDownload = () => {
+        console.log("Downloading reciept =>")
+    }
+    const handleShowQRC = () => {
+        router.push("tickets/TicketQrcode")
     }
     return (
         <SafeAreaView style={{ backgroundColor: COLORS.gray50, flex: 1, paddingHorizontal: 24, paddingTop: 24, paddingBottom: 16 }}>
@@ -84,22 +94,19 @@ const TicketReciept = () => {
                         </View>
                         <View style={{ alignItems: 'center' }}>
                             <ICONS.Barcode />
+                            <Text style={styles.txt_subtitle}>{myBooking?.id}</Text>
                         </View>
                     </View>
                 </View>
             </View>
-            {/* <View style={{ marginTop: "15%", gap: 12, flexDirection: "row", alignItems: "center" }}>
-                <GenericButton label={"Download Image"} fontColor={"white"} bgColor={"primaryBase"} iconName={"Download"} />
-                <GenericButton label={"Show QR Code"} fontColor={"secondaryBase"} bgColor={"white"} iconName={"BxQr"} />
-            </View> */}
             <FooterMultipleButtons
                 iconName={"Download"}
                 iconName2={"BxQr"}
                 label={"Download Receipt"}
                 label2={"Show QR Code"}
                 fontSize={12}
-                handleClickButton={() => { }}
-                handleClickButton2={() => { }}
+                handleClickButton={handleRecieptDownload}
+                handleClickButton2={handleShowQRC}
             />
         </SafeAreaView>
     )

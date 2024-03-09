@@ -14,11 +14,6 @@ const TicketQrcode = () => {
       fontFamily: FONTS.NotoSansJPBold,
       fontWeight: 700,
     },
-    // tabBarIcon: ({ focused }) => (
-    //     <View style={styles.tabBarIconContainer}>
-    //         {focused ? <ICONS.TicketIconActive /> : <ICONS.TicketIcon />}
-    //     </View>
-    // ),
     headerStyle: {
       backgroundColor: COLORS.gray50,
       elevation: 0,
@@ -71,7 +66,7 @@ const TicketQrcode = () => {
           <DashedLine dashLength={5} dashColor='#E5E7EB' dashGap={7} />
         </View>
         <View style={styles.qr_code}>
-          <QRCode />
+          <Image style={{ width: 200, height: 200 }} source={{ uri: 'https://dev-qube-bucket.s3.amazonaws.com/qr_codes/83509d0e-92bb-497d-ae64-3ea33cd9f3ae.png' }} resizeMode='contain' />
         </View>
       </View>
       <View style={styles.quick_tip}>
@@ -82,10 +77,6 @@ const TicketQrcode = () => {
           <Text style={styles.quick_tip_text}>Please show this code at the event entrance to proceed.</Text>
         </View>
       </View>
-      {/* <View style={{ flexDirection: 'row', gap: 12, marginTop: 73 }}>
-        <GenericButton label={"Download Image"} fontColor={"white"} bgColor={"primaryBase"} iconName={"Download"} />
-        <GenericButton label={"Share Code"} fontColor={"secondaryBase"} bgColor={"white"} iconName={"Share"} />
-      </View> */}
       <FooterMultipleButtons
         iconName={"Download"}
         iconName2={"Share"}

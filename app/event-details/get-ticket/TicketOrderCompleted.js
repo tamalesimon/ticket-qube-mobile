@@ -1,14 +1,13 @@
 import { View, Text, SafeAreaView, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useRouter, Stack, useLocalSearchParams } from 'expo-router';
-import { useNavigation } from '@react-navigation/native';
 import { COLORS, FONTS, ICONS } from '~/constants'
 import GenericButton from '~/components/buttons/genericButton'
 import OrderCompleted from '~/assets/images/ticket-order-completed.png'
 import { useGetBookingByIdMutation } from '../../../redux/bookings/bookingApiSlice';
 import InLineLoader from '~/components/loaders/InlineLoader'
-import { selectBookingId, selectCurrentBooking } from '../../../redux/bookings/bookingSlice';
-import { useSelector } from 'react-redux';
+import { selectBookingId, selectCurrentBooking, setCurrentBooking } from '../../../redux/bookings/bookingSlice';
+import { useSelector, useDispatch } from 'react-redux';
 
 
 
@@ -23,7 +22,7 @@ const TicketOrderCompleted = () => {
     const params = useLocalSearchParams()
     const { eventName, bookingId } = params
     const router = useRouter();
-    const navigation = useNavigation();
+    const dispatch = useDispatch();
     const HeadersWithClose = {
         headerStyle: {
             backgroundColor: COLORS.white,
@@ -53,19 +52,20 @@ const TicketOrderCompleted = () => {
         router.push(`tickets/TicketReciept`)
     }
     const handleViewEvents = () => {
-        navigation.navigate("Explore")
+        router.replace("Explore")
     }
 
     const confirmBookingStatus = async () => {
         while (true) {
             const response = await getBookingById(bookingId).unwrap();
-            console.log("booking: ", response?.status)
+            console.log("booking: ", response)
             setBookingStatus(response?.status)
 
             if (response?.status === "ACTIVE") {
                 setIsProcessing(false);
+                dispatch(setCurrentBooking(response))
                 console.log("Booking Status is now ACTIVE");
-                return; // Exit the loop if booking status is "ACTIVE"
+                return;
             }
 
             await delay(3000);
@@ -82,7 +82,6 @@ const TicketOrderCompleted = () => {
         if (isProcessing) {
             return (
                 <View style={styles.text_image_container}>
-                    {/* <Image style={{ alignSelf: 'cent</View>er' }} source={OrderCompleted} resizeMode='contain' /> */}
                     <View style={styles.text_container}>
                         <View style={{ flexDirection: 'row', gap: 4, alignItems: 'center', justifyContent: 'center', }}>
                             <InLineLoader />
