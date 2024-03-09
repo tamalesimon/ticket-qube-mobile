@@ -68,6 +68,7 @@ import EditIcon from "../assets/svgIcons/EditIcon.jsx"
 import SettingsIcon from "../assets/svgIcons/SettingsIcon.jsx"
 import DotIcon from "../assets/svgIcons/DotIcon.jsx"
 import ChevronDownIcon from "../assets/svgIcons/ChevronDownIcon.jsx"
+import SuccessCheckMark from "../assets/svgIcons/CheckMark.jsx"
 
 
 export default {
@@ -140,5 +141,6 @@ export default {
     EditIcon,
     SettingsIcon,
     DotIcon,
-    ChevronDownIcon
+    ChevronDownIcon,
+    SuccessCheckMark
 }

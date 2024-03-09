@@ -16,11 +16,6 @@ const TicketReciept = () => {
             fontFamily: FONTS.NotoSansJPBold,
             fontWeight: 700,
         },
-        // tabBarIcon: ({ focused }) => (
-        //     <View style={styles.tabBarIconContainer}>
-        //         {focused ? <ICONS.TicketIconActive /> : <ICONS.TicketIcon />}
-        //     </View>
-        // ),
         headerStyle: {
             backgroundColor: COLORS.gray50,
             elevation: 0,
@@ -36,7 +31,9 @@ const TicketReciept = () => {
         },
         headerLeft: () => (
             <View style={styles.headerButtonContainer}>
-                <ICONS.ArrowLeftIcon />
+                <TouchableOpacity onPress={() => router.back()}>
+                    <ICONS.ArrowLeftIcon />
+                </TouchableOpacity>
             </View>
         ),
         headerRight: () => (
@@ -53,6 +50,7 @@ const TicketReciept = () => {
     const handleShowQRC = () => {
         router.push("tickets/TicketQrcode")
     }
+    console.log("my booking: ", myBooking.bookingId)
     return (
         <SafeAreaView style={{ backgroundColor: COLORS.gray50, flex: 1, paddingHorizontal: 24, paddingTop: 24, paddingBottom: 16 }}>
             <Stack.Screen options={{ ...HeaderStack, headerTitle: 'Ticket Receipt', }} />
@@ -63,7 +61,7 @@ const TicketReciept = () => {
                 <View>
                     <View style={styles.line} />
                     <View style={styles.ticketReciept}>
-                        <Text style={styles.ticketTitle}>Xenson Art Exhibit: 2022 Xgallery 29-30</Text>
+                        <Text style={styles.ticketTitle}>{myBooking?.event?.name}</Text>
                         <View style={styles.lineDashed} />
                         <View style={styles.details}>
                             <View style={styles.ticket_date_time}>
@@ -73,7 +71,7 @@ const TicketReciept = () => {
                                 </View>
                                 <View>
                                     <Text style={styles.txt_title}>Venue</Text>
-                                    <Text style={styles.txt_subtitle}>Building park</Text>
+                                    <Text style={styles.txt_subtitle}>{myBooking?.event?.location}</Text>
                                 </View>
                             </View>
                             <View style={styles.ticket_date_time}>
@@ -83,18 +81,22 @@ const TicketReciept = () => {
                                 </View>
                                 <View>
                                     <Text style={styles.txt_title}>Seat</Text>
-                                    <Text style={styles.txt_subtitle}>N/A</Text>
+                                    <Text style={styles.txt_subtitle}>{myBooking?.ticket?.name}</Text>
                                 </View>
                             </View>
                         </View>
-                        <View style={[styles.receipt_look, { marginTop: 8 }]}>
+                        <View style={{ justifyContent: 'center', alignItems: 'center', gap: 5 }}>
+                            <ICONS.SuccessCheckMark />
+                            <Text style={{ ...styles.ticketTitle, color: '#22C55E', fontWeight: 400, }}>Successful Payment</Text>
+                        </View>
+                        <View style={[styles.receipt_look, { marginTop: 3 }]}>
                             <View style={styles.semiCircleLeft} />
                             <View style={[styles.lineDashed]} />
                             <View style={styles.semiCircleRight} />
                         </View>
                         <View style={{ alignItems: 'center' }}>
                             <ICONS.Barcode />
-                            <Text style={styles.txt_subtitle}>{myBooking?.id}</Text>
+                            <Text style={styles.txt_subtitle}>{myBooking?.bookingId}</Text>
                         </View>
                     </View>
                 </View>
@@ -171,7 +173,8 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: 700,
         lineHeight: 21,
-        color: COLORS.grayBase
+        color: COLORS.grayBase,
+        textAlign: 'center',
     },
     lineDashed: {
         width: "100%",

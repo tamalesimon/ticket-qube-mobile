@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, Image, StyleSheet } from 'react-native'
+import { View, Text, SafeAreaView, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { COLORS, FONTS, ICONS } from '../../constants'
 import { useRouter, Stack, useLocalSearchParams } from 'expo-router';
@@ -9,6 +9,7 @@ import { FooterMultipleButtons } from '../../screens/event/components'
 import DashedLine from 'react-native-dashed-line'
 
 const TicketQrcode = () => {
+  const router = useRouter();
   const HeaderStack = {
     headerTitleStyle: {
       fontFamily: FONTS.NotoSansJPBold,
@@ -29,7 +30,9 @@ const TicketQrcode = () => {
     },
     headerLeft: () => (
       <View style={styles.headerButtonContainer}>
-        <ICONS.ArrowLeftIcon />
+        <TouchableOpacity onPress={() => router.back()}>
+          <ICONS.ArrowLeftIcon />
+        </TouchableOpacity>
       </View>
     ),
     headerRight: () => (
