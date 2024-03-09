@@ -6,6 +6,7 @@ import layoutSlice from "./redux/layoutSlice";
 import interestSlice from "./redux/interestSlice";
 import eventSlice from "./redux/events/eventSlice";
 import paymentSlice from "./redux/payments/paymentSlice";
+import bookingSlice from "./redux/bookings/bookingSlice";
 // import eventsSlice from "./redux/eventsSlice";
 
 
@@ -16,7 +17,8 @@ const store = configureStore({
         events: eventSlice,
         layout: layoutSlice,
         interests: interestSlice,
-        payments: paymentSlice
+        payments: paymentSlice,
+        bookings: bookingSlice
     },
     middleware: getDefaultMiddleware => getDefaultMiddleware().concat(apiSlice.middleware),
     devTools: true
