@@ -14,7 +14,7 @@ const FooterMultipleButtons = ({ info, spotInfo, iconName, iconName2, fontSize, 
                 <View style={{
                     gap: 12,
                     flexDirection: 'row',
-                    alignItems:'center',
+                    alignItems: 'center',
                     // alignItems: shouldCenterButton ? 'center' : 'flex-start',
                     width: shouldCenterButton ? '50%' : undefined,
                 }}>
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.gray50,
         // alignItems: "center",
         // justifyContent: "center",
-        height: 92,
+        // height: 92,
         position: "absolute",
         bottom: 0,
         left: 0,

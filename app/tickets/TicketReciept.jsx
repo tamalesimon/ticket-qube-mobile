@@ -3,14 +3,17 @@ import React from 'react'
 import { useRouter, Stack, useLocalSearchParams } from 'expo-router';
 import { COLORS, FONTS, ICONS } from '../../constants'
 import TestImage from '../../assets/images/artur-matosyan-4YWUMaftmag-unsplash.jpg'
+import noImage from '../../assets/images/no-image-placeholder.jpeg'
 import GenericButton from '../../components/buttons/genericButton'
 import { FooterMultipleButtons } from '../../screens/event/components'
 import { useSelector } from 'react-redux';
 import { selectCurrentBooking } from '../../redux/bookings/bookingSlice';
+import { formatMoney } from '../../utils/utils';
 
 const TicketReciept = () => {
     const router = useRouter();
     const myBooking = useSelector(selectCurrentBooking);
+    const ticketTotal = (myBooking?.numTickets) * myBooking?.ticket?.price + (myBooking?.numTickets) * myBooking?.ticket?.processingFee;
     const HeaderStack = {
         headerTitleStyle: {
             fontFamily: FONTS.NotoSansJPBold,
@@ -50,13 +53,13 @@ const TicketReciept = () => {
     const handleShowQRC = () => {
         router.push("tickets/TicketQrcode")
     }
-    console.log("my booking: ", myBooking.bookingId)
+
     return (
         <SafeAreaView style={{ backgroundColor: COLORS.gray50, flex: 1, paddingHorizontal: 24, paddingTop: 24, paddingBottom: 16 }}>
             <Stack.Screen options={{ ...HeaderStack, headerTitle: 'Ticket Receipt', }} />
             <View style={styles.container}>
                 <View style={styles.imageContainer}>
-                    <Image source={TestImage} resizeMode='cover' style={styles.eventImage} />
+                    <Image source={{ uri: myBooking?.event?.imageUrl ? '../../assets/images/no-image-placeholder.jpeg' : require('../../assets/images/no-image-placeholder.jpeg') }} resizeMode='contain' style={{ width: 279, height: 170 }} />
                 </View>
                 <View>
                     <View style={styles.line} />
@@ -67,27 +70,46 @@ const TicketReciept = () => {
                             <View style={styles.ticket_date_time}>
                                 <View>
                                     <Text style={styles.txt_title}>Date</Text>
-                                    <Text style={styles.txt_subtitle}>March 29, 2022</Text>
+                                    {myBooking?.event?.startTime && (
+                                        <Text style={styles.txt_subtitle}>
+                                            {
+                                                new Date(myBooking?.event?.startTime).toLocaleDateString('en-US', {
+                                                    year: 'numeric',
+                                                    month: 'short',
+                                                    day: 'numeric'
+                                                })}
+                                        </Text>
+                                    )}
                                 </View>
                                 <View>
                                     <Text style={styles.txt_title}>Venue</Text>
-                                    <Text style={styles.txt_subtitle}>{myBooking?.event?.location}</Text>
+                                    <Text style={{ ...styles.txt_subtitle, width: '90%' }}>{myBooking?.event?.location}</Text>
                                 </View>
                             </View>
                             <View style={styles.ticket_date_time}>
                                 <View>
                                     <Text style={styles.txt_title}>Time</Text>
-                                    <Text style={styles.txt_subtitle}>10:00 PM</Text>
+                                    {myBooking?.event?.startTime && (
+                                        <Text style={styles.txt_subtitle}>
+                                            {
+                                                new Date(myBooking?.event?.startTime).toLocaleTimeString('en-US', {
+                                                    hour: '2-digit',
+                                                    minute: '2-digit',
+                                                })}
+                                        </Text>
+                                    )}
                                 </View>
                                 <View>
                                     <Text style={styles.txt_title}>Seat</Text>
-                                    <Text style={styles.txt_subtitle}>{myBooking?.ticket?.name}</Text>
+                                    <Text style={styles.txt_subtitle}>{myBooking?.numTickets}x{myBooking?.ticket?.name}</Text>
                                 </View>
                             </View>
                         </View>
+                        <View style={[styles.lineDashed]} />
                         <View style={{ justifyContent: 'center', alignItems: 'center', gap: 5 }}>
                             <ICONS.SuccessCheckMark />
-                            <Text style={{ ...styles.ticketTitle, color: '#22C55E', fontWeight: 400, }}>Successful Payment</Text>
+                            <Text style={{ ...styles.ticketTitle, color: '#22C55E', fontWeight: 400, }}>Successful Payment!</Text>
+                            <Text style={{ ...styles.ticketTitle }}>{formatMoney(myBooking?.ticket?.currency, ticketTotal)}</Text>
                         </View>
                         <View style={[styles.receipt_look, { marginTop: 3 }]}>
                             <View style={styles.semiCircleLeft} />
@@ -121,7 +143,7 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.primaryBase,
         borderRadius: 32,
         padding: 20,
-        gap: 24,
+        // gap: 24,
         shadowColor: COLORS.primaryBase,
         shadowOffset: {
             width: 0,
@@ -135,10 +157,11 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         borderRadius: 16,
         borderColor: COLORS.white,
-        borderWidth: 4
+        borderWidth: 4,
+        backgroundColor: '#474C50'
     },
     eventImage: {
-        height: 178,
+        width: 178,
     },
     line: {
         position: 'relative',
@@ -179,7 +202,7 @@ const styles = StyleSheet.create({
     lineDashed: {
         width: "100%",
         height: 1,
-        borderColor: COLORS.gray100,
+        borderColor: COLORS.gray200,
         borderRadius: 1,
         borderWidth: 1,
         borderStyle: 'dashed'
@@ -187,7 +210,7 @@ const styles = StyleSheet.create({
     details: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        // alignItems: 'center'
     },
     ticket_date_time: {
         flexDirection: 'column',

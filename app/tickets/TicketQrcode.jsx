@@ -4,12 +4,14 @@ import { COLORS, FONTS, ICONS } from '../../constants'
 import { useRouter, Stack, useLocalSearchParams } from 'expo-router';
 import GenericButton from '../../components/buttons/genericButton'
 import test_image from '../../assets/images/test_image.jpg'
-import QRCode from '../../assets/svgIcons/QRCode'
+import { useSelector } from 'react-redux';
 import { FooterMultipleButtons } from '../../screens/event/components'
+import { selectCurrentBooking } from '../../redux/bookings/bookingSlice';
 import DashedLine from 'react-native-dashed-line'
 
 const TicketQrcode = () => {
   const router = useRouter();
+  const myBooking = useSelector(selectCurrentBooking);
   const HeaderStack = {
     headerTitleStyle: {
       fontFamily: FONTS.NotoSansJPBold,
@@ -48,19 +50,36 @@ const TicketQrcode = () => {
       <Stack.Screen options={{ ...HeaderStack, headerTitle: 'QR Code', }} />
       <View style={styles.qr_container}>
         <View style={styles.event_details}>
-          <Image source={test_image} resizeMode='cover' style={{ height: 66, width: 66, borderRadius: 12 }} />
+          <Image source={{ uri: '../../assets/images/no-image-placeholder.jpeg' }} resizeMode='cover' style={{ height: 66, width: 66, borderRadius: 12 }} />
           <View style={{ flexDirection: 'column', gap: 8 }}>
             <View style={{ width: "80%" }}>
-              <Text style={styles.event_details_title}>Xenson Art gallery: 2022 Xgallery 29-30</Text>
+              <Text style={styles.event_details_title}>{myBooking?.event?.name}</Text>
             </View>
             <View style={{ flexDirection: 'row', gap: 16 }}>
               <View style={styles.date_time_details}>
                 <ICONS.CalendarDetails />
-                <Text style={styles.text_small}>March 29, 2022</Text>
+                {myBooking?.event?.startTime && (
+                  <Text style={styles.text_small}>
+                    {
+                      new Date(myBooking?.event?.startTime).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric'
+                      })}
+                  </Text>
+                )}
               </View>
               <View style={styles.date_time_details}>
                 <ICONS.ClockDetailsTime />
-                <Text style={styles.text_small}>10:00 PM</Text>
+                {myBooking?.event?.startTime && (
+                  <Text style={styles.text_small}>
+                    {
+                      new Date(myBooking?.event?.startTime).toLocaleTimeString('en-US', {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                      })}
+                  </Text>
+                )}
               </View>
             </View>
           </View>
@@ -69,7 +88,7 @@ const TicketQrcode = () => {
           <DashedLine dashLength={5} dashColor='#E5E7EB' dashGap={7} />
         </View>
         <View style={styles.qr_code}>
-          <Image style={{ width: 200, height: 200 }} source={{ uri: 'https://dev-qube-bucket.s3.amazonaws.com/qr_codes/83509d0e-92bb-497d-ae64-3ea33cd9f3ae.png' }} resizeMode='contain' />
+          <Image style={{ width: 200, height: 200 }} source={{ uri: myBooking?.qrCodeImageUrl }} resizeMode='contain' />
         </View>
       </View>
       <View style={styles.quick_tip}>
