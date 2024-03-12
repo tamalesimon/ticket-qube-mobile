@@ -9,11 +9,13 @@ import { FooterMultipleButtons } from '../../screens/event/components'
 import { useSelector } from 'react-redux';
 import { selectCurrentBooking } from '../../redux/bookings/bookingSlice';
 import { formatMoney } from '../../utils/utils';
+import useImageErrorHandler from '../../hooks/useImageErrorHandler';
 
 const TicketReciept = () => {
     const router = useRouter();
     const myBooking = useSelector(selectCurrentBooking);
     const ticketTotal = (myBooking?.numTickets) * myBooking?.ticket?.price + (myBooking?.numTickets) * myBooking?.ticket?.processingFee;
+    const [imageSource, handleImageError] = useImageErrorHandler(myBooking?.event?.imageUrl)
     const HeaderStack = {
         headerTitleStyle: {
             fontFamily: FONTS.NotoSansJPBold,
@@ -59,7 +61,11 @@ const TicketReciept = () => {
             <Stack.Screen options={{ ...HeaderStack, headerTitle: 'Ticket Receipt', }} />
             <View style={styles.container}>
                 <View style={styles.imageContainer}>
-                    <Image source={{ uri: myBooking?.event?.imageUrl ? '../../assets/images/no-image-placeholder.jpeg' : require('../../assets/images/no-image-placeholder.jpeg') }} resizeMode='contain' style={{ width: 279, height: 170 }} />
+                    <Image
+                        source={{ uri: imageSource ? imageSource : require('../../assets/images/no-image-placeholder.jpeg') }}
+                        resizeMode='contain'
+                        style={{ width: 279, height: 170 }}
+                        onError={handleImageError} />
                 </View>
                 <View>
                     <View style={styles.line} />

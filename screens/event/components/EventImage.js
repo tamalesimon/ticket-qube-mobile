@@ -2,15 +2,18 @@ import { ImageBackground, View, Text, TouchableOpacity, StyleSheet } from "react
 import { ICONS, COLORS } from "~/constants";
 import { checkImageURL } from "~/utils";
 import { Skeleton } from "moti/skeleton";
+import useImageErrorHandler from "../../../hooks/useImageErrorHandler";
 
 const EventImage = ({ data, isLoading }) => {
+    const [imageSource, handleImageError] = useImageErrorHandler(data?.imageUrl)
     return (
         <View style={{ marginBottom: 16 }}>
             <Skeleton colorMode="light" height={240} show={isLoading}>
                 <ImageBackground
-                    source={{ uri: checkImageURL(data?.imageUrl) ? data.imageUrl : '../../../assets/images/test_image.jpg' }}
+                    source={{ uri: checkImageURL(imageSource) ? imageSource : '../../assets/images/no-image-placeholder.jpeg' }}
                     style={styles.image}
                     resizeMode='cover'
+                    onError={handleImageError}
                 >
                     <View style={{ flexDirection: 'column-reverse', height: '100%' }}>
                         <TouchableOpacity >

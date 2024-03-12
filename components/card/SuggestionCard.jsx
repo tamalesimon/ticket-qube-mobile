@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
 import { ICONS, COLORS, FONTS } from '../../constants'
 import { checkImageURL, returnDateDay, returnDateMonth, moneyFormat, shortenEventName } from '../../utils/utils';
+import useImageErrorHandler from '../../hooks/useImageErrorHandler'
 
 export default function SuggestionCard({ item, selectedEvent, handleEventClicked }) {
+    const [imageSource, handleImageError] = useImageErrorHandler(item?.imageUrl)
     return (
         <TouchableOpacity style={styles.container} onPress={handleEventClicked}>
             <ImageBackground
-                source={{ uri: checkImageURL(item?.imageUrl) ? item.imageUrl : 'https://img.freepik.com/premium-photo/abstract-futuristic-contemporary-modern-watercolor-art_93314-4483.jpg' }}
+                source={{ uri: checkImageURL(imageSource) ? imageSource : '../../assets/images/no-image-placeholder.jpeg' }}
                 style={styles.imageIcon}
+                onError={handleImageError}
             >
                 <View style={styles.dateContainer}>
                     <Text style={styles.dateDay}>{returnDateDay(item.startTime)}</Text>

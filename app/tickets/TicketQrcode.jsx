@@ -8,10 +8,13 @@ import { useSelector } from 'react-redux';
 import { FooterMultipleButtons } from '../../screens/event/components'
 import { selectCurrentBooking } from '../../redux/bookings/bookingSlice';
 import DashedLine from 'react-native-dashed-line'
+import useImageErrorHandler from '../../hooks/useImageErrorHandler';
 
 const TicketQrcode = () => {
+
   const router = useRouter();
   const myBooking = useSelector(selectCurrentBooking);
+  const [imageSource, handleImageError] = useImageErrorHandler(myBooking?.event?.imageUrl)
   const HeaderStack = {
     headerTitleStyle: {
       fontFamily: FONTS.NotoSansJPBold,
@@ -50,7 +53,12 @@ const TicketQrcode = () => {
       <Stack.Screen options={{ ...HeaderStack, headerTitle: 'QR Code', }} />
       <View style={styles.qr_container}>
         <View style={styles.event_details}>
-          <Image source={{ uri: '../../assets/images/no-image-placeholder.jpeg' }} resizeMode='cover' style={{ height: 66, width: 66, borderRadius: 12 }} />
+          <Image
+            source={{ uri: imageSource ? imageSource : require('../../assets/images/no-image-placeholder.jpeg') }}
+            resizeMode='cover'
+            style={{ height: 66, width: 66, borderRadius: 12 }}
+            onError={handleImageError}
+          />
           <View style={{ flexDirection: 'column', gap: 8 }}>
             <View style={{ width: "80%" }}>
               <Text style={styles.event_details_title}>{myBooking?.event?.name}</Text>
