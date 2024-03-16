@@ -10,7 +10,7 @@ const EventImage = ({ data, isLoading }) => {
         <View style={{ marginBottom: 16 }}>
             <Skeleton colorMode="light" height={240} show={isLoading}>
                 <ImageBackground
-                    source={{ uri: checkImageURL(imageSource) ? imageSource : '../../assets/images/no-image-placeholder.jpeg' }}
+                    source={{ uri: checkImageURL(imageSource) ? imageSource : '../../assets/images/no-image.png' }}
                     style={styles.image}
                     resizeMode='cover'
                     onError={handleImageError}

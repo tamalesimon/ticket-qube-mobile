@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useRouter, Stack, useLocalSearchParams } from 'expo-router';
 import { COLORS, FONTS, ICONS } from '~/constants'
 import GenericButton from '~/components/buttons/genericButton'
+import { useNavigation } from '@react-navigation/native';
 import OrderCompleted from '~/assets/images/ticket-order-completed.png'
 import { useGetBookingByIdMutation } from '../../../redux/bookings/bookingApiSlice';
 import InLineLoader from '~/components/loaders/InlineLoader'
@@ -22,6 +23,7 @@ const TicketOrderCompleted = () => {
     const params = useLocalSearchParams()
     const { eventName, bookingId } = params
     const router = useRouter();
+    const navigation = useNavigation();
     const dispatch = useDispatch();
     const HeadersWithClose = {
         headerStyle: {
@@ -52,7 +54,7 @@ const TicketOrderCompleted = () => {
         router.push(`tickets/TicketReciept`)
     }
     const handleViewEvents = () => {
-        router.replace("Explore")
+        navigation.navigate("Explore")
     }
 
     const confirmBookingStatus = async () => {

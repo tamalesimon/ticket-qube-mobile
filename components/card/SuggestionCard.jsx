@@ -9,7 +9,7 @@ export default function SuggestionCard({ item, selectedEvent, handleEventClicked
     return (
         <TouchableOpacity style={styles.container} onPress={handleEventClicked}>
             <ImageBackground
-                source={{ uri: checkImageURL(imageSource) ? imageSource : '../../assets/images/no-image-placeholder.jpeg' }}
+                source={{ uri: checkImageURL(imageSource) ? imageSource : '../../assets/images/no-image.png' }}
                 style={styles.imageIcon}
                 onError={handleImageError}
             >

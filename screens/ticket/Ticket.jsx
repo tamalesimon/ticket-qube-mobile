@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native';
 import { ICONS, COLORS, FONTS } from '../../constants';
 import FiveDayStrip from "../../screens/event/components/EventDateStrip"

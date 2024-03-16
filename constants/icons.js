@@ -69,6 +69,7 @@ import SettingsIcon from "../assets/svgIcons/SettingsIcon.jsx"
 import DotIcon from "../assets/svgIcons/DotIcon.jsx"
 import ChevronDownIcon from "../assets/svgIcons/ChevronDownIcon.jsx"
 import SuccessCheckMark from "../assets/svgIcons/CheckMark.jsx"
+import LikeIconLiked from "../assets/svgIcons/LikeIconLiked.jsx"
 
 
 export default {
@@ -103,6 +104,7 @@ export default {
     CalendarAddIcon,
     UploadIcon,
     LikeIcon,
+    LikeIconLiked,
     BadgeVerified,
     LinkIcon,
     CheckCircle,
