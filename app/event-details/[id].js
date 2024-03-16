@@ -5,7 +5,7 @@ import { fetchEventById } from "../../redux/eventsSlice";
 import { SafeAreaView, Text, useWindowDimensions, View, StyleSheet } from "react-native";
 import { COLORS, ICONS } from "~/constants";
 import { EventImage, Details, EventOrganizer, Footer, EventItenary, EventLocation, ShareEvent } from "~/screens/event/components";
-import useDataFetch from "../../utils/useDataFetch";
+// import useDataFetch from "../../utils/useDataFetch";
 import { ScrollView } from "react-native-gesture-handler";
 import BackLeft from "../../components/header/explore/BackLeft";
 import Upload from "../../screens/event/components/Upload";
@@ -21,6 +21,8 @@ const EventDetails = () => {
     const router = useRouter();
     const params = useSearchParams();
     const dispatch = useDispatch();
+
+    const [eventLiked, setEventLiked] = useState(true)
 
 
     const [getEventById, { data: event, error, isLoading, isSuccess, isError }] = useGetEventByIdMutation();
@@ -43,6 +45,10 @@ const EventDetails = () => {
         bottomSheetRef.current.close();
     }, [])
 
+    const handleEventLike = () => {
+        setEventLiked(!eventLiked)
+    }
+
     const navigateToNext = () => {
         router.push("event-details/get-ticket/GetTicket")
     }
@@ -54,7 +60,7 @@ const EventDetails = () => {
                     <BackLeft handlePress={() => router.back()} />
                     <View style={styles.buttonsRightHeader}>
                         <Upload handlePress={openHandler} />
-                        <LikesHeart handlePress={closeHandler} />
+                        <LikesHeart handlePress={handleEventLike} liked={eventLiked} />
                     </View>
                 </View>
             </View>

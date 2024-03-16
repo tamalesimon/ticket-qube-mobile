@@ -49,7 +49,8 @@ const COLORS = {
     blue:"#3B82F6",
     white:"#FFFFFF",
     camaron:"#FF8092",
-    portage:"#887EF9"
+    portage:"#887EF9",
+    like:"#FF4747"
 
 
 
