@@ -1,12 +1,13 @@
-import { View, Text, StyleSheet, } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react';
 import { COLORS, FONTS, ICONS } from '../../constants';
+import { returnDateTime } from "../../utils/utils";
 
-const TicketStrip = () => {
+const TicketStrip = React.memo(({ booking, handleClickedTicket }) => {
     return (
-        <View style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={handleClickedTicket}>
             <View style={styles.title_icon}>
-                <Text style={styles.ticketTitle}>Xenson Art Exibit: 2023 Xgallery 29-30</Text>
+                <Text style={styles.ticketTitle}>{booking?.event?.name}</Text>
                 <ICONS.PaintIcon />
             </View>
             <View style={styles.ticketDivider}>
@@ -18,7 +19,7 @@ const TicketStrip = () => {
                 <View style={styles.ticketTime_seating}>
                     <View style={styles.time_seat}>
                         <Text style={styles.time_title}>Time</Text>
-                        <Text style={styles.time_text}>10:00 PM</Text>
+                        <Text style={styles.time_text}>{returnDateTime(booking?.event?.startTime)}</Text>
                     </View>
                     <View style={styles.time_seat}>
                         <Text style={styles.time_title}>Seating</Text>
@@ -26,12 +27,12 @@ const TicketStrip = () => {
                     </View>
                 </View>
                 <View style={styles.tickerStrip_button}>
-                    <Text style={styles.ticketStrip_button_text}>Premium ticket x1</Text>
+                    <Text style={styles.ticketStrip_button_text}>{booking?.ticket?.name}</Text>
                 </View>
             </View>
-        </View>
+        </TouchableOpacity>
     )
-}
+})
 
 export default TicketStrip
 
