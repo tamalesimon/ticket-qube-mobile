@@ -4,6 +4,7 @@ import { ICONS, COLORS, FONTS } from '../../constants';
 import FiveDayStrip from "../../screens/event/components/EventDateStrip"
 import CalendarComponent from '../../components/Tickets/CalendarComponent';
 import UpcomingPastTickets from '../../components/Tickets/UpcomingPastTickets';
+import { useGetUserActiveBookingsQuery, useGetUserPastBookingsQuery } from '../../redux/bookings/bookingApiSlice';
 
 
 export default function Tickets() {
@@ -24,7 +25,7 @@ export default function Tickets() {
         }
       </View>
       <ScrollView style={styles.upcoming_past_tickets} showsVerticalScrollIndicator={false}>
-        <UpcomingPastTickets />
+        <UpcomingPastTickets tabOptions ={tabOptions} selected={selected} />
       </ScrollView>
     </SafeAreaView>
   );

@@ -2,9 +2,19 @@ import { apiSlice } from "../api/apiSlice";
 
 export const bookingApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        getUserBookings: builder.query({
+        getUserActiveBookings: builder.query({
             query: () => ({
-                url: '/booking',
+                url: '/booking/active',
+                method: 'GET',
+                params: {
+                    size: 5,
+                    totalPagess: 14
+                }
+            })
+        }),
+        getUserPastBookings: builder.query({
+            query: () => ({
+                url: '/booking/past',
                 method: 'GET'
             })
         }),
@@ -18,7 +28,8 @@ export const bookingApiSlice = apiSlice.injectEndpoints({
 })
 
 export const {
-    useGetUserBookingsQuery,
+    useGetUserActiveBookingsQuery,
+    useGetUserPastBookingsQuery,
     useGetBookingByIdMutation
 } = bookingApiSlice;
 
