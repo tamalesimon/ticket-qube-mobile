@@ -10,7 +10,7 @@ import { selectCurrentBooking } from '../../redux/bookings/bookingSlice';
 import DashedLine from 'react-native-dashed-line'
 import useImageErrorHandler from '../../hooks/useImageErrorHandler';
 
-const TicketQrcode = () => {
+const TicketQrcode = React.memo(() => {
 
   const router = useRouter();
   const myBooking = useSelector(selectCurrentBooking);
@@ -118,7 +118,7 @@ const TicketQrcode = () => {
       />
     </SafeAreaView>
   )
-}
+})
 
 export default TicketQrcode;
 

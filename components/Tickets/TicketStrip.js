@@ -5,7 +5,7 @@ import { returnDateTime } from "../../utils/utils";
 
 const TicketStrip = React.memo(({ booking, handleClickedTicket }) => {
     return (
-        <TouchableOpacity style={styles.container} onPress={handleClickedTicket}>
+        <TouchableOpacity key={booking?.bookingId} style={styles.container} onPress={handleClickedTicket}>
             <View style={styles.title_icon}>
                 <Text style={styles.ticketTitle}>{booking?.event?.name}</Text>
                 <ICONS.PaintIcon />
